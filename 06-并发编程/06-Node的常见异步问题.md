@@ -1,31 +1,8 @@
 # 06-Node 异步编程
 
-## 一 函数式编程
+## 一 回调函数编程难点
 
-在 JavaScript 中，可以将函数作为参数、返回值来进行传递，这样的做法称为高阶函数。如下所示：
-
-```js
-function foo(x) {
-    reuturn funtion() {
-        return x;
-    }
-}
-```
-
-高阶函数可以形成一种后续传递风格（Continuation Passing Style）的结果的接收方式，而非单一的返回值形式，大量的业务代码可以这样依次传递下去：
-
-```js
-function foo(x, fn1) {
-    x++
-    return fn1(x)
-}
-```
-
-JS 中通过高阶函数机制实现了很多方法，如：数组的 forEach、reduce()等。高阶函数也在 Node 中的异步编程中被广泛使用，如事件的回调函数。
-
-## 二 回调函数编程难点
-
-### 2.1 回调地狱
+### 1.1 回调地狱
 
 异步编程最大的痛点也来自于回调函数，很容易形成回调地狱：
 
@@ -60,7 +37,7 @@ fs.readdir(source, function (err, files) {
 
 回调地狱的解决方案见下一节。
 
-### 2.2 错误处理
+### 1.2 错误处理
 
 回调函数在异常处理上也会产生问题：
 
@@ -119,7 +96,7 @@ try {
 callback()
 ```
 
-### 2.3 代码阻塞
+### 1.3 代码阻塞
 
 Node 没有 sleep()线程睡眠函数，也导致了阻塞代码执行变得困难，如果使用下面方式，将会引起灾难：
 
@@ -133,76 +110,9 @@ while (new Date() - start < 1000) {
 
 上述代码完全破坏了 Node 的事件循环调度，会持续占用 CPU 进行判断，导致整个应用阻塞，与线程睡眠差距极大。
 
-## 一 Node 的异步并发按控制
+## 二 回调地狱解决方案
 
-Node 虽然很容易实现并发，但是也必须对并发做出限制：
-
-```js
-for (var i = 0; i < 10000; i++>) {
-    fs.readFile()
-}
-```
-
-上述代码瞬间对文件系统发起大量并发调用，操作系统的文件描述符数量会被瞬间用光：
-
-```js
-Error: EMFILE, too many open files
-```
-
-这是异步 I/O 和同步 I/O 的最大编程体验差距，同步 I/O 中的调用时一个接一个的，不会出现文件描述符耗尽的情况，但是性能低下，而异步 I/O 并发实现简单，但是需要提供一定的过载保护！
-
-一般可以通过队列来控制并发量：
-
--   如果当前活跃（调用发起但未执行回调）的异步调用量小于限定值，从队列中取出执行
--   如果活跃调用达到限定值，调用暂时存放到队列中
--   每个异步调用结束时，从队列中取出新的异步调用执行
-
-参见实现：<https://github.com/JacksonTian/bagpipe>
-
-async 库也有解决方案：
-
-```js
-async.parallelLimit(
-    [
-        function (callback) {
-            fs.readFile('file1.txt', 'utf-8', callback)
-        },
-        function (callback) {
-            fs.readFile('file2.txt', 'utf-8', callback)
-        },
-    ],
-    1,
-    function (err, results) {
-        // TODO
-    }
-)
-```
-
-parallelLimit()方法与 parallel()类似，但多了一个用于限制并发数量的参数，使得任务只能同时并发一定数量，而不是无限制并发。
-
-parallelLimit()方法的却显示是无法动态增加并行任务，async 的 queue()方法可以，比如用来遍历文件目录等操作十分有效：
-
-```js
-var q = async.queue(function (file, callback) {
-    fs.readFile(file, 'utf-8', callback)
-}, 2)
-
-q.drain = function () {
-    // 完成了对了队列中的所有任务
-}
-
-fs.readdirSync('.').forEach(function (file) {
-    q.push(file, function (err, data) {
-        // TODO
-    })
-})
-```
-
-queue()的却显示接收参数固定，丢失了 parallelLimit()方法的灵活性。
-
-# 05-回调地狱解决方案
-
-## 回调地狱解决方案汇总
+### 2.0 方案汇总
 
 回调地狱可以通过对回调函数命名，进行简单的优化，但这并没有从本质上改变编程体验。能够本质改变异步编程体验的解决方案有：‘
 
@@ -211,9 +121,7 @@ queue()的却显示接收参数固定，丢失了 parallelLimit()方法的灵活
 -   利用 ES6 的 Promise
 -   利用 ES7 的 async/await 语法糖：该方案目前渐渐成为主流
 
-异步递归是解决实现异步控制流的基础
-
-## 一 使用事件模块实现发布订阅
+### 2.1 使用事件模块实现发布订阅
 
 原生的回调函数：
 
@@ -287,7 +195,7 @@ emitter.emit('step1')
 
 从上述看出，使用事件的方式，需要预先设定执行流程，这是由发布订阅模式的机制决定的。
 
-## 二 第三方库 Async 库
+### 2.2 第三方库 Async 库
 
 第三方库 Async 是 ES7 async/await 出现之前（node7.6），最常使用的异步库。
 
@@ -314,7 +222,7 @@ async.waterfall(
 )
 ```
 
-## 三 使用 Promise
+### 2.3 使用 Promise
 
 由于事件模式必须预先设定执行流程，如下所示：
 
@@ -356,11 +264,11 @@ new Promise(function (resolve, reject) {
 
 详细使用参见 ES6 章节
 
-## 四 Generator
+### 2.4 Generator
 
 generator 也是 ES6 退出的异步解决方案，但是是过渡性方案，现在已经不再使用，async/await 异步控制方案是当前最主流的异步控制方案
 
-## 五 async/await
+### 2.5 async/await
 
 ```js
 function fn() {
@@ -379,3 +287,68 @@ test()
 ```
 
 详细使用参见 ES6 章节
+
+## 三 Node 的异步并发按控制
+
+Node 虽然很容易实现并发，但是也必须对并发做出限制：
+
+```js
+for (var i = 0; i < 10000; i++>) {
+    fs.readFile()
+}
+```
+
+上述代码瞬间对文件系统发起大量并发调用，操作系统的文件描述符数量会被瞬间用光：
+
+```js
+Error: EMFILE, too many open files
+```
+
+这是异步 I/O 和同步 I/O 的最大编程体验差距，同步 I/O 中的调用时一个接一个的，不会出现文件描述符耗尽的情况，但是性能低下，而异步 I/O 并发实现简单，但是需要提供一定的过载保护！
+
+一般可以通过队列来控制并发量：
+
+-   如果当前活跃（调用发起但未执行回调）的异步调用量小于限定值，从队列中取出执行
+-   如果活跃调用达到限定值，调用暂时存放到队列中
+-   每个异步调用结束时，从队列中取出新的异步调用执行
+
+async 库解决方案：
+
+```js
+async.parallelLimit(
+    [
+        function (callback) {
+            fs.readFile('file1.txt', 'utf-8', callback)
+        },
+        function (callback) {
+            fs.readFile('file2.txt', 'utf-8', callback)
+        },
+    ],
+    1,
+    function (err, results) {
+        // TODO
+    }
+)
+```
+
+parallelLimit()方法与 parallel()类似，但多了一个用于限制并发数量的参数，使得任务只能同时并发一定数量，而不是无限制并发。
+
+parallelLimit()方法的却显示是无法动态增加并行任务，async 的 queue()方法可以，比如用来遍历文件目录等操作十分有效：
+
+```js
+var q = async.queue(function (file, callback) {
+    fs.readFile(file, 'utf-8', callback)
+}, 2)
+
+q.drain = function () {
+    // 完成了对了队列中的所有任务
+}
+
+fs.readdirSync('.').forEach(function (file) {
+    q.push(file, function (err, data) {
+        // TODO
+    })
+})
+```
+
+queue()的却显示接收参数固定，丢失了 parallelLimit()方法的灵活性。
