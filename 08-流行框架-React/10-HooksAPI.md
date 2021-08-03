@@ -2,15 +2,15 @@
 
 ## 一 HooksAPI 简介
 
-hook 是 React16.8 新增的重要特性，其核心功能是让函数式组件能够使用状态。
+函数式组件最大的问题是没有 this，即实例对象，这就造成了类组件中很多实例方法无法在函数式组件中得到使用。在最初，函数式组件只能用来定义那些没有 state 的简单组件。
 
-贴士：函数式组件的状态可以是对象，也可是基础类型。
+hook 是 React16.8 新增的重要特性，其核心功能是让函数式组件能够使用状态、生命周期等特性，自此 React 的组件不再存在无状态属性这个概念。
 
-## 二 常用 HooksAPI
+## 二 状态 Hooks：useState()
 
-### 2.1 useState
+### 2.1 基本写法
 
-示例：
+函数式组件在 React16 之前无法使用状态，称为无状态组件，但是 HooksAPI 流行后，useState() 可以让函数式组件使用状态：
 
 ```js
 import React from 'react'
@@ -20,6 +20,12 @@ export default function Count(props) {
     let [count, setCount] = React.useState(0)
 
     function add() {
+        // 函数式写法：
+        // setCount(count => {
+        //     return count + 1
+        // })
+
+        // 常规写法：是参数写法的语法糖
         setCount(count + 1)
     }
 
@@ -32,17 +38,7 @@ export default function Count(props) {
 }
 ```
 
-useState 也支持函数参数写法：
-
-```js
-function add() {
-    setCount(count => {
-        return count + 1
-    })
-}
-```
-
-多个参数写法：
+### 2.2 多个状态写法
 
 ```js
 import React from 'react'
@@ -71,32 +67,60 @@ export default function Count(props) {
 }
 ```
 
-### 2.2 useEffect()
+### 2.3 状态的更新
 
-函数组件没有生命周期函数，hoos 提供了 useEffect() 用于监控组件状态的变更。
-
-2.1 中的示例添加 useEffect Hook：
+react 的状态是异步更新的：
 
 ```js
-let [count, setCount] = React.useState(0)
+state = { count: 0 }
+
+// count 增加的触发函数
+add = () => {
+    const { count } = this.state
+    this.setState({ count: count + 1 })
+    console.log('count: ', this.state.count) // 仍然输出0
+}
+```
+
+正确的写法是 setState 支持第二个参数，是一个 callback，代表状态改变之后执行的函数：
+
+```js
+state = { count: 0 }
+
+// count 增加的触发函数
+add = () => {
+    const { count } = this.state
+    this.setState({ count: count + 1 }, () => {
+        console.log('count: ', this.state.count) // 仍然输出0
+    })
+}
+```
+
+callback 是在状态更新、render()执行之后才执行！
+
+## 三 生命周期 Hooks：useEffect()
+
+函数组件没有生命周期函数，hoos 提供了 useEffect() 可以在函数式组件中执行副作用操作（即监控组件状态的变更，模拟生命周期）。
+
+贴士：副作用操作有在 React 中发送 ajax、手动更改真实 DOM、启动定时器等。
+
+添加 useEffect Hook，示例将会在初次加载、任意状态改变时执行：
+
+```js
+let [count, setCount] = React.useState('Jack')
 let [name, setName] = React.useState('Jack')
 
 React.useEffect(() => {
     console.log('useEffect...')
-})
+}, [count, name])
 ```
 
-上述示例中，点击 count、name 2 个改变状态的按钮，都会让 useEffect 执行。
+第二个数组参数是可选的，意思是：监控该函数式组件内哪些状态。
 
-如果传入第二个数组参数，只会监测指定数据数据。若传入空数组，则只在第一次加载时，运行一次 useEffect：
+-   空数组，则不会监控，只会在组件初次加载时执行 useEffect()。
+-   数组参数不写，则监控所有状态。
 
-```js
-React.useEffect(() => {
-    console.log('useEffect...')
-}, [count]) // 只有count状态发生改变才会触发 useEffect
-```
-
-useEffect 的第一个函数参数内部也可以返回一个函数，这个返回的函数会在组件卸载时触发：
+useEffect 的第一个函数参数内部也可以返回一个函数，这个返回的函数会在组件卸载时触发，推荐在 return 中书写清理定时器等方法：
 
 ```js
 React.useEffect(() => {
@@ -107,7 +131,7 @@ React.useEffect(() => {
 })
 ```
 
-### 2.3 useRef
+## 四 操作 DOMHooks：useRef()
 
 useRef 可以在函数式组件中存储、查找组件内的一些数据：
 
@@ -130,9 +154,9 @@ export default function Count(props) {
 }
 ```
 
-## 三 其他 HooksAPI
+## 五 其他 HooksAPI
 
-### 3.1 传值 useContext
+### 5.1 传值 useContext
 
 ```js
 const ctx = React.createContext()
@@ -156,7 +180,7 @@ function Demo(){
 }
 ```
 
-### 3.2 useReducer
+### 5.2 useReducer
 
 ```js
 function Demo() {
@@ -185,7 +209,7 @@ function Demo() {
 }
 ```
 
-### 3.3 useReducer 和 useContext 的配合使用
+### 5.3 useReducer 和 useContext 的配合使用
 
 useReducer 和 useContext 其实可以模拟出 Redux 效果：
 

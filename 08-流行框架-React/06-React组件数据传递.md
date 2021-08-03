@@ -175,20 +175,20 @@ export default class Father extends React.Component {
 import React from 'react'
 import PubSub from 'pubsub-js'
 
-export default class Son extends React.Component {
+export default class Son1 extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             num: 100,
         }
     }
-    fn() {
+    fn = () => {
         PubSub.publish('evt', this.state.num)
     }
     render() {
         return (
             <div>
-                <button onClick={this.fn.bind(this)}>点我发送数据给兄弟</button>
+                <button onClick={this.fn}>点我发送数据给兄弟</button>
             </div>
         )
     }
@@ -201,7 +201,7 @@ export default class Son extends React.Component {
 import React from 'react'
 import PubSub from 'pubsub-js'
 
-export default class Son extends React.Component {
+export default class Son2 extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -212,7 +212,35 @@ export default class Son extends React.Component {
         })
     }
     render() {
-        return <div>other的num: {this.state.num}</div>
+        return <div>来自兄弟的数据: {this.state.num}</div>
+    }
+}
+```
+
+## 四 插槽
+
+如果有下列方式的组件使用：
+
+```js
+render(){
+    return {
+        <div className="father">
+            <A>
+                <B></b>
+            </A>
+        </div>
+    }
+}
+```
+
+A 与 B 也同样构成了父子关系，这时候如何传值？
+
+```js
+render(){
+    return {
+        <div className="father">
+            <A render={ (name) => <B name={name}/> }/>
+        </div>
     }
 }
 ```

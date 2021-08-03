@@ -113,11 +113,32 @@ npm start
 -   index.js：全局入口文件
 -   App.js：根组件
 
-注意：使用新版脚手架创建的 react 项目默认是不暴露 webpack 配置的，一旦使用其创建时提供的脚本暴露了 webpack 就彻底无法返回。
+注意：使用新版脚手架创建的 react 项目默认是不暴露 webpack 配置的，一旦使用其创建时提供的脚本 `yarn eject` 暴露了 webpack 就彻底无法返回。
 
 这里不建议暴露，开发者可以通过其他方式自定义配置，如：
 
 ```js
 // 开发服务器代理可以在 package.json 中直接配置
-proxy: 'http://localhost:3000'
+proxy: 'http://192.168.1.1:5000'
+```
+
+复杂的代理配置可以直接在 src 目录的根目录中创建 `setupProxy.js` 文件，React 脚手架会自动编译。如下所示：
+
+```js
+const proxy = require('http-proxy-middleware')
+
+module.exports = function (app) {
+    app.use(
+        proxy('/api/v1', {
+            target: 'http://192.168.1.1:5001', // 请求转发给谁
+            changeOrigin: true, // 默认为false，为true时服务器的host的端口值为5001，而不是客户端React服务的端口
+            pathRewrite: { '^/api/v1': '/api' }, // 将地址重写
+        }),
+        proxy('/api/v2', {
+            target: 'http://192.168.1.1:5002',
+            changeOrigin: true,
+            pathRewrite: { '^/api/v2': '/api' },
+        })
+    )
+}
 ```

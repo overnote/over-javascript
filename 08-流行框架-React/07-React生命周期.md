@@ -81,12 +81,17 @@
 
 ![钩子函数](../images/mvvm/react-04.svg)
 
-在新版生命周期中，有三个旧钩子不再被推荐使用，即`componentWillMount`、`componentWillUpdate`、`componentWillReceiveProps`。React 为这三个函数分别额外提供了一个在新函数，即原函数名上添加了`UNSAFE_`前缀的函数，在 React18 中，只有带该前缀的钩子函数可以使用。因为 React 官方认为这三个函数经常被滥用，且在异步渲染中更容易出现错误。
+在新版生命周期中，有三个旧钩子不再被推荐使用，即`componentWillMount`、`componentWillUpdate`、`componentWillReceiveProps`。React 为这三个函数分别额外提供了一个在新函数，即原函数名上添加了`UNSAFE_`前缀的函数，而且在 React18 中，只有带该前缀的钩子函数可以使用。因为 React 官方认为这三个函数经常被滥用，且在异步渲染中更容易出现错误。
 
 在新版生命周期中，提出了 2 个不常用的新钩子：
 
--   `static getDeriveStateFromProps(props, state)`：此方法只用于组件状态与 props 一致的场景，即该方法能够通过 props 派生并返回状态对象。但该钩子函数会造成代码冗余，笔者认为极度鸡肋！
+-   `static getDeriveStateFromProps(props, state)`：若组件的状态依赖于 props 可以使用该钩子，即该方法能够通过 props 派生并返回状态对象。但该钩子函数会造成代码冗余。
 -   `getSnapshotBeforeUpdate()`：可以在更新发生前捕获一些信息（快照），其返回值将作为参数传递给下游钩子 `componentDidUpdate()`。使用场景如：获取滚动位置。
+
+版本使用变化汇总：
+
+-   16.3+：可以使用带 `UNSAFE_`开头的钩子，也可以使用旧版钩子
+-   17：只能使用 `UNSAFE_`开头的钩子，或者新版钩子
 
 ### 3.2 新生命周期个阶段对应钩子总结
 
@@ -113,4 +118,69 @@
 
 ```txt
 第一步：  componentWillUnmount()
+```
+
+## 四 错误处理
+
+当子组件报错，会导致整个页面的崩溃，这是不允许的，可以在父组件内利用下列钩子：
+
+```js
+export default Father extends Component {
+
+  state = {
+    err: null
+  }
+
+  static getDerivedStateFromError(error){
+    console.log(error)
+    return {err: error}
+  }
+
+  componentDidCatch(error, info){
+    // 统计页面错误，发送错误信息给后台
+  }
+
+  render(){
+    return (
+      <div>
+        {this.state.err ? <h3>当前网络不稳定</h3> : <Son/>}
+      </div>
+    )
+  }
+}
+```
+
+贴士：上述错误边界处理在生产环境中才能正常显示。
+
+## 五 useEffect()
+
+函数组件没有生命周期函数，hoos 提供了 useEffect() 可以在函数式组件中执行副作用操作（即监控组件状态的变更，模拟生命周期）。
+
+贴士：副作用操作有在 React 中发送 ajax、手动更改真实 DOM、启动定时器等。
+
+添加 useEffect Hook，示例将会在初次加载、任意状态改变时执行：
+
+```js
+let [count, setCount] = React.useState('Jack')
+let [name, setName] = React.useState('Jack')
+
+React.useEffect(() => {
+    console.log('useEffect...')
+}, [count, name])
+```
+
+第二个数组参数是可选的，意思是：监控该函数式组件内哪些状态。
+
+-   空数组，则不会监控，只会在组件初次加载时执行 useEffect()。
+-   数组参数不写，则监控所有状态。
+
+useEffect 的第一个函数参数内部也可以返回一个函数，这个返回的函数会在组件卸载时触发，推荐在 return 中书写清理定时器等方法：
+
+```js
+React.useEffect(() => {
+    console.log('useEffect...')
+    return () => {
+        console.log('component will unmount...')
+    }
+})
 ```

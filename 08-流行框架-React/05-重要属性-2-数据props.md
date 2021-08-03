@@ -8,9 +8,8 @@ react 组件内可以引用其他组件，这就形成了组件树，下层组�
 
 ## 二 props 使用示例
 
-### 2.0 外部传递数据示例
-
 ```js
+// 外部向组件内部传递数据示例
 function App() {
     let data = 'lisi'
     return (
@@ -20,20 +19,17 @@ function App() {
         </div>
     )
 }
-```
 
-### 2.1 函数组件使用 props 示例
-
-```js
+// 函数组件接收数据
 function FuncComp(props) {
     return <div>传递过来的数据：{props.name}</div>
 }
-```
 
-### 2.2 类组件使用 props 示例
-
-```js
+// 类组件接收数据
 class ClaComp extends React.Component {
+    constructor(props) {
+        super(props)
+    }
     render() {
         return <div>组件props数据：{this.props.name}</div>
     }
@@ -43,6 +39,28 @@ class ClaComp extends React.Component {
 ## 三 props 使用注意事项
 
 ### 3.1 props 默认值
+
+类组件设定默认值：
+
+```js
+// 方式一：浏览器编译以后才会生效
+class ClaComp extends React.Component {
+    static defaultProps = {
+        name: 'ryj',
+    }
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        return <div>组件props数据：{this.props.name}</div>
+    }
+}
+
+// 方式二：一直生效
+ClaComp。defaultProps = {
+    name: 'yy'
+}
+```
 
 函数类型组件定默认值：
 
@@ -68,15 +86,14 @@ props.name = props.name || '默认值'
 传递多个参数时可以使用 ES6 的扩展运算符:
 
 ```js
+// 传递 name、age
 let data = {
     name: 'lisi',
     age: 30,
 }
-return (
-    <div className="App">
-        <FuncComp {...data}></FuncComp>
-    </div>
-)
+
+// 传递方式
+<Comp {...data}></Comp>
 ```
 
 ### 3.3 props 验证
@@ -92,8 +109,9 @@ npm i prop-types -S
 验证示例：
 
 ```js
-import ReactTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
+// 类组件属性验证示例
 class Comp extends React.Component {
     // 类型限制
     static propTypes = {
@@ -101,13 +119,19 @@ class Comp extends React.Component {
         age: PropTypes.number,
         info: PropTypes.func,
     }
-    // 默认值
-    static defaultProps = {
-        age: 18,
-    }
+}
+
+// 函数组件属性验证示例
+function FuncComp(props) {
+    return <div>默认数据：{props.name}</div>
+}
+FuncComp.propTypes = {
+    name: PropTypes.string,
+    age: PropTypes.number,
+    info: PropTypes.func,
 }
 ```
 
 ### 3.4 构造器中的 props
 
-构造器 props 的书写与否并不会影响组件的创建于使用，但是构造器只有接受了 props，且使用`supre(props)`，组价的实例才能获取到 props，该用方法几乎用不到。
+构造器 props 的书写与否并不会影响组件的创建于使用，但是构造器只有接受了 props，且使用`super(props)`，组件的实例才能获取到 props，该用方法几乎用不到。
