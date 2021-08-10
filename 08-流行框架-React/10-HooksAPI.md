@@ -100,6 +100,8 @@ callback 是在状态更新、render()执行之后才执行！
 
 ## 三 生命周期 Hooks：useEffect()
 
+### 3.1 useEffect()监控状态
+
 函数组件没有生命周期函数，hoos 提供了 useEffect() 可以在函数式组件中执行副作用操作（即监控组件状态的变更，模拟生命周期）。
 
 贴士：副作用操作有在 React 中发送 ajax、手动更改真实 DOM、启动定时器等。
@@ -120,6 +122,8 @@ React.useEffect(() => {
 -   空数组，则不会监控，只会在组件初次加载时执行 useEffect()。
 -   数组参数不写，则监控所有状态。
 
+### 3.2 需要清除的 effect
+
 useEffect 的第一个函数参数内部也可以返回一个函数，这个返回的函数会在组件卸载时触发，推荐在 return 中书写清理定时器等方法：
 
 ```js
@@ -129,6 +133,104 @@ React.useEffect(() => {
         console.log('component will unmount...')
     }
 })
+```
+
+如下示例，每次状态改变，都会给 document 添加一个事件处理函数，所以需要做清除处理：
+
+```js
+const [pos, setPos] = useState({ x: 0, y: 0 })
+
+useEffect(() => {
+    const update = e => {
+        setPosition({ x: e.clientX, y: e.clientY })
+    }
+    document.addEventListener('click', update)
+    return () => {
+        document.removeEventListener('click', update)
+    }
+})
+
+return ()   // JSX
+```
+
+### 3.3 自定义 hook
+
+自定义 hook 通常以 use 开头命名：
+
+```js
+const useMyPosition = () => {
+    const [pos, setPos] = useState({ x: 0, y: 0 })
+
+    useEffect(() => {
+        const update = e => {
+            setPosition({ x: e.clientX, y: e.clientY })
+        }
+        document.addEventListener('click', update)
+        return () => {
+            document.removeEventListener('click', update)
+        }
+    })
+
+    return pos // 不再return JSX
+}
+export default useMyPosition
+```
+
+使用：
+
+```js
+function App() {
+    const pos = useMyPosition()
+    return <div>{pos.x}</div>
+}
+```
+
+### 3.4 高阶组件 HOC（Higher order component）与自定义 hook
+
+一般组件都是接收 props 参数，将这些参数转化为组件数据来使用的，而高阶组件其实即接收了组件作为参数，返回了新的组件。
+
+如下所示：
+
+```js
+// 制作一个高阶组件
+const withLoader = (WrapperComponent, url) => {
+    return class LoaderComponent extends React.Component {
+        //  内部执行ajax
+    }
+}
+
+// 使用该高阶组件
+function App() {
+    const WithLoaderComponent = withLoader(wrapper, '')
+    return <WithLoaderComponent />
+}
+```
+
+这里如果使用 hooksAPI 将会更加优雅，能够直接使用其返回值：
+
+```js
+// 制作自定义hooks
+const useLoader = url => {
+    const [data, setData] = useState(null)
+    const [loading, setLoading] = useState(false)
+    useEffect(() => {
+        setLoading(true)
+        axios.get(ulr).then(res => {
+            setData(res)
+            setLoading(false)
+        })
+    }, [url])
+
+    return [data, loading]
+}
+export default useLoader
+
+// 使用
+const ShowHook = () => {
+    const [data, loading] = useLoader('localhost')
+    return <>{isLoading ? <p>读取中</p> : <p>加载完成</p>}</>
+}
+function App() {}
 ```
 
 ## 四 操作 DOMHooks：useRef()
