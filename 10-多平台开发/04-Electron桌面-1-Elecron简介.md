@@ -84,22 +84,36 @@ npm i electron -D
 ```js
 const { app, BrowserWindow } = require('electron')
 
-// 软件窗口对象
-let mainWindow = null
+let mainWindow
 
-app.on('ready', function () {
-    mainWindow = new BrowserWindow({})
-
-    // 加载初始界面
-    mainWindow.loadFile('./index.html')
-
-    // 关闭窗口
-    mainWindow.on('closed', () => {
-        mainWindow = null
+function createWindow() {
+    mainWindow = new BrowserWindow({
+        width: 1024,
+        height: 680,
+        webPreferences: {
+            nodeIntegration: true,
+        },
     })
-})
 
-// 当全部窗口关闭时退出
+    // 根据开发环境设置加载地址，build模式下直接加载build文件中的index.html即可
+    // 生产打包文件地址： file://${path.join(__dirname, './build/index.html')}
+    const urlLocation = 'http://localhost:3000'
+    mainWindow.loadURL(urlLocation)
+    mainWindow.webContents.openDevTools()
+
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
+}
+
+app.on('ready', createWindow)
+
+app.on('activate', function () {
+    // macOS中点击Dock图标时没有已打开的其余应用窗口时,则通常在应用中重建一个窗口
+    if (mainWindow === null) {
+        createWindow()
+    }
+})
 app.on('window-all-closed', () => {
     app.quit()
 })
@@ -217,6 +231,25 @@ bug 解决：此时国内环境是无法直接启动的，是因为要安装 dev
 <https://github.com/ry-cli/electron-vue-element-admin>
 
 ### 5.3 Electron 集成 React
+
+原生继承示例：使用 create-react-app 工具创建 react 项目，进入该项目手动后集成 electron：
+
+```txt
+# 第一步：安装electron，以及一些需要的软件
+npm i electron -D
+
+# 第二步：项目根目录（src同级目录）创建 main.js，内容与3.1相同
+
+# 第三步：增加package.json键值对： 此时当 yarn start 后，再运行 electron . 项目初级结构已经完成
+"main": "main.js",          // 设定入口文件
+"homepage": "./",           // 解决electron file协议导致生产环境加载index.html资源404问题
+
+# 第四步：配置electron的启动项脚本。如果想要启动时开启浏览器，则可以移除 cross-env BROWSER=none
+npm i concurrently -D    用来运行跨平台脚本，并支持一个npm脚本中运行多个命令
+npm i wait-on -D         用来等待web服务启动后才启动electron
+npm i cross-env -D       用来执行一些跨平台命令
+"dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\"",
+```
 
 目前较为活跃的集成示例是：<https://github.com/electron-react-boilerplate/electron-react-boilerplate>
 

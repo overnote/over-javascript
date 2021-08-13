@@ -1,8 +1,6 @@
-# Electron 进程
+# 04-Electron 桌面-2-Electron 进程
 
 ## 一 Electron 中的主进程与渲染进程
-
-在 HelloWorld 示例中，`electron .` 的入口文件是 `main.js` 文件中的代码，即启动了一个进程，并且执行该代码，创建了窗口、加载了`index.html`，而`index.html`中的代码则会运行在 Electron 的渲染进程中。
 
 一个 Electron 应用只有一个主进程，但可以有多个渲染进程：
 
@@ -10,6 +8,8 @@
 -   渲染进程：一个 BrowserWindow 实例代表一个渲染进程，若该实例被销毁，则渲染进程也会终结。渲染界面负责完成界面渲染、接收用户输入、响应用户交互。
 
 ![electron应用架构](./../images/node/electron-00.svg)
+
+在 HelloWorld 示例中，`electron .` 的入口文件是 `main.js` 文件中的代码，即启动了一个进程，并且执行该代码，创建了窗口、加载了`index.html`，而`index.html`中的代码则会运行在 Electron 的渲染进程中。
 
 贴士：
 
@@ -96,6 +96,12 @@ mainWindow.webContents.openDevTools()
 Electron 项目启动后，打开 Chrome 浏览器，输入 `chrome://inspect`，点击 `Configure` 后，输入配置的端口 `localhost:5858` 即可，此时浏览器会连接该程序。
 
 ## 三 进程间的消息传递
+
+### 3.0 Electron 进程通信机制
+
+Electron 使用 IPC（interprocess communication）在进程之间进行通信。
+
+![electron debug 2](../images/electron/03.png)
 
 ### 3.1 渲染进程向主进程发送消息
 
@@ -231,6 +237,6 @@ remote 模块可以降低主进程与渲染进程之间访问的难度，但是�
 
 -   性能损耗很大：跨进程操作的性能损耗是计算机中最严重的性能消耗点之一。
 -   容易产生错误：
-    -   如：remote 模块使用了主进程某个对象，该对象在某一时刻会触发事件，但是事件处理程序位于渲染进程，这时候消息传递造成的延时很容易让渲染进程中一些代码失效，如：`event.preventDefault()`
-    -   如：remote 模块的对象其实是代理对象，并不是真实的原始对象。代理对象原型链上的属性不会映射到渲染进程的代理对象上。其次，类似 NaN、Infinity 这些值不能被正确的映射到渲染进程，如果一个主进程方法返回 NaN，则渲染进程 remote 模块获取的是 undefined。
+-   如：remote 模块使用了主进程某个对象，该对象在某一时刻会触发事件，但是事件处理程序位于渲染进程，这时候消息传递造成的延时很容易让渲染进程中一些代码失效，如：`event.preventDefault()`
+-   如：remote 模块的对象其实是代理对象，并不是真实的原始对象。代理对象原型链上的属性不会映射到渲染进程的代理对象上。其次，类似 NaN、Infinity 这些值不能被正确的映射到渲染进程，如果一个主进程方法返回 NaN，则渲染进程 remote 模块获取的是 undefined。
 -   安全问题：IPC 管道通信时，如果要加载第三方网页，恶意代码能够通过原型污染攻击来模拟 remote 模块的远程消息，以获取访问主进程模块的权利，从而逃离沙箱。
