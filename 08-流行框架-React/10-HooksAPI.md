@@ -185,6 +185,8 @@ function App() {
 }
 ```
 
+通常来说自定义 hook 返回一个函数，可以简化或者为 useEffect 这些 hooks 提供新功能。
+
 ### 3.4 高阶组件 HOC（Higher order component）与自定义 hook
 
 一般组件都是接收 props 参数，将这些参数转化为组件数据来使用的，而高阶组件其实即接收了组件作为参数，返回了新的组件。
