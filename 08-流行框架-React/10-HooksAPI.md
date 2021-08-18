@@ -500,5 +500,3 @@ useMemo(() => {}, [])
 在未进行任何处理的情况下，父组件 render，总会导致子组件 render，即使子组件的 state/props 并未发生变化。在大列表筛选时，筛选逻辑复杂，这将是一个很重要的优化点。memoize-one 可以帮助：
 
 <https://github.com/alexreardon/memoize-one>
-
-## 八 记忆函数 useMemo()
