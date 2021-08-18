@@ -164,24 +164,15 @@ _fn() // 43
 _fn(1, 4) // 43，因为参数绑定，重新传入的参数是无效的
 ```
 
-## 五 手动实现 call、apply、bind
-
-### 5.1 手动实现 call
-
-### 5.2 手动实现 apply
-
-### 5.3 手动实现 bind
+手动实现 bind：
 
 ```js
-Function.prototype.bind =
-  Function.prototype.bind ||
-  function (context) {
-    let that = this
-    let args = Array.prototype.slice.call(arguments, 1)
-    return function bound() {
-      let innerArgs = Array.prototype.slice.call(arguments)
-      let finalArgs = args.concat(innerArgs)
-      return that.apply(context, finalArgs)
-    }
+function myBind(context) {
+  const that = this
+  const args = Array.prototype.slice.call(arguments, 1)
+  return function () {
+    const innerArgs = Array.prototype.slice.call(arguments)
+    return that.apply(context, args.concat(innerArgs))
   }
+}
 ```
