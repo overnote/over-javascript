@@ -112,6 +112,31 @@ render(){
 }
 ```
 
+不过在 HooksAPI 支持下，可以使用 useContext 简化，无需使用 Consumer 进行嵌套：
+
+```js
+// 创建一个用于保存用户名的上下文
+const MyCtx = React.createContext()
+
+function Son(){
+  let count = React.useContext(ctx)
+  return (<h3>{count}</h3>)
+}
+
+function Father(){
+  const [count, setCount] = React.useState(100)
+  return (
+    <div>
+      <p>{count}<p>
+      <button onClick={()=>{count+1}}>点击</buttom>
+      <ctx.Provider value={count}>
+        <Son />
+      </ctx.Provider>
+    </div>
+  )
+}
+```
+
 ## 二 子传父
 
 子：

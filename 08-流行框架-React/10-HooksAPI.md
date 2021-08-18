@@ -107,11 +107,7 @@ callback 是在状态更新、render()执行之后才执行！
 
 ### 3.1 useEffect()监控状态
 
-函数组件没有生命周期函数，hoos 提供了 useEffect() 可以在函数式组件中执行副作用操作（即监控组件状态的变更，模拟生命周期）。
-
-贴士：副作用操作有在 React 中发送 ajax、手动更改真实 DOM、启动定时器等。
-
-添加 useEffect Hook，示例将会在初次加载、任意状态改变时执行：
+函数组件没有生命周期函数，添加 useEffect Hook，示例将会在初次加载、任意状态改变时执行：
 
 ```js
 let [count, setCount] = React.useState('Jack')
@@ -126,6 +122,14 @@ React.useEffect(() => {
 
 - 空数组，则不会监控，只会在组件初次加载时执行 useEffect()。
 - 数组参数不写，则监控所有状态。
+
+useEffect() 可以在函数式组件中执行副作用操作，即监控组件状态的变更，模拟生命周期，比如在 React 中方发送 ajax，手动更改真实 DOM、启动定时器等，如下所示：
+
+```js
+useEffect(async () => {
+  let data = await fetchUsers()
+}, [])
+```
 
 ### 3.2 需要清除的 effect
 
@@ -263,9 +267,9 @@ export default function Count(props) {
 }
 ```
 
-## 五 其他 HooksAPI
+## 五 改造 context 通信 Hooks：useContext()
 
-### 5.1 传值 useContext
+createContext() 可以实现跨组件通信，useContext()可以在此基础上将原有的写法改造，不需要再依赖 consumer，解决 consumer 嵌套问题：
 
 ```js
 const ctx = React.createContext()
@@ -275,7 +279,7 @@ function Son(){
   return (<h3>{count}</h3>)
 }
 
-function Demo(){
+function Father(){
   const [count, setCount] = React.useState(100)
   return (
     <div>
@@ -289,7 +293,9 @@ function Demo(){
 }
 ```
 
-### 5.2 useReducer
+## 六 useReducer()
+
+useRedcuer() 的使用方式类似 redux：
 
 ```js
 function Demo() {
@@ -317,8 +323,6 @@ function Demo() {
   )
 }
 ```
-
-### 5.3 useReducer 和 useContext 的配合使用
 
 useReducer 和 useContext 其实可以模拟出 Redux 效果：
 
@@ -384,3 +388,117 @@ function MyComp1() {
   )
 }
 ```
+
+## 七 记忆函数 useCallback()、useMemo()
+
+### 7.0 组件更新问题
+
+如下所示类组件的 React 代码：
+
+```js
+class Demo {
+  render() {
+    return (
+      <div>
+        <Comp
+          style={{ fontSize: 14 }}
+          handler={() => {
+            console.log('run....')
+          }}
+        />
+      </div>
+    )
+  }
+}
+```
+
+在 React 中，父组件如果重新 render()，则其内部子组件的 render()也都会被相应调用。一旦 Demo 的 props、state 发生改变，触发 Demo 的 render()函数后，其子组件 Comp 的 style、handler 属性的值是一个新生成的引用，这时候会导致 Comp 重新渲染。如果该组件是一个大型组件树，则会造成性能损失，解决办法是将参数抽离为变量：
+
+```js
+const fontSizeStyle = { fontSize: 14 }
+class Demo {
+  handler = () => {
+    console.log('run....')
+  }
+  render() {
+    return (
+      <div>
+        <Comp style={ontSizeStyle} handler={this.handler} />
+      </div>
+    )
+  }
+}
+```
+
+在函数式组件中，没有 this 保存函数，所以函数式组件在每次渲染时，如果有传递函数的话都会重新渲染子组件：
+
+```js
+const fontSizeStyle = { fontSize: 14 }
+
+function Demo() {
+  const handler = () => {
+    console.log('run....')
+  }
+
+  return (
+    <div>
+      <Comp style={ontSizeStyle} handler={handler} />
+    </div>
+  )
+}
+```
+
+贴士：一般可以将函数式组件理解为类组件中 render 函数的语法糖，所以每次渲染时，哈术士组件内部所有代码都会重新执行一遍，对应到上述代码，每次 render，handler 都是一个新的引用，即其绑定的事件函数仍然一直在随着 render 发生变化！
+
+### 7.1 记忆函数 useCallback()
+
+useCallback() 可以获得一个记忆函数：
+
+```js
+const fontSizeStyle = { fontSize: 14 }
+
+// 这里要对子组件做高阶组件化处理才能行得通
+const MemComp = memo(Comp)
+
+function Demo() {
+  const handler = useCallback(() => {
+    console.log('run....')
+  }, []) // 空数组表示无论什么情况该函数都不会发生改变
+
+  return (
+    <div>
+      <MemComp style={ontSizeStyle} handler={handler} />
+    </div>
+  )
+}
+```
+
+useCallback()第二个参数数组中每一项发生改变，或者引用发生改变，useCallback()返回一个新的记忆函数提供给后面进行渲染。
+
+memo()的第二个参数是一个回调函数，如果返回 true，则表示组件内的函数被永远缓存了下来：
+
+```js
+const MemComp = memo(Comp, () => {
+  return true
+})
+```
+
+### 7.2 记忆函数 useMemo()
+
+useMemo()可以完全取代 useCallback：
+
+```js
+useMemo(() => {}, [])
+```
+
+二者的区别是：useCallback() 不会执行第一个参数函数，而是直接返回给你，useMemo()则会执行该函数，并将函数结果返回给你。
+
+一般情况下：useCallback()用于事件的响应函数，useMemo()用于组件的缓存。
+
+### 7.3 memoize-one
+
+在未进行任何处理的情况下，父组件 render，总会导致子组件 render，即使子组件的 state/props 并未发生变化。在大列表筛选时，筛选逻辑复杂，这将是一个很重要的优化点。memoize-one 可以帮助：
+
+<https://github.com/alexreardon/memoize-one>
+
+## 八 记忆函数 useMemo()
