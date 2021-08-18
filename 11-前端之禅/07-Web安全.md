@@ -23,22 +23,22 @@ XSS 安全包括：反射型 XSS、存储型 XSS。
 ```js
 // 反射型XSS：/goods?category=<script>alert(1)</script>
 app.get('/goods', (req, res) => {
-    let { category } = req.query
+  let { category } = req.query
 
-    let goods = {
-        books: [{ name: '木许传' }, { name: '金平没' }],
-        tools: [{ name: 'ipad' }, { name: 'iphone' }],
-    }
-    let currentGoods = goods[category]
+  let goods = {
+    books: [{ name: '木许传' }, { name: '金平没' }],
+    tools: [{ name: 'ipad' }, { name: 'iphone' }],
+  }
+  let currentGoods = goods[category]
 
-    let detail = ''
-    if (currentGoods) {
-        detail = currentGoods.map(item => `<li>${item.name}</li>`).join('')
-    } else {
-        detail = `此分类下没有商品`
-    }
-    res.setHeader('Content-Type', 'text/html;charset=utf8')
-    res.send(`
+  let detail = ''
+  if (currentGoods) {
+    detail = currentGoods.map((item) => `<li>${item.name}</li>`).join('')
+  } else {
+    detail = `此分类下没有商品`
+  }
+  res.setHeader('Content-Type', 'text/html;charset=utf8')
+  res.send(`
         <h1>商品分类：${category}</h1>
         <ul>${detail}</ul>
     `)
@@ -63,10 +63,10 @@ app.get('/goods', (req, res) => {
 ```js
 // 持久型XSS：常见于用户评论
 app.get('/comments', (req, res) => {
-    // 假设用户提交了一个评论如下：
-    let commont = '你好啊<script>alert(1)</script>'
-    // 后台渲染该评论
-    res.send(`
+  // 假设用户提交了一个评论如下：
+  let commont = '你好啊<script>alert(1)</script>'
+  // 后台渲染该评论
+  res.send(`
         <h1>评论列表</h1>
         <ul>
             <li>${commont}</li>
@@ -106,12 +106,12 @@ document.cookie
 
 ```js
 function encode(str) {
-    return String(str)
-        .replace(/>/g, '&gt;')
-        .replace(/</g, '&lt;')
-        .replace(/'/g, '&#39')
-        .replace(/"/g, '&quot;')
-        .replace(/$/g, '&amp;')
+  return String(str)
+    .replace(/>/g, '&gt;')
+    .replace(/</g, '&lt;')
+    .replace(/'/g, '&#39')
+    .replace(/"/g, '&quot;')
+    .replace(/$/g, '&amp;')
 }
 ```
 

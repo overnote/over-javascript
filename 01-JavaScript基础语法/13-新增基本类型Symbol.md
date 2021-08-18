@@ -42,8 +42,8 @@ let sObj = Object(s)
 
 ```js
 let obj = {
-    name: 'zs',
-    [Symbol('category')]: '食品',
+  name: 'zs',
+  [Symbol('category')]: '食品',
 }
 
 // 再添加一个 category分类
@@ -59,8 +59,8 @@ console.log(Reflect.ownKeys(obj)) //["name", Symbol(category), Symbol(category)]
 
 ```js
 let users = {
-    lisi: '30岁，前端工程师',
-    lisi: '24岁，设计师',
+  lisi: '30岁，前端工程师',
+  lisi: '24岁，设计师',
 }
 
 // 这2个人的名字一样
@@ -71,18 +71,18 @@ console.log(users.lisi) // 24岁，设计师
 
 ```js
 let user1 = {
-    name: 'lisi',
-    key: Symbol(),
+  name: 'lisi',
+  key: Symbol(),
 }
 
 let user2 = {
-    name: 'lisi',
-    key: Symbol(),
+  name: 'lisi',
+  key: Symbol(),
 }
 
 let userInfo = {
-    [user1.key]: '30岁，前端工程师',
-    [user2.key]: '24岁，设计师',
+  [user1.key]: '30岁，前端工程师',
+  [user2.key]: '24岁，设计师',
 }
 ```
 
@@ -109,8 +109,8 @@ const user = {
 let s = Symbol()
 
 let p = {
-    name: 'lisi',
-    [s]: '隐藏属性',
+  name: 'lisi',
+  [s]: '隐藏属性',
 }
 
 // 使用 for in 或者 for of 都无法遍历到 [s] 成员
@@ -122,7 +122,7 @@ let p = {
 
 // 遍历所有属性
 for (const key of Reflect.ownKeys(p)) {
-    console.log(key) // name  Symbol()
+  console.log(key) // name  Symbol()
 }
 ```
 
@@ -139,9 +139,9 @@ Symbol.match // 当执行 str.match(obj) 时，如果该属性存在，会调用
 
 ```js
 class Person {
-    static [Symbol.hasInstance]() {
-        console.log('被用来检测！')
-    }
+  static [Symbol.hasInstance]() {
+    console.log('被用来检测！')
+  }
 }
 
 let o = {}
@@ -190,9 +190,9 @@ console.log(Foo[Symbol.hasInstance](f)) // true
 class Foo {}
 
 class Fov extends Foo {
-    static [Symbol.hasInstance]() {
-        return false
-    }
+  static [Symbol.hasInstance]() {
+    return false
+  }
 }
 
 let f = new Fov()

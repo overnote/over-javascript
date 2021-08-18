@@ -77,7 +77,7 @@ $('#test').hide(500).stop()
 //第四个参数 : 回调函数，可选
 
 $(this).animate({ width: 300 }, 4000, 'linear', function () {
-    alert(123)
+  alert(123)
 })
 ```
 

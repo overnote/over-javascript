@@ -39,10 +39,10 @@ require('os').tpmdir() // 返回默认临时文件夹：C:\Users\[user name]\App
 
 浏览器的存储机制主要有四个：
 
--   cookie： 最多只能存储 4KB 数据，数据有过期时间，数据也会被传递到服务端
--   LocalStorage：最多只能存储 10M 数据，数据没有过期时间，数据不会自动随浏览器传递到服务端
--   SessionStorage：特性与 LocalStorage 相同，但是只是会话存储，浏览器关闭后，数据也会清除
--   IndexDB：基于 JavaScript 的面向对象数据库存储，可以用于存储大量数据，推荐使用第三方库：[Dexie.js](https://github.com/dfahlander/Dexie.js)、<https://github.com/jakearchibald/idb>、<https://pouchdb.com/>(类似 CouchDB 的强大数据库，上手成本高)
+- cookie： 最多只能存储 4KB 数据，数据有过期时间，数据也会被传递到服务端
+- LocalStorage：最多只能存储 10M 数据，数据没有过期时间，数据不会自动随浏览器传递到服务端
+- SessionStorage：特性与 LocalStorage 相同，但是只是会话存储，浏览器关闭后，数据也会清除
+- IndexDB：基于 JavaScript 的面向对象数据库存储，可以用于存储大量数据，推荐使用第三方库：[Dexie.js](https://github.com/dfahlander/Dexie.js)、<https://github.com/jakearchibald/idb>、<https://pouchdb.com/>(类似 CouchDB 的强大数据库，上手成本高)
 
 浏览器原生的 document 可以访问 cookie，但是一旦 cookie 受限，则无法继续操作。Electron 提供了独立的 cookie 操作 API，可以用来访问受限的 cookie：
 
@@ -82,8 +82,8 @@ let session = win.webContents.session
 
 一些轻量级的第三方数据库也可以直接安装在 Electron 内：
 
--   SQLite：轻量关系型数据库，常用于客户端存储方案。推荐驱动为 knex.js
--   rxdb：可以运行在浏览器中的实时数据库！支持订阅数据变更事件。在 Electron 中，操作一个窗口数据，无需发消息给另外一个窗口，那个窗口可以通过数据变更事件获悉变更的内容！git 仓库为：<https://github.com/pubkey/rxdb>
+- SQLite：轻量关系型数据库，常用于客户端存储方案。推荐驱动为 knex.js
+- rxdb：可以运行在浏览器中的实时数据库！支持订阅数据变更事件。在 Electron 中，操作一个窗口数据，无需发消息给另外一个窗口，那个窗口可以通过数据变更事件获悉变更的内容！git 仓库为：<https://github.com/pubkey/rxdb>
 
 ## 二 Electron 通信
 
@@ -93,12 +93,12 @@ Electron 的通信可以依赖于浏览器的 Ajax 能力，也可以依赖 Node
 
 ```js
 let win = new BrowserWindow({
-    webPreferences: {
-        // ... 其他配置
-        webSecurity: false, // 禁用当前窗口的同源策略
-        // 此外还可以在HTTPS页面内访问HTTP协议服务
-        allowRunningInsecureContent: true,
-    },
+  webPreferences: {
+    // ... 其他配置
+    webSecurity: false, // 禁用当前窗口的同源策略
+    // 此外还可以在HTTPS页面内访问HTTP协议服务
+    allowRunningInsecureContent: true,
+  },
 })
 ```
 
@@ -113,30 +113,33 @@ let win = new BrowserWindow({
 let open = window.XMLHttpRequest.prototype.open
 
 window.XMLHttpRequest.prototype.open = function (method, url, params) {
-    this.addEventListener(
-        'readystatechange',
-        () => {
-            if (this.readyState === 4 && this.status === 200) {
-                console.log(this.responseText) // 打印截获的服务端数据
-            }
-        },
-        false
-    )
-    // 自定义的open调用完毕后，再用原来的open方法再次调用
-    open.apply(this, arguments)
+  this.addEventListener(
+    'readystatechange',
+    () => {
+      if (this.readyState === 4 && this.status === 200) {
+        console.log(this.responseText) // 打印截获的服务端数据
+      }
+    },
+    false
+  )
+  // 自定义的open调用完毕后，再用原来的open方法再次调用
+  open.apply(this, arguments)
 }
 ```
 
 上述方法也有局限性：无法截获静态文件请求、无法修改响应数据，此时可以使用 Electron 提供的方法：
 
 ```js
-this.wind.webContents.session.webRequest.onBeforeRequest({ urls: ['https://*/*'] }, (details, cb) => {
+this.wind.webContents.session.webRequest.onBeforeRequest(
+  { urls: ['https://*/*'] },
+  (details, cb) => {
     if (details.url === 'https://demo.com/demo.css') {
-        cb({ redirectURL: 'http://redirectdemo.com/demo.css' })
+      cb({ redirectURL: 'http://redirectdemo.com/demo.css' })
     } else {
-        cb(null)
+      cb(null)
     }
-})
+  }
+)
 ```
 
 ### 2.2 Electron 与系统其他应用通信
@@ -150,25 +153,25 @@ const net = require('net')
 
 const PIPE_NAME = '\\\\.\\ pipe\\ mypipe'
 
-const server = net.createServer(conn => {
-    conn.on('data', r => {
-        console.log('receive:', r.toString())
-    })
+const server = net.createServer((conn) => {
+  conn.on('data', (r) => {
+    console.log('receive:', r.toString())
+  })
 
-    conn.on('end', () => {
-        console.log('client close')
-    })
+  conn.on('end', () => {
+    console.log('client close')
+  })
 
-    conn.write('client ready, starting to send data!')
+  conn.write('client ready, starting to send data!')
 })
 
 server.on('end', () => {
-    console.log('server close')
+  console.log('server close')
 })
 
 // 创建一个命名管道server，一旦有客户端连接此管道，则触发createServer的回调函数
 server.listen(PIPE_NAME, () => {
-    console.log('Server is ready')
+  console.log('Server is ready')
 })
 ```
 
@@ -180,17 +183,17 @@ const net = require('net')
 const PIPE_NAME = '\\\\.\\ pipe\\ mypipe'
 
 const client = net.connect(PIPE_NAME, () => {
-    console.log('connect success')
-    client.write('send data...')
+  console.log('connect success')
+  client.write('send data...')
 })
 
-client.on('data', r => {
-    console.log('receive:', r.toString())
-    client.end('close client')
+client.on('data', (r) => {
+  console.log('receive:', r.toString())
+  client.end('close client')
 })
 
 client.on('end', () => {
-    console.log('Client end...')
+  console.log('Client end...')
 })
 ```
 
@@ -207,10 +210,10 @@ client.on('end', () => {
 const { protocol } = require('electron')
 
 const option = [
-    {
-        scheme: 'app', // 协议名称
-        privileges: { secure: true, standard: true },
-    },
+  {
+    scheme: 'app', // 协议名称
+    privileges: { secure: true, standard: true },
+  },
 ]
 
 protocol.registerSchemesAsprivileged(option)
@@ -225,32 +228,32 @@ const fs = require('fs')
 
 // 主持一个基于缓冲区的协议：当用户发起类似 ”app://” 开头的请求时，此回调函数会截获用户的请求，完成一个静态服务
 protocol.registerBufferProtocol(
-    'app',
-    (req, respond) => {
-        let pathName = new URL(req.url).pathname
-        let fullName = path.join(__dirname, pathName)
-        fs.readFile(fullName, (err, data) => {
-            if (err) {
-                console.log(err)
-                return
-            }
-            let ext = path.extname(pathName).toLowerCase()
-            let mimeType = ''
-            if (ext === '.js') {
-                mimeType = 'text/javascript'
-            } else if (ext === '.html') {
-                mimeType = 'text/html'
-            } else if (ext === '.css') {
-                mimeType = 'text/css'
-            }
-            respond({ mimeType, data })
-        })
-    },
-    error => {
-        if (error) {
-            console.log(error)
-        }
+  'app',
+  (req, respond) => {
+    let pathName = new URL(req.url).pathname
+    let fullName = path.join(__dirname, pathName)
+    fs.readFile(fullName, (err, data) => {
+      if (err) {
+        console.log(err)
+        return
+      }
+      let ext = path.extname(pathName).toLowerCase()
+      let mimeType = ''
+      if (ext === '.js') {
+        mimeType = 'text/javascript'
+      } else if (ext === '.html') {
+        mimeType = 'text/html'
+      } else if (ext === '.css') {
+        mimeType = 'text/css'
+      }
+      respond({ mimeType, data })
+    })
+  },
+  (error) => {
+    if (error) {
+      console.log(error)
     }
+  }
 )
 ```
 
@@ -262,7 +265,7 @@ socks5 的适用性更强，使用方式如下：
 
 ```js
 let result = await win.webContents.session.setProxy({
-    proxyRules: 'socks5://192.168.1.101',
+  proxyRules: 'socks5://192.168.1.101',
 })
 ```
 

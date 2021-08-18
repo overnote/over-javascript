@@ -45,8 +45,8 @@ maximizable 说明：用来设置窗口大小，以及是否允许用户控制�
 
 ```js
 mainWin = new BrowserWindow({
-    frame: false,
-    webPreferences: { nodeIntegration: true },
+  frame: false,
+  webPreferences: { nodeIntegration: true },
 })
 ```
 
@@ -61,22 +61,22 @@ const currentWin = remote.getCurrentWindow()
 
 // 最小化
 function minisize() {
-    currentWin.minisize()
+  currentWin.minisize()
 }
 
 // 最大化
 function maxsize() {
-    currentWin.maxsize()
+  currentWin.maxsize()
 }
 
 // 重置窗口
 function restore() {
-    currentWin.resotre()
+  currentWin.resotre()
 }
 
 // 关闭窗口
 function close() {
-    currentWin.close()
+  currentWin.close()
 }
 ```
 
@@ -117,16 +117,16 @@ mounted(){
 
 处理方案：
 
--   方案一：将上述逻辑放在主进程中
--   方案二：禁止页面刷新
+- 方案一：将上述逻辑放在主进程中
+- 方案二：禁止页面刷新
 
 禁止刷新代码：
 
 ```js
 mainWin.onkeydown = function (e) {
-    if (e.keyCode == 82 && (e.ctrlKey || e.metaKey)) {
-        return false
-    }
+  if (e.keyCode == 82 && (e.ctrlKey || e.metaKey)) {
+    return false
+  }
 }
 ```
 
@@ -200,8 +200,8 @@ debounce(fn){
 ```js
 // 创建窗口时，不显示窗口
 mainWin = new BrowserWindow({
-    // 其他配置...
-    show: false,
+  // 其他配置...
+  show: false,
 })
 ```
 
@@ -222,24 +222,24 @@ Electron 无法像网页那样监听 `onbeforeunload` 阻止关闭，但是可�
 
 ```js
 currentWin.onbeforeunload = function () {
-    currentWin.destroy() // 不能使用 close()，因为该函数会再次触发onbeforeunload事件，造成死循环
+  currentWin.destroy() // 不能使用 close()，因为该函数会再次触发onbeforeunload事件，造成死循环
 }
 ```
 
 还有一个方案是，使用 close 事件阻止：
 
 ```js
-currentWin.on('close', e => {
-    // 由渲染进程显示提示信息，根据用户选择发送消息给主进程
-    e.preventDefault()
+currentWin.on('close', (e) => {
+  // 由渲染进程显示提示信息，根据用户选择发送消息给主进程
+  e.preventDefault()
 })
 ```
 
 注意：使用 onbeforeunload 事件方式来实现阻止窗口关闭时，如果 Electron 加载了一个注册了 onbeforeunload 事件的第三方网页，则该窗口无法关闭！这时候可以监听 webContents 的 `will-prevent-unload` 事件：
 
 ```js
-win.webContents.on('will-prevent-unload', event => {
-    event.preventDefault()
+win.webContents.on('will-prevent-unload', (event) => {
+  event.preventDefault()
 })
 ```
 
@@ -285,17 +285,17 @@ Mac 上应用程序在关闭后，仍然会保留在 Docker 栏上，方便快�
 
 ```js
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        // 如果不是Mac系统，才会退出，是Mac系统则什么都不做！
-        app.quit()
-    }
+  if (process.platform !== 'darwin') {
+    // 如果不是Mac系统，才会退出，是Mac系统则什么都不做！
+    app.quit()
+  }
 })
 
 // Mac专用事件，Docker上的应用激活时触发
 app.on('activate', () => {
-    if (win == null) {
-        createWindow()
-    }
+  if (win == null) {
+    createWindow()
+  }
 })
 ```
 

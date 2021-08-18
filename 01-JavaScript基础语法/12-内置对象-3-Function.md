@@ -12,9 +12,9 @@ arguments 对象是个伪数组，其长度由实参个数决定。
 
 ```js
 function fn(a, b) {
-    console.log(fn.length) //输出：函数的形参的个数 2
-    console.log(arguments) //输出：{ '0': 1, '1': 2 }
-    console.log(arguments.length) // 输出实参个数1
+  console.log(fn.length) //输出：函数的形参的个数 2
+  console.log(arguments) //输出：{ '0': 1, '1': 2 }
+  console.log(arguments.length) // 输出实参个数1
 }
 fn(1)
 ```
@@ -24,20 +24,20 @@ fn(1)
 ```js
 // 阶乘函数示例：该写法造成了内部函数与函数本身的耦合，且若修改了函数名，还要去内部修改一次递归调用明
 function factorial(num) {
-    if (num <= 1) {
-        return 1
-    } else {
-        return num * factorial(num - 1)
-    }
+  if (num <= 1) {
+    return 1
+  } else {
+    return num * factorial(num - 1)
+  }
 }
 
 // 替换写法
 function factorial(num) {
-    if (num <= 1) {
-        return 1
-    } else {
-        return num * arguments.callee(num - 1)
-    }
+  if (num <= 1) {
+    return 1
+  } else {
+    return num * arguments.callee(num - 1)
+  }
 }
 ```
 
@@ -52,22 +52,22 @@ caller 对象中保存着调用当前函数的函数的引用，如果是在全�
 ```js
 // 下列代码会导致警告框中显示 outer()函数的源代码，因为 outer()调用了 inter()，所以inner.caller 就指向 outer()。
 function outer() {
-    inner()
+  inner()
 }
 
 function inner() {
-    alert(inner.caller)
+  alert(inner.caller)
 }
 
 outer()
 
 // 使用 caller 实现松耦合
 function outer() {
-    inner()
+  inner()
 }
 
 function inner() {
-    alert(arguments.callee.caller)
+  alert(arguments.callee.caller)
 }
 
 outer()
@@ -79,8 +79,8 @@ outer()
 
 每个函数都包含两个属性：
 
--   length：表示函数命名参数的个数
--   prototype：原型属性，每个函数都有原型，用于实现继承。要注意的是 prototype 属性不可枚举（即不能通过 for in 发现）
+- length：表示函数命名参数的个数
+- prototype：原型属性，每个函数都有原型，用于实现继承。要注意的是 prototype 属性不可枚举（即不能通过 for in 发现）
 
 ## 三 apply() call()
 
@@ -91,11 +91,11 @@ outer()
 ```js
 let a = 20
 let obj = {
-    a: 40,
+  a: 40,
 }
 
 function fn() {
-    console.log(this.a)
+  console.log(this.a)
 }
 
 fn() // 输出20，因为这里的this是全局的window
@@ -109,14 +109,14 @@ apply 与 call 都修改了函数内部 this 的指向，this 指向第一个参
 
 apply 与 call 的区别是：第二个参数及其后续参数传递形式不同。
 
--   apply：第二个参数为数组，将函数执行需要的参数组装为数组再传入
--   call：第二个及其之后的参数是函数执行需要的参数
+- apply：第二个参数为数组，将函数执行需要的参数组装为数组再传入
+- call：第二个及其之后的参数是函数执行需要的参数
 
 但是其参数是不同的：
 
--   apply 用于函数的形参个数不确定的情况：函数名.apply(绑定对象,函数参数列表数组);
--   call 用于确定了函数的形参有多少个的时候使用：函数名.call(绑定对象,函数参数 1,参数 2,参数 3....);
--   apply 和 call 的第一个参数都为 null 时，表示为函数调用模式，即 this 指向 window
+- apply 用于函数的形参个数不确定的情况：函数名.apply(绑定对象,函数参数列表数组);
+- call 用于确定了函数的形参有多少个的时候使用：函数名.call(绑定对象,函数参数 1,参数 2,参数 3....);
+- apply 和 call 的第一个参数都为 null 时，表示为函数调用模式，即 this 指向 window
 
 使用案例一：求数组最大值
 
@@ -133,10 +133,10 @@ console.log(max2) //输出10
 ```javascript
 //obj是个伪数组，无法使用obj.0获取属性，也无法像数组那样用obj[0]获取
 let obj = {
-    0: 'a',
-    1: 'b',
-    2: 'c',
-    length: 3,
+  0: 'a',
+  1: 'b',
+  2: 'c',
+  length: 3,
 }
 // [].concat(1,2,3)会产生数组[1,2,3]
 let arr = [].concat.apply([], obj)
@@ -149,12 +149,12 @@ ES5 增加了 bind 函数，也用来改变函数内部的 this 指向。但是 
 
 ```js
 function fn(num1, num2) {
-    return this.a + num1 + num1
+  return this.a + num1 + num1
 }
 
 let a = 20
 let obj = {
-    a: 40,
+  a: 40,
 }
 
 let _fn = fn.bind(obj, 1, 2)
@@ -174,14 +174,14 @@ _fn(1, 4) // 43，因为参数绑定，重新传入的参数是无效的
 
 ```js
 Function.prototype.bind =
-    Function.prototype.bind ||
-    function (context) {
-        let that = this
-        let args = Array.prototype.slice.call(arguments, 1)
-        return function bound() {
-            let innerArgs = Array.prototype.slice.call(arguments)
-            let finalArgs = args.concat(innerArgs)
-            return that.apply(context, finalArgs)
-        }
+  Function.prototype.bind ||
+  function (context) {
+    let that = this
+    let args = Array.prototype.slice.call(arguments, 1)
+    return function bound() {
+      let innerArgs = Array.prototype.slice.call(arguments)
+      let finalArgs = args.concat(innerArgs)
+      return that.apply(context, finalArgs)
     }
+  }
 ```

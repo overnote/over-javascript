@@ -58,22 +58,22 @@ Resource Server：资源服务器，即服务提供商存放用户资源的服�
 let state = Date.now()
 
 router.get('/login', function (req, res, next) {
-    let grantUrl = 'https://graph.qq.com/oauth2.0/authorize?'
-    let options = {
-        response_type: 'code', //响应类型 固定为code
-        client_id: AppId, //客户端的ID，这个ID是由QQ授权服务器分配的
-        redirect_uri, // 'http://www.demo.com/user/callback'
-        state,
-        scope: 'get_user_info,list_album',
-    }
-    let query = querystring.stringify(options)
-    grantUrl += query
-    res.render('login', { title: '登录', grantUrl })
+  let grantUrl = 'https://graph.qq.com/oauth2.0/authorize?'
+  let options = {
+    response_type: 'code', //响应类型 固定为code
+    client_id: AppId, //客户端的ID，这个ID是由QQ授权服务器分配的
+    redirect_uri, // 'http://www.demo.com/user/callback'
+    state,
+    scope: 'get_user_info,list_album',
+  }
+  let query = querystring.stringify(options)
+  grantUrl += query
+  res.render('login', { title: '登录', grantUrl })
 })
 
 //http://www.demo.com/user/callback?code=9A5F06AF&state=test
 router.get('/callback', function (req, res) {
-    let { code, state } = req.query
-    res.send(code)
+  let { code, state } = req.query
+  res.send(code)
 })
 ```

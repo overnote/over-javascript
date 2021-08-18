@@ -16,35 +16,35 @@
 
 ```html
 <div id="app">
-    <comp>
-        <list></list>
-    </comp>
+  <comp>
+    <list></list>
+  </comp>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 <script>
-    Vue.component('comp', {
-        template: `
+  Vue.component('comp', {
+    template: `
                 <div>
                     <p>comp内容：</>
                     <slot></slot>
                 </div>`,
-    })
+  })
 
-    Vue.component('list', {
-        template: `
+  Vue.component('list', {
+    template: `
                 <ul>
                     <li>1</li>
                     <li>2</li>
                     <li>3</li>
                 </ul>`,
-    })
+  })
 
-    new Vue({
-        el: '#app',
-        data: {},
-    })
+  new Vue({
+    el: '#app',
+    data: {},
+  })
 </script>
 ```
 
@@ -56,27 +56,27 @@
 
 ```html
 <div id="app">
-    <!--表示插槽使用名字为 right 的插槽来替换，如果没有该名字，则使用无名字的查抄替换-->
-    <comp slot="right"><span>替换</span></comp>
+  <!--表示插槽使用名字为 right 的插槽来替换，如果没有该名字，则使用无名字的查抄替换-->
+  <comp slot="right"><span>替换</span></comp>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 <script>
-    Vue.component('comp', {
-        template: `
+  Vue.component('comp', {
+    template: `
                 <div>
                     <p>comp内容：</>
                     <slot name="left"><span>左边slot</span></slot>
                     <slot name="right"><span>右边slot</span></slot>
                     <slot><span>没有名字的slot</span></slot>
                 </div>`,
-    })
+  })
 
-    new Vue({
-        el: '#app',
-        data: {},
-    })
+  new Vue({
+    el: '#app',
+    data: {},
+  })
 </script>
 ```
 
@@ -86,32 +86,32 @@
 
 ```html
 <div id="app">
-    <comp v-show="isShow">
-        <p v-show="isShow">slot也会显示</p>
-    </comp>
+  <comp v-show="isShow">
+    <p v-show="isShow">slot也会显示</p>
+  </comp>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 <script>
-    Vue.component('comp', {
-        template: `<div>
+  Vue.component('comp', {
+    template: `<div>
                 <div>会显示</div>
                 <slot></slot>
             </div>`,
-        data() {
-            return {
-                isShow: false, // 子组件数据要求不显示
-            }
-        },
-    })
+    data() {
+      return {
+        isShow: false, // 子组件数据要求不显示
+      }
+    },
+  })
 
-    new Vue({
-        el: '#app',
-        data: {
-            isShow: true, // 父组件数据要求显示
-        },
-    })
+  new Vue({
+    el: '#app',
+    data: {
+      isShow: true, // 父组件数据要求显示
+    },
+  })
 </script>
 ```
 
@@ -121,35 +121,35 @@ comp 位于 组件 `#app` 中，所以默认会使用根组件中的 data 数据
 
 ```html
 <div id="app">
-    <comp v-show="isShow">
-        <template slot-scope="myslot">
-            <p v-show="myslot.data">slot不会显示</p>
-        </template>
-    </comp>
+  <comp v-show="isShow">
+    <template slot-scope="myslot">
+      <p v-show="myslot.data">slot不会显示</p>
+    </template>
+  </comp>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 <script>
-    Vue.component('comp', {
-        template: `<div>
+  Vue.component('comp', {
+    template: `<div>
                 <div>会显示</div>
                 <slot :data="isShow">
                 </slot>
             </div>`,
-        data() {
-            return {
-                isShow: false,
-            }
-        },
-    })
+    data() {
+      return {
+        isShow: false,
+      }
+    },
+  })
 
-    new Vue({
-        el: '#app',
-        data: {
-            isShow: true,
-        },
-    })
+  new Vue({
+    el: '#app',
+    data: {
+      isShow: true,
+    },
+  })
 </script>
 ```
 
@@ -159,9 +159,9 @@ comp 位于 组件 `#app` 中，所以默认会使用根组件中的 data 数据
 
 插槽在 vue2.6 前后的写法对比
 
--   普通插槽：
-    -   2.6 之前：`<template slot="xxx"></template>`
-    -   2.6 之后：`<template v-slot:"xxx"></template>`
--   作用域插槽：
-    -   2.6 之前：`<template slot="xxx" slot-scope="props"></template>`
-    -   2.6 之后：`<template v-slot:xxx="props"></template>`
+- 普通插槽：
+  - 2.6 之前：`<template slot="xxx"></template>`
+  - 2.6 之后：`<template v-slot:"xxx"></template>`
+- 作用域插槽：
+  - 2.6 之前：`<template slot="xxx" slot-scope="props"></template>`
+  - 2.6 之后：`<template v-slot:xxx="props"></template>`

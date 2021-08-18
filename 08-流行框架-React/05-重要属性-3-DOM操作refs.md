@@ -16,19 +16,19 @@ MVVM 框架推崇以数据来驱动界面更新，而不是直接操作 DOM，�
 
 ```js
 class Comp extends React.Component {
-    showRefs = () => {
-        console.log(this.refs)
-        console.log(this.refs.input1.value)
-    }
-    render() {
-        return (
-            <div>
-                <input ref="input1" type="text" />
-                <input ref="input2" type="password" />
-                <button onClick={this.showRefs}>点击获取refs</button>
-            </div>
-        )
-    }
+  showRefs = () => {
+    console.log(this.refs)
+    console.log(this.refs.input1.value)
+  }
+  render() {
+    return (
+      <div>
+        <input ref="input1" type="text" />
+        <input ref="input2" type="password" />
+        <button onClick={this.showRefs}>点击获取refs</button>
+      </div>
+    )
+  }
 }
 ```
 
@@ -40,23 +40,23 @@ class Comp extends React.Component {
 
 ```js
 class Comp extends React.Component {
-    cb = c => {
-        console.log('被调用，c:', c) // c 为 input
-        this.input1 = c
-    }
-    showRefs = () => {
-        const { input1 } = this
-        console.log(input1.value)
-    }
-    render() {
-        return (
-            <div>
-                {/*<input ref={c=>this.input1 = c;console.log('被调用，c:',c)} type="text" />*/}
-                <input ref={this.cb} type="text" />
-                <button onClick={this.showRefs}>点击获取refs</button>
-            </div>
-        )
-    }
+  cb = (c) => {
+    console.log('被调用，c:', c) // c 为 input
+    this.input1 = c
+  }
+  showRefs = () => {
+    const { input1 } = this
+    console.log(input1.value)
+  }
+  render() {
+    return (
+      <div>
+        {/*<input ref={c=>this.input1 = c;console.log('被调用，c:',c)} type="text" />*/}
+        <input ref={this.cb} type="text" />
+        <button onClick={this.showRefs}>点击获取refs</button>
+      </div>
+    )
+  }
 }
 ```
 
@@ -70,23 +70,23 @@ React16.3 提供了新的 refs 使用方式，即 React.createRef()：
 
 ```js
 class Comp extends React.Component {
-    constructor(props) {
-        super(props)
-        this.myRef = React.createRef()
-    }
-    render() {
-        return (
-            <div>
-                <input type="text" ref={this.myRef} />
-                <button
-                    onClick={() => {
-                        console.log(this.myRef.current.value)
-                    }}
-                >
-                    点击获取当前input数据
-                </button>
-            </div>
-        )
-    }
+  constructor(props) {
+    super(props)
+    this.myRef = React.createRef()
+  }
+  render() {
+    return (
+      <div>
+        <input type="text" ref={this.myRef} />
+        <button
+          onClick={() => {
+            console.log(this.myRef.current.value)
+          }}
+        >
+          点击获取当前input数据
+        </button>
+      </div>
+    )
+  }
 }
 ```

@@ -21,9 +21,9 @@
 
 vue 中使用组件的步骤：
 
--   第一步：`Vue.extend()`创建组件构造器
--   第二步：`Vue.component()`注册组件
--   第三步：类似 HTML 标签一样使用组件
+- 第一步：`Vue.extend()`创建组件构造器
+- 第二步：`Vue.component()`注册组件
+- 第三步：类似 HTML 标签一样使用组件
 
 注意：组件化与模块化都是软件工程的思想，但是完全不是一个概念。组件化是从 UI 界面角度出发，实现 UI 元素的复用，模块化是从代码组织角度出发，便于代码的复用与维护。
 
@@ -33,25 +33,25 @@ vue 中使用组件的步骤：
 
 ```html
 <div id="div">
-    <!--驼峰命名的组件名，在html中引用使用 - 连接符，并修改为小写-->
-    <my-comp></my-comp>
+  <!--驼峰命名的组件名，在html中引用使用 - 连接符，并修改为小写-->
+  <my-comp></my-comp>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-    // 依次传入组件名、组件各种属性
-    Vue.component('myComp', {
-        data: function () {
-            return {
-                count: 0,
-            }
-        },
-        template: `<button @click="count++">{{count}}</button>`,
-    })
+  // 依次传入组件名、组件各种属性
+  Vue.component('myComp', {
+    data: function () {
+      return {
+        count: 0,
+      }
+    },
+    template: `<button @click="count++">{{count}}</button>`,
+  })
 
-    const app = new Vue({
-        el: '#div',
-    })
+  const app = new Vue({
+    el: '#div',
+  })
 </script>
 ```
 
@@ -60,12 +60,12 @@ vue 中使用组件的步骤：
 ```js
 // 第一步：创建组件构造器。依次传入 组件名、组件内容：内部数据、模板、函数等等
 const myComp = Vue.extend({
-    data: function () {
-        return {
-            count: 0,
-        }
-    },
-    template: `<button @click="count++">{{count}}</button>`,
+  data: function () {
+    return {
+      count: 0,
+    }
+  },
+  template: `<button @click="count++">{{count}}</button>`,
 })
 
 // 第二步：注册组件。依次传入组件名、组件内容
@@ -78,12 +78,12 @@ Vue.component('myComp', myComp)
 
 ```js
 new Vue({
-    el: '#app',
-    components: {
-        myCom: {
-            template: '<h3>私有组件</h3>',
-        },
+  el: '#app',
+  components: {
+    myCom: {
+      template: '<h3>私有组件</h3>',
     },
+  },
 })
 ```
 
@@ -111,21 +111,21 @@ template 属性也可以直接引用其他已经定义好的 template。
 
 ```html
 <div id="app">
-    <my-com3></my-com3>
+  <my-com3></my-com3>
 </div>
 
 <template id="tmp1">
-    <h3>组件</h3>
+  <h3>组件</h3>
 </template>
 
 <script>
-    Vue.component('myCom3', {
-        template: '#tmp1',
-    })
+  Vue.component('myCom3', {
+    template: '#tmp1',
+  })
 
-    new Vue({
-        el: '#app',
-    })
+  new Vue({
+    el: '#app',
+  })
 </script>
 ```
 
@@ -137,25 +137,25 @@ template 属性也可以直接引用其他已经定义好的 template。
 
 ```html
 <div id="app">
-    <span @click="who='com1'">显示组件1</span>
-    <span @click="who='com2'">显示组件2</span>
-    <component :is="who"></component>
+  <span @click="who='com1'">显示组件1</span>
+  <span @click="who='com2'">显示组件2</span>
+  <component :is="who"></component>
 </div>
 
 <script>
-    Vue.component('com1', {
-        template: '<h3>111</h3>',
-    })
+  Vue.component('com1', {
+    template: '<h3>111</h3>',
+  })
 
-    Vue.component('com2', {
-        template: '<h3>222</h3>',
-    })
+  Vue.component('com2', {
+    template: '<h3>222</h3>',
+  })
 
-    let vm = new Vue({
-        el: '#app',
-        data: {
-            who: 'com1',
-        },
-    })
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      who: 'com1',
+    },
+  })
 </script>
 ```

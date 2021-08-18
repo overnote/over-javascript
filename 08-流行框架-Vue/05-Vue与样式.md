@@ -8,22 +8,22 @@
 
 ```html
 <div id="app">
-    <h2 :style="{'background-color': 'green'}">test1</h2>
-    <h2 :style="styleObj1">test2</h2>
-    <h2 :style="[styleObj1,styleObj2]">test3</h2>
+  <h2 :style="{'background-color': 'green'}">test1</h2>
+  <h2 :style="styleObj1">test2</h2>
+  <h2 :style="[styleObj1,styleObj2]">test3</h2>
 </div>
 
 <script>
-    new Vue({
-        el: '#app',
-        data: {
-            msg: 'hello',
-            isActive: true,
-            styleObj1: { 'background-color': 'green' },
-            styleObj2: { 'font-size': '100px' },
-        },
-        methods: {},
-    })
+  new Vue({
+    el: '#app',
+    data: {
+      msg: 'hello',
+      isActive: true,
+      styleObj1: { 'background-color': 'green' },
+      styleObj2: { 'font-size': '100px' },
+    },
+    methods: {},
+  })
 </script>
 ```
 
@@ -33,34 +33,34 @@
 
 ```html
 <style>
-    .green {
-        background-color: green;
-    }
-    .big {
-        font-weigth: 200;
-    }
-    .active {
-        letter-spacing: 0.5em;
-    }
+  .green {
+    background-color: green;
+  }
+  .big {
+    font-weigth: 200;
+  }
+  .active {
+    letter-spacing: 0.5em;
+  }
 </style>
 
 <div id="app">
-    <h2 :class="['green', 'big']">test1</h2>
-    <h2 :class="['green', 'big', isActive?'active':'']">test2</h2>
-    <h2 :class="['green', 'big', {'active': isActive}]">test3</h2>
-    <h2 :class="{ green:true, big:true }">test4</h2>
-    <h2 :class="classObj">test5</h2>
+  <h2 :class="['green', 'big']">test1</h2>
+  <h2 :class="['green', 'big', isActive?'active':'']">test2</h2>
+  <h2 :class="['green', 'big', {'active': isActive}]">test3</h2>
+  <h2 :class="{ green:true, big:true }">test4</h2>
+  <h2 :class="classObj">test5</h2>
 </div>
 
 <script>
-        new Vue({
-        el: "#app",
-        data: {
-            msg: "hello",
-            isActive: true，
-            classObj: { green:true, big:true }
-        }
-    });
+      new Vue({
+      el: "#app",
+      data: {
+          msg: "hello",
+          isActive: true，
+          classObj: { green:true, big:true }
+      }
+  });
 </script>
 ```
 
@@ -70,18 +70,18 @@
 
 ```html
 <template>
-    <div>
-        <p class="green">绿色</p>
-    </div>
+  <div>
+    <p class="green">绿色</p>
+  </div>
 </template>
 
 <script></script>
 
 <!-- 直接在此处设置 -->
 <style>
-    .green {
-        background-color: green;
-    }
+  .green {
+    background-color: green;
+  }
 </style>
 ```
 
@@ -98,12 +98,12 @@ import 'element-ui/lib/theme-default/index.css'
 ```html
 <!-- 方式一：在 script 标签中引入 -->
 <script>
-    import '../static/css/global.css'
+  import '../static/css/global.css'
 </script>
 
 <!-- 方式二：在 style 中引入样式 -->
 <style scoped>
-    @import '../css/style.css';
+  @import '../css/style.css';
 </style>
 
 <!-- 方式三：在 style 标签的 src上引入 -->
@@ -116,10 +116,10 @@ import 'element-ui/lib/theme-default/index.css'
 
 ```html
 <style scoped>
-    /* 添加scoped后，此处的样式只是针对此组件的，不会污染全局 */
-    .h1 {
-        color: red;
-    }
+  /* 添加scoped后，此处的样式只是针对此组件的，不会污染全局 */
+  .h1 {
+    color: red;
+  }
 </style>
 ```
 
@@ -127,9 +127,9 @@ import 'element-ui/lib/theme-default/index.css'
 
 ```html
 <style scoped>
-    /deep/ .text-box input {
-        width: 166px;
-    }
+  /deep/ .text-box input {
+    width: 166px;
+  }
 </style>
 ```
 
@@ -139,10 +139,10 @@ import 'element-ui/lib/theme-default/index.css'
 
 ```html
 <style lang="less" scoped>
-    .text-box {
-        input {
-            width: 166px;
-        }
+  .text-box {
+    input {
+      width: 166px;
     }
+  }
 </style>
 ```

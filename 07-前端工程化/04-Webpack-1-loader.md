@@ -12,30 +12,30 @@ loader 在 webpack 配置文件的 module 字段中配置，位于 rules 字段�
 
 ```js
 module: {
-    rules: [
-        {
-            test: /(\.jsx|\.js)$/, //正则匹配 哪些文件 需要该加载器
-            use: {
-                //匹配到的文件使用哪个加载器
-                loader: 'babel-loader',
-                options: {
-                    //加载器的参数
-                    presets: ['env'],
-                },
-            },
-            exclude: /node_modules/, //忽略掉哪些文件不走该加载器
+  rules: [
+    {
+      test: /(\.jsx|\.js)$/, //正则匹配 哪些文件 需要该加载器
+      use: {
+        //匹配到的文件使用哪个加载器
+        loader: 'babel-loader',
+        options: {
+          //加载器的参数
+          presets: ['env'],
         },
-        {
-            //后续的其他加载器
-        },
-    ]
+      },
+      exclude: /node_modules/, //忽略掉哪些文件不走该加载器
+    },
+    {
+      //后续的其他加载器
+    },
+  ]
 }
 ```
 
 注意事项：
 
--   每个 loader 都不是 webpack 本身的功能，所以需要安装这些第三方 loader 才能使用
--   **多个 loader 的处理顺序是：从下到上，从右到左！**
+- 每个 loader 都不是 webpack 本身的功能，所以需要安装这些第三方 loader 才能使用
+- **多个 loader 的处理顺序是：从下到上，从右到左！**
 
 ## 二 常用 js loader
 
@@ -125,10 +125,10 @@ cnpm i url-loader -D
 
 ```js
 rules: [
-    {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        use: ['url-loader?limit=10000', 'img-loader'],
-    },
+  {
+    test: /\.(jpe?g|png|gif|svg)$/i,
+    use: ['url-loader?limit=10000', 'img-loader'],
+  },
 ]
 ```
 
@@ -136,7 +136,7 @@ rules: [
 
 ```js
 pngquant: {
-    quality: 80
+  quality: 80
 }
 ```
 
@@ -162,8 +162,8 @@ pngquant: {
 
 打包 CSS 需要两个 loader 配合：
 
--   css-loader：让 JS 支持 `import` css 模块，会遍历 CSS 文件，然后找到 url() 表达式的关系并处理他们
--   style-loader： 把刚才分析得到的 css 代码插入页面 head 标签的 style 标签中。
+- css-loader：让 JS 支持 `import` css 模块，会遍历 CSS 文件，然后找到 url() 表达式的关系并处理他们
+- style-loader： 把刚才分析得到的 css 代码插入页面 head 标签的 style 标签中。
 
 安装 `style-loader` `css-loader`：
 
@@ -228,7 +228,7 @@ webpack 添加 loader：
 
 ```js
 module.exports = {
-    plugins: [require('autoprefixer')],
+  plugins: [require('autoprefixer')],
 }
 ```
 

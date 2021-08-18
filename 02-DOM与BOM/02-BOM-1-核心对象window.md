@@ -6,8 +6,8 @@ BOM 的核心对象是 window，代表了浏览器的一个实例，也是浏览
 
 window 对象有两重身份：
 
--   ECMAScript 中的 Global 对象
--   浏览器窗口的 JS 接口
+- ECMAScript 中的 Global 对象
+- 浏览器窗口的 JS 接口
 
 window 对象上挂载的主要对象有：document、location、navigation、screen、history。在书写挂载在 window 上的成员时，window 可以省略。
 
@@ -21,7 +21,7 @@ window 对象上挂载的主要对象有：document、location、navigation、sc
 var age = 29
 
 function sayAge() {
-    alert(this.age)
+  alert(this.age)
 }
 
 console.log(window.age) //29
@@ -46,9 +46,9 @@ console.log(olVal)
 
 window 对象上绑定了一些属性，可以访问与自己有关的窗口：
 
--   window.self：自己
--   window.top：最外层的窗口，即浏览器窗口本身
--   window.parent：当前窗口的父窗口
+- window.self：自己
+- window.top：最外层的窗口，即浏览器窗口本身
+- window.parent：当前窗口的父窗口
 
 如果页面中包含框架，则每个框架都有自己的 window 对象，并且保存在 frames 集合中：
 
@@ -96,7 +96,7 @@ alert(window.color) //undefined
 ```js
 // onlaod：加载完图像、脚本、css等后调用
 window.onload = function () {
-    // 当前页面的所有业务代码
+  // 当前页面的所有业务代码
 }
 ```
 
@@ -162,9 +162,9 @@ window.open('http://www.wrox.com/', 'topFrame')
 
 下列三个方法可以让浏览器调用系统对话框向用户显示消息：
 
--   alert()：弹出警告框
--   confirm()：弹出确认框
--   prompt()：弹出提示输入框
+- alert()：弹出警告框
+- confirm()：弹出确认框
+- prompt()：弹出提示输入框
 
 ### 4.5 窗口位置 screenLeft 和 screenTop
 
@@ -173,9 +173,11 @@ window.open('http://www.wrox.com/', 'topFrame')
 使用下列兼容代码可以跨浏览器取得窗口左边和上边的位置:
 
 ```js
-let leftPos = typeof window.screenLeft == 'number' ? window.screenLeft : window.screenX
+let leftPos =
+  typeof window.screenLeft == 'number' ? window.screenLeft : window.screenX
 
-let topPos = typeof window.screenTop == 'number' ? window.screenTop : window.screenY
+let topPos =
+  typeof window.screenTop == 'number' ? window.screenTop : window.screenY
 ```
 
 IE 中， screenLeft 和 screenTop 中保存的是从屏幕左边和上边到由 window 对象表示的页面可见区域的距离。换句话说，如果 window 对象是最外层对象，而且浏览器窗口紧贴屏幕最上端——即 y 轴坐标为 0，那么 screenTop 的值就是位于页面可见区域上方的浏览器工具栏的像素高度。但是，在 Chrome、 Firefox 和 Safari 中， screenY 或 screenTop 中保存的是整个浏览器窗口相对于屏幕的坐标值，即在窗口的 y 轴坐标为 0 时返回 0。

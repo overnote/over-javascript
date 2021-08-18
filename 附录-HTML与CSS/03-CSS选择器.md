@@ -39,9 +39,9 @@ E[attr|="value"]      /* 属性值是value或以 value- 开头的值（比如说
 
 ```html
 <style>
-    div[class=^'icon'] {
-        color: red;
-    }
+  div[class=^'icon'] {
+    color: red;
+  }
 </style>
 ```
 
@@ -68,7 +68,7 @@ E:focus {
 ```css
 /* 链接伪类的书写顺序最好为：lvha */
 a:link:hover {
-    color: red;
+  color: red;
 }
 ```
 
@@ -124,24 +124,24 @@ E:empty                 /* 没有任何子节点（包括空格）的E元素,(�
 
 注意：
 
--   n 遵循线性变化，其取值是：0、1、2、3、4....。n<=0 时选取无效。
--   n 可以是多种形式：`nth-child(2n)`、`nth-child(2n+1)`、`nth-child(-1n+5)`、`nth-last-child(-1n+5)`(后五个)等；
--   n 可以是特殊字符：`even`(偶数)、`odd`(奇数)
+- n 遵循线性变化，其取值是：0、1、2、3、4....。n<=0 时选取无效。
+- n 可以是多种形式：`nth-child(2n)`、`nth-child(2n+1)`、`nth-child(-1n+5)`、`nth-last-child(-1n+5)`(后五个)等；
+- n 可以是特殊字符：`even`(偶数)、`odd`(奇数)
 
 示例：
 
 ```html
 <style>
-    div span:nth-of-type(1) {
-        background-colr: pink;
-    }
+  div span:nth-of-type(1) {
+    background-colr: pink;
+  }
 </style>
 
 <div>
-    <p>第一个</p>
-    <span>111</span>
-    <span>222</span>
-    <span>333</span>
+  <p>第一个</p>
+  <span>111</span>
+  <span>222</span>
+  <span>333</span>
 </div>
 ```
 
@@ -151,9 +151,9 @@ E:empty                 /* 没有任何子节点（包括空格）的E元素,(�
 
 ```html
 <style>
-    div::before {
-        content: '你';
-    }
+  div::before {
+    content: '你';
+  }
 </style>
 
 <div>好</div>

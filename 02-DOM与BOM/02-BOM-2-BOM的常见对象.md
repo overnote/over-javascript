@@ -76,7 +76,7 @@ console.log(searchParams.toString()) // " num=10&page=3"
 let qs = '?q=javascript&num=10'
 let searchParams = new URLSearchParams(qs)
 for (let param of searchParams) {
-    console.log(param)
+  console.log(param)
 }
 // ["q", "javascript"]
 // ["num", "10"]
@@ -162,19 +162,19 @@ navigator.geolocation //会提示用户是否允许获取该API的权限
 ```js
 //判断浏览器是否兼容代码
 if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-        function success(position) {
-            console.log('获取位置成功，当前位置为：', position)
-        },
-        function errror(error) {
-            console.log('获取位置错误，错误为：', error)
-        },
-        {
-            timeout: 10000,
-        }
-    )
+  navigator.geolocation.getCurrentPosition(
+    function success(position) {
+      console.log('获取位置成功，当前位置为：', position)
+    },
+    function errror(error) {
+      console.log('获取位置错误，错误为：', error)
+    },
+    {
+      timeout: 10000,
+    }
+  )
 } else {
-    //没有获取到地理位置执行的操作
+  //没有获取到地理位置执行的操作
 }
 ```
 
@@ -210,9 +210,9 @@ navigator.geolocation.clearWatch(watchID)
 window.online //用户网络连接时被调用
 window.offline //用户网络断开时被调用
 window.addEventListener('online', function () {
-    console.log('已经建立了网络连接')
+  console.log('已经建立了网络连接')
 })
 window.addEventListener('offline', function () {
-    console.log('已经失去了网络连接')
+  console.log('已经失去了网络连接')
 })
 ```

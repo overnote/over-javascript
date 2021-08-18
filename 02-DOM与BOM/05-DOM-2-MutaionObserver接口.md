@@ -6,7 +6,7 @@ MutaionObserver 是 H5 新增的接口，可以在 DOM 背修改时异步执行�
 
 ```js
 let observer = new MutationObserver(
-    mutationRecords => console.log('监控到改变：', mutationRecords) // 监控到变化后输出
+  (mutationRecords) => console.log('监控到改变：', mutationRecords) // 监控到变化后输出
 )
 observer.observe(document.body, { attributes: true })
 
@@ -17,8 +17,8 @@ console.log('属性改变了') // 先输出
 
 贴士：
 
--   回调函数的第一个参数： MutationRecord 数组包含顺序入队的触发事件，而且连续的修改会生成多个 MutationRecord 实例。
--   回调函数的第二个参数：是观察变化的 MutationObserver 的实例
+- 回调函数的第一个参数： MutationRecord 数组包含顺序入队的触发事件，而且连续的修改会生成多个 MutationRecord 实例。
+- 回调函数的第二个参数：是观察变化的 MutationObserver 的实例
 
 ## 二 常见使用方法
 
@@ -27,7 +27,9 @@ console.log('属性改变了') // 先输出
 被观察的元素如果没有被垃圾回收，在默认情况下监控到的 DOM 变化事件都会响应。但是使用 disconnect() 方法可以提前终止回调：
 
 ```js
-let observer = new MutationObserver(() => console.log('<body> attributes changed'))
+let observer = new MutationObserver(() =>
+  console.log('<body> attributes changed')
+)
 observer.observe(document.body, { attributes: true })
 
 // 示例没有输出
@@ -39,14 +41,16 @@ document.body.className = 'bar'
 要想让已经加入任务队列的回调执行，可以使用 setTimeout()让已经入列的回调执行完毕再调用 disconnect()：
 
 ```js
-let observer = new MutationObserver(() => console.log('<body> attributes changed'))
+let observer = new MutationObserver(() =>
+  console.log('<body> attributes changed')
+)
 observer.observe(document.body, { attributes: true })
 
 // 示例：<body> attributes changed
 document.body.className = 'foo'
 setTimeout(() => {
-    observer.disconnect()
-    document.body.className = 'bar'
+  observer.disconnect()
+  document.body.className = 'bar'
 }, 0)
 ```
 
@@ -62,7 +66,9 @@ document.body.appendChild(childA)
 document.body.appendChild(childB)
 
 // 观察两个子节点
-let observer = new MutationObserver(mutationRecords => console.log(mutationRecords.map(x => x.target)))
+let observer = new MutationObserver((mutationRecords) =>
+  console.log(mutationRecords.map((x) => x.target))
+)
 observer.observe(childA, { attributes: true })
 observer.observe(childB, { attributes: true })
 
@@ -76,7 +82,9 @@ childB.setAttribute('foo', 'bar')
 调用 disconnect()并不会结束 MutationObserver 的生命。还可以重新使用这个观察者，再将它关联到新的目标节点：
 
 ```js
-let observer = new MutationObserver(() => console.log('<body> attributeschanged'))
+let observer = new MutationObserver(() =>
+  console.log('<body> attributeschanged')
+)
 observer.observe(document.body, { attributes: true })
 
 // 这行代码会触发变化事件
@@ -84,14 +92,14 @@ document.body.setAttribute('foo', 'bar')
 
 // 断开后不会触发变化事件
 setTimeout(() => {
-    observer.disconnect()
-    document.body.setAttribute('bar', 'baz')
+  observer.disconnect()
+  document.body.setAttribute('bar', 'baz')
 }, 0)
 
 // 再次重用，可以再次监听
 setTimeout(() => {
-    observer.observe(document.body, { attributes: true })
-    document.body.setAttribute('baz', 'qux')
+  observer.observe(document.body, { attributes: true })
+  document.body.setAttribute('baz', 'qux')
 }, 0)
 ```
 
@@ -134,7 +142,9 @@ MutationObserver 接口的核心是异步回调与记录队列模型，为了在
 回调执行后，这些 MutationRecord 就用不着了，因此记录队列会被清空，其内容会被丢弃。不过调用 MutationObserver 实例的 takeRecords()方法可以直接清空记录队列，取出并返回其中的所有 MutationRecord 实例：
 
 ```js
-let observer = new MutationObserver(mutationRecords => console.log(mutationRecords))
+let observer = new MutationObserver((mutationRecords) =>
+  console.log(mutationRecords)
+)
 observer.observe(document.body, { attributes: true })
 
 document.body.className = 'foo'

@@ -26,20 +26,20 @@ const fs = require('fs')
 
 let rs = fs.createReadStream('./demo-read.txt', 'utf-8')
 
-rs.on('data', data => {
-    console.log(data) // 输出第一次读取到的数据
+rs.on('data', (data) => {
+  console.log(data) // 输出第一次读取到的数据
 })
 
-rs.on('error', error => {
-    console.log('error:', error) // 如果有错误，输出错误
+rs.on('error', (error) => {
+  console.log('error:', error) // 如果有错误，输出错误
 })
 
 rs.on('end', () => {
-    console.log('end')
+  console.log('end')
 })
 
 rs.on('close', () => {
-    console.log('close') // 读取完毕后输出 close
+  console.log('close') // 读取完毕后输出 close
 })
 
 // 将读取到的数据填入可写流
@@ -53,10 +53,12 @@ rs.pipe(ws) // 将数据以流形式写入
 const http = require('http')
 const fs = require('fs')
 
-http.createServer((req, res) => {
+http
+  .createServer((req, res) => {
     let rs = fs.createReadStream('./1.jpg')
     rs.pipe(res) // 将流写入返回结果 res
-}).listen(8000)
+  })
+  .listen(8000)
 ```
 
 注意：只有流才有 on 监听事件，所以 req、res 也是流，而且流是有方向的！
@@ -71,35 +73,39 @@ Node 中的流都运作在字符串、Buffer、Unit8Array 上。但是流可以�
 const { Transform } = require('stream')
 
 const commaSplitter = new Transform({
-    readableObjectMode: true,
-    transform(chunk, encoding, callback) {
-        this.push(chunk.toString().trim().split(','))
-        callback()
-    },
+  readableObjectMode: true,
+  transform(chunk, encoding, callback) {
+    this.push(chunk.toString().trim().split(','))
+    callback()
+  },
 })
 
 const arrayToObject = new Transform({
-    readableObjectMode: true,
-    writableObjectMode: true,
-    transform(chunk, encoding, callback) {
-        const obj = {}
-        for (let i = 0; i < chunk.length; i += 2) {
-            obj[chunk[i]] = chunk[i + 1]
-        }
-        this.push(obj)
-        callback()
-    },
+  readableObjectMode: true,
+  writableObjectMode: true,
+  transform(chunk, encoding, callback) {
+    const obj = {}
+    for (let i = 0; i < chunk.length; i += 2) {
+      obj[chunk[i]] = chunk[i + 1]
+    }
+    this.push(obj)
+    callback()
+  },
 })
 
 const objectToString = new Transform({
-    writableObjectMode: true,
-    transform(chunk, encoding, callback) {
-        this.push(JSON.stringify(chunk) + '\n')
-        callback()
-    },
+  writableObjectMode: true,
+  transform(chunk, encoding, callback) {
+    this.push(JSON.stringify(chunk) + '\n')
+    callback()
+  },
 })
 
-process.stdin.pipe(commaSplitter).pipe(arrayToObject).pipe(objectToString).pipe(process.stdout)
+process.stdin
+  .pipe(commaSplitter)
+  .pipe(arrayToObject)
+  .pipe(objectToString)
+  .pipe(process.stdout)
 ```
 
 注意：将已经存在的流切换到对象模式是不安全的。
@@ -127,35 +133,35 @@ const { Readable } = require('stream')
 
 //这里我们自定义了一个用来读取数组的流
 class ArrRead extends Readable {
-    constructor(arr, opt) {
-        //注意这里，需调用父类的构造函数
-        super(opt)
-        this.arr = arr
-        this.index = 0
-    }
+  constructor(arr, opt) {
+    //注意这里，需调用父类的构造函数
+    super(opt)
+    this.arr = arr
+    this.index = 0
+  }
 
-    //实现 _read() 方法
-    _read(size) {
-        //如果当前下标等于数组长度，说明数据已经读完
-        if (this.index == this.arr.length) {
-            this.push(null)
-        } else {
-            this.arr.slice(this.index, this.index + size).forEach(value => {
-                this.push(value.toString())
-            })
-            this.index += size
-        }
+  //实现 _read() 方法
+  _read(size) {
+    //如果当前下标等于数组长度，说明数据已经读完
+    if (this.index == this.arr.length) {
+      this.push(null)
+    } else {
+      this.arr.slice(this.index, this.index + size).forEach((value) => {
+        this.push(value.toString())
+      })
+      this.index += size
     }
+  }
 }
 
 let arr = new ArrRead([1, 2, 3, 4, 5, 6, 7, 8, 9, 0], {
-    highWaterMark: 2,
+  highWaterMark: 2,
 })
 
 //这样当我们监听 'data' 事件时，流会调用我们实现的 _read() 方法往缓冲区中读取数据
 //然后提供给消费者
 arr.on('data', function (data) {
-    console.log(data.toString())
+  console.log(data.toString())
 })
 ```
 
@@ -167,23 +173,23 @@ const { Duplex } = require('stream')
 const kSource = Symbol('source')
 
 class MyDuplex extends Duplex {
-    constructor(source, options) {
-        supre(options)
-        this[kSource] = source
-    }
+  constructor(source, options) {
+    supre(options)
+    this[kSource] = source
+  }
 
-    _write(chunk, endcoding, callback) {
-        if (Buffer.isBuffer(chunk)) {
-            chunk = chunk.toString()
-        }
-        this[kSource].writeSomeData(chunk)
-        callback()
+  _write(chunk, endcoding, callback) {
+    if (Buffer.isBuffer(chunk)) {
+      chunk = chunk.toString()
     }
+    this[kSource].writeSomeData(chunk)
+    callback()
+  }
 
-    _read(size) {
-        this[kSource].fetchSomeData(size, (data, encoding) => {
-            this.push(Buffer.from(data, encoding))
-        })
-    }
+  _read(size) {
+    this[kSource].fetchSomeData(size, (data, encoding) => {
+      this.push(Buffer.from(data, encoding))
+    })
+  }
 }
 ```

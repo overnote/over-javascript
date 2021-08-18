@@ -4,10 +4,10 @@
 
 Vue 提供了 transition 的封装组件，在下列情形中，可以给任何元素和组件添加 进入/离开 过渡：
 
--   条件渲染 (使用 v-if)
--   条件展示 (使用 v-show)
--   动态组件
--   组件根节点
+- 条件渲染 (使用 v-if)
+- 条件展示 (使用 v-show)
+- 动态组件
+- 组件根节点
 
 一个完整的动画分为了两部分：进入部分和离开部分。进入和离开部分都分为两个时间点和一个时间段。
 
@@ -45,8 +45,8 @@ v-leave-active：
 
 贴士：
 
--   v-enter 和 v-leave-to 的状态是一致的；
--   v-enter-to 和 v-leave 的状态是一致的；
+- v-enter 和 v-leave-to 的状态是一致的；
+- v-enter-to 和 v-leave 的状态是一致的；
 
 ## 二 元素过渡步骤
 
@@ -56,26 +56,26 @@ v-leave-active：
 <button @click="flag=!flag">显示/隐藏</button>
 
 <transition>
-    <p v-show="flag">我想通过动画显示隐藏</p>
+  <p v-show="flag">我想通过动画显示隐藏</p>
 </transition>
 
 <script>
-    new Vue({
-        data:{
-            flag: true;
-        }
-    })
+  new Vue({
+      data:{
+          flag: true;
+      }
+  })
 </script>
 
 <style>
-    .v-enter,
-    .v-leave-to {
-        opacity: 0;
-    }
-    .v-leave-active,
-    .v-enter-active {
-        transition: all 0.4s;
-    }
+  .v-enter,
+  .v-leave-to {
+    opacity: 0;
+  }
+  .v-leave-active,
+  .v-enter-active {
+    transition: all 0.4s;
+  }
 </style>
 ```
 
@@ -83,33 +83,33 @@ v-leave-active：
 
 **8.2.1 步骤**：
 
--   在 transition 标签上添加 name 属性，并给 name 属性赋值，赋的值替换 ‘v-’ 来作为过渡类类名的前缀；
--   使用自定义过渡类名 定义两组样式，来控制 transition 内部元素实现动画；
+- 在 transition 标签上添加 name 属性，并给 name 属性赋值，赋的值替换 ‘v-’ 来作为过渡类类名的前缀；
+- 使用自定义过渡类名 定义两组样式，来控制 transition 内部元素实现动画；
 
 ```html
 <button @click="flag=!flag">显示/隐藏</button>
 
 <transition name="my">
-    <p v-show="flag">我想通过动画显示隐藏</p>
+  <p v-show="flag">我想通过动画显示隐藏</p>
 </transition>
 
 <script>
-    new Vue({
-        data:{
-            flag: true;
-        }
-    })
+  new Vue({
+      data:{
+          flag: true;
+      }
+  })
 </script>
 
 <style>
-    .my-enter,
-    .my-leave-to {
-        opacity: 0;
-    }
-    .my-leave-active,
-    .my-enter-active {
-        transition: all 0.4s;
-    }
+  .my-enter,
+  .my-leave-to {
+    opacity: 0;
+  }
+  .my-leave-active,
+  .my-enter-active {
+    transition: all 0.4s;
+  }
 </style>
 ```
 
@@ -122,16 +122,16 @@ v-leave-active：
 
 ```html
 <transition
-    v-on:before-enter="beforeEnter"
-    v-on:enter="enter"
-    v-on:after-enter="afterEnter"
-    v-on:enter-cancelled="enterCancelled"
-    v-on:before-leave="beforeLeave"
-    v-on:leave="leave"
-    v-on:after-leave="afterLeave"
-    v-on:leave-cancelled="leaveCancelled"
+  v-on:before-enter="beforeEnter"
+  v-on:enter="enter"
+  v-on:after-enter="afterEnter"
+  v-on:enter-cancelled="enterCancelled"
+  v-on:before-leave="beforeLeave"
+  v-on:leave="leave"
+  v-on:after-leave="afterLeave"
+  v-on:leave-cancelled="leaveCancelled"
 >
-    上面四个是入场的动画生命周期函数； 后面四个是出场的动画生命周期函数；
+  上面四个是入场的动画生命周期函数； 后面四个是出场的动画生命周期函数；
 </transition>
 ```
 

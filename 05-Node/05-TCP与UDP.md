@@ -22,12 +22,12 @@ const net = require('net')
 const server = net.createServer()
 
 // 创建一个套接字socket，作为参数传递给回调函数
-server.on('connection', socket => {
-    console.log('new connection comming')
+server.on('connection', (socket) => {
+  console.log('new connection comming')
 })
 
 server.listen(() => {
-    console.log('Listen...')
+  console.log('Listen...')
 })
 ```
 
@@ -39,29 +39,29 @@ server.listen(() => {
 const net = require('net')
 
 // 创建一个套接字socket，作为参数传递给回调函数
-const server = net.createServer(socket => {
-    // socket.end("world\n");
-    socket.write('world\n')
+const server = net.createServer((socket) => {
+  // socket.end("world\n");
+  socket.write('world\n')
 })
 
-server.on('error', err => {
-    throw err
+server.on('error', (err) => {
+  throw err
 })
 
-server.on('connection', socket => {
-    console.log('new connection comming...')
+server.on('connection', (socket) => {
+  console.log('new connection comming...')
 })
 
 server.on('listening', () => {
-    console.log('listening...')
+  console.log('listening...')
 })
 
-server.on('close', socket => {
-    console.log('close...')
+server.on('close', (socket) => {
+  console.log('close...')
 })
 
 server.listen(3001, () => {
-    console.log('Listen on ', server.address())
+  console.log('Listen on ', server.address())
 })
 ```
 
@@ -76,14 +76,14 @@ const net = require('net')
 const client = new net.Socket()
 
 client.connect(3000, 'localhost', () => {
-    //运行后输出该句，证明回调已经执行
-    console.log('connect...')
-    client.write('msg of client') //发送数据
+  //运行后输出该句，证明回调已经执行
+  console.log('connect...')
+  client.write('msg of client') //发送数据
 })
 
 //接收数据
-client.on('data', data => {
-    console.log('the data come from server is ' + data.toString())
+client.on('data', (data) => {
+  console.log('the data come from server is ' + data.toString())
 })
 ```
 
@@ -157,11 +157,11 @@ Node 使用 dgram 模块中的 createSocket() 方法创建一个 UDP 服务器�
 const dgram = require('dgram')
 
 const socket = dgram.createSocket('udp4', (msg, rinfo) => {
-    // code
+  // code
 })
 
 socket.bind(3000, 'localhost', () => {
-    console.log('bind 3000....')
+  console.log('bind 3000....')
 })
 ```
 
@@ -173,18 +173,18 @@ socket.bind(3000, 'localhost', () => {
 const dgram = require('dgram')
 const server = dgram.createSocket('udp4')
 
-server.on('error', err => {
-    console.log(`server error:\n${err.stack}`)
-    server.close()
+server.on('error', (err) => {
+  console.log(`server error:\n${err.stack}`)
+  server.close()
 })
 
 server.on('message', (msg, rinfo) => {
-    console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`)
+  console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`)
 })
 
 server.on('listening', () => {
-    const address = server.address()
-    console.log(`server listening ${address.address}:${address.port}`)
+  const address = server.address()
+  console.log(`server listening ${address.address}:${address.port}`)
 })
 ```
 
@@ -199,17 +199,24 @@ var message = new Buffer('msg from client')
 
 var socket = dgram.createSocket('udp4')
 
-socket.send(message, 0, message.length, 3000, 'localhost', function (err, bytes) {
+socket.send(
+  message,
+  0,
+  message.length,
+  3000,
+  'localhost',
+  function (err, bytes) {
     if (err) {
-        console.log(err)
-        return
+      console.log(err)
+      return
     } else {
-        console.log('client send ' + bytes + 'message')
+      console.log('client send ' + bytes + 'message')
     }
-})
+  }
+)
 
 socket.on('message', function (msg, rinfo) {
-    console.log('msg from server')
+  console.log('msg from server')
 })
 ```
 

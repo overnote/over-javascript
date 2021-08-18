@@ -8,14 +8,14 @@ GraphQL 是 Facebook 开发的数据查询语言，于 2015 年发布。GraphQL 
 
 GraphQL 的特点：
 
--   请求需要的数据更精准，只取得需要的字段，无冗余。
--   多个资源的获取，只需要一个请求即可实现。
--   对资源实现了更加详细的描述，能够方便的增加、删除字段，便于平滑演进。
+- 请求需要的数据更精准，只取得需要的字段，无冗余。
+- 多个资源的获取，只需要一个请求即可实现。
+- 对资源实现了更加详细的描述，能够方便的增加、删除字段，便于平滑演进。
 
 ### 1.2 GraphQL 与 Restful 对比
 
--   Restful 一次只能返回一个资源，GraphQL 一次可以获取多个资源的合集
--   Restful 用不同的 url 区分资源，GraphQL 用类型区分资源
+- Restful 一次只能返回一个资源，GraphQL 一次可以获取多个资源的合集
+- Restful 用不同的 url 区分资源，GraphQL 用类型区分资源
 
 ## 二 使用 GraphQL
 
@@ -43,29 +43,29 @@ let demoSchema = graphql.buildSchema(`
 
 // 定义查询对应的处理器（resolver）
 let demoRoot = {
-    name: () => {
-        return 'zs'
-    },
-    age: () => {
-        return 30
-    },
-    info: () => {
-        return {
-            sex: 1,
-            address: '育才路',
-        }
-    },
+  name: () => {
+    return 'zs'
+  },
+  age: () => {
+    return 30
+  },
+  info: () => {
+    return {
+      sex: 1,
+      address: '育才路',
+    }
+  },
 }
 
 const app = express()
 
 app.use(
-    '/demo',
-    graphqlHTTP({
-        schema: demoSchema,
-        rootValue: demoRoot,
-        graphiql: true,
-    })
+  '/demo',
+  graphqlHTTP({
+    schema: demoSchema,
+    rootValue: demoRoot,
+    graphiql: true,
+  })
 )
 
 app.listen(3000)
@@ -120,22 +120,22 @@ const query = `
 `
 
 const variables = {
-    sex: 1,
+  sex: 1,
 }
 
 fetch('/demo', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-    },
-    body: JSON.stringify({
-        query,
-        variables,
-    }),
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
+  body: JSON.stringify({
+    query,
+    variables,
+  }),
 })
-    .then(res => res.json)
-    .then(json => {
-        console.log(json)
-    })
+  .then((res) => res.json)
+  .then((json) => {
+    console.log(json)
+  })
 ```

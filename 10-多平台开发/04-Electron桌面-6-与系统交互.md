@@ -43,30 +43,30 @@ app.showAboutPanel()
 // 创建菜单
 const { Mennu } = require('electron')
 let menuTemplates = [
-    {
-        label: '菜单1',
-        submenu: [{ label: '子菜单1-1' }, { label: '子菜单1-2' }],
-    },
-    {
-        label: '菜单2',
-        submenu: [
-            {
-                label: '子菜单2-1',
-                click() {
-                    console.log(111)
-                },
-            },
-            // role表示行为，有：undo、redo、cut、copy、paste、selectAll、reload、minimize、close、quit等
-            // 拥有 role 行为的菜单 click 无效
-            // Mac 系统必须设置 role，否则窗口不具备 复制、剪切、粘贴功能
-            { label: '粘贴', role: 'paste' },
-            { label: '菜单2-3', type: 'separator' }, // 设置菜单空格，值还有 checkbox、radio
-            { label: '菜单2-4' },
-        ],
-    },
+  {
+    label: '菜单1',
+    submenu: [{ label: '子菜单1-1' }, { label: '子菜单1-2' }],
+  },
+  {
+    label: '菜单2',
+    submenu: [
+      {
+        label: '子菜单2-1',
+        click() {
+          console.log(111)
+        },
+      },
+      // role表示行为，有：undo、redo、cut、copy、paste、selectAll、reload、minimize、close、quit等
+      // 拥有 role 行为的菜单 click 无效
+      // Mac 系统必须设置 role，否则窗口不具备 复制、剪切、粘贴功能
+      { label: '粘贴', role: 'paste' },
+      { label: '菜单2-3', type: 'separator' }, // 设置菜单空格，值还有 checkbox、radio
+      { label: '菜单2-4' },
+    ],
+  },
 ]
 if (process.platform == 'darwin') {
-    menuTemplates.unshift({ label: '' }) // 第一个菜单不做任何设置，直接由应用名默认替代
+  menuTemplates.unshift({ label: '' }) // 第一个菜单不做任何设置，直接由应用名默认替代
 }
 
 let menu = Menu.buildFromTemplate(menuTemplates)
@@ -80,17 +80,17 @@ Menu.setApplicationMenu(menu)
 ```js
 const { Menu } = window.require('electron').remote
 let menu = Menu.buildFromTemplate([
-    {
-        label: '右键菜单1',
-        click() {
-            console.log(111)
-        },
+  {
+    label: '右键菜单1',
+    click() {
+      console.log(111)
     },
-    { label: '右键菜单2' },
+  },
+  { label: '右键菜单2' },
 ])
 window.oncontextmenu = function (e) {
-    e.preventDefault()
-    menu.popup()
+  e.preventDefault()
+  menu.popup()
 }
 ```
 
@@ -98,48 +98,48 @@ window.oncontextmenu = function (e) {
 
 ```vue
 <template>
-    <div id="app">
-        <div id="menu-list">
-            <div class="menu-item">右键菜单1</div>
-            <div class="menu-item">右键菜单2</div>
-        </div>
+  <div id="app">
+    <div id="menu-list">
+      <div class="menu-item">右键菜单1</div>
+      <div class="menu-item">右键菜单2</div>
     </div>
+  </div>
 </template>
 
 <script>
 const { screen } = window.require('electron').remote
 window.oncontextmenu = function (e) {
-    e.preventDefault()
-    let menu = document.querySelector('#menu-list')
-    let point = screen.getCursorScreenPoint()
-    // 菜单窗口的位置应该是相对于窗口的，而不应该相对于鼠标
-    console.log('e.clientX: ' + e.clientX + ', e.clientY: ' + e.clientY)
-    console.log('point.x: ' + point.x + ',point.y: ' + e.clientY)
-    menu.style.left = point.x + 'px'
-    menu.style.top = point.y + 'px'
-    menu.style.display = 'block'
+  e.preventDefault()
+  let menu = document.querySelector('#menu-list')
+  let point = screen.getCursorScreenPoint()
+  // 菜单窗口的位置应该是相对于窗口的，而不应该相对于鼠标
+  console.log('e.clientX: ' + e.clientX + ', e.clientY: ' + e.clientY)
+  console.log('point.x: ' + point.x + ',point.y: ' + e.clientY)
+  menu.style.left = point.x + 'px'
+  menu.style.top = point.y + 'px'
+  menu.style.display = 'block'
 }
 
 window.onclick = function (e) {
-    document.querySelector('#menu-list').style.display = 'none'
+  document.querySelector('#menu-list').style.display = 'none'
 }
 </script>
 
 <style scoped>
 #menu-list {
-    width: 125px;
-    overflow: hidden;
-    border: 0px solid #ccc;
-    box-shadow: 3px 3px 3px #ccc;
-    position: absolute;
-    display: none;
+  width: 125px;
+  overflow: hidden;
+  border: 0px solid #ccc;
+  box-shadow: 3px 3px 3px #ccc;
+  position: absolute;
+  display: none;
 }
 #menu-list .menu-item {
-    height: 36px;
-    line-height: 36px;
-    text-align: center;
-    border-bottom: 1px solid #ccc;
-    background: #fff;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  background: #fff;
 }
 </style>
 ```
@@ -150,10 +150,10 @@ window.onclick = function (e) {
 
 ```js
 window.onkeydown = function (e) {
-    // Ctrl + S      e.metaKey是mac上的花键
-    if ((e.ctrKey || e.metaKey) && e.keyCode == 83) {
-        console.log(111)
-    }
+  // Ctrl + S      e.metaKey是mac上的花键
+  if ((e.ctrKey || e.metaKey) && e.keyCode == 83) {
+    console.log(111)
+  }
 }
 ```
 
@@ -163,7 +163,7 @@ window.onkeydown = function (e) {
 const { globalShorcut } = window.require('electron')
 // 全局监听 Ctrl + K
 globalShorcut.register('CommandOrCControl+K', () => {
-    console.log(111)
+  console.log(111)
 })
 ```
 
@@ -245,7 +245,7 @@ Notification.requestPermission( status => {
 
 ```js
 notify.onlick = function () {
-    console.log('用户点击了消息')
+  console.log('用户点击了消息')
 }
 ```
 

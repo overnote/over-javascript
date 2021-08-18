@@ -120,19 +120,21 @@ render(){
 import React from 'react'
 
 export default class Son extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            num: 100,
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+      num: 100,
     }
-    render() {
-        return (
-            <div>
-                <button onClick={this.props.fn.bind(this, this.state.num)}>点我发送数据给父组件</button>
-            </div>
-        )
-    }
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.props.fn.bind(this, this.state.num)}>
+          点我发送数据给父组件
+        </button>
+      </div>
+    )
+  }
 }
 ```
 
@@ -144,26 +146,26 @@ import React from 'react'
 import Son from './Son'
 
 export default class Father extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            num: 0, // 默认值为0
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+      num: 0, // 默认值为0
     }
-    fn = data => {
-        console.log('收到子组件数据：', data)
-        this.setState({
-            num: data,
-        })
-    }
-    render() {
-        return (
-            <div>
-                num: {this.state.num}
-                <Son fn={this.fn} />
-            </div>
-        )
-    }
+  }
+  fn = (data) => {
+    console.log('收到子组件数据：', data)
+    this.setState({
+      num: data,
+    })
+  }
+  render() {
+    return (
+      <div>
+        num: {this.state.num}
+        <Son fn={this.fn} />
+      </div>
+    )
+  }
 }
 ```
 
@@ -176,22 +178,22 @@ import React from 'react'
 import PubSub from 'pubsub-js'
 
 export default class Son1 extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            num: 100,
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+      num: 100,
     }
-    fn = () => {
-        PubSub.publish('evt', this.state.num)
-    }
-    render() {
-        return (
-            <div>
-                <button onClick={this.fn}>点我发送数据给兄弟</button>
-            </div>
-        )
-    }
+  }
+  fn = () => {
+    PubSub.publish('evt', this.state.num)
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.fn}>点我发送数据给兄弟</button>
+      </div>
+    )
+  }
 }
 ```
 
@@ -202,18 +204,18 @@ import React from 'react'
 import PubSub from 'pubsub-js'
 
 export default class Son2 extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            num: 0,
-        }
-        PubSub.subscribe('evt', (e, data) => {
-            console.log('data:', data)
-        })
+  constructor(props) {
+    super(props)
+    this.state = {
+      num: 0,
     }
-    render() {
-        return <div>来自兄弟的数据: {this.state.num}</div>
-    }
+    PubSub.subscribe('evt', (e, data) => {
+      console.log('data:', data)
+    })
+  }
+  render() {
+    return <div>来自兄弟的数据: {this.state.num}</div>
+  }
 }
 ```
 

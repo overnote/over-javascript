@@ -23,23 +23,23 @@ async function(){
 
 ```js
 async function show(params) {
-    console.log('阶段一')
+  console.log('阶段一')
 
-    await new Promise(function (resolve, rejec) {
-        setTimeout(function () {
-            resolve()
-        }, 3000)
-    })
+  await new Promise(function (resolve, rejec) {
+    setTimeout(function () {
+      resolve()
+    }, 3000)
+  })
 
-    console.log('阶段二')
+  console.log('阶段二')
 
-    await new Promise(function (resolve, rejec) {
-        setTimeout(function () {
-            resolve()
-        }, 2000)
-    })
+  await new Promise(function (resolve, rejec) {
+    setTimeout(function () {
+      resolve()
+    }, 2000)
+  })
 
-    console.log('阶段三')
+  console.log('阶段三')
 }
 
 show() // 阶段一  阶段二  阶段三
@@ -59,7 +59,7 @@ let bar = async function () {}
 let baz = async () => {}
 
 class Qux {
-    async qux() {}
+  async qux() {}
 }
 ```
 
@@ -68,24 +68,24 @@ class Qux {
 ```js
 // 第一种情况
 async function foo() {
-    return 3 // 与 return Promise.resolve(3) 效果一致
+  return 3 // 与 return Promise.resolve(3) 效果一致
 }
 
 // 返回值由then函数解包
-foo().then(data => {
-    console.log('后打印:', data) // 3
+foo().then((data) => {
+  console.log('后打印:', data) // 3
 })
 
 console.log('先打印') // 1
 
 // 第二种情况：返回一个实现了 thenable 接口的非期约对象
 async function baz() {
-    const thenable = {
-        then(callback) {
-            callback('baz')
-        },
-    }
-    return thenable
+  const thenable = {
+    then(callback) {
+      callback('baz')
+    },
+  }
+  return thenable
 }
 
 // 由 then() 解包
@@ -99,12 +99,12 @@ baz().then(console.log) // baz
 ```js
 // 纯Promise解决方案：
 let p = new Promise((resolve, reject) => setTimeout(resolve, 1000, 3))
-p.then(x => console.log(x)) // 3
+p.then((x) => console.log(x)) // 3
 
 // 使用 async/await 可以写成这样：
 async function foo() {
-    let p = new Promise((resolve, reject) => setTimeout(resolve, 1000, 3))
-    console.log(await p)
+  let p = new Promise((resolve, reject) => setTimeout(resolve, 1000, 3))
+  console.log(await p)
 }
 foo() // 3
 ```
@@ -116,20 +116,20 @@ await 的用法与医院操作一样，可以单独使用，也可以在表达�
 ```js
 // 异步打印"foo"
 async function foo() {
-    console.log(await Promise.resolve('foo'))
+  console.log(await Promise.resolve('foo'))
 }
 foo() // foo
 
 // 异步打印"bar"
 async function bar() {
-    return await Promise.resolve('bar')
+  return await Promise.resolve('bar')
 }
 bar().then(console.log) // bar
 
 // 1000 毫秒后异步打印"baz"
 async function baz() {
-    await new Promise((resolve, reject) => setTimeout(resolve, 1000))
-    console.log('baz')
+  await new Promise((resolve, reject) => setTimeout(resolve, 1000))
+  console.log('baz')
 }
 baz() // baz（ 1000 毫秒后）
 ```
@@ -142,13 +142,13 @@ await 关键字必须在异步函数中使用，不能在顶级上下文如`<scr
 
 ```js
 async function foo() {
-    console.log(await Promise.resolve(3))
+  console.log(await Promise.resolve(3))
 }
 foo() // 3
 
 // 立即调用的异步函数表达式
 ;(async function () {
-    console.log(await Promise.resolve(3))
+  console.log(await Promise.resolve(3))
 })() // 3
 ```
 
@@ -157,34 +157,34 @@ await 错误示例：
 ```js
 // 不允许： await 出现在了箭头函数中
 function foo() {
-    const syncFn = () => {
-        return await Promise.resolve('foo')
-    }
-    console.log(syncFn())
+  const syncFn = () => {
+    return await Promise.resolve('foo')
+  }
+  console.log(syncFn())
 }
 
 // 不允许： await 出现在了同步函数声明中
 function bar() {
-    function syncFn() {
-        return await Promise.resolve('bar')
-    }
-    console.log(syncFn())
+  function syncFn() {
+    return await Promise.resolve('bar')
+  }
+  console.log(syncFn())
 }
 
 // 不允许： await 出现在了同步函数表达式中
 function baz() {
-    const syncFn = function () {
-        return await Promise.resolve('baz')
-    }
-    console.log(syncFn())
+  const syncFn = function () {
+    return await Promise.resolve('baz')
+  }
+  console.log(syncFn())
 }
 
 // 不允许： IIFE 使用同步函数表达式或箭头函数
 function qux() {
-    ;(function () {
-        console.log(await Promise.resolve('qux'))
-    })()
-    ;(() => console.log(await Promise.resolve('qux')))()
+  ;(function () {
+    console.log(await Promise.resolve('qux'))
+  })()
+  ;(() => console.log(await Promise.resolve('qux')))()
 }
 ```
 
@@ -194,8 +194,8 @@ function qux() {
 
 ```js
 async function foo() {
-    console.log(1)
-    Promise.reject(3)
+  console.log(1)
+  Promise.reject(3)
 }
 // Attach a rejected handler to the returned promise
 foo().catch(console.log)
@@ -209,10 +209,10 @@ console.log(2)
 
 ```js
 async function foo() {
-    console.log(1)
-    await (() => {
-        throw 3
-    })()
+  console.log(1)
+  await (() => {
+    throw 3
+  })()
 }
 
 // 给返回的期约添加一个拒绝处理程序，输出 1 2 3
@@ -224,9 +224,9 @@ console.log(2)
 
 ```js
 async function foo() {
-    console.log(1)
-    await Promise.reject(3)
-    console.log(4) // 这行代码不会执行
+  console.log(1)
+  await Promise.reject(3)
+  console.log(4) // 这行代码不会执行
 }
 // 给返回的期约添加一个拒绝处理程序
 foo().catch(console.log)
@@ -239,13 +239,13 @@ console.log(2)
 
 ```js
 async function foo() {
-    console.log(await Promise.resolve('foo'))
+  console.log(await Promise.resolve('foo'))
 }
 async function bar() {
-    console.log(await 'bar')
+  console.log(await 'bar')
 }
 async function baz() {
-    console.log('baz')
+  console.log('baz')
 }
 foo()
 bar()
@@ -261,9 +261,9 @@ JavaScript 运行时在碰到 await 关键字时，会记录在哪里暂停执�
 
 ```js
 async function foo() {
-    console.log(2)
-    await null
-    console.log(4)
+  console.log(2)
+  await null
+  console.log(4)
 }
 console.log(1)
 foo()
@@ -295,14 +295,14 @@ console.log(3)
 
 ```js
 async function foo() {
-    console.log(2)
-    console.log(await Promise.resolve(8))
-    console.log(9)
+  console.log(2)
+  console.log(await Promise.resolve(8))
+  console.log(9)
 }
 async function bar() {
-    console.log(4)
-    console.log(await 6)
-    console.log(7)
+  console.log(4)
+  console.log(await 6)
+  console.log(7)
 }
 console.log(1)
 foo()
@@ -357,12 +357,12 @@ console.log(5)
 
 ```js
 async function sleep(delay) {
-    return new Promise(resolve => setTimeout(resolve, delay))
+  return new Promise((resolve) => setTimeout(resolve, delay))
 }
 async function foo() {
-    const t0 = Date.now()
-    await sleep(1500) // 暂停约 1500 毫秒
-    console.log(Date.now() - t0)
+  const t0 = Date.now()
+  await sleep(1500) // 暂停约 1500 毫秒
+  console.log(Date.now() - t0)
 }
 foo()
 // 1502
@@ -374,23 +374,23 @@ foo()
 
 ```js
 async function randomDelay(id) {
-    // 延迟 0~1000 毫秒
-    const delay = Math.random() * 1000
-    return new Promise(resolve =>
-        setTimeout(() => {
-            console.log(`${id} finished`)
-            resolve()
-        }, delay)
-    )
+  // 延迟 0~1000 毫秒
+  const delay = Math.random() * 1000
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      console.log(`${id} finished`)
+      resolve()
+    }, delay)
+  )
 }
 async function foo() {
-    const t0 = Date.now()
-    await randomDelay(0)
-    await randomDelay(1)
-    await randomDelay(2)
-    await randomDelay(3)
-    await randomDelay(4)
-    console.log(`${Date.now() - t0}ms elapsed`)
+  const t0 = Date.now()
+  await randomDelay(0)
+  await randomDelay(1)
+  await randomDelay(2)
+  await randomDelay(3)
+  await randomDelay(4)
+  console.log(`${Date.now() - t0}ms elapsed`)
 }
 foo()
 // 0 finished
@@ -405,21 +405,21 @@ foo()
 
 ```js
 async function randomDelay(id) {
-    // 延迟 0~1000 毫秒
-    const delay = Math.random() * 1000
-    return new Promise(resolve =>
-        setTimeout(() => {
-            console.log(`${id} finished`)
-            resolve()
-        }, delay)
-    )
+  // 延迟 0~1000 毫秒
+  const delay = Math.random() * 1000
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      console.log(`${id} finished`)
+      resolve()
+    }, delay)
+  )
 }
 async function foo() {
-    const t0 = Date.now()
-    for (let i = 0; i < 5; ++i) {
-        await randomDelay(i)
-    }
-    console.log(`${Date.now() - t0}ms elapsed`)
+  const t0 = Date.now()
+  for (let i = 0; i < 5; ++i) {
+    await randomDelay(i)
+  }
+  console.log(`${Date.now() - t0}ms elapsed`)
 }
 foo()
 ```
@@ -428,28 +428,28 @@ foo()
 
 ```js
 async function randomDelay(id) {
-    // 延迟 0~1000 毫秒
-    const delay = Math.random() * 1000
-    return new Promise(resolve =>
-        setTimeout(() => {
-            setTimeout(console.log, 0, `${id} finished`)
-            resolve()
-        }, delay)
-    )
+  // 延迟 0~1000 毫秒
+  const delay = Math.random() * 1000
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      setTimeout(console.log, 0, `${id} finished`)
+      resolve()
+    }, delay)
+  )
 }
 async function foo() {
-    const t0 = Date.now()
-    const p0 = randomDelay(0)
-    const p1 = randomDelay(1)
-    const p2 = randomDelay(2)
-    const p3 = randomDelay(3)
-    const p4 = randomDelay(4)
-    await p0
-    await p1
-    await p2
-    await p3
-    await p4
-    setTimeout(console.log, 0, `${Date.now() - t0}ms elapsed`)
+  const t0 = Date.now()
+  const p0 = randomDelay(0)
+  const p1 = randomDelay(1)
+  const p2 = randomDelay(2)
+  const p3 = randomDelay(3)
+  const p4 = randomDelay(4)
+  await p0
+  await p1
+  await p2
+  await p3
+  await p4
+  setTimeout(console.log, 0, `${Date.now() - t0}ms elapsed`)
 }
 foo()
 ```
@@ -458,24 +458,24 @@ foo()
 
 ```js
 async function randomDelay(id) {
-    // 延迟 0~1000 毫秒
-    const delay = Math.random() * 1000
-    return new Promise(resolve =>
-        setTimeout(() => {
-            console.log(`${id} finished`)
-            resolve()
-        }, delay)
-    )
+  // 延迟 0~1000 毫秒
+  const delay = Math.random() * 1000
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      console.log(`${id} finished`)
+      resolve()
+    }, delay)
+  )
 }
 async function foo() {
-    const t0 = Date.now()
-    const promises = Array(5)
-        .fill(null)
-        .map((_, i) => randomDelay(i))
-    for (const p of promises) {
-        await p
-    }
-    console.log(`${Date.now() - t0}ms elapsed`)
+  const t0 = Date.now()
+  const promises = Array(5)
+    .fill(null)
+    .map((_, i) => randomDelay(i))
+  for (const p of promises) {
+    await p
+  }
+  console.log(`${Date.now() - t0}ms elapsed`)
 }
 foo()
 ```
@@ -484,24 +484,24 @@ foo()
 
 ```js
 async function randomDelay(id) {
-    // 延迟 0~1000 毫秒
-    const delay = Math.random() * 1000
-    return new Promise(resolve =>
-        setTimeout(() => {
-            console.log(`${id} finished`)
-            resolve(id)
-        }, delay)
-    )
+  // 延迟 0~1000 毫秒
+  const delay = Math.random() * 1000
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      console.log(`${id} finished`)
+      resolve(id)
+    }, delay)
+  )
 }
 async function foo() {
-    const t0 = Date.now()
-    const promises = Array(5)
-        .fill(null)
-        .map((_, i) => randomDelay(i))
-    for (const p of promises) {
-        console.log(`awaited ${await p}`)
-    }
-    console.log(`${Date.now() - t0}ms elapsed`)
+  const t0 = Date.now()
+  const promises = Array(5)
+    .fill(null)
+    .map((_, i) => randomDelay(i))
+  for (const p of promises) {
+    console.log(`awaited ${await p}`)
+  }
+  console.log(`${Date.now() - t0}ms elapsed`)
 }
 foo()
 ```
@@ -512,19 +512,19 @@ foo()
 
 ```js
 function addTwo(x) {
-    return x + 2
+  return x + 2
 }
 function addThree(x) {
-    return x + 3
+  return x + 3
 }
 function addFive(x) {
-    return x + 5
+  return x + 5
 }
 async function addTen(x) {
-    for (const fn of [addTwo, addThree, addFive]) {
-        x = await fn(x)
-    }
-    return x
+  for (const fn of [addTwo, addThree, addFive]) {
+    x = await fn(x)
+  }
+  return x
 }
 addTen(9).then(console.log) // 19
 ```
@@ -533,19 +533,19 @@ await 直接传递了每个函数的返回值，结果通过迭代产生。当�
 
 ```js
 async function addTwo(x) {
-    return x + 2
+  return x + 2
 }
 async function addThree(x) {
-    return x + 3
+  return x + 3
 }
 async function addFive(x) {
-    return x + 5
+  return x + 5
 }
 async function addTen(x) {
-    for (const fn of [addTwo, addThree, addFive]) {
-        x = await fn(x)
-    }
-    return x
+  for (const fn of [addTwo, addThree, addFive]) {
+    x = await fn(x)
+  }
+  return x
 }
 addTen(9).then(console.log) // 19
 ```
@@ -557,10 +557,10 @@ addTen(9).then(console.log) // 19
 ```js
 // 拒绝期约栈追踪
 function fooPromiseExecutor(resolve, reject) {
-    setTimeout(reject, 1000, 'bar')
+  setTimeout(reject, 1000, 'bar')
 }
 function foo() {
-    new Promise(fooPromiseExecutor)
+  new Promise(fooPromiseExecutor)
 }
 
 foo()
@@ -575,10 +575,10 @@ foo()
 
 ```js
 function fooPromiseExecutor(resolve, reject) {
-    setTimeout(reject, 1000, 'bar')
+  setTimeout(reject, 1000, 'bar')
 }
 async function foo() {
-    await new Promise(fooPromiseExecutor)
+  await new Promise(fooPromiseExecutor)
 }
 foo()
 // Uncaught (in promise) bar

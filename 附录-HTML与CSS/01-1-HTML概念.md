@@ -14,10 +14,10 @@
 
 HTML 标准由 W3C 组织制定，经过多年发展，现在的标准版本为 HTML5，当然其兼容性仍然较差，市面上现有的 HTML 标准有：
 
--   HTML4：被大多数浏览器所兼容
--   XHTML：是 HTML4 与 XML 的过渡版本，不推荐使用
--   XML：可以自定义标签，但是未被浏览器标准接受，被广泛应用于通信协议领域
--   HTML5：具备划时代意义的 HTML 版本，已经被 Chrome、FireFox 等浏览器接受，但是很多场合兼容度较低，需要做兼容处理
+- HTML4：被大多数浏览器所兼容
+- XHTML：是 HTML4 与 XML 的过渡版本，不推荐使用
+- XML：可以自定义标签，但是未被浏览器标准接受，被广泛应用于通信协议领域
+- HTML5：具备划时代意义的 HTML 版本，已经被 Chrome、FireFox 等浏览器接受，但是很多场合兼容度较低，需要做兼容处理
 
 ### 1.3 HTML 网页结构
 
@@ -26,34 +26,34 @@ HTML 标准由 W3C 组织制定，经过多年发展，现在的标准版本为 
 ```html
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-    <head>
-        <title>Document</title>
-    </head>
-    <body>
-        hello world!
-    </body>
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    hello world!
+  </body>
 </html>
 ```
 
 HTML 文档整体两部分组成：
 
--   文档声明：`<!DOCTYPE html>`。用于帮助浏览器正确显示网页，即指示浏览器使用的是哪个 HTML 版本，声明必须放在第一行。
--   文档文本：由 `<html> </html>` 标签包裹，是 HTML 文档的内容展示区。其中 header 用于描述文档基本信息，body 是文档内容
+- 文档声明：`<!DOCTYPE html>`。用于帮助浏览器正确显示网页，即指示浏览器使用的是哪个 HTML 版本，声明必须放在第一行。
+- 文档文本：由 `<html> </html>` 标签包裹，是 HTML 文档的内容展示区。其中 header 用于描述文档基本信息，body 是文档内容
 
 文档声明现在默认使用 H5 标准即可，浏览器大多支持向下兼容，标准的 H5 网页如下所示：
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-    </head>
-    <body>
-        hello world!
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    hello world!
+  </body>
 </html>
 ```
 
@@ -63,9 +63,9 @@ HTML 文档整体两部分组成：
 
 header 标签是网页头部，用于描绘网页的基础信息，其内部包含的标签有：
 
--   link： 网页中引入的样式表、标题小图标
--   meta： 网页的元信息
--   title： 网页标题
+- link： 网页中引入的样式表、标题小图标
+- meta： 网页的元信息
+- title： 网页标题
 
 link 用来引入外部资源，如浏览器标题小图标、css：
 
@@ -93,7 +93,7 @@ body 标签内的内容是网页的肢体信息，网页内容在这个地方显
 
 ```html
 <body>
-    网页内容....
+  网页内容....
 </body>
 ```
 
@@ -150,13 +150,13 @@ a 标签不能嵌套 a 标签。
 
 emmet 语法用于提升编辑器的操作速度，笔者这里是 vscode：
 
--   输入 div，tab 键可以直接输入完整的 div 标签
--   输入 html，tab 键可以直接输入完整的 html 文档
--   输入 `div*3`，tab 键可以直接输入 3 个 div
--   输入 `ul>li*3`， tab 键可以输入 ul/li，并有 3 个 li
--   输入 div+p， tab 键可以输入 div 与 p 两个兄弟节点
--   输入 .demo， tab 键可以直接输入 `<div class="demo"></div>`，类似的也支持 #
--   输入 `.demo\$*3`， tab 键可以为 class 类名做自增， class=demo1
+- 输入 div，tab 键可以直接输入完整的 div 标签
+- 输入 html，tab 键可以直接输入完整的 html 文档
+- 输入 `div*3`，tab 键可以直接输入 3 个 div
+- 输入 `ul>li*3`， tab 键可以输入 ul/li，并有 3 个 li
+- 输入 div+p， tab 键可以输入 div 与 p 两个兄弟节点
+- 输入 .demo， tab 键可以直接输入 `<div class="demo"></div>`，类似的也支持 #
+- 输入 `.demo\$*3`， tab 键可以为 class 类名做自增， class=demo1
 
 ## 六 其他语法
 

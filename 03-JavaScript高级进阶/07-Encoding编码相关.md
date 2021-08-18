@@ -44,33 +44,33 @@ TextEncoderStream 其实就是 TransformStream 形式的 TextEncoder。将解码
 
 ```js
 async function* chars() {
-    const decodedText = 'foo'
-    for (let char of decodedText) {
-        yield await new Promise(resolve => setTimeout(resolve, 1000, char))
-    }
+  const decodedText = 'foo'
+  for (let char of decodedText) {
+    yield await new Promise((resolve) => setTimeout(resolve, 1000, char))
+  }
 }
 
 const decodedTextStream = new ReadableStream({
-    async start(controller) {
-        for await (let chunk of chars()) {
-            controller.enqueue(chunk)
-        }
-        controller.close()
-    },
+  async start(controller) {
+    for await (let chunk of chars()) {
+      controller.enqueue(chunk)
+    }
+    controller.close()
+  },
 })
 
 const encodedTextStream = decodedTextStream.pipeThrough(new TextEncoderStream())
 const readableStreamDefaultReader = encodedTextStream.getReader()
 
 ;(async function () {
-    while (true) {
-        const { done, value } = await readableStreamDefaultReader.read()
-        if (done) {
-            break
-        } else {
-            console.log(value)
-        }
+  while (true) {
+    const { done, value } = await readableStreamDefaultReader.read()
+    if (done) {
+      break
+    } else {
+      console.log(value)
     }
+  }
 })()
 // Uint8Array[102]
 // Uint8Array[111]
@@ -99,34 +99,34 @@ TextDecoderStream 其实就是 TransformStream 形式的 TextDecoder。将编码
 
 ```js
 async function* chars() {
-    // 每个块必须是一个定型数组
-    const encodedText = [102, 111, 111].map(x => Uint8Array.of(x))
-    for (let char of encodedText) {
-        yield await new Promise(resolve => setTimeout(resolve, 1000, char))
-    }
+  // 每个块必须是一个定型数组
+  const encodedText = [102, 111, 111].map((x) => Uint8Array.of(x))
+  for (let char of encodedText) {
+    yield await new Promise((resolve) => setTimeout(resolve, 1000, char))
+  }
 }
 
 const encodedTextStream = new ReadableStream({
-    async start(controller) {
-        for await (let chunk of chars()) {
-            controller.enqueue(chunk)
-        }
-        controller.close()
-    },
+  async start(controller) {
+    for await (let chunk of chars()) {
+      controller.enqueue(chunk)
+    }
+    controller.close()
+  },
 })
 
 const decodedTextStream = encodedTextStream.pipeThrough(new TextDecoderStream())
 const readableStreamDefaultReader = decodedTextStream.getReader()
 
 ;(async function () {
-    while (true) {
-        const { done, value } = await readableStreamDefaultReader.read()
-        if (done) {
-            break
-        } else {
-            console.log(value)
-        }
+  while (true) {
+    const { done, value } = await readableStreamDefaultReader.read()
+    if (done) {
+      break
+    } else {
+      console.log(value)
     }
+  }
 })()
 // f
 // o
@@ -137,34 +137,34 @@ const readableStreamDefaultReader = decodedTextStream.getReader()
 
 ```js
 async function* chars() {
-    // ☺的 UTF-8 编码是 0xF0 0x9F 0x98 0x8A（即十进制 240、 159、 152、 138）
-    const encodedText = [240, 159, 152, 138].map(x => Uint8Array.of(x))
-    for (let char of encodedText) {
-        yield await new Promise(resolve => setTimeout(resolve, 1000, char))
-    }
+  // ☺的 UTF-8 编码是 0xF0 0x9F 0x98 0x8A（即十进制 240、 159、 152、 138）
+  const encodedText = [240, 159, 152, 138].map((x) => Uint8Array.of(x))
+  for (let char of encodedText) {
+    yield await new Promise((resolve) => setTimeout(resolve, 1000, char))
+  }
 }
 
 const encodedTextStream = new ReadableStream({
-    async start(controller) {
-        for await (let chunk of chars()) {
-            controller.enqueue(chunk)
-        }
-        controller.close()
-    },
+  async start(controller) {
+    for await (let chunk of chars()) {
+      controller.enqueue(chunk)
+    }
+    controller.close()
+  },
 })
 
 const decodedTextStream = encodedTextStream.pipeThrough(new TextDecoderStream())
 const readableStreamDefaultReader = decodedTextStream.getReader()
 
 ;(async function () {
-    while (true) {
-        const { done, value } = await readableStreamDefaultReader.read()
-        if (done) {
-            break
-        } else {
-            console.log(value)
-        }
+  while (true) {
+    const { done, value } = await readableStreamDefaultReader.read()
+    if (done) {
+      break
+    } else {
+      console.log(value)
     }
+  }
 })()
 // ☺
 ```
@@ -176,6 +176,6 @@ const response = await fetch(url)
 const stream = response.body.pipeThrough(new TextDecoderStream())
 const decodedStream = stream.getReader()
 for await (let decodedChunk of decodedStream) {
-    console.log(decodedChunk)
+  console.log(decodedChunk)
 }
 ```

@@ -8,10 +8,10 @@ Nest 的中文文档：<https://docs.nestjs.cn/>
 
 与 Express、Koa 不同，Nest 具备了大量企业级开发特性，这些特性往往与 Java 中的 Spring 框架开发思想相似：
 
--   基于 TypeScript 语言开发，具备类型校验功能，也有更便利的语法联想，适合大型工程项目
--   具备依赖注入（DI）、控制反转（IOC）功能，解耦了业务代码
--   提供了大量 cli 工具命令与第三方模块，开发起来相对方便
--   支持函数式、面向对象、函数式响应编程等范式
+- 基于 TypeScript 语言开发，具备类型校验功能，也有更便利的语法联想，适合大型工程项目
+- 具备依赖注入（DI）、控制反转（IOC）功能，解耦了业务代码
+- 提供了大量 cli 工具命令与第三方模块，开发起来相对方便
+- 支持函数式、面向对象、函数式响应编程等范式
 
 Express 与 Koa 适合小型项目，如个人博客等，但是其约定很差，项目格式会因为不同开发者的个人风格而千奇百怪，阿里的 egg 虽然也做了约束，但是仍然只适合对项目做了普通约束，他们都是只适合作为上层框架的底层框架而存在。
 
@@ -89,19 +89,19 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { AppModule } from './app.module'
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule)
+  const app = await NestFactory.create(AppModule)
 
-    // 配置 swagger
-    const swaggerOptions = new DocumentBuilder()
-        .setTitle('Demo')
-        .setDescription('demo...')
-        .setVersion('1.0')
-        .addTag('demo')
-        .build()
-    const document = SwaggerModule.createDocument(app, swaggerOptions)
-    SwaggerModule.setup('api-docs', app, document)
+  // 配置 swagger
+  const swaggerOptions = new DocumentBuilder()
+    .setTitle('Demo')
+    .setDescription('demo...')
+    .setVersion('1.0')
+    .addTag('demo')
+    .build()
+  const document = SwaggerModule.createDocument(app, swaggerOptions)
+  SwaggerModule.setup('api-docs', app, document)
 
-    await app.listen(3000)
+  await app.listen(3000)
 }
 bootstrap()
 ```
@@ -115,11 +115,11 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger'
 @Controller('user')
 @ApiTags('user')
 export class UserController {
-    @Get()
-    @ApiOperation({ summary: '用户首页' })
-    index() {
-        return 'user...'
-    }
+  @Get()
+  @ApiOperation({ summary: '用户首页' })
+  index() {
+    return 'user...'
+  }
 }
 ```
 

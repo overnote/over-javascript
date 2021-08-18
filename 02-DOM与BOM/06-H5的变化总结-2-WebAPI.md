@@ -42,12 +42,12 @@ iframe 应用实例：
 <button id="btn">点击发送消息给iframe</button>
 <iframe src="http:127.0.0.1/iframe.html"></iframe>
 <script>
-    let btn = document.querySelector('#btn')
-    let data = ['周一', '周二', '周五']
-    btn.onclick = function () {
-        alert('执行发送数据给iframe？')
-        window.parent.postMessage(data, 'http:127.0.0.1/iframe.html')
-    }
+  let btn = document.querySelector('#btn')
+  let data = ['周一', '周二', '周五']
+  btn.onclick = function () {
+    alert('执行发送数据给iframe？')
+    window.parent.postMessage(data, 'http:127.0.0.1/iframe.html')
+  }
 </script>
 ```
 
@@ -75,11 +75,11 @@ iframe 接受数据：
 ```js
 let droptarget = document.getElementById('droptarget')
 EventUtil.addHandler(droptarget, 'dragover', function (event) {
-    EventUtil.preventDefault(event)
+  EventUtil.preventDefault(event)
 })
 
 EventUtil.addHandler(droptarget, 'dragenter', function (event) {
-    EventUtil.preventDefault(event)
+  EventUtil.preventDefault(event)
 })
 ```
 
@@ -87,7 +87,7 @@ EventUtil.addHandler(droptarget, 'dragenter', function (event) {
 
 ```js
 EventUtil.addHandler(droptarget, 'drop', function (event) {
-    EventUtil.preventDefault(event)
+  EventUtil.preventDefault(event)
 })
 ```
 
@@ -115,17 +115,17 @@ HTML5 新增了两个与媒体相关的元素：`<audio>`和`<video>`，可以�
 ```html
 <!-- 嵌入视频 -->
 <video id="myVideo">
-    <source src="conference.webm" type="video/webm; codecs='vp8, vorbis'" />
-    <source src="conference.ogv" type="video/ogg; codecs='theora, vorbis'" />
-    <source src="conference.mpg" />
-    Video player not available.
+  <source src="conference.webm" type="video/webm; codecs='vp8, vorbis'" />
+  <source src="conference.ogv" type="video/ogg; codecs='theora, vorbis'" />
+  <source src="conference.mpg" />
+  Video player not available.
 </video>
 
 <!-- 嵌入音频 -->
 <audio id="myAudio">
-    <source src="song.ogg" type="audio/ogg" />
-    <source src="song.mp3" type="audio/mpeg" />
-    Audio player not available.
+  <source src="song.ogg" type="audio/ogg" />
+  <source src="song.mp3" type="audio/mpeg" />
+  Audio player not available.
 </audio>
 ```
 
@@ -135,12 +135,12 @@ Notifications API 用于向用户显示通知，比传统的 alert()更灵活，
 
 Notifications API 有被滥用的可能，因此默认会开启两项安全措施：
 
--   通知只能在运行在安全上下文的代码中被触发；
--   通知必须按照每个源的原则明确得到用户允许。
+- 通知只能在运行在安全上下文的代码中被触发；
+- 通知必须按照每个源的原则明确得到用户允许。
 
 ```js
-Notification.requestPermission().then(permission => {
-    console.log('User responded to permission request:', permission)
+Notification.requestPermission().then((permission) => {
+  console.log('User responded to permission request:', permission)
 })
 ```
 
@@ -148,9 +148,9 @@ Notification 构造函数用于创建和显示通知，第二个可选参数可�
 
 ```js
 const n = new Notification('Title text!', {
-    body: 'Body text!',
-    image: 'path/to/image.png',
-    vibrate: true,
+  body: 'Body text!',
+  image: 'path/to/image.png',
+  vibrate: true,
 })
 
 // 关闭通知

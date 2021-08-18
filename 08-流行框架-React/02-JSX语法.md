@@ -24,32 +24,32 @@ const vdom = <h1 id="title"><span>Hello World!</span></h1>
 
 常见的表达式有：
 
--   `num`
--   `num++`
--   `fn(num)`（这是函数表达式）
--   `arr.map()`
+- `num`
+- `num++`
+- `fn(num)`（这是函数表达式）
+- `arr.map()`
 
 示例：
 
 ```js
 function App() {
-    let title = 'hello' // 在JSX中使用表达式
+  let title = 'hello' // 在JSX中使用表达式
 
-    let fn = function (obj) {
-        console.log(obj.name)
-    }
+  let fn = function (obj) {
+    console.log(obj.name)
+  }
 
-    let user = {
-        age: 21,
-        name: 'lisi',
-    }
+  let user = {
+    age: 21,
+    name: 'lisi',
+  }
 
-    return (
-        <div className="App">
-            <h2>{title} world</h2>
-            <div>{fn(user)}</div>
-        </div>
-    )
+  return (
+    <div className="App">
+      <h2>{title} world</h2>
+      <div>{fn(user)}</div>
+    </div>
+  )
 }
 ```
 
@@ -114,10 +114,10 @@ const vdom = <div style={{ color: 'red', fontSize: '20px' }}></div>
 
 ```js
 function App() {
-    let myDom = [1, 2, 3].map((item, index) => {
-        return <p key={index}>{item}</p>
-    })
-    return <div className="App">{myDom}</div>
+  let myDom = [1, 2, 3].map((item, index) => {
+    return <p key={index}>{item}</p>
+  })
+  return <div className="App">{myDom}</div>
 }
 ```
 
@@ -130,7 +130,7 @@ function App() {
 ```js
 let myDom = []
 for (let i in [1, 2, 3]) {
-    myDom.push(<p key={i}>{[1, 2, 3][i]}</p>)
+  myDom.push(<p key={i}>{[1, 2, 3][i]}</p>)
 }
 ```
 

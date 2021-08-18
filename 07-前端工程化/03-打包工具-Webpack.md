@@ -10,12 +10,12 @@
 
 webpack 的优点：
 
--   1. 对 CommonJS 、 AMD 、ES6 的语法规范都做了兼容
--   2. 对 js、css、图片等资源文件都支持打包
--   3. 串联式模块加载器以及插件机制，使用更加灵活，扩展性更强
--   4. 有独立的配置文件 webpack.config.js
--   5. 可以将代码切割成不同的 chunk，实现按需加载，降低了初始化时间
--   6. 支持 SourceUrls 和 SourceMaps，易于调试
+- 1. 对 CommonJS 、 AMD 、ES6 的语法规范都做了兼容
+- 2. 对 js、css、图片等资源文件都支持打包
+- 3. 串联式模块加载器以及插件机制，使用更加灵活，扩展性更强
+- 4. 有独立的配置文件 webpack.config.js
+- 5. 可以将代码切割成不同的 chunk，实现按需加载，降低了初始化时间
+- 6. 支持 SourceUrls 和 SourceMaps，易于调试
 
 ### 1.2 webpack 与 gulp 区别
 
@@ -107,12 +107,12 @@ webpack 并不能实现 js 的编译，只能识别到 JS 中的 `import`语法�
 const path = require('path')
 
 module.exports = {
-    mode: 'development',
-    entry: path.resolve(__dirname, 'src/index.js'), //入口
-    output: {
-        path: path.resolve(__dirname, 'dist'), //输出目录
-        filename: 'bundle.js', //输出文件名
-    },
+  mode: 'development',
+  entry: path.resolve(__dirname, 'src/index.js'), //入口
+  output: {
+    path: path.resolve(__dirname, 'dist'), //输出目录
+    filename: 'bundle.js', //输出文件名
+  },
 }
 ```
 
@@ -124,10 +124,10 @@ module.exports = {
 
 webpack5 对 webpack 几个固有问题进行了优化：
 
--   打包后文件被大幅缩小，代码更加清爽
--   treashaking 进行了优化，打包后的捆绑包更小
--   通过持久缓存提高构建性能！使用了更好的算法和默认值来改善长期缓存（hash 值算法改变）
--   能够识别循环依赖
+- 打包后文件被大幅缩小，代码更加清爽
+- treashaking 进行了优化，打包后的捆绑包更小
+- 通过持久缓存提高构建性能！使用了更好的算法和默认值来改善长期缓存（hash 值算法改变）
+- 能够识别循环依赖
 
 webpack5 打包后的程序更加清爽，从而也避免了饱受诟病的打包后文件变大的毛病（一个 console 有 1KB，webpack5 打包后只有几十 B）：
 

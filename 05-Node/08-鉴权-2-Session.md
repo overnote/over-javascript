@@ -8,8 +8,8 @@ Session 是专门为了解决 Cookie 数据安全性而提出来的技术，其�
 
 一般 Session 的实现步骤：
 
--   用户第一次访问服务器，服务器创建 session 对象，生成一个类似 key，value 的对象，然后将 key 返回给浏览器，以 cookie 的形式保存该 key。
--   用户再次访问时，携带了该 key，会得到对应的值。
+- 用户第一次访问服务器，服务器创建 session 对象，生成一个类似 key，value 的对象，然后将 key 返回给浏览器，以 cookie 的形式保存该 key。
+- 用户再次访问时，携带了该 key，会得到对应的值。
 
 ## 二 Session 的实现
 
@@ -23,16 +23,16 @@ var key = 'session_id'
 var EXPIRES = 20 * 60 * 1000
 
 function generate() {
-    var session = {}
+  var session = {}
 
-    session.id = new Date().getTime() + Math.random()
-    session.cookie = {
-        expire: new Date().getTime() + EXPIRES,
-    }
+  session.id = new Date().getTime() + Math.random()
+  session.cookie = {
+    expire: new Date().getTime() + EXPIRES,
+  }
 
-    sessions[session.id] = session
+  sessions[session.id] = session
 
-    return session
+  return session
 }
 ```
 
@@ -69,11 +69,13 @@ function (req, res) {
 ```js
 var writeHead = res.writeHead
 res.writeHead = function () {
-    var cookies = res.getHeader('Set-Cookie')
-    var session = serialize('Set-Cookie', req.session.id)
-    cookies = Array.isArray(cookies) ? cookies.concat(session) : [cookies, session]
-    res.setHeader('Set-Cookie', cookies)
-    return writeHead.apply(this, arguments)
+  var cookies = res.getHeader('Set-Cookie')
+  var session = serialize('Set-Cookie', req.session.id)
+  cookies = Array.isArray(cookies)
+    ? cookies.concat(session)
+    : [cookies, session]
+  res.setHeader('Set-Cookie', cookies)
+  return writeHead.apply(this, arguments)
 }
 ```
 
@@ -81,14 +83,14 @@ res.writeHead = function () {
 
 ```js
 function handle(req, res) {
-    if (!req.session.isLogin) {
-        res.session.isLogin = true
-        res.writeHead(200)
-        res.end('欢迎登陆')
-    } else {
-        res.writeHead(200)
-        res.end('请先登录')
-    }
+  if (!req.session.isLogin) {
+    res.session.isLogin = true
+    res.writeHead(200)
+    res.end('欢迎登陆')
+  } else {
+    res.writeHead(200)
+    res.end('请先登录')
+  }
 }
 ```
 
@@ -100,9 +102,9 @@ function handle(req, res) {
 
 ```js
 function getURL(_url, key, value) {
-    var obj = url.parse(_url, true)
-    obj.query[key] = value
-    return url.format(obj)
+  var obj = url.parse(_url, true)
+  obj.query[key] = value
+  return url.format(obj)
 }
 ```
 
@@ -158,9 +160,9 @@ function (req, res) {
 
 在上述案例中 Session 都是存储在一个 Node 进程的变量中的。这会引起两个问题：
 
--   状态过多，如登录用户数目极大，会突破 Node 进程的内存限制，引起频繁 GC 扫描，造成性能问题
--   Node 多进程中不共享内存，Session 就会出现错乱
--   在负载均衡状态下，多个服务器共同协作，用户的请求可能被不同的服务器执行，这时候其中一个服务器保存了 session，那么用户下次的请求在别的服务器上，将如何获取？
+- 状态过多，如登录用户数目极大，会突破 Node 进程的内存限制，引起频繁 GC 扫描，造成性能问题
+- Node 多进程中不共享内存，Session 就会出现错乱
+- 在负载均衡状态下，多个服务器共同协作，用户的请求可能被不同的服务器执行，这时候其中一个服务器保存了 session，那么用户下次的请求在别的服务器上，将如何获取？
 
 通常 Session 不会被考虑直接存储在业务进程中，一般将 session 保存在缓存服务器中，如 redis、memcache。
 
@@ -171,7 +173,15 @@ Session 的口令仍然是存储在 Cookie 中的，同样存在口令盗用的�
 ```js
 // 将值通过私钥签名，由 . 分割原值和签名
 var sign = function (val, secret) {
-    return val + '.' + crypto.createHmac('sha256', secret).update(val).digest('base64').replace(/\=+$/, '')
+  return (
+    val +
+    '.' +
+    crypto
+      .createHmac('sha256', secret)
+      .update(val)
+      .digest('base64')
+      .replace(/\=+$/, '')
+  )
 }
 ```
 
@@ -187,8 +197,8 @@ res.setHeader('Set-Cookie', cookie.serialize(key, val))
 ```js
 // 取出口令部分进行签名，对比用户提交的值
 var unsign = function (val, secret) {
-    var str = val.slice(0, val.lastIndexOf('.'))
-    return sign(str, secret) == val ? str : false
+  var str = val.slice(0, val.lastIndexOf('.'))
+  return sign(str, secret) == val ? str : false
 }
 ```
 

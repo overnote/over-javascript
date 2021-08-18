@@ -14,17 +14,17 @@ npm i -D babel-loader @babel/core @babel/preset-env
 
 ```js
 module.exports = {
-    module: {
-        rules: [
-            {
-                test: /(\.jsx|\.js)$/,
-                use: {
-                    loader: 'babel-loader',
-                },
-                exclude: /node_modules/,
-            },
-        ],
-    },
+  module: {
+    rules: [
+      {
+        test: /(\.jsx|\.js)$/,
+        use: {
+          loader: 'babel-loader',
+        },
+        exclude: /node_modules/,
+      },
+    ],
+  },
 }
 ```
 
@@ -97,13 +97,13 @@ options: {
 ```js
 // 原生代码如下：
 const foo = (a, b) => {
-    return Object.assign(a, b)
+  return Object.assign(a, b)
 }
 
 //经过babel编译后为：
 ;('use strict')
 var foo = function foo(a, b) {
-    return Object.assign(a, b)
+  return Object.assign(a, b)
 }
 ```
 
@@ -111,9 +111,9 @@ Object.assign 作为 ES6 语法被编译成了普通函数，而不是我们理�
 
 ```js
 Object.assign ||
-    function () {
-        /*...*/
-    }
+  function () {
+    /*...*/
+  }
 ```
 
 这样编译为了保证正确的语义，只能转换语法而不是去增加或修改原有的属性和方法。所以 babel 不处理 Object.assign 反倒是最正确的做法。而处理这些方法的方案则被称为 polyfill。

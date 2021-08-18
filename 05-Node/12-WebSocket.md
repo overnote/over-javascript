@@ -6,8 +6,8 @@
 
 目前支持状态、双工通信的协议有：
 
--   http2：国际标准协议，但是该协议尚未被完全支持
--   websocket：非标准协议，但是该协议已经被大多浏览器支持，所以在实践中较为常用。
+- http2：国际标准协议，但是该协议尚未被完全支持
+- websocket：非标准协议，但是该协议已经被大多浏览器支持，所以在实践中较为常用。
 
 ## 二 socket.io
 
@@ -35,74 +35,74 @@ ws.on('disconnect') // 断开连接事件
 ```html
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Title</title>
-        <style>
-            #listText {
-                list-style: none;
-                border: solid 1px #2aabd2;
-                width: 400px;
-                height: 300px;
-                position: relative;
-            }
-            #listText .myText {
-                color: #5cb85c;
-            }
-            #listText #connectStat {
-                position: absolute;
-                left: auto;
-                bottom: 20px;
-                color: red;
-                display: none;
-            }
-        </style>
-    </head>
-    <body>
-        <ul id="listText">
-            <span id="connectStat">服务器已断开，请检查网络....</span>
-        </ul>
-        <textarea rows="4" cols="60" id="sendText"></textarea>
-        <button id="sendBtn">发送</button>
-        <script src="./node_modules/socket.io-client/dist/socket.io.js"></script>
-        <script>
-            const ws = io(`ws://localhost:8000`)
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <style>
+      #listText {
+        list-style: none;
+        border: solid 1px #2aabd2;
+        width: 400px;
+        height: 300px;
+        position: relative;
+      }
+      #listText .myText {
+        color: #5cb85c;
+      }
+      #listText #connectStat {
+        position: absolute;
+        left: auto;
+        bottom: 20px;
+        color: red;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="listText">
+      <span id="connectStat">服务器已断开，请检查网络....</span>
+    </ul>
+    <textarea rows="4" cols="60" id="sendText"></textarea>
+    <button id="sendBtn">发送</button>
+    <script src="./node_modules/socket.io-client/dist/socket.io.js"></script>
+    <script>
+      const ws = io(`ws://localhost:8000`)
 
-            let listText = document.querySelector('#listText')
-            let sendText = document.querySelector('#sendText')
-            let connectStat = document.querySelector('#connectStat')
-            let sendBtn = document.querySelector('#sendBtn')
+      let listText = document.querySelector('#listText')
+      let sendText = document.querySelector('#sendText')
+      let connectStat = document.querySelector('#connectStat')
+      let sendBtn = document.querySelector('#sendBtn')
 
-            sendBtn.onclick = function () {
-                //发送一个名称为msg的消息
-                ws.emit('msg', sendText.value)
-                let myLi = document.createElement('li')
-                myLi.innerHTML = sendText.value
-                myLi.className = 'myText'
-                listText.appendChild(myLi)
-                sendText.value = ''
-            }
+      sendBtn.onclick = function () {
+        //发送一个名称为msg的消息
+        ws.emit('msg', sendText.value)
+        let myLi = document.createElement('li')
+        myLi.innerHTML = sendText.value
+        myLi.className = 'myText'
+        listText.appendChild(myLi)
+        sendText.value = ''
+      }
 
-            //已经连接
-            ws.on('connect', function () {
-                console.log('已连接')
-                connectStat.style.display = 'none'
-            })
+      //已经连接
+      ws.on('connect', function () {
+        console.log('已连接')
+        connectStat.style.display = 'none'
+      })
 
-            //接收消息
-            ws.on('rec', function (str) {
-                let oLi = document.createElement('li')
-                oLi.innerHTML = str
-                listText.appendChild(oLi)
-            })
+      //接收消息
+      ws.on('rec', function (str) {
+        let oLi = document.createElement('li')
+        oLi.innerHTML = str
+        listText.appendChild(oLi)
+      })
 
-            //断开连接
-            ws.on('disconnect', function () {
-                console.log('已断开')
-                connectStat.style.display = 'block'
-            })
-        </script>
-    </body>
+      //断开连接
+      ws.on('disconnect', function () {
+        console.log('已断开')
+        connectStat.style.display = 'block'
+      })
+    </script>
+  </body>
 </html>
 ```
 
@@ -133,27 +133,27 @@ server.listen(8000)
 const ws = io.listen(hs)
 
 let sockArr = []
-ws.on('connection', socket => {
-    sockArr.push(sock)
+ws.on('connection', (socket) => {
+  sockArr.push(sock)
 
-    //接收消息
-    socket.on('msg', function (str) {
-        //分发消息给所有客户端，除了发消息的客户端
-        sockArr.forEach(function (s) {
-            if (s != socket) {
-                s.emit('serverMsg', str)
-            }
-        })
+  //接收消息
+  socket.on('msg', function (str) {
+    //分发消息给所有客户端，除了发消息的客户端
+    sockArr.forEach(function (s) {
+      if (s != socket) {
+        s.emit('serverMsg', str)
+      }
     })
+  })
 
-    //断开连接
-    socket.on('disconnect', function () {
-        //从数组中删除该链接
-        let n = sockArr.indexOf(socket)
-        if (n != -1) {
-            sockArr.splice(n, 1)
-        }
-    })
+  //断开连接
+  socket.on('disconnect', function () {
+    //从数组中删除该链接
+    let n = sockArr.indexOf(socket)
+    if (n != -1) {
+      sockArr.splice(n, 1)
+    }
+  })
 })
 ```
 
@@ -257,28 +257,28 @@ net.createServer(socket=>{    //使用http接收会拒绝
 
 ```html
 <script>
-    let ws = new WebSocket('ws://localhost:8000')
+  let ws = new WebSocket('ws://localhost:8000')
 
-    //模仿socket.io手工封装一个emit方法
-    ws.emit = function (name, ...args) {
-        console.log('发送了：' + JSON.stringify({ name, data: [...args] }))
-        ws.send(JSON.stringify({ name, data: [...args] }))
-    }
-    //已经连接
-    ws.onopen = function () {
-        console.log('连接上了')
-        ws.emit('msg', 12, 5)
-    }
+  //模仿socket.io手工封装一个emit方法
+  ws.emit = function (name, ...args) {
+    console.log('发送了：' + JSON.stringify({ name, data: [...args] }))
+    ws.send(JSON.stringify({ name, data: [...args] }))
+  }
+  //已经连接
+  ws.onopen = function () {
+    console.log('连接上了')
+    ws.emit('msg', 12, 5)
+  }
 
-    //发现数据传输
-    ws.onmessage = function () {
-        console.log('有数据传输')
-    }
+  //发现数据传输
+  ws.onmessage = function () {
+    console.log('有数据传输')
+  }
 
-    //断开连接
-    ws.onclose = function () {
-        console.log('断开连接')
-    }
+  //断开连接
+  ws.onclose = function () {
+    console.log('断开连接')
+  }
 </script>
 ```
 

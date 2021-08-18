@@ -8,12 +8,12 @@
 
 ```js
 new Vue({
-    // ... 其他选项属性
-    methods: {
-        changeAge() {
-            return this.age++
-        },
+  // ... 其他选项属性
+  methods: {
+    changeAge() {
+      return this.age++
     },
+  },
 })
 ```
 
@@ -31,15 +31,15 @@ new Vue({
 ;<div>{{ getMsg }}</div> // 这里使用 getMsg，而不再是直接使用 msg与表达式
 
 new Vue({
-    el: '#app',
-    data: {
-        msg: 'hello',
+  el: '#app',
+  data: {
+    msg: 'hello',
+  },
+  computed: {
+    getMsg() {
+      return this.msg.toUpperCase()
     },
-    computed: {
-        getMsg() {
-            return this.msg.toUpperCase()
-        },
-    },
+  },
 })
 ```
 
@@ -78,13 +78,13 @@ new Vue({
 
 ```js
 new Vue({
-    el: '#app',
-    data: {
-        msg: 'hello',
-    },
-    watch: {
-        ageChange: function (val) {},
-    },
+  el: '#app',
+  data: {
+    msg: 'hello',
+  },
+  watch: {
+    ageChange: function (val) {},
+  },
 })
 ```
 
@@ -99,17 +99,17 @@ new Vue({
 <div id="app">{{count | myFormat(3,1) }}</div>
 
 <script>
-    new Vue({
-      el: "#app",
-      data: {
-        count: 2,
-      },
-      filters:{
-        myFormat: function (count, num1, num2) {
-          return count + num1 - num2;
-        };
-      }
-    });
+  new Vue({
+    el: "#app",
+    data: {
+      count: 2,
+    },
+    filters:{
+      myFormat: function (count, num1, num2) {
+        return count + num1 - num2;
+      };
+    }
+  });
 </script>
 ```
 
@@ -119,6 +119,6 @@ new Vue({
 
 ```js
 Vue.filter('myFormat', function (count, num1, num2) {
-    return count + num1 - num2
+  return count + num1 - num2
 })
 ```

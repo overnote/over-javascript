@@ -26,13 +26,13 @@ console.log(obj1 == obj) // false
 
 由于 Object 对象是所有对象的祖先对象（基类），所以其属性和方法，其他对象都会拥有：
 
--   `constructor`属性：保存当前对象的构造函数
--   `hasOwnProperty(propStr)方法`：检测实例对象是否包含该属性用于检查给定的属性（不会检测原型中的属性）
--   `isPrototypeOf(protoObj)方法`：检测当前对象是否是传入的原型对象
--   `propertyIsEnumerable(propStr)`：检测传入的参数属性是否能够被 for-in 枚举到。
--   `toString()`：返回对象的字符串表示。
--   `valueOf()`：返回对象的字符串、数值或布尔值表示
--   `getPrototypeOf(obj)`：返回 obj 实例对应构造函数的原型
+- `constructor`属性：保存当前对象的构造函数
+- `hasOwnProperty(propStr)方法`：检测实例对象是否包含该属性用于检查给定的属性（不会检测原型中的属性）
+- `isPrototypeOf(protoObj)方法`：检测当前对象是否是传入的原型对象
+- `propertyIsEnumerable(propStr)`：检测传入的参数属性是否能够被 for-in 枚举到。
+- `toString()`：返回对象的字符串表示。
+- `valueOf()`：返回对象的字符串、数值或布尔值表示
+- `getPrototypeOf(obj)`：返回 obj 实例对应构造函数的原型
 
 从上看出，Object 主要用来处理对象相关的操作。
 
@@ -44,18 +44,18 @@ Object.keys() 用来获取对象成员数组：
 
 ```js
 let obj = {
-    name: 'lisi',
-    age: 30,
-    run: function () {
-        console.log(this.name + ' is running')
-    },
+  name: 'lisi',
+  age: 30,
+  run: function () {
+    console.log(this.name + ' is running')
+  },
 }
 
 let keys = Object.keys(obj)
 console.log(keys) //[ 'name', 'age', 'run' ]
 
 for (let item in obj) {
-    console.log(item) // name  age  run
+  console.log(item) // name  age  run
 }
 ```
 
@@ -69,13 +69,13 @@ for (let item in obj) {
 
 ```js
 for (let item in obj) {
-    if (!item.hasOwnProperty(item)) {
-        continue // 跳过继承的属性
-    }
+  if (!item.hasOwnProperty(item)) {
+    continue // 跳过继承的属性
+  }
 
-    if (typeof son[item] === 'function') {
-        continue // 跳过方法
-    }
+  if (typeof son[item] === 'function') {
+    continue // 跳过方法
+  }
 }
 ```
 
@@ -85,19 +85,19 @@ for (let item in obj) {
 
 ```js
 class Father {
-    constructor(name, age) {
-        this.name = name
-        this.age = age
-    }
-    run() {
-        console.log('running...')
-    }
+  constructor(name, age) {
+    this.name = name
+    this.age = age
+  }
+  run() {
+    console.log('running...')
+  }
 }
 
 class Son extends Father {
-    constructor(name, age) {
-        super()
-    }
+  constructor(name, age) {
+    super()
+  }
 }
 
 let s = new Son('四', 30)
@@ -134,17 +134,17 @@ console.log('x' in obj) // true
 
 对象的成员在 JS 引擎中有着各种特征，比如：是否可访问等，这些特征并不能让开发者直接访问：
 
--   `Configurable`：默认值为 true，表示能否通过 delete 删除属性从而重新定义属性，能否修改属性的特性，或者能否把属性修改为访问器属性。
--   `Enumerable`：默认值为 true，表示能否通过 for-in 循环返回属性
--   `Writable`：默认值为 true，表示能否修改属性的值
--   `Value`：默认值为 false，包含这个属性的数据值。读取属性值的时候，从这个位置读；写入属性值的时候，把新值保存在这个位置
+- `Configurable`：默认值为 true，表示能否通过 delete 删除属性从而重新定义属性，能否修改属性的特性，或者能否把属性修改为访问器属性。
+- `Enumerable`：默认值为 true，表示能否通过 for-in 循环返回属性
+- `Writable`：默认值为 true，表示能否修改属性的值
+- `Value`：默认值为 false，包含这个属性的数据值。读取属性值的时候，从这个位置读；写入属性值的时候，把新值保存在这个位置
 
 示例：
 
 ```js
 let p = {
-    // 直接在对对象上定义了属性，则 Configurable、Enumerable、Writable都被默认设置为了true
-    name: 'lisi', // name属性的  Value 特征被设置为了 lisi
+  // 直接在对对象上定义了属性，则 Configurable、Enumerable、Writable都被默认设置为了true
+  name: 'lisi', // name属性的  Value 特征被设置为了 lisi
 }
 ```
 
@@ -154,9 +154,9 @@ let p = {
 let person = {}
 
 Object.defineProperty(person, 'name', {
-    writable: false,
-    configurable: false,
-    value: 'lisi',
+  writable: false,
+  configurable: false,
+  value: 'lisi',
 })
 
 console.log(person.name) // lisi
@@ -172,36 +172,36 @@ console.log(person.name) // lisi
 
 注意：
 
--   defineProperty 方法可以被多次调用，但是一旦设置 configurable 设置为 false 之后就不能再调用了！
--   defineProperty 方法如果不指定内部属性，默认都是 false
+- defineProperty 方法可以被多次调用，但是一旦设置 configurable 设置为 false 之后就不能再调用了！
+- defineProperty 方法如果不指定内部属性，默认都是 false
 
 ### 3.2 改变访问器属性
 
 访问器属性是一对 getter、setter 函数（非必须），分别用于读取属性、写入属性。访问器属性也有四个特征：
 
--   Configurable：默认值为 true，表示能否通过 delete 删除属性从而重新定义属性，能否修改属性的特性，或者能否把属性修改为访问器属性。
--   Enumerable：默认值为 true，表示能否通过 for-in 循环返回属性
--   Get：在读取属性时调用的函数，默认值为 undefined
--   Set：在写入属性时调用的函数，默认值为 undefined
+- Configurable：默认值为 true，表示能否通过 delete 删除属性从而重新定义属性，能否修改属性的特性，或者能否把属性修改为访问器属性。
+- Enumerable：默认值为 true，表示能否通过 for-in 循环返回属性
+- Get：在读取属性时调用的函数，默认值为 undefined
+- Set：在写入属性时调用的函数，默认值为 undefined
 
 示例：
 
 ```js
 let book = {
-    _year: 2004,
-    edition: 1,
+  _year: 2004,
+  edition: 1,
 }
 
 Object.defineProperty(book, 'year', {
-    get: function () {
-        return this._year
-    },
-    set: function (newValue) {
-        if (newValue > 2004) {
-            this._year = newValue
-            this.edition += newValue - 2004
-        }
-    },
+  get: function () {
+    return this._year
+  },
+  set: function (newValue) {
+    if (newValue > 2004) {
+      this._year = newValue
+      this.edition += newValue - 2004
+    }
+  },
 })
 
 book.year = 2005
@@ -214,18 +214,18 @@ console.log(book.edition) //2
 
 ```js
 let book = {
-    _year: 2004,
-    edition: 1,
+  _year: 2004,
+  edition: 1,
 }
 //定义访问器的旧有方法
 book.__defineGetter__('year', function () {
-    return this._year
+  return this._year
 })
 book.__defineSetter__('year', function (newValue) {
-    if (newValue > 2004) {
-        this._year = newValue
-        this.edition += newValue - 2004
-    }
+  if (newValue > 2004) {
+    this._year = newValue
+    this.edition += newValue - 2004
+  }
 })
 book.year = 2005
 console.log(book.edition) //2
@@ -238,23 +238,23 @@ console.log(book.edition) //2
 ```js
 let book = {}
 Object.defineProperties(book, {
-    _year: {
-        value: 2004,
+  _year: {
+    value: 2004,
+  },
+  edition: {
+    value: 1,
+  },
+  year: {
+    get: function () {
+      return this._year
     },
-    edition: {
-        value: 1,
+    set: function (newValue) {
+      if (newValue > 2004) {
+        this._year = newValue
+        this.edition += newValue - 2004
+      }
     },
-    year: {
-        get: function () {
-            return this._year
-        },
-        set: function (newValue) {
-            if (newValue > 2004) {
-                this._year = newValue
-                this.edition += newValue - 2004
-            }
-        },
-    },
+  },
 })
 ```
 
@@ -265,23 +265,23 @@ Object.defineProperties(book, {
 ```js
 let book = {}
 Object.defineProperties(book, {
-    _year: {
-        value: 2004,
+  _year: {
+    value: 2004,
+  },
+  edition: {
+    value: 1,
+  },
+  year: {
+    get: function () {
+      return this._year
     },
-    edition: {
-        value: 1,
+    set: function (newValue) {
+      if (newValue > 2004) {
+        this._year = newValue
+        this.edition += newValue - 2004
+      }
     },
-    year: {
-        get: function () {
-            return this._year
-        },
-        set: function (newValue) {
-            if (newValue > 2004) {
-                this._year = newValue
-                this.edition += newValue - 2004
-            }
-        },
-    },
+  },
 })
 
 let descriptor = Object.getOwnPropertyDescriptor(book, '_year')
@@ -305,8 +305,8 @@ console.log(typeof descriptor.get) //"function"
 
 ```js
 let host = {
-    url: 'localhost:8080/api',
-    port: 443,
+  url: 'localhost:8080/api',
+  port: 443,
 }
 
 Object.freeze(host) // host已经无法变更
@@ -322,8 +322,8 @@ console.log(Object.isFrozen(host)) // true
 
 ```js
 const HOST = {
-    url: '/api/users',
-    port: 80,
+  url: '/api/users',
+  port: 80,
 }
 Object.freeze(HOST)
 

@@ -8,30 +8,35 @@
 
 ```js
 fs.readdir(source, function (err, files) {
-    if (err) {
-        console.log('Error finding files: ' + err)
-    } else {
-        files.forEach(function (filename, fileIndex) {
-            console.log(filename)
-            gm(source + filename).size(function (err, values) {
-                if (err) {
-                    console.log('Error identifying file size: ' + err)
-                } else {
-                    console.log(filename + ' : ' + values)
-                    aspect = values.width / values.height
-                    widths.forEach(
-                        function (width, widthIndex) {
-                            height = Math.round(width / aspect)
-                            console.log('resizing ' + filename + 'to ' + height + 'x' + height)
-                            this.resize(width, height).write(dest + 'w' + width + '_' + filename, function (err) {
-                                if (err) console.log('Error writing file: ' + err)
-                            })
-                        }.bind(this)
-                    )
+  if (err) {
+    console.log('Error finding files: ' + err)
+  } else {
+    files.forEach(function (filename, fileIndex) {
+      console.log(filename)
+      gm(source + filename).size(function (err, values) {
+        if (err) {
+          console.log('Error identifying file size: ' + err)
+        } else {
+          console.log(filename + ' : ' + values)
+          aspect = values.width / values.height
+          widths.forEach(
+            function (width, widthIndex) {
+              height = Math.round(width / aspect)
+              console.log(
+                'resizing ' + filename + 'to ' + height + 'x' + height
+              )
+              this.resize(width, height).write(
+                dest + 'w' + width + '_' + filename,
+                function (err) {
+                  if (err) console.log('Error writing file: ' + err)
                 }
-            })
-        })
-    }
+              )
+            }.bind(this)
+          )
+        }
+      })
+    })
+  }
 })
 ```
 
@@ -43,9 +48,9 @@ fs.readdir(source, function (err, files) {
 
 ```js
 try {
-    // 执行业务
+  // 执行业务
 } catch (e) {
-    // 捕获异常后处理
+  // 捕获异常后处理
 }
 ```
 
@@ -54,12 +59,12 @@ try {
 ```js
 // 定义一个异步函数
 function asyncFN(callbck) {
-    process.nextTick(callback)
+  process.nextTick(callback)
 }
 
 // 执行该异步函数
 try {
-    asyncFN(callback)
+  asyncFN(callback)
 } catch (e) {}
 ```
 
@@ -75,11 +80,11 @@ asyncFN(function (err, results) {})
 
 ```js
 try {
-    // 业务处理
-    callback()
+  // 业务处理
+  callback()
 } catch (e) {
-    // 错误处理
-    callback(e)
+  // 错误处理
+  callback(e)
 }
 ```
 
@@ -87,11 +92,11 @@ try {
 
 ```js
 try {
-    // 业务处理
-    callback()
+  // 业务处理
+  callback()
 } catch (e) {
-    // 错误处理
-    return callback(e)
+  // 错误处理
+  return callback(e)
 }
 callback()
 ```
@@ -104,7 +109,7 @@ Node 没有 sleep()线程睡眠函数，也导致了阻塞代码执行变得困�
 // 模拟 sleep(1000)
 var start = new Date()
 while (new Date() - start < 1000) {
-    // TODO
+  // TODO
 }
 ```
 
@@ -116,10 +121,10 @@ while (new Date() - start < 1000) {
 
 回调地狱可以通过对回调函数命名，进行简单的优化，但这并没有从本质上改变编程体验。能够本质改变异步编程体验的解决方案有：‘
 
--   利用 `events`模块：这是一种发布订阅方式，让回调函数与调用者解耦
--   使用第三方库：Async
--   利用 ES6 的 Promise
--   利用 ES7 的 async/await 语法糖：该方案目前渐渐成为主流
+- 利用 `events`模块：这是一种发布订阅方式，让回调函数与调用者解耦
+- 使用第三方库：Async
+- 利用 ES6 的 Promise
+- 利用 ES7 的 async/await 语法糖：该方案目前渐渐成为主流
 
 ### 2.1 使用事件模块实现发布订阅
 
@@ -143,19 +148,19 @@ obj.api1(function(data1){
 
 ```js
 var fn1 = function (data1) {
-    obj.api2(data1, fn2)
+  obj.api2(data1, fn2)
 }
 
 var fn2 = function (data2) {
-    obj.api3(data2, fn3)
+  obj.api3(data2, fn3)
 }
 
 var fn3 = function (data3) {
-    obj.api4(data3, fn4)
+  obj.api4(data3, fn4)
 }
 
 var fn4 = function (data4) {
-    callback(data4)
+  callback(data4)
 }
 
 obj.api1(fn1)
@@ -167,27 +172,27 @@ obj.api1(fn1)
 var emitter = new event.Emitter()
 
 emitter.on('step1', function () {
-    obj.api1(function (data1) {
-        emitter.emit('step2', data1)
-    })
+  obj.api1(function (data1) {
+    emitter.emit('step2', data1)
+  })
 })
 
 emitter.on('step2', function (data1) {
-    obj.api2(data1, function (data2) {
-        emitter.emit('step3', data2)
-    })
+  obj.api2(data1, function (data2) {
+    emitter.emit('step3', data2)
+  })
 })
 
 emitter.on('step3', function (data2) {
-    obj.api3(data2, function (data3) {
-        emitter.emit('step4', data3)
-    })
+  obj.api3(data2, function (data3) {
+    emitter.emit('step4', data3)
+  })
 })
 
 emitter.on('step4', function (data3) {
-    obj.api1(data3, function (data4) {
-        callback(data4)
-    })
+  obj.api1(data3, function (data4) {
+    callback(data4)
+  })
 })
 
 emitter.emit('step1')
@@ -203,22 +208,22 @@ emitter.emit('step1')
 var async = require('async')
 
 async.waterfall(
-    [
-        function (callback) {
-            callback(null, 'one', 'two')
-        },
-        function (arg1, arg2, callback) {
-            // arg1 now equals 'one' and arg2 now equals 'two'
-            callback(null, 'three')
-        },
-        function (arg1, callback) {
-            // arg1 now equals 'three'
-            callback(null, 'done')
-        },
-    ],
-    function (err, result) {
-        // result now equals 'done'
-    }
+  [
+    function (callback) {
+      callback(null, 'one', 'two')
+    },
+    function (arg1, arg2, callback) {
+      // arg1 now equals 'one' and arg2 now equals 'two'
+      callback(null, 'three')
+    },
+    function (arg1, callback) {
+      // arg1 now equals 'three'
+      callback(null, 'done')
+    },
+  ],
+  function (err, result) {
+    // result now equals 'done'
+  }
 )
 ```
 
@@ -228,9 +233,9 @@ async.waterfall(
 
 ```js
 $.get('/api', {
-    sucess: onSuccess,
-    error: onError,
-    complete: onComplete,
+  sucess: onSuccess,
+  error: onError,
+  complete: onComplete,
 })
 ```
 
@@ -249,16 +254,16 @@ Promise 现在是 ES6 官方认可的社区异步方案，已进入标准化：
 
 ```js
 new Promise(function (resolve, reject) {
-    // 一段耗时的异步操作
-    resolve('成功') // 数据处理完成
-    // reject('失败') // 数据处理出错
+  // 一段耗时的异步操作
+  resolve('成功') // 数据处理完成
+  // reject('失败') // 数据处理出错
 }).then(
-    res => {
-        console.log(res)
-    }, // 成功
-    err => {
-        console.log(err)
-    } // 失败
+  (res) => {
+    console.log(res)
+  }, // 成功
+  (err) => {
+    console.log(err)
+  } // 失败
 )
 ```
 
@@ -272,16 +277,16 @@ generator 也是 ES6 退出的异步解决方案，但是是过渡性方案，�
 
 ```js
 function fn() {
-    return new Promise((resolve, reject) => {
-        let sino = parseInt(Math.random() * 6 + 1)
-        setTimeout(() => {
-            resolve(sino)
-        }, 3000)
-    })
+  return new Promise((resolve, reject) => {
+    let sino = parseInt(Math.random() * 6 + 1)
+    setTimeout(() => {
+      resolve(sino)
+    }, 3000)
+  })
 }
 async function test() {
-    let n = await fn()
-    console.log(n)
+  let n = await fn()
+  console.log(n)
 }
 test()
 ```
@@ -308,26 +313,26 @@ Error: EMFILE, too many open files
 
 一般可以通过队列来控制并发量：
 
--   如果当前活跃（调用发起但未执行回调）的异步调用量小于限定值，从队列中取出执行
--   如果活跃调用达到限定值，调用暂时存放到队列中
--   每个异步调用结束时，从队列中取出新的异步调用执行
+- 如果当前活跃（调用发起但未执行回调）的异步调用量小于限定值，从队列中取出执行
+- 如果活跃调用达到限定值，调用暂时存放到队列中
+- 每个异步调用结束时，从队列中取出新的异步调用执行
 
 async 库解决方案：
 
 ```js
 async.parallelLimit(
-    [
-        function (callback) {
-            fs.readFile('file1.txt', 'utf-8', callback)
-        },
-        function (callback) {
-            fs.readFile('file2.txt', 'utf-8', callback)
-        },
-    ],
-    1,
-    function (err, results) {
-        // TODO
-    }
+  [
+    function (callback) {
+      fs.readFile('file1.txt', 'utf-8', callback)
+    },
+    function (callback) {
+      fs.readFile('file2.txt', 'utf-8', callback)
+    },
+  ],
+  1,
+  function (err, results) {
+    // TODO
+  }
 )
 ```
 
@@ -337,17 +342,17 @@ parallelLimit()方法的却显示是无法动态增加并行任务，async 的 q
 
 ```js
 var q = async.queue(function (file, callback) {
-    fs.readFile(file, 'utf-8', callback)
+  fs.readFile(file, 'utf-8', callback)
 }, 2)
 
 q.drain = function () {
-    // 完成了对了队列中的所有任务
+  // 完成了对了队列中的所有任务
 }
 
 fs.readdirSync('.').forEach(function (file) {
-    q.push(file, function (err, data) {
-        // TODO
-    })
+  q.push(file, function (err, data) {
+    // TODO
+  })
 })
 ```
 

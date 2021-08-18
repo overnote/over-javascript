@@ -74,25 +74,25 @@ export default class App extends Component {
 
 react-router-dom 内置组件：
 
--   BrowserRouter、HashRouter：路由的根容器，分别代表历史路由（`history.createBrowserRouter`）、哈希路由（`history.createHashRouter`）。所有路由相关的内容都要包裹在该标签中。
--   Route：表示一个路由映射规则，用于注册路由。在 Route 上，有两个比较重要的属性：path、component，分别代表有对应关系的路由与组件。
--   Link：表示路由的连接，其本质是被 React 阻止默认行为，添加监听的 a 连接。
--   NavLink：
--   Redirect：
--   Switch：
+- BrowserRouter、HashRouter：路由的根容器，分别代表历史路由（`history.createBrowserRouter`）、哈希路由（`history.createHashRouter`）。所有路由相关的内容都要包裹在该标签中。
+- Route：表示一个路由映射规则，用于注册路由。在 Route 上，有两个比较重要的属性：path、component，分别代表有对应关系的路由与组件。
+- Link：表示路由的连接，其本质是被 React 阻止默认行为，添加监听的 a 连接。
+- NavLink：
+- Redirect：
+- Switch：
 
 ### 3.2 路由组件与一般组件
 
 规范：
 
--   一般组件：被类似 `<About />` 的方式直接使用的组件，一般放置在 components 文件夹中。
--   路由组件：被使用在 Route 标签的 `component` 属性中的组件，一般放置在 pages 文件夹中。
+- 一般组件：被类似 `<About />` 的方式直接使用的组件，一般放置在 components 文件夹中。
+- 路由组件：被使用在 Route 标签的 `component` 属性中的组件，一般放置在 pages 文件夹中。
 
 二者核心区别：**路由组件接收的 props 为三个固定属性**：
 
--   history：包含 go、goBack、push、replace（替换栈顶）、location 等常用的 historyAPI
--   location：与前者 history.location 一致，包含：pathname（路由地址）、search（参数）、state（状态）
--   match：包含：isExact（默认为 true，精准匹配）、params、path、url
+- history：包含 go、goBack、push、replace（替换栈顶）、location 等常用的 historyAPI
+- location：与前者 history.location 一致，包含：pathname（路由地址）、search（参数）、state（状态）
+- match：包含：isExact（默认为 true，精准匹配）、params、path、url
 
 ### 3.3 路由匹配 exact
 
@@ -157,9 +157,9 @@ export default class MyNavLink extends Component {
 
 ```js
 <Switch>
-    <Route path="/home" component={Home}></Route>
-    <Route path="/about" component={About}></Route>
-    <Route path="/home" component={Other}></Route>
+  <Route path="/home" component={Home}></Route>
+  <Route path="/about" component={About}></Route>
+  <Route path="/home" component={Other}></Route>
 </Switch>
 ```
 
@@ -169,9 +169,9 @@ export default class MyNavLink extends Component {
 
 ```js
 <Switch>
-    <Route path="/home" component={Home}></Route>
-    <Route path="/about" component={About}></Route>
-    <Redirect to="/home"></Redirect>
+  <Route path="/home" component={Home}></Route>
+  <Route path="/about" component={About}></Route>
+  <Redirect to="/home"></Redirect>
 </Switch>
 ```
 
@@ -313,7 +313,7 @@ import React, { Component, lazy, Suspense } from 'react'
 
 // import Home from './components/Home'
 const Home = lazy(() => {
-    import './components/Home'
+  import './components/Home'
 })
 ```
 

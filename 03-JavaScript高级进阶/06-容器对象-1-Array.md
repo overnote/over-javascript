@@ -144,13 +144,13 @@ console.log(arr) // [ 0, 1, 10, 15, 5 ]
 
 ```js
 function compare(v1, v2) {
-    if (v1 < v2) {
-        return -1
-    } else if (v1 > v2) {
-        return 1
-    } else {
-        return 0
-    }
+  if (v1 < v2) {
+    return -1
+  } else if (v1 > v2) {
+    return 1
+  } else {
+    return 0
+  }
 }
 
 let arr = [0, 1, 5, 10, 15]
@@ -201,9 +201,9 @@ console.log(colors3) //green,blue,yellow
 
 splice()的主要用途是向数组的中部插入项，但使用这种方法的方式则有如下 3 种。
 
--   删除：可以删除任意数量的项，只需指定 2 个参数：要删除的第一项的位置和要删除的项数。例如， splice(0,2)会删除数组中的前两项。
--   插入：可以向指定位置插入任意数量的项，只需提供 3 个参数：起始位置、 0（要删除的项数）和要插入的项。如果要插入多个项，可以再传入第四、第五，以至任意多个项。例如，splice(2,0,"red","green")会从当前数组的位置 2 开始插入字符串"red"和"green"。
--   替换：可以向指定位置插入任意数量的项，且同时删除任意数量的项，只需指定 3 个参数：起始位置、要删除的项数和要插入的任意数量的项。插入的项数不必与删除的项数相等。例如，splice (2,1,"red","green")会删除当前数组位置 2 的项，然后再从位置 2 开始插入字符串"red"和"green"。
+- 删除：可以删除任意数量的项，只需指定 2 个参数：要删除的第一项的位置和要删除的项数。例如， splice(0,2)会删除数组中的前两项。
+- 插入：可以向指定位置插入任意数量的项，只需提供 3 个参数：起始位置、 0（要删除的项数）和要插入的项。如果要插入多个项，可以再传入第四、第五，以至任意多个项。例如，splice(2,0,"red","green")会从当前数组的位置 2 开始插入字符串"red"和"green"。
+- 替换：可以向指定位置插入任意数量的项，且同时删除任意数量的项，只需指定 3 个参数：起始位置、要删除的项数和要插入的任意数量的项。插入的项数不必与删除的项数相等。例如，splice (2,1,"red","green")会删除当前数组位置 2 的项，然后再从位置 2 开始插入字符串"red"和"green"。
 
 splice()方法始终都会返回一个数组，该数组中包含从原始数组中删除的项（如果没有删除任何项，则返回一个空数组）。
 
@@ -242,7 +242,7 @@ copyWithin()会按照指定范围浅复制数组中的部分内容，然后将�
 
 ```js
 let ints,
-    reset = () => (ints = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+  reset = () => (ints = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 reset()
 // 从 ints 中复制索引 0 开始的内容，插入到索引 5 开始的位置
 // 在源索引或目标索引到达数组边界时停止
@@ -258,14 +258,14 @@ ECMAScript 2019 在 Array.prototype 上增加了两个方法： flat()和 flatMa
 
 ```js
 function flatten(sourceArray, flattenedArray = []) {
-    for (const element of sourceArray) {
-        if (Array.isArray(element)) {
-            flatten(element, flattenedArray)
-        } else {
-            flattenedArray.push(element)
-        }
+  for (const element of sourceArray) {
+    if (Array.isArray(element)) {
+      flatten(element, flattenedArray)
+    } else {
+      flattenedArray.push(element)
     }
-    return flattenedArray
+  }
+  return flattenedArray
 }
 const arr = [[0], 1, 2, [3, [4, 5]], 6]
 console.log(flatten(arr))
@@ -278,14 +278,14 @@ console.log(flatten(arr))
 
 ```js
 function flatten(sourceArray, depth, flattenedArray = []) {
-    for (const element of sourceArray) {
-        if (Array.isArray(element) && depth > 0) {
-            flatten(element, depth - 1, flattenedArray)
-        } else {
-            flattenedArray.push(element)
-        }
+  for (const element of sourceArray) {
+    if (Array.isArray(element) && depth > 0) {
+      flatten(element, depth - 1, flattenedArray)
+    } else {
+      flattenedArray.push(element)
     }
-    return flattenedArray
+  }
+  return flattenedArray
 }
 const arr = [[0], 1, 2, [3, [4, 5]], 6]
 console.log(flatten(arr, 1))
@@ -325,7 +325,7 @@ flatMap()在非数组对象的方法返回数组时特别有用，例如字符�
 
 ```js
 const arr = ['Lorem ipsum dolor sit amet,', 'consectetur adipiscing elit.']
-console.log(arr.flatMap(x => x.split(/[\W+]/)))
+console.log(arr.flatMap((x) => x.split(/[\W+]/)))
 // ["Lorem", "ipsum", "dolor", "sit", "amet", "", "consectetur", "adipiscing","elit", ""]
 ```
 
@@ -333,7 +333,7 @@ console.log(arr.flatMap(x => x.split(/[\W+]/)))
 
 ```js
 const arr = ['Lorem ipsum dolor sit amet,', 'consectetur adipiscing elit.']
-console.log(arr.flatMap(x => x.split(/[\W+]/)).flatMap(x => x || []))
+console.log(arr.flatMap((x) => x.split(/[\W+]/)).flatMap((x) => x || []))
 // ["Lorem", "ipsum", "dolor", "sit", "amet", consectetur", "adipiscing", "elit"]
 ```
 
@@ -346,7 +346,7 @@ console.log(arr.flatMap(x => x.split(/[\W+]/)).flatMap(x => x || []))
 ```js
 let arr = [1, 2, 3]
 for (let i = 0; i < arr.length; i++) {
-    console.log(arr[i])
+  console.log(arr[i])
 }
 ```
 
@@ -364,18 +364,18 @@ console.log(aEntries) // [[0, "foo"], [1, "bar"], [2, "baz"], [3, "qux"]]
 
 // 延伸：通过解构赋值实战使用
 for (const [idx, element] of a.entries()) {
-    console.log(idx)
-    console.log(element)
+  console.log(idx)
+  console.log(element)
 }
 ```
 
 ES5 为数组定义了 5 个迭代方法。每个方法都接收两个参数：要在每一项上运行的函数和（可选的）运行该函数的作用域对象——影响 this 的值。传入这些方法中的函数会接收三个参数：数组项的值、该项在数组中的位置和数组对象本身:
 
--   every()：对数组中的每一项运行给定函数，如果该函数对每一项都返回 true，则返回 true。
--   filter()：对数组中的每一项运行给定函数，返回该函数会返回 true 的项组成的数组。
--   forEach()：对数组中的每一项运行给定函数。这个方法没有返回值。
--   map()：对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组。
--   some()：对数组中的每一项运行给定函数，如果该函数对任一项返回 true，则返回 true。
+- every()：对数组中的每一项运行给定函数，如果该函数对每一项都返回 true，则返回 true。
+- filter()：对数组中的每一项运行给定函数，返回该函数会返回 true 的项组成的数组。
+- forEach()：对数组中的每一项运行给定函数。这个方法没有返回值。
+- map()：对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组。
+- some()：对数组中的每一项运行给定函数，如果该函数对任一项返回 true，则返回 true。
 
 以上方法都不会修改数组中的包含的值。
 
@@ -387,13 +387,13 @@ ES5 为数组定义了 5 个迭代方法。每个方法都接收两个参数：�
 let numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1]
 
 let everyResult = numbers.every(function (item, index, array) {
-    return item > 2
+  return item > 2
 })
 
 console.log(everyResult) //false
 
 let someResult = numbers.some(function (item, index, array) {
-    return item > 2
+  return item > 2
 })
 
 console.log(someResult)
@@ -406,7 +406,7 @@ filter()函数，它利用指定的函数确定是否在返回的数组中包含
 ```js
 let numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1]
 let filterResult = numbers.filter(function (item, index, array) {
-    return item > 2
+  return item > 2
 })
 console.log(filterResult) //[3,4,5,4,3]
 ```
@@ -418,7 +418,7 @@ map()也返回一个数组，而这个数组的每一项都是在原始数组中
 ```js
 let numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1]
 let mapResult = numbers.map(function (item, index, array) {
-    return item * 2
+  return item * 2
 })
 console.log(mapResult) //[2,4,6,8,10,8,6,4,2]
 ```
@@ -430,7 +430,7 @@ forEach()只是对数组中的每一项运行传入的函数。这个方法没�
 ```js
 let numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1]
 numbers.forEach(function (item, index, array) {
-    //执行某些操作
+  //执行某些操作
 })
 ```
 
@@ -446,7 +446,7 @@ numbers.forEach(function (item, index, array) {
 let values = [1, 2, 3, 4, 5]
 
 let sum = values.reduce(function (prev, cur, index, array) {
-    return prev + cur
+  return prev + cur
 })
 
 console.log(sum) //15
@@ -458,7 +458,7 @@ reduceRight()的作用类似，只不过方向相反：
 let values = [1, 2, 3, 4, 5]
 
 let sum = values.reduceRight(function (prev, cur, index, array) {
-    return prev + cur
+  return prev + cur
 })
 
 console.log(sum) //15
@@ -507,28 +507,28 @@ console.log(newArr) //[ 1, 2, { category: 1, obj: { name: 'li', age: 40 } } ]
 ```js
 // 转换迭代器
 const iter = {
-    *[Symbol.iterator]() {
-        yield 1
-        yield 2
-        yield 3
-        yield 4
-    },
+  *[Symbol.iterator]() {
+    yield 1
+    yield 2
+    yield 3
+    yield 4
+  },
 }
 console.log(Array.from(iter)) //[ 1, 2, 3, 4 ]
 
 // 转换 arguments对象
 function getArgsArray() {
-    return Array.from(arguments)
+  return Array.from(arguments)
 }
 console.log(getArgsArray(1, 2, 3, 4)) // [1, 2, 3, 4]
 
 // 转换带有必要属性的对象
 const arrayLikeObject = {
-    0: 1,
-    1: 2,
-    2: 3,
-    3: 4,
-    length: 4,
+  0: 1,
+  1: 2,
+  2: 3,
+  3: 4,
+  length: 4,
 }
 console.log(Array.from(arrayLikeObject)) // [1, 2, 3, 4]
 ```
@@ -537,13 +537,13 @@ Array.from()还接收第二个可选的映射函数参数。这个函数可以�
 
 ```js
 const a1 = [1, 2, 3, 4]
-const a2 = Array.from(a1, x => x ** 2)
+const a2 = Array.from(a1, (x) => x ** 2)
 const a3 = Array.from(
-    a1,
-    function (x) {
-        return x ** this.exponent
-    },
-    { exponent: 2 }
+  a1,
+  function (x) {
+    return x ** this.exponent
+  },
+  { exponent: 2 }
 )
 console.log(a2) // [1, 4, 9, 16]
 console.log(a3) // [1, 4, 9, 16]

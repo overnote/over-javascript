@@ -11,15 +11,15 @@ DOM 上的文件输入元素现在拥有 files 集合，可以直接访问文件
 ```js
 let filesList = document.getElementById('files-list')
 
-filesList.addEventListener('change', event => {
-    let files = event.target.files,
-        i = 0,
-        len = files.length
-    while (i < len) {
-        const f = files[i]
-        console.log(`${f.name} (${f.type}, ${f.size} bytes)`)
-        i++
-    }
+filesList.addEventListener('change', (event) => {
+  let files = event.target.files,
+    i = 0,
+    len = files.length
+  while (i < len) {
+    const f = files[i]
+    console.log(`${f.name} (${f.type}, ${f.size} bytes)`)
+    i++
+  }
 })
 ```
 
@@ -49,40 +49,40 @@ load 事件：会在文件成功加载后触发。如果 error 事件被触发�
 ```js
 let filesList = document.getElementById('files-list')
 
-filesList.addEventListener('change', event => {
-    let info = '',
-        output = document.getElementById('output'),
-        progress = document.getElementById('progress'),
-        files = event.target.files,
-        type = 'default',
-        reader = new FileReader()
-    if (/image/.test(files[0].type)) {
-        reader.readAsDataURL(files[0])
-        type = 'image'
-    } else {
-        reader.readAsText(files[0])
-        type = 'text'
+filesList.addEventListener('change', (event) => {
+  let info = '',
+    output = document.getElementById('output'),
+    progress = document.getElementById('progress'),
+    files = event.target.files,
+    type = 'default',
+    reader = new FileReader()
+  if (/image/.test(files[0].type)) {
+    reader.readAsDataURL(files[0])
+    type = 'image'
+  } else {
+    reader.readAsText(files[0])
+    type = 'text'
+  }
+  reader.onerror = function () {
+    output.innerHTML = 'Could not read file, error code is ' + reader.error.code
+  }
+  reader.onprogress = function (event) {
+    if (event.lengthComputable) {
+      progress.innerHTML = `${event.loaded}/${event.total}`
     }
-    reader.onerror = function () {
-        output.innerHTML = 'Could not read file, error code is ' + reader.error.code
+  }
+  reader.onload = function () {
+    let html = ''
+    switch (type) {
+      case 'image':
+        html = `<img src="${reader.result}">`
+        break
+      case 'text':
+        html = reader.result
+        break
     }
-    reader.onprogress = function (event) {
-        if (event.lengthComputable) {
-            progress.innerHTML = `${event.loaded}/${event.total}`
-        }
-    }
-    reader.onload = function () {
-        let html = ''
-        switch (type) {
-            case 'image':
-                html = `<img src="${reader.result}">`
-                break
-            case 'text':
-                html = reader.result
-                break
-        }
-        output.innerHTML = html
-    }
+    output.innerHTML = html
+  }
 })
 ```
 
@@ -113,24 +113,25 @@ Blob 对象有一个 size 属性和一个 type 属性，还有一个 slice()方�
 
 ```js
 let filesList = document.getElementById('files-list')
-filesList.addEventListener('change', event => {
-    let info = '',
-        output = document.getElementById('output'),
-        progress = document.getElementById('progress'),
-        files = event.target.files,
-        reader = new FileReader(),
-        blob = blobSlice(files[0], 0, 32)
-    if (blob) {
-        reader.readAsText(blob)
-        reader.onerror = function () {
-            output.innerHTML = 'Could not read file, error code is ' + reader.error.code
-        }
-        reader.onload = function () {
-            output.innerHTML = reader.result
-        }
-    } else {
-        console.log("Your browser doesn't support slice().")
+filesList.addEventListener('change', (event) => {
+  let info = '',
+    output = document.getElementById('output'),
+    progress = document.getElementById('progress'),
+    files = event.target.files,
+    reader = new FileReader(),
+    blob = blobSlice(files[0], 0, 32)
+  if (blob) {
+    reader.readAsText(blob)
+    reader.onerror = function () {
+      output.innerHTML =
+        'Could not read file, error code is ' + reader.error.code
     }
+    reader.onload = function () {
+      output.innerHTML = reader.result
+    }
+  } else {
+    console.log("Your browser doesn't support slice().")
+  }
 })
 ```
 
@@ -142,22 +143,22 @@ filesList.addEventListener('change', event => {
 
 ```js
 let filesList = document.getElementById('files-list')
-filesList.addEventListener('change', event => {
-    let info = '',
-        output = document.getElementById('output'),
-        progress = document.getElementById('progress'),
-        files = event.target.files,
-        reader = new FileReader(),
-        url = window.URL.createObjectURL(files[0])
-    if (url) {
-        if (/image/.test(files[0].type)) {
-            output.innerHTML = `<img src="${url}">`
-        } else {
-            output.innerHTML = 'Not an image.'
-        }
+filesList.addEventListener('change', (event) => {
+  let info = '',
+    output = document.getElementById('output'),
+    progress = document.getElementById('progress'),
+    files = event.target.files,
+    reader = new FileReader(),
+    url = window.URL.createObjectURL(files[0])
+  if (url) {
+    if (/image/.test(files[0].type)) {
+      output.innerHTML = `<img src="${url}">`
     } else {
-        output.innerHTML = "Your browser doesn't support object URLs."
+      output.innerHTML = 'Not an image.'
     }
+  } else {
+    output.innerHTML = "Your browser doesn't support object URLs."
+  }
 })
 ```
 
@@ -174,22 +175,22 @@ filesList.addEventListener('change', event => {
 ```js
 let droptarget = document.getElementById('droptarget')
 function handleEvent(event) {
-    let info = '',
-        output = document.getElementById('output'),
-        files,
-        i,
-        len
-    event.preventDefault()
-    if (event.type == 'drop') {
-        files = event.dataTransfer.files
-        i = 0
-        len = files.length
-        while (i < len) {
-            info += `${files[i].name} (${files[i].type}, ${files[i].size} bytes)<br>`
-            i++
-        }
-        output.innerHTML = info
+  let info = '',
+    output = document.getElementById('output'),
+    files,
+    i,
+    len
+  event.preventDefault()
+  if (event.type == 'drop') {
+    files = event.dataTransfer.files
+    i = 0
+    len = files.length
+    while (i < len) {
+      info += `${files[i].name} (${files[i].type}, ${files[i].size} bytes)<br>`
+      i++
     }
+    output.innerHTML = info
+  }
 }
 droptarget.addEventListener('dragenter', handleEvent)
 droptarget.addEventListener('dragover', handleEvent)

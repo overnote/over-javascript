@@ -9,29 +9,29 @@
 ```html
 <button id="btn">点击执行Ajax</button>
 <script>
-    let btn = document.querySelector('#btn')
+  let btn = document.querySelector('#btn')
 
-    btn.onclick = function () {
-        // 1 创建 Ajax 对象。IE6 中对象为：ActiveXObject("Microsoft.XMLHTTP");
-        let xhr = new XMLHttpRequest()
-        // 2 设置请求方式、请求地址，参数三可选表示是否异步，默认为true异步
-        xhr.open('get', 'http://localhost:3000/hi')
-        // 3 发送请求
-        xhr.send(null)
-        // 4.获取服务器端响应的数据：由于 xhr.send() 是异步的，所以后面只能用事件方式监听
-        // 如果是同步请求则这里无需使用事件
-        xhr.onload = function () {
-            // onload事件在成功接收完响应时触发
-            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-                console.log(xhr.responseText)
-            } else {
-                console.log('error: ' + xhr.status)
-            }
-        }
-
-        // 5 如果在收到响应前想取消异步请求
-        // xhr.abort()
+  btn.onclick = function () {
+    // 1 创建 Ajax 对象。IE6 中对象为：ActiveXObject("Microsoft.XMLHTTP");
+    let xhr = new XMLHttpRequest()
+    // 2 设置请求方式、请求地址，参数三可选表示是否异步，默认为true异步
+    xhr.open('get', 'http://localhost:3000/hi')
+    // 3 发送请求
+    xhr.send(null)
+    // 4.获取服务器端响应的数据：由于 xhr.send() 是异步的，所以后面只能用事件方式监听
+    // 如果是同步请求则这里无需使用事件
+    xhr.onload = function () {
+      // onload事件在成功接收完响应时触发
+      if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+        console.log(xhr.responseText)
+      } else {
+        console.log('error: ' + xhr.status)
+      }
     }
+
+    // 5 如果在收到响应前想取消异步请求
+    // xhr.abort()
+  }
 </script>
 ```
 
@@ -55,16 +55,16 @@
 
 ```js
 xhr.onreadystatechange = function () {
-    console.log(xhr.readyState) // 依次输出 1 2 3 4
+  console.log(xhr.readyState) // 依次输出 1 2 3 4
 
-    // DOM Level0 风格的响应处理
-    if (xhr.readyState == 4) {
-        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-            console.log(xhr.responseText)
-        } else {
-            console.log('error: ' + xhr.status)
-        }
+  // DOM Level0 风格的响应处理
+  if (xhr.readyState == 4) {
+    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+      console.log(xhr.responseText)
+    } else {
+      console.log('error: ' + xhr.status)
     }
+  }
 }
 xhr.send(params)
 ```
@@ -135,9 +135,9 @@ POST 请求方式：
 let params = 'username=lisi&password=123'
 xhr.open('post', 'http://localhost:3000/postDemo')
 xhr.setRequestHeader(
-    // POST 请求必须设置请求头
-    'Content-Type',
-    'application/x-www-form-urlencoded'
+  // POST 请求必须设置请求头
+  'Content-Type',
+  'application/x-www-form-urlencoded'
 )
 // 3 发送请求：在sen的中发送参数，POST的参数封装在请求体中
 xhr.send(params)
@@ -170,9 +170,9 @@ xhr.send(JSON.stringify({ username: 'zs', password: '123' }))
 
 ```js
 function addURLParam(url, name, value) {
-    url += url.indexOf('?') == -1 ? '?' : '&'
-    url += encodeURIComponent(name) + '=' + encodeURIComponent(value)
-    return url
+  url += url.indexOf('?') == -1 ? '?' : '&'
+  url += encodeURIComponent(name) + '=' + encodeURIComponent(value)
+  return url
 }
 
 let url = 'locahost:3000/getDemo'
@@ -203,13 +203,13 @@ FormData() 构造函数可以直接传入一个表单元素！这样就能快速
 ```js
 let xhr = new XMLHttpRequest()
 xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4) {
-        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-            console.log(xhr.responseText)
-        } else {
-            console.log('error: ' + xhr.status)
-        }
+  if (xhr.readyState == 4) {
+    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+      console.log(xhr.responseText)
+    } else {
+      console.log('error: ' + xhr.status)
     }
+  }
 }
 xhr.open('post', 'localhost:3000/postDemo', true)
 
@@ -226,22 +226,22 @@ IE8 中 XHR 的 timeout 事件现在也成为了 XMLHttpRequest Level 2 规范�
 ```js
 let xhr = new XMLHttpRequest()
 xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4) {
-        try {
-            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-                alert(xhr.responseText)
-            } else {
-                alert('Request was unsuccessful: ' + xhr.status)
-            }
-        } catch (ex) {
-            // 假设由 ontimeout 处理
-        }
+  if (xhr.readyState == 4) {
+    try {
+      if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+        alert(xhr.responseText)
+      } else {
+        alert('Request was unsuccessful: ' + xhr.status)
+      }
+    } catch (ex) {
+      // 假设由 ontimeout 处理
     }
+  }
 }
 xhr.open('get', 'localhost:3000', true)
 xhr.timeout = 1000 // 1000毫秒超时
 xhr.ontimeout = function () {
-    alert('Request did not return in a second.')
+  alert('Request did not return in a second.')
 }
 xhr.send(null)
 ```
@@ -281,11 +281,11 @@ load 事件可以替代检查 readyState，更简洁，但是不兼容 IE 低版
 ```js
 let xhr = new XMLHttpRequest()
 xhr.onload = function () {
-    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-        alert(xhr.responseText)
-    } else {
-        alert('Request was unsuccessful: ' + xhr.status)
-    }
+  if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+    alert(xhr.responseText)
+  } else {
+    alert('Request was unsuccessful: ' + xhr.status)
+  }
 }
 xhr.open('get', 'localhost:3000', true)
 xhr.send(null)
@@ -300,18 +300,19 @@ xhr.send(null)
 let xhr = new XMLHttpRequest()
 
 xhr.onload = function (event) {
-    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-        alert(xhr.responseText)
-    } else {
-        alert('Request was unsuccessful: ' + xhr.status)
-    }
+  if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+    alert(xhr.responseText)
+  } else {
+    alert('Request was unsuccessful: ' + xhr.status)
+  }
 }
 
 xhr.onprogress = function (event) {
-    let divStatus = document.getElementById('status')
-    if (event.lengthComputable) {
-        divStatus.innerHTML = 'Received ' + event.position + ' of ' + event.totalSize + ' bytes'
-    }
+  let divStatus = document.getElementById('status')
+  if (event.lengthComputable) {
+    divStatus.innerHTML =
+      'Received ' + event.position + ' of ' + event.totalSize + ' bytes'
+  }
 }
 
 // 必须在调用 open()之前添加 onprogress 事件处理程序
@@ -344,7 +345,10 @@ xhr.open('get', 'http://www.demo.com?t=' + Math.random())
 // 发送 POST 请求
 // URL: 'https://example.com/analytics-reporting-url'
 // 请求负载： '{foo: "bar"}'
-navigator.sendBeacon('https://example.com/analytics-reporting-url', '{foo: "bar"}')
+navigator.sendBeacon(
+  'https://example.com/analytics-reporting-url',
+  '{foo: "bar"}'
+)
 ```
 
 这个方法虽然看起来只不过是 POST 请求的一个语法糖，但它有几个重要的特性：

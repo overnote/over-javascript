@@ -15,7 +15,7 @@ $('p').bind('click mouseenter', function (e) {})
 
 // 第三阶段：delegate绑定
 $('.parentBox').delegate('p', 'click', function () {
-    //为 .parentBox下面的所有的p标签绑定事件
+  //为 .parentBox下面的所有的p标签绑定事件
 })
 
 // 推荐方式：on
@@ -29,22 +29,22 @@ on 方式比起简单绑定方式，支持一次性绑定多个事件：
 ```js
 //on绑定事件书写方式一
 $('div').on('click mouseover', function () {
-    alert(123)
+  alert(123)
 })
 
 //on绑定事件书写方式二
 $('div').on({
-    click: function () {
-        alert(123)
-    },
-    mouseover: function () {
-        alert(456)
-    },
+  click: function () {
+    alert(123)
+  },
+  mouseover: function () {
+    alert(456)
+  },
 })
 
 //绑定一次性事件
 $('p').one('click', function () {
-    alert($(this).text())
+  alert($(this).text())
 })
 ```
 
@@ -56,7 +56,7 @@ $('p').one('click', function () {
 ```js
 //注册委托事件：让子元素li执行事件
 $('ul').on('click', 'li', function () {
-    alert(123)
+  alert(123)
 })
 ```
 
@@ -65,8 +65,8 @@ $('ul').on('click', 'li', function () {
 ```js
 let li = $('<li>动态创建的li</li>')
 $('ul')
-    .append(li)
-    .on('click', function () {})
+  .append(li)
+  .on('click', function () {})
 ```
 
 ### 1.5 jQuery 移除事件绑定
@@ -157,29 +157,29 @@ event.preventDefault() //阻止默认行为
 ```js
 //按下1-9这几个数字键，能触发对应的mouseenter事件
 $(document).on('keydown', function (e) {
-    if (flag) {
-        flag = false
-        //获取到按下的键
-        let code = e.keyCode
-        if (code >= 49 && code <= 57) {
-            //触发对应的li的mouseenter事件
-            $('.nav li')
-                .eq(code - 49)
-                .mouseenter()
-        }
-    }
-})
-
-$(document).on('keyup', function (e) {
-    flag = true
-
+  if (flag) {
+    flag = false
     //获取到按下的键
     let code = e.keyCode
     if (code >= 49 && code <= 57) {
-        //触发对应的li的mouseenter事件
-        $('.nav li')
-            .eq(code - 49)
-            .mouseleave()
+      //触发对应的li的mouseenter事件
+      $('.nav li')
+        .eq(code - 49)
+        .mouseenter()
     }
+  }
+})
+
+$(document).on('keyup', function (e) {
+  flag = true
+
+  //获取到按下的键
+  let code = e.keyCode
+  if (code >= 49 && code <= 57) {
+    //触发对应的li的mouseenter事件
+    $('.nav li')
+      .eq(code - 49)
+      .mouseleave()
+  }
 })
 ```

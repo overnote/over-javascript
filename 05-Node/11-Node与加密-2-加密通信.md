@@ -11,21 +11,24 @@ const tls = require('tls')
 const fs = require('fs')
 
 let options = {
-    key: fs.readFileSync('./keys/server.key'),
-    cert: fs.readFileSync('./keys/server.crt'),
-    requestCert: true,
-    ca: [fs.readFileSync('./keys/ca.crt')],
+  key: fs.readFileSync('./keys/server.key'),
+  cert: fs.readFileSync('./keys/server.crt'),
+  requestCert: true,
+  ca: [fs.readFileSync('./keys/ca.crt')],
 }
 
 const server = tls.createServer(options, function (stream) {
-    console.log('server connected', stream.authorized ? 'authorized' : 'unauthorized')
-    stream.write('welcome!\n')
-    stream.setEncoding('utf8')
-    stream.pipe(stream)
+  console.log(
+    'server connected',
+    stream.authorized ? 'authorized' : 'unauthorized'
+  )
+  stream.write('welcome!\n')
+  stream.setEncoding('utf8')
+  stream.pipe(stream)
 })
 
 server.listen(8000, function () {
-    console.log('server bound')
+  console.log('server bound')
 })
 ```
 
@@ -57,24 +60,27 @@ const tls = require('tls')
 const fs = require('fs')
 
 let options = {
-    key: fs.readFileSync('./keys/client.key'),
-    cert: fs.readFileSync('./keys/client.crt'),
-    ca: [fs.readFileSync('./keys/ca.crt')],
+  key: fs.readFileSync('./keys/client.key'),
+  cert: fs.readFileSync('./keys/client.crt'),
+  ca: [fs.readFileSync('./keys/ca.crt')],
 }
 
 let stream = tls.connect(8000, options, function () {
-    console.log('client connected', stream.authorized ? 'authorized' : 'unauthorized')
-    process.stdin.pipe(stream)
+  console.log(
+    'client connected',
+    stream.authorized ? 'authorized' : 'unauthorized'
+  )
+  process.stdin.pipe(stream)
 })
 
 stream.setEncoding('utf8')
 
 stream.on('data', function (data) {
-    console.log(data)
+  console.log(data)
 })
 
 stream.on('end', function () {
-    server.close()
+  server.close()
 })
 ```
 
@@ -89,16 +95,16 @@ const https = require('https')
 const fs = require('fs')
 
 let options = {
-    key: fs.readFileSync('./keys/server.key'),
-    cert: fs.readFileSync('./keys/server.crt'),
+  key: fs.readFileSync('./keys/server.key'),
+  cert: fs.readFileSync('./keys/server.crt'),
 }
 
 https
-    .createServer(options, function (req, res) {
-        res.writeHead(200)
-        res.end('hello world\n')
-    })
-    .listen(8000)
+  .createServer(options, function (req, res) {
+    res.writeHead(200)
+    res.end('hello world\n')
+  })
+  .listen(8000)
 ```
 
 启动后通过 curl 进行测试：
@@ -109,8 +115,8 @@ curl https://localhost:8000/
 
 此时会爆出错误警告，因为 curl 工具无法验证服务端证书是否正确，解决方案：
 
--   加 -k 选项，忽略证书验证，这样仍然通过公钥加密传输，但是无法保证对方是否可靠，存在中间人攻击风险
--   使用：`curl --cacert keys/ca.crt https://localhost:8000/`
+- 加 -k 选项，忽略证书验证，这样仍然通过公钥加密传输，但是无法保证对方是否可靠，存在中间人攻击风险
+- 使用：`curl --cacert keys/ca.crt https://localhost:8000/`
 
 ### 2.2 客户端
 
@@ -119,28 +125,28 @@ const https = require('https')
 const fs = require('fs')
 
 let options = {
-    hostname: 'localhost',
-    port: 8000,
-    path: '/',
-    method: 'GET',
-    key: fs.readFileSync('./keys/client.key'),
-    cert: fs.readFileSync('./keys/client.crt'),
-    ca: [fs.readFileSync('./keys/ca.crt')],
+  hostname: 'localhost',
+  port: 8000,
+  path: '/',
+  method: 'GET',
+  key: fs.readFileSync('./keys/client.key'),
+  cert: fs.readFileSync('./keys/client.crt'),
+  ca: [fs.readFileSync('./keys/ca.crt')],
 }
 
 options.agent = new https.Agent(options)
 
 let req = https.request(options, function (res) {
-    res.setEncoding('utf-8')
-    res.on('data', function (d) {
-        console.log(d)
-    })
+  res.setEncoding('utf-8')
+  res.on('data', function (d) {
+    console.log(d)
+  })
 })
 
 req.end()
 
 req.on('error', function (e) {
-    console.log(e)
+  console.log(e)
 })
 ```
 

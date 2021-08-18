@@ -4,8 +4,8 @@
 
 最常见的前后端数据交互方式有两种：
 
--   JSON：轻量的通用数据格式，是目前互联网领域的主流数据交互格式
--   XML：曾经的互联网数据传输事实标准
+- JSON：轻量的通用数据格式，是目前互联网领域的主流数据交互格式
+- XML：曾经的互联网数据传输事实标准
 
 ## 二 JSON
 
@@ -27,16 +27,16 @@ JSON 语法支持表示 3 种类型的值。
 
 ES5 新增了 JSON 解析全局对象 `JSON`，该对象提供了 2 个方法：
 
--   stringify()：将 JS 序列化为 JSON 字符串
--   parse()：将 JSON 字符串解析为原生 JS，若字符串无效，则会解析错误。
+- stringify()：将 JS 序列化为 JSON 字符串
+- parse()：将 JSON 字符串解析为原生 JS，若字符串无效，则会解析错误。
 
 ### 2.3 序列化方法 stringify()
 
 ```js
 let obj = {
-    id: 1001,
-    name: 'Li',
-    brothers: ['WW', 'ZS'],
+  id: 1001,
+  name: 'Li',
+  brothers: ['WW', 'ZS'],
 }
 // 参数二可选，表示只序列化哪些： JSON.stringify(book, ["name", "brothers"])
 let objStr = JSON.stringify(obj)
@@ -47,14 +47,14 @@ console.log(objStr)
 
 ```js
 let jsonText = JSON.stringify(obj, (key, value) => {
-    switch (key) {
-        case 'name':
-            return value.join('-')
-        case 'id':
-            return 100
-        default:
-            return value
-    }
+  switch (key) {
+    case 'name':
+      return value.join('-')
+    case 'id':
+      return 100
+    default:
+      return value
+  }
 })
 ```
 
@@ -62,12 +62,12 @@ toJSON() 方法可以自定义序列化：
 
 ```js
 let obj = {
-    id: 1001,
-    name: 'Li',
-    brothers: ['WW', 'ZS'],
-    toJSON: function () {
-        return this.name
-    },
+  id: 1001,
+  name: 'Li',
+  brothers: ['WW', 'ZS'],
+  toJSON: function () {
+    return this.name
+  },
 }
 ```
 
@@ -89,15 +89,17 @@ JSON.parse()方法也可以接收一个额外的参数，这个函数会针对�
 
 ```js
 let book = {
-    id: 1001,
-    name: 'Li',
-    brothers: ['WW', 'ZS'],
-    date: new Date(2020, 12, 11),
+  id: 1001,
+  name: 'Li',
+  brothers: ['WW', 'ZS'],
+  date: new Date(2020, 12, 11),
 }
 
 let objText = JSON.stringify(obj)
 
-let objCopy = JSON.parse(objText, (key, value) => (key == 'date' ? new Date(value) : value))
+let objCopy = JSON.parse(objText, (key, value) =>
+  key == 'date' ? new Date(value) : value
+)
 console.log(objCopy.date.getFullYear())
 ```
 

@@ -6,6 +6,11 @@
 
 hook 是 React16.8 新增的重要特性，其核心功能是让函数式组件能够使用状态、生命周期等特性，自此 React 的组件不再存在无状态属性这个概念。
 
+增强后的函数式组件对比类组件：
+
+- 代码可读性更强了：类组件的业务逻辑被分布在了不同的生命周期函数中，不利于维护，Hooks 可以将业务代码聚合
+- 组件层级更浅：类组件需要使用 HOC/render props 等方式复用组件状态，增强功能，会增加组件的层级，Hooks 可以通过自定义 Hooks 实现。
+
 ## 二 状态 Hooks：useState()
 
 ### 2.1 基本写法
@@ -16,25 +21,25 @@ hook 是 React16.8 新增的重要特性，其核心功能是让函数式组件�
 import React from 'react'
 
 export default function Count(props) {
-    // useState 返回是数组，数组的两个元素是：状态值、更新状态的方法
-    let [count, setCount] = React.useState(0)
+  // useState 返回是数组，数组的两个元素是：状态值、更新状态的方法
+  let [count, setCount] = React.useState(0)
 
-    function add() {
-        // 函数式写法：
-        // setCount(count => {
-        //     return count + 1
-        // })
+  function add() {
+    // 函数式写法：
+    // setCount(count => {
+    //     return count + 1
+    // })
 
-        // 常规写法：是参数写法的语法糖
-        setCount(count + 1)
-    }
+    // 常规写法：是参数写法的语法糖
+    setCount(count + 1)
+  }
 
-    return (
-        <div>
-            状态值：{count}
-            <button onClick={add}>点我修改状态</button>
-        </div>
-    )
+  return (
+    <div>
+      状态值：{count}
+      <button onClick={add}>点我修改状态</button>
+    </div>
+  )
 }
 ```
 
@@ -44,26 +49,26 @@ export default function Count(props) {
 import React from 'react'
 
 export default function Count(props) {
-    let [count, setCount] = React.useState(0)
-    let [name, setName] = React.useState('Jack')
+  let [count, setCount] = React.useState(0)
+  let [name, setName] = React.useState('Jack')
 
-    function changeCount() {
-        setCount(count + 1)
-    }
+  function changeCount() {
+    setCount(count + 1)
+  }
 
-    function changeName() {
-        setName('Ross')
-    }
+  function changeName() {
+    setName('Ross')
+  }
 
-    return (
-        <div>
-            count值：{count}
-            <button onClick={changeCount}>点我修改count</button>
-            <hr />
-            name值：{name}
-            <button onClick={changeName}>点我修改name</button>
-        </div>
-    )
+  return (
+    <div>
+      count值：{count}
+      <button onClick={changeCount}>点我修改count</button>
+      <hr />
+      name值：{name}
+      <button onClick={changeName}>点我修改name</button>
+    </div>
+  )
 }
 ```
 
@@ -76,9 +81,9 @@ state = { count: 0 }
 
 // count 增加的触发函数
 add = () => {
-    const { count } = this.state
-    this.setState({ count: count + 1 })
-    console.log('count: ', this.state.count) // 仍然输出0
+  const { count } = this.state
+  this.setState({ count: count + 1 })
+  console.log('count: ', this.state.count) // 仍然输出0
 }
 ```
 
@@ -89,10 +94,10 @@ state = { count: 0 }
 
 // count 增加的触发函数
 add = () => {
-    const { count } = this.state
-    this.setState({ count: count + 1 }, () => {
-        console.log('count: ', this.state.count) // 仍然输出0
-    })
+  const { count } = this.state
+  this.setState({ count: count + 1 }, () => {
+    console.log('count: ', this.state.count) // 仍然输出0
+  })
 }
 ```
 
@@ -113,14 +118,14 @@ let [count, setCount] = React.useState('Jack')
 let [name, setName] = React.useState('Jack')
 
 React.useEffect(() => {
-    console.log('useEffect...')
+  console.log('useEffect...')
 }, [count, name])
 ```
 
 第二个数组参数是可选的，意思是：监控该函数式组件内哪些状态。
 
--   空数组，则不会监控，只会在组件初次加载时执行 useEffect()。
--   数组参数不写，则监控所有状态。
+- 空数组，则不会监控，只会在组件初次加载时执行 useEffect()。
+- 数组参数不写，则监控所有状态。
 
 ### 3.2 需要清除的 effect
 
@@ -128,10 +133,10 @@ useEffect 的第一个函数参数内部也可以返回一个函数，这个返�
 
 ```js
 React.useEffect(() => {
-    console.log('useEffect...')
-    return () => {
-        console.log('component will unmount...')
-    }
+  console.log('mount...')
+  return () => {
+    console.log('component will unmount...')
+  }
 })
 ```
 
@@ -159,19 +164,19 @@ return ()   // JSX
 
 ```js
 const useMyPosition = () => {
-    const [pos, setPos] = useState({ x: 0, y: 0 })
+  const [pos, setPos] = useState({ x: 0, y: 0 })
 
-    useEffect(() => {
-        const update = e => {
-            setPosition({ x: e.clientX, y: e.clientY })
-        }
-        document.addEventListener('click', update)
-        return () => {
-            document.removeEventListener('click', update)
-        }
-    })
+  useEffect(() => {
+    const update = (e) => {
+      setPosition({ x: e.clientX, y: e.clientY })
+    }
+    document.addEventListener('click', update)
+    return () => {
+      document.removeEventListener('click', update)
+    }
+  })
 
-    return pos // 不再return JSX
+  return pos // 不再return JSX
 }
 export default useMyPosition
 ```
@@ -180,8 +185,8 @@ export default useMyPosition
 
 ```js
 function App() {
-    const pos = useMyPosition()
-    return <div>{pos.x}</div>
+  const pos = useMyPosition()
+  return <div>{pos.x}</div>
 }
 ```
 
@@ -196,15 +201,15 @@ function App() {
 ```js
 // 制作一个高阶组件
 const withLoader = (WrapperComponent, url) => {
-    return class LoaderComponent extends React.Component {
-        //  内部执行ajax
-    }
+  return class LoaderComponent extends React.Component {
+    //  内部执行ajax
+  }
 }
 
 // 使用该高阶组件
 function App() {
-    const WithLoaderComponent = withLoader(wrapper, '')
-    return <WithLoaderComponent />
+  const WithLoaderComponent = withLoader(wrapper, '')
+  return <WithLoaderComponent />
 }
 ```
 
@@ -212,25 +217,25 @@ function App() {
 
 ```js
 // 制作自定义hooks
-const useLoader = url => {
-    const [data, setData] = useState(null)
-    const [loading, setLoading] = useState(false)
-    useEffect(() => {
-        setLoading(true)
-        axios.get(ulr).then(res => {
-            setData(res)
-            setLoading(false)
-        })
-    }, [url])
+const useLoader = (url) => {
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    setLoading(true)
+    axios.get(ulr).then((res) => {
+      setData(res)
+      setLoading(false)
+    })
+  }, [url])
 
-    return [data, loading]
+  return [data, loading]
 }
 export default useLoader
 
 // 使用
 const ShowHook = () => {
-    const [data, loading] = useLoader('localhost')
-    return <>{isLoading ? <p>读取中</p> : <p>加载完成</p>}</>
+  const [data, loading] = useLoader('localhost')
+  return <>{isLoading ? <p>读取中</p> : <p>加载完成</p>}</>
 }
 function App() {}
 ```
@@ -243,18 +248,18 @@ useRef 可以在函数式组件中存储、查找组件内的一些数据：
 import React from 'react'
 
 export default function Count(props) {
-    const myRef = React.useRef()
+  const myRef = React.useRef()
 
-    function show() {
-        console.log(myRef.current.value)
-    }
+  function show() {
+    console.log(myRef.current.value)
+  }
 
-    return (
-        <div>
-            <input type="text" ref={myRef} />
-            <button onClick={show}>点我获取输入框数据</button>
-        </div>
-    )
+  return (
+    <div>
+      <input type="text" ref={myRef} />
+      <button onClick={show}>点我获取输入框数据</button>
+    </div>
+  )
 }
 ```
 
@@ -288,28 +293,28 @@ function Demo(){
 
 ```js
 function Demo() {
-    const [count, dispatch] = React.useReducer((state, action) => {
-        switch (action) {
-            case 'add':
-                return state + 1
-            case 'sub':
-                return state - 1
-            default:
-                return state
-        }
-    }, 0)
-    return (
-        <div>
-            <h3>count: {count}</h3>
-            <button
-                onClick={() => {
-                    dispatch('add')
-                }}
-            >
-                增加
-            </button>
-        </div>
-    )
+  const [count, dispatch] = React.useReducer((state, action) => {
+    switch (action) {
+      case 'add':
+        return state + 1
+      case 'sub':
+        return state - 1
+      default:
+        return state
+    }
+  }, 0)
+  return (
+    <div>
+      <h3>count: {count}</h3>
+      <button
+        onClick={() => {
+          dispatch('add')
+        }}
+      >
+        增加
+      </button>
+    </div>
+  )
 }
 ```
 
@@ -317,8 +322,8 @@ function Demo() {
 
 useReducer 和 useContext 其实可以模拟出 Redux 效果：
 
--   useContext：可以访问全局状态，避免一层层传递，可以实现 Redux 状态全局化统一管理。
--   useReducer：可以实现类似 Redux 的 Reducer 部分
+- useContext：可以访问全局状态，避免一层层传递，可以实现 Redux 状态全局化统一管理。
+- useReducer：可以实现类似 Redux 的 Reducer 部分
 
 所以创建一个共享数据的组件：
 
@@ -354,8 +359,8 @@ export function DemoRedux = props => {
 
 ```js
 <DemoRedux>
-    <MyComp1 />
-    <MyComp2 />
+  <MyComp1 />
+  <MyComp2 />
 </DemoRedux>
 ```
 
@@ -363,19 +368,19 @@ MyComp1 中动态接收数据：
 
 ```js
 function MyComp1() {
-    const { data } = React.useContext(DemoRedux)
+  const { data } = React.useContext(DemoRedux)
 
-    return (
-        <div>
-            DemoRedux:{data}
-            <button
-                onClick={() => {
-                    dispatcj((type: 'add'), (data: 20))
-                }}
-            >
-                点击
-            </button>
-        </div>
-    )
+  return (
+    <div>
+      DemoRedux:{data}
+      <button
+        onClick={() => {
+          dispatcj((type: 'add'), (data: 20))
+        }}
+      >
+        点击
+      </button>
+    </div>
+  )
 }
 ```

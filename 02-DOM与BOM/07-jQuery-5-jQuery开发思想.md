@@ -14,9 +14,9 @@ jQuery 的选择器具备隐式迭代的特性，如下案例所示：
 <div>div3</div>
 
 <script>
-    let div = $('div')
-    console.log($('div')) // 3个全拿到了
-    div.css('background', 'red') // 3个div全部被修改为了red
+  let div = $('div')
+  console.log($('div')) // 3个全拿到了
+  div.css('background', 'red') // 3个div全部被修改为了red
 </script>
 ```
 
@@ -28,8 +28,8 @@ jQuery 的选择器具备隐式迭代的特性，如下案例所示：
 
 ```js
 $('li').each(function (i, elem) {
-    //i：下标 elem : 每个元素
-    $(elem).html(i)
+  //i：下标 elem : 每个元素
+  $(elem).html(i)
 })
 ```
 
@@ -43,12 +43,12 @@ $('li').each(function (i, elem) {
 <div style="background-color: aqua;">div3</div>
 <script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script>
-    // 当前元素变化背景，其余去掉颜色
-    $('div').click(function () {
-        //  this 必须转换为 jQuery对象
-        $(this).css('background', 'green')
-        $(this).siblings('div').css('background', '')
-    })
+  // 当前元素变化背景，其余去掉颜色
+  $('div').click(function () {
+    //  this 必须转换为 jQuery对象
+    $(this).css('background', 'green')
+    $(this).siblings('div').css('background', '')
+  })
 </script>
 ```
 
@@ -73,10 +73,10 @@ jQuery.noConflict()
 
 // 此时只能使用 jQuery变量
 jQuery(function () {
-    // 函数内部仍然可以继续使用 $
-    $('p').click(function () {
-        console.log(1)
-    })
+  // 函数内部仍然可以继续使用 $
+  $('p').click(function () {
+    console.log(1)
+  })
 })
 ```
 
@@ -106,26 +106,26 @@ jQuery 只提供了 DOM 等操作，复杂的操作依赖于大量的第三方�
 
 通过插件的方式，可以扩展 jQuery 的功能，常用的插件网址有：
 
--   <http://www.htmleaf.com>
--   <http://www.jq22.com>
+- <http://www.htmleaf.com>
+- <http://www.jq22.com>
 
 案例：
 
 ```html
 <script>
-    $.extend({
-        leftTrim: function (str) {
-            return str.replace(/^\s+/, '')
-        },
-        rightTrim: function () {
-            //方法体
-        },
-    })
+  $.extend({
+    leftTrim: function (str) {
+      return str.replace(/^\s+/, '')
+    },
+    rightTrim: function () {
+      //方法体
+    },
+  })
 </script>
 
 <script>
-    let str = ' hello '
-    console.log($.leftTrim(str))
+  let str = ' hello '
+  console.log($.leftTrim(str))
 </script>
 ```
 

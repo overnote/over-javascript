@@ -6,8 +6,8 @@ Web Storage 目的是解决通过客户端存储不需要频繁发送回服务�
 
 Web Storage 的第 2 版定义了两个对象：
 
--   localStorage：永久存储机制
--   sessionStorage：跨会话的存储机制
+- localStorage：永久存储机制
+- sessionStorage：跨会话的存储机制
 
 这两种浏览器存储 API 提供了在浏览器中不受页面刷新影响而存储数据的两种方式。2009 年之后，该 API 被大多浏览器接受。
 
@@ -77,8 +77,8 @@ alert(`${key}=`${value}`);
 
 ```js
 for (let key in sessionStorage) {
-    let value = sessionStorage.getItem(key)
-    alert(`${key}=${value}`)
+  let value = sessionStorage.getItem(key)
+  alert(`${key}=${value}`)
 }
 ```
 
@@ -131,7 +131,9 @@ oldValue：键变化之前的值。
 可以使用如下代码监听 storage 事件：
 
 ```js
-window.addEventListener('storage', event => alert('Storage changed for ${event.domain}'))
+window.addEventListener('storage', (event) =>
+  alert('Storage changed for ${event.domain}')
+)
 ```
 
 对于 sessionStorage 和 localStorage 上的任何更改都会触发 storage 事件，但 storage 事件不会区分这两者。

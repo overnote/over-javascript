@@ -23,7 +23,7 @@ JavaScript 是一种弱类型的动态语言。
 ```js
 // 该函数参数数据类型并未限制，可以任意传递 对象、字符串、undefined，产生的结果也会千奇百怪
 function add(num) {
-    return num + 1
+  return num + 1
 }
 ```
 
@@ -42,8 +42,8 @@ int add(int num) {
 
 为了解决该问题，JavaScript 涌现了许多类型检查机制，常见的有：
 
--   **Flow**：Facebook 推出的 JavaScript 静态类型检查工具，已渐渐式微
--   **TypeScrip**t：微软推出的编程语言，是 JavaScript 的超集，当前热度极高。
+- **Flow**：Facebook 推出的 JavaScript 静态类型检查工具，已渐渐式微
+- **TypeScrip**t：微软推出的编程语言，是 JavaScript 的超集，当前热度极高。
 
 ## 二 TypeScript 初识
 
@@ -70,9 +70,9 @@ helloworld 案例：
 ```ts
 //新建一个 hello.ts
 export class Hello {
-    run() {
-        console.log('hello world!')
-    }
+  run() {
+    console.log('hello world!')
+  }
 }
 new Hello().run()
 ```
@@ -95,12 +95,12 @@ ts 代码如下：
 
 ```ts
 interface Point {
-    x: number
-    y: number
+  x: number
+  y: number
 }
 
 function fn(p: Point): void {
-    console.log(p.x + p.y) // 在输入 p. 时候会轻松联想出 x y
+  console.log(p.x + p.y) // 在输入 p. 时候会轻松联想出 x y
 }
 
 fn({ x: 1, y: 2 })
@@ -110,12 +110,12 @@ fn({ x: 1, y: 2 })
 
 ```js
 let Point = {
-    x: number,
-    y: number,
+  x: number,
+  y: number,
 }
 
 function fn(p) {
-    console.log(p.x + p.y) // 这里的联想出很多不必要的东西，甚至不会联想！
+  console.log(p.x + p.y) // 这里的联想出很多不必要的东西，甚至不会联想！
 }
 
 fn({ x: 1, y: 2 })

@@ -13,7 +13,7 @@
 ```ts
 // 类型 'string' 不能赋值给 类型 'number'
 const increment = (i: number): number => {
-    return i + '1'
+  return i + '1'
 }
 
 // 类型 '"98765432"' 的参数不能赋值给类型 'number' 的参数.
@@ -26,7 +26,7 @@ TypeScript 并不保证 100%的及安全性，而是在正确性与生产力之�
 
 ```ts
 interface A {
-    x: number
+  x: number
 }
 
 let a: A = { x: 3 }
@@ -49,10 +49,10 @@ a.x.toFixed(0)
 
 ```ts
 const getFullName = async (): string => {
-    const person: AxiosResponse = await api()
+  const person: AxiosResponse = await api()
 
-    //response.name.fullName 可能在运行时成为 undefined
-    return response.name.fullName
+  //response.name.fullName 可能在运行时成为 undefined
+  return response.name.fullName
 }
 ```
 

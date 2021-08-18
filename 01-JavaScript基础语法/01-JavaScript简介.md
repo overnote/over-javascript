@@ -12,11 +12,11 @@ JavaScript 诞生于 1995 年，由网景公司的 Brendan Eich 在十天内开�
 
 ECMAScript 现在的流行版本是：ES5、ES6，其主要版本有：
 
--   ECMAScript3：1999 年标准规范，火狐的 js1.5 和 1.8 都是基于 3 规范
--   ECMAScript4：为了适应互联网发展出来的激进版本，由于存在大量分歧，该版本被放弃！
--   ECMAScript5：2009 年发布，包含了 4 中的一些常见功能，其本质是 ES3.1，是当前的主流版本
--   ECMAScript6：诞生于 2015 年，也称为 ES2015，是 js 划时代意义的版本。引入了开发大型项目所需要的功能，JS 终于不再是一门`玩具语言`。
--   ES2016：诞生于 2016 年，即 ES7，后续版本均以年为名称，如 ES2017、ES2018。ES2016 最出色的地方是引入了`async await`异步解决方案。
+- ECMAScript3：1999 年标准规范，火狐的 js1.5 和 1.8 都是基于 3 规范
+- ECMAScript4：为了适应互联网发展出来的激进版本，由于存在大量分歧，该版本被放弃！
+- ECMAScript5：2009 年发布，包含了 4 中的一些常见功能，其本质是 ES3.1，是当前的主流版本
+- ECMAScript6：诞生于 2015 年，也称为 ES2015，是 js 划时代意义的版本。引入了开发大型项目所需要的功能，JS 终于不再是一门`玩具语言`。
+- ES2016：诞生于 2016 年，即 ES7，后续版本均以年为名称，如 ES2017、ES2018。ES2016 最出色的地方是引入了`async await`异步解决方案。
 
 ### 1.2 JavaScript 的 API 组成
 
@@ -28,9 +28,9 @@ ECMAScript 是 JavaScript 的语法核心，但是仅仅有语法，没有一些
 
 所以 JavaScript 包含三个方面：
 
--   ECMAScript：JavaScript 语法标准，如：类型、关键字、基本对象等，有 ES5、ES6(即 ES2015)、ES7(即 ES2016)，后续皆以年代为规范的名称
--   DOM：`Document Object Model`，JavaScript 操作网页元素的 API
--   BOM：`Browser Object Model`，JavaScript 操作浏览器部分功能的 API
+- ECMAScript：JavaScript 语法标准，如：类型、关键字、基本对象等，有 ES5、ES6(即 ES2015)、ES7(即 ES2016)，后续皆以年代为规范的名称
+- DOM：`Document Object Model`，JavaScript 操作网页元素的 API
+- BOM：`Browser Object Model`，JavaScript 操作浏览器部分功能的 API
 
 > API：Application Programming Interface，即用用程序编程接口，是包装好后提供给开发人员使用的工具
 
@@ -38,8 +38,8 @@ ECMAScript 是 JavaScript 的语法核心，但是仅仅有语法，没有一些
 
 JavaScript 是一种解释性编程语言，依赖于解释引擎，常见的引擎有：
 
--   v8 引擎：js 最著名的引擎，以高性能著称，被应用于 Chrome 浏览器与 Node.js
--   SpiderMonkey：火狐浏览器中的 js 引擎
+- v8 引擎：js 最著名的引擎，以高性能著称，被应用于 Chrome 浏览器与 Node.js
+- SpiderMonkey：火狐浏览器中的 js 引擎
 
 编程语言有解释型和编译型两种：
 
@@ -73,16 +73,16 @@ JavaScript 是一种解释性编程语言，依赖于解释引擎，常见的引
 ```html
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Title</title>
-    </head>
-    <body>
-        <script>
-            // 这里开始书写js代码
-            console.log('Hello World!')
-        </script>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script>
+      // 这里开始书写js代码
+      console.log('Hello World!')
+    </script>
+  </body>
 </html>
 ```
 

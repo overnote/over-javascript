@@ -6,18 +6,18 @@
 
 表单用来收集信息，是前台与后台进行交互的最常见的地方。构成包含：
 
--   表单域：`form` 标签即代表包裹了一个表单域
--   表单控件：`input` 等
+- 表单域：`form` 标签即代表包裹了一个表单域
+- 表单控件：`input` 等
 
 如下所示：
 
 ```html
 <!--  action:用来处理表单数据 method:表单提交得方式 -->
 <form action="" method="">
-    <label>账户：</label>
-    <input type="text" name="username" placeholder="请输入账户" />
-    <label>密码：</label>
-    <input type="password" name="password" placeholder="请输入密码" />
+  <label>账户：</label>
+  <input type="text" name="username" placeholder="请输入账户" />
+  <label>密码：</label>
+  <input type="password" name="password" placeholder="请输入密码" />
 </form>
 ```
 
@@ -28,10 +28,10 @@
 ```html
 <!-- for中填写对应要获取焦点的id即可 -->
 <form action="" method="">
-    <label for="account">账户：</label>
-    <input type="text" id="account" name="username" />
-    <label for="pass">密码：</label>
-    <input type="password" id="pass" name="password" />
+  <label for="account">账户：</label>
+  <input type="text" id="account" name="username" />
+  <label for="pass">密码：</label>
+  <input type="password" id="pass" name="password" />
 </form>
 ```
 
@@ -39,14 +39,14 @@
 
 ```html
 <form action="" method="">
-    <label>
-        账户：
-        <input type="text" name="username" />
-    </label>
-    <label>
-        密码：
-        <input type="password" name="password" />
-    </label>
+  <label>
+    账户：
+    <input type="text" name="username" />
+  </label>
+  <label>
+    密码：
+    <input type="password" name="password" />
+  </label>
 </form>
 ```
 
@@ -108,27 +108,27 @@ autocomplete="on"         开启历史输入数据提示
 <!-- 数据提示 -->
 <inpyt type="search" name="searchList" list="lesson" />
 <datalist id="lsesson">
-    <option value="html">html</option>
-    <option value="css">css</option>
-    <option value="js">js</option>
+  <option value="html">html</option>
+  <option value="css">css</option>
+  <option value="js">js</option>
 </datalist>
 
 <!-- 下拉列表： 属性 multiple="multiple"可以实现多选-->
 <select>
-    <option>河北</option>
-    <option selected="selected">河南</option>
+  <option>河北</option>
+  <option selected="selected">河南</option>
 </select>
 <!-- 下拉还可以有更深的子级嵌套： -->
 <select>
-    <optgroup label="河南">
-        <option>南阳</option>
-        <option>洛阳</option>
-    </optgroup>
+  <optgroup label="河南">
+    <option>南阳</option>
+    <option>洛阳</option>
+  </optgroup>
 </select>
 
 <!-- 分组控件 -->
 <fieldset>
-    <legend>用户注册信息</legend>
+  <legend>用户注册信息</legend>
 </fieldset>
 
 <!-- 多行文本域 cols  控制输入字符的长度，rows  控制输入的行数-->
@@ -197,7 +197,7 @@ oninvalid       验证不通过时触发
 ```html
 <input type="text" list="data" />
 <datalist id="data">
-    <option>男</option>
-    <option>女</option>
+  <option>男</option>
+  <option>女</option>
 </datalist>
 ```

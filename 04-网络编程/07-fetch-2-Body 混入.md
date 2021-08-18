@@ -16,8 +16,8 @@ Body.text()方法返回期约，解决为将缓冲区转存得到的 UTF-8 格�
 
 ```js
 fetch('https://foo.com')
-    .then(response => response.text())
-    .then(console.log)
+  .then((response) => response.text())
+  .then(console.log)
 // <!doctype html><html lang="en">
 // <head>
 // <meta charset="utf-8">
@@ -28,8 +28,8 @@ fetch('https://foo.com')
 
 ```js
 let request = new Request('https://foo.com', {
-    method: 'POST',
-    body: 'barbazqux',
+  method: 'POST',
+  body: 'barbazqux',
 })
 request.text().then(console.log)
 // barbazqux
@@ -41,8 +41,8 @@ Body.json()方法返回期约，解决为将缓冲区转存得到的 JSON。下�
 
 ```js
 fetch('https://foo.com/foo.json')
-    .then(response => response.json())
-    .then(console.log)
+  .then((response) => response.json())
+  .then(console.log)
 // {"foo": "bar"}
 ```
 
@@ -50,8 +50,8 @@ fetch('https://foo.com/foo.json')
 
 ```js
 let request = new Request('https://foo.com', {
-    method: 'POST',
-    body: JSON.stringify({ bar: 'baz' }),
+  method: 'POST',
+  body: JSON.stringify({ bar: 'baz' }),
 })
 request.json().then(console.log)
 // {bar: 'baz'}
@@ -86,8 +86,8 @@ request.formData()
 
 ```js
 fetch('https://foo.com')
-    .then(response => response.arrayBuffer())
-    .then(console.log)
+  .then((response) => response.arrayBuffer())
+  .then(console.log)
 // ArrayBuffer(...) {}
 ```
 
@@ -95,11 +95,11 @@ fetch('https://foo.com')
 
 ```js
 let request = new Request('https://foo.com', {
-    method: 'POST',
-    body: 'abcdefg',
+  method: 'POST',
+  body: 'abcdefg',
 })
 // 以整数形式打印二进制编码的字符串
-request.arrayBuffer().then(buf => console.log(new Int8Array(buf)))
+request.arrayBuffer().then((buf) => console.log(new Int8Array(buf)))
 // Int8Array(7) [97, 98, 99, 100, 101, 102, 103]
 ```
 
@@ -109,8 +109,8 @@ request.arrayBuffer().then(buf => console.log(new Int8Array(buf)))
 
 ```js
 fetch('https://foo.com')
-    .then(response => response.blob())
-    .then(console.log)
+  .then((response) => response.blob())
+  .then(console.log)
 // Blob(...) {size:..., type: "..."}
 ```
 
@@ -118,8 +118,8 @@ fetch('https://foo.com')
 
 ```js
 let request = new Request('https://foo.com', {
-    method: 'POST',
-    body: 'abcdefg',
+  method: 'POST',
+  body: 'abcdefg',
 })
 request.blob().then(console.log)
 // Blob(7) {size: 7, type: "text/plain;charset=utf-8"}
@@ -130,7 +130,9 @@ request.blob().then(console.log)
 因为 Body 混入是构建在 ReadableStream 之上的，所以主体流只能使用一次。这意味着所有主体混入方法都只能调用一次，再次调用就会抛出错误。
 
 ```js
-fetch('https://foo.com').then(response => response.blob().then(() => response.blob()))
+fetch('https://foo.com').then((response) =>
+  response.blob().then(() => response.blob())
+)
 // TypeError: Failed to execute 'blob' on 'Response': body stream is locked
 let request = new Request('https://foo.com', { method: 'POST', body: 'foobar' })
 request.blob().then(() => request.blob())
@@ -140,9 +142,9 @@ request.blob().then(() => request.blob())
 即使是在读取流的过程中，所有这些方法也会在它们被调用时给 ReadableStream 加锁，以阻止其他读取器访问：
 
 ```js
-fetch('https://foo.com').then(response => {
-    response.blob() // 第一次调用给流加锁
-    response.blob() // 第二次调用再次加锁会失败
+fetch('https://foo.com').then((response) => {
+  response.blob() // 第一次调用给流加锁
+  response.blob() // 第二次调用再次加锁会失败
 })
 // TypeError: Failed to execute 'blob' on 'Response': body stream is locked
 let request = new Request('https://foo.com', { method: 'POST', body: 'foobar' })
@@ -174,12 +176,12 @@ JavaScript 编程逻辑很多时候会将访问网络作为原子操作，比如
 
 ```js
 fetch('https://fetch.spec.whatwg.org/')
-    .then(response => response.body)
-    .then(body => {
-        let reader = body.getReader()
-        console.log(reader) // ReadableStreamDefaultReader {}
-        reader.read().then(console.log)
-    })
+  .then((response) => response.body)
+  .then((body) => {
+    let reader = body.getReader()
+    console.log(reader) // ReadableStreamDefaultReader {}
+    reader.read().then(console.log)
+  })
 // { value: Uint8Array{}, done: false }
 ```
 
@@ -187,18 +189,18 @@ fetch('https://fetch.spec.whatwg.org/')
 
 ```js
 fetch('https://fetch.spec.whatwg.org/')
-    .then(response => response.body)
-    .then(body => {
-        let reader = body.getReader()
-        function processNextChunk({ value, done }) {
-            if (done) {
-                return
-            }
-            console.log(value)
-            return reader.read().then(processNextChunk)
-        }
-        return reader.read().then(processNextChunk)
-    })
+  .then((response) => response.body)
+  .then((body) => {
+    let reader = body.getReader()
+    function processNextChunk({ value, done }) {
+      if (done) {
+        return
+      }
+      console.log(value)
+      return reader.read().then(processNextChunk)
+    }
+    return reader.read().then(processNextChunk)
+  })
 // { value: Uint8Array{}, done: false }
 // { value: Uint8Array{}, done: false }
 // { value: Uint8Array{}, done: false }
@@ -209,17 +211,17 @@ fetch('https://fetch.spec.whatwg.org/')
 
 ```js
 fetch('https://fetch.spec.whatwg.org/')
-    .then(response => response.body)
-    .then(async function (body) {
-        let reader = body.getReader()
-        while (true) {
-            let { value, done } = await reader.read()
-            if (done) {
-                break
-            }
-            console.log(value)
-        }
-    })
+  .then((response) => response.body)
+  .then(async function (body) {
+    let reader = body.getReader()
+    while (true) {
+      let { value, done } = await reader.read()
+      if (done) {
+        break
+      }
+      console.log(value)
+    }
+  })
 // { value: Uint8Array{}, done: false }
 // { value: Uint8Array{}, done: false }
 // { value: Uint8Array{}, done: false }
@@ -230,22 +232,22 @@ fetch('https://fetch.spec.whatwg.org/')
 
 ```js
 fetch('https://fetch.spec.whatwg.org/')
-    .then(response => response.body)
-    .then(async function (body) {
-        let reader = body.getReader()
-        let asyncIterable = {
-            [Symbol.asyncIterator]() {
-                return {
-                    next() {
-                        return reader.read()
-                    },
-                }
-            },
+  .then((response) => response.body)
+  .then(async function (body) {
+    let reader = body.getReader()
+    let asyncIterable = {
+      [Symbol.asyncIterator]() {
+        return {
+          next() {
+            return reader.read()
+          },
         }
-        for await (chunk of asyncIterable) {
-            console.log(chunk)
-        }
-    })
+      },
+    }
+    for await (chunk of asyncIterable) {
+      console.log(chunk)
+    }
+  })
 // { value: Uint8Array{}, done: false }
 // { value: Uint8Array{}, done: false }
 // { value: Uint8Array{}, done: false }
@@ -256,26 +258,26 @@ fetch('https://fetch.spec.whatwg.org/')
 
 ```js
 async function* streamGenerator(stream) {
-    const reader = stream.getReader()
-    try {
-        while (true) {
-            const { value, done } = await reader.read()
-            if (done) {
-                break
-            }
-            yield value
-        }
-    } finally {
-        reader.releaseLock()
+  const reader = stream.getReader()
+  try {
+    while (true) {
+      const { value, done } = await reader.read()
+      if (done) {
+        break
+      }
+      yield value
     }
+  } finally {
+    reader.releaseLock()
+  }
 }
 fetch('https://fetch.spec.whatwg.org/')
-    .then(response => response.body)
-    .then(async function (body) {
-        for await (chunk of streamGenerator(body)) {
-            console.log(chunk)
-        }
-    })
+  .then((response) => response.body)
+  .then(async function (body) {
+    for await (chunk of streamGenerator(body)) {
+      console.log(chunk)
+    }
+  })
 ```
 
 在这些例子中，当读取完 Uint8Array 块之后，浏览器会将其标记为可以被垃圾回收。对于需要在不连续的内存中连续检查大量数据的情况，这样可以节省很多内存空间。
@@ -297,26 +299,26 @@ fetch('https://fetch.spec.whatwg.org/')
 ```js
 let decoder = new TextDecoder()
 async function* streamGenerator(stream) {
-    const reader = stream.getReader()
-    try {
-        while (true) {
-            const { value, done } = await reader.read()
-            if (done) {
-                break
-            }
-            yield value
-        }
-    } finally {
-        reader.releaseLock()
+  const reader = stream.getReader()
+  try {
+    while (true) {
+      const { value, done } = await reader.read()
+      if (done) {
+        break
+      }
+      yield value
     }
+  } finally {
+    reader.releaseLock()
+  }
 }
 fetch('https://fetch.spec.whatwg.org/')
-    .then(response => response.body)
-    .then(async function (body) {
-        for await (chunk of streamGenerator(body)) {
-            console.log(decoder.decode(chunk, { stream: true }))
-        }
-    })
+  .then((response) => response.body)
+  .then(async function (body) {
+    for await (chunk of streamGenerator(body)) {
+      console.log(decoder.decode(chunk, { stream: true }))
+    }
+  })
 // <!doctype html><html lang="en"> ...
 // whether a <a data-link-type="dfn" href="#concept-header" ...
 // result to <var>rangeValue</var>. ...
@@ -327,30 +329,30 @@ fetch('https://fetch.spec.whatwg.org/')
 
 ```js
 fetch('https://fetch.spec.whatwg.org/')
-    .then(response => response.body)
-    .then(body => {
-        const reader = body.getReader()
-        // 创建第二个流
-        return new ReadableStream({
-            async start(controller) {
-                try {
-                    while (true) {
-                        const { value, done } = await reader.read()
-                        if (done) {
-                            break
-                        }
-                        // 将主体流的块推到第二个流
-                        controller.enqueue(value)
-                    }
-                } finally {
-                    controller.close()
-                    reader.releaseLock()
-                }
-            },
-        })
+  .then((response) => response.body)
+  .then((body) => {
+    const reader = body.getReader()
+    // 创建第二个流
+    return new ReadableStream({
+      async start(controller) {
+        try {
+          while (true) {
+            const { value, done } = await reader.read()
+            if (done) {
+              break
+            }
+            // 将主体流的块推到第二个流
+            controller.enqueue(value)
+          }
+        } finally {
+          controller.close()
+          reader.releaseLock()
+        }
+      },
     })
-    .then(secondaryStream => new Response(secondaryStream))
-    .then(response => response.text())
-    .then(console.log)
+  })
+  .then((secondaryStream) => new Response(secondaryStream))
+  .then((response) => response.text())
+  .then(console.log)
 // <!doctype html><html lang="en"><head><meta charset="utf-8"> ...
 ```

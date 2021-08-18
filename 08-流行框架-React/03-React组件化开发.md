@@ -25,8 +25,8 @@
 
 react 中定义组件有两种方式：
 
--   函数组件：定义组件简单方便，但是 React16 之前无法使用状态，只能用来作为基础模板使用，在 React16 hooks API 出来之后，函数组件逐渐兴起
--   类组件：使用 class 语法定义的组件，能够使用状态，但是书写较为臃肿
+- 函数组件：定义组件简单方便，但是 React16 之前无法使用状态，只能用来作为基础模板使用，在 React16 hooks API 出来之后，函数组件逐渐兴起
+- 类组件：使用 class 语法定义的组件，能够使用状态，但是书写较为臃肿
 
 ## 二 React 组件化开发初识
 
@@ -38,7 +38,7 @@ react 中定义组件有两种方式：
 
 ```js
 function FuncComp() {
-    return <div>函数组件</div>
+  return <div>函数组件</div>
 }
 
 export default FuncComp
@@ -51,9 +51,9 @@ export default FuncComp
 import React from 'react'
 
 class ClaComp extends React.Component {
-    render() {
-        return <div>类组件</div>
-    }
+  render() {
+    return <div>类组件</div>
+  }
 }
 
 export default ClaComp
@@ -68,12 +68,12 @@ import FuncComp from './components/FuncComp'
 import ClaComp from './components/ClaComp'
 
 function App() {
-    return (
-        <div className="App">
-            <FuncComp></FuncComp>
-            <ClaComp></ClaComp>
-        </div>
-    )
+  return (
+    <div className="App">
+      <FuncComp></FuncComp>
+      <ClaComp></ClaComp>
+    </div>
+  )
 }
 
 export default App
@@ -87,10 +87,10 @@ export default App
 
 ```js
 return (
-    <>
-        <MyComp1 />
-        <MyComp2 />
-    </>
+  <>
+    <MyComp1 />
+    <MyComp2 />
+  </>
 )
 ```
 
@@ -98,10 +98,10 @@ return (
 
 ```js
 return (
-    <Fragment>
-        <MyComp1 />
-        <MyComp2 />
-    </Fragment>
+  <Fragment>
+    <MyComp1 />
+    <MyComp2 />
+  </Fragment>
 )
 ```
 
@@ -117,9 +117,9 @@ return (
 import comp1 from './comp1.module.css'
 
 export default class Comp1 extends Component {
-    render() {
-        return <div className={comp1.box}>hello</div>
-    }
+  render() {
+    return <div className={comp1.box}>hello</div>
+  }
 }
 ```
 
@@ -159,8 +159,8 @@ export default class Demo extends React.Component {
 
 使用 Component 实现的组件，在状态更新术后会有以下问题：
 
--   只要执行了 setState()，即使该函数内没做任何事情，组件依然会重新 render
--   父组件 render 之后，子组件即使没有用到父组件数据也会 render！
+- 只要执行了 setState()，即使该函数内没做任何事情，组件依然会重新 render
+- 父组件 render 之后，子组件即使没有用到父组件数据也会 render！
 
 Component 组件只有在组件的 state 或者 props 真正发生改变触发 render 时，效率才会变高。
 
@@ -172,4 +172,21 @@ render 一直被触发的原因是：shouldComponentUpdate() 这个阀门总是�
 import React, {PureComponent}
 
 export default Comp extends PureComponent {}
+```
+
+## 四 高阶组件 Higher-Order Components
+
+高阶组件只是一个函数，接收组件作为参数，返回一个新的组件。
+
+高阶组件一般用于将组件增强，比如为组件添加新的内容：
+
+```js
+const CustomHighComp = (Comp) => {
+  return class extends Component {
+    render() {
+      // 添加新属性
+      return <Comp title="hello" />
+    }
+  }
+}
 ```

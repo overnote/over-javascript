@@ -8,16 +8,16 @@ Node.js 由 Ryan Dahl 于 2009 年发布，其最初的目的是为了基于 V8 
 
 现在可以先厘清一下 ECMAScript 与 V8 的关系：
 
--   ECMAScript：JavaScript、JScript 等语言的语法标准
--   V8：解析 JavaScript 语言的引擎
+- ECMAScript：JavaScript、JScript 等语言的语法标准
+- V8：解析 JavaScript 语言的引擎
 
 有了 ECMAScript 语法、V8 对语法的解析，一个语言就能书写、运行了。但是我们在学习时，经常使用 Chrome 浏览器来运行 JavaScript，因为 Chrome 浏览器内部也内置了 V8，而且在 ECMAScript 的基础上，浏览器给开发者额外提供了 DOM、BOM 的 API。
 同理，Node 与 Chrome 浏览器道理一样，因为 Node 内部集成了 V8，其也能运行 JavaScript，但是 Node 没有浏览器额外提供的 DOM、BOM 等 API，而是拥有自己独立的文件、网络操作 API。
 
 JavaScript 现在的运行平台可以总结如下：
 
--   Chrome 浏览器：使用 V8 作为 JS 解析引擎，额外封装了 DOM、BOM 等页面渲染相关的 API。Chrome 浏览器还拥有 Webkit 排版引擎。
--   NodeJS：使用 V8 作为 JS 解析引擎，封装了文件、网络的 API。NodeJS 还拥有一个名为 libuv 事件处理库。
+- Chrome 浏览器：使用 V8 作为 JS 解析引擎，额外封装了 DOM、BOM 等页面渲染相关的 API。Chrome 浏览器还拥有 Webkit 排版引擎。
+- NodeJS：使用 V8 作为 JS 解析引擎，封装了文件、网络的 API。NodeJS 还拥有一个名为 libuv 事件处理库。
 
 下图是 Chrome 浏览器与 Node.js 的内核区别：
 
@@ -30,8 +30,8 @@ JavaScript 现在的运行平台可以总结如下：
 
 贴士：
 
--   运行平台：为某个语言提供了该平台专属的 API，如浏览器平台，为 JS 提供了 DOM、BOM 操作 API；Node 平台为 JS 提供了文件、网络操作 API
--   运行时（runtime）：为某个语言提供解析引擎，如 Chrome 的 V8，Firefox 的 SpiderMonkey。运行时的作用是解析编程语言，所以其最核心的特点是要执行编程语言标准，如 ECMAScript，所以其于浏览器、Node，以及各自的事件循环都没有关系，这些平台可以选择任一款 JS 的运行时。
+- 运行平台：为某个语言提供了该平台专属的 API，如浏览器平台，为 JS 提供了 DOM、BOM 操作 API；Node 平台为 JS 提供了文件、网络操作 API
+- 运行时（runtime）：为某个语言提供解析引擎，如 Chrome 的 V8，Firefox 的 SpiderMonkey。运行时的作用是解析编程语言，所以其最核心的特点是要执行编程语言标准，如 ECMAScript，所以其于浏览器、Node，以及各自的事件循环都没有关系，这些平台可以选择任一款 JS 的运行时。
 
 当然，Node 的周边生态已经相当繁荣，类似 Java 平台，我们也可以将 Node 理解为一个开发平台：
 
@@ -46,8 +46,8 @@ runtime：    V8              JVM
 
 Node 的核心部分有两部分：
 
--   V8 引擎：由 C++ 语言开发的编译器，提供解析 JavaScript 语言的能力。该引擎由 Google 公司推出，是 Chrome 浏览器内置的 JavaScript 引擎
--   libuv：由 C++ 语言开发的异步 I/O 库，在该库基础上，Node 提供了网络、文件等操作系统 API。该库由 Ryan Dahl 自己为了让 Node 拥有异步 I/O 能力亲自开发。
+- V8 引擎：由 C++ 语言开发的编译器，提供解析 JavaScript 语言的能力。该引擎由 Google 公司推出，是 Chrome 浏览器内置的 JavaScript 引擎
+- libuv：由 C++ 语言开发的异步 I/O 库，在该库基础上，Node 提供了网络、文件等操作系统 API。该库由 Ryan Dahl 自己为了让 Node 拥有异步 I/O 能力亲自开发。
 
 ![Node架构图](../images/node/node-01.png)
 
@@ -61,8 +61,8 @@ Node 本身也是多线程的，但是他与开发平台最大的不同是：在
 
 这样做的意义是：
 
--   在单线程上处理业务代码，避免了传统语言反复切换线程上下文带来的损耗
--   在事件循环机制支持下的，非阻塞 I/O 同样能够应对并发问题
+- 在单线程上处理业务代码，避免了传统语言反复切换线程上下文带来的损耗
+- 在事件循环机制支持下的，非阻塞 I/O 同样能够应对并发问题
 
 ### 1.4 Node 特点-非阻塞 I/O
 
@@ -76,7 +76,7 @@ Node 本身就是以异步 API 为基础，如在运行到读取文件代码时�
 const fs = require('fs')
 
 fs.readFile('/path', function (err, file) {
-    console.log('befroe...')
+  console.log('befroe...')
 })
 
 console.log('after....')
@@ -93,13 +93,13 @@ before...
 
 虽然单线程非阻塞 I/O 的设计给 Node 应用程序开发提供了极大的性能支持，但是也造成了 2 个极端情况：
 
--   异步编程体验极度糟糕：由于异步操作的后续结果依赖回调函数，会造成`回调地狱`
--   单线程带来的阻塞问题：Node 的核心线程一直在循环处理各种事件，该线程一旦要去处理一个耗时操作，就会造成整个 Node 服务暂停。如计算一个效率不高的位运算，那么整个事件循环会因为该运算而停止。
+- 异步编程体验极度糟糕：由于异步操作的后续结果依赖回调函数，会造成`回调地狱`
+- 单线程带来的阻塞问题：Node 的核心线程一直在循环处理各种事件，该线程一旦要去处理一个耗时操作，就会造成整个 Node 服务暂停。如计算一个效率不高的位运算，那么整个事件循环会因为该运算而停止。
 
 但是上述问题在 EcmaScript 的发展下，都得到了很好的解决：
 
--   回调地狱解决：Node7.6 之后引入了 async/await 编程语法糖，是回调地狱问题的终极解决方案。
--   单线程阻塞解决：Node10 之后引入 work thread（工作线程），耗时操作可以交给新开启的工作线程处理。
+- 回调地狱解决：Node7.6 之后引入了 async/await 编程语法糖，是回调地狱问题的终极解决方案。
+- 单线程阻塞解决：Node10 之后引入 work thread（工作线程），耗时操作可以交给新开启的工作线程处理。
 
 ### 1.5 Node 应用领域
 
@@ -107,9 +107,9 @@ before...
 
 Node 目前的主要应用领域：
 
--   **Web 开发**：与 JavaWeb、PyhtonWeb 相同，可以应用于 Web 开发，因为 Web 是最常见的网络 I/O 场景
--   **命令行工具**：目前市面上已经拥有大量的替代 shell 的 Node 开发的命令行工具，最出名的是前端开发领域的构建工具 Webpack
--   **客户端开发**：使用基于 Node 的框架 Electron 可以快速开发跨平台客户端
+- **Web 开发**：与 JavaWeb、PyhtonWeb 相同，可以应用于 Web 开发，因为 Web 是最常见的网络 I/O 场景
+- **命令行工具**：目前市面上已经拥有大量的替代 shell 的 Node 开发的命令行工具，最出名的是前端开发领域的构建工具 Webpack
+- **客户端开发**：使用基于 Node 的框架 Electron 可以快速开发跨平台客户端
 
 ## 二 Node 的安装
 

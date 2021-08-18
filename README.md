@@ -23,9 +23,9 @@ OverNote 系列笔记是我在平时一些学习时间阅读书籍博客、观�
 
 笔者推荐直接阅读新时期的一些必读著作：
 
--   [《CSS 权威指南（第四版）》](https://book.douban.com/subject/33398314/)：经典 CSS 书籍
--   [《深入解析 CSS》](https://book.douban.com/subject/35021471/)：新近较好的 CSS 基础与进阶书籍，有大量工作细节补充
--   [《CSS 揭秘》](https://book.douban.com/subject/26745943/)：重点书籍，CSS 书籍瑰宝！！！
+- [《CSS 权威指南（第四版）》](https://book.douban.com/subject/33398314/)：经典 CSS 书籍
+- [《深入解析 CSS》](https://book.douban.com/subject/35021471/)：新近较好的 CSS 基础与进阶书籍，有大量工作细节补充
+- [《CSS 揭秘》](https://book.douban.com/subject/26745943/)：重点书籍，CSS 书籍瑰宝！！！
 
 其他优秀书籍：
 
@@ -48,11 +48,11 @@ OverNote 系列笔记是我在平时一些学习时间阅读书籍博客、观�
 
 **基础语法与 DOM 编程**：
 
--   [《JavaScript 高级程序设计》第 4 版](https://book.douban.com/subject/35175321/)：红宝书，最好的 JS 入门书籍之一
--   [《JavaScript 语言精髓与编程实践（第 3 版）》](https://book.douban.com/subject/35085910/)：国内非常深入优秀的 JS 书籍
--   [《深入理解 ECMAScript6》](https://book.douban.com/subject/27072230/)：很好的 ES6 书籍
--   [《ECMAScript6 入门》第 3 版](https://book.douban.com/subject/27127030/)：很好的 ES6 书籍
--   [《JavaScript 权威指南》第 7 版](https://book.douban.com/subject/35396470/)：即犀牛书，JS 的百科全书，与红宝书冲突过多
+- [《JavaScript 高级程序设计》第 4 版](https://book.douban.com/subject/35175321/)：红宝书，最好的 JS 入门书籍之一
+- [《JavaScript 语言精髓与编程实践（第 3 版）》](https://book.douban.com/subject/35085910/)：国内非常深入优秀的 JS 书籍
+- [《深入理解 ECMAScript6》](https://book.douban.com/subject/27072230/)：很好的 ES6 书籍
+- [《ECMAScript6 入门》第 3 版](https://book.douban.com/subject/27127030/)：很好的 ES6 书籍
+- [《JavaScript 权威指南》第 7 版](https://book.douban.com/subject/35396470/)：即犀牛书，JS 的百科全书，与红宝书冲突过多
 
 其他优秀书籍，可以不看：
 
@@ -78,9 +78,9 @@ DOM：
 
 **JavaScript 提升**：
 
--   [《你不知道 JavaScript》上卷+中卷](https://book.douban.com/subject/26351021/)：笔者认为目前最好的 JS 深入书籍之一
--   [《JavaScript 忍者秘籍》第 2 版](https://book.douban.com/subject/30143702/)：对函数的讲解：闭包、重载、柯里化化讲解极好
--   [《JavaScript 核心技术开发解密》](https://book.douban.com/subject/30190189/)：短小精悍的介绍了一些重点
+- [《你不知道 JavaScript》上卷+中卷](https://book.douban.com/subject/26351021/)：笔者认为目前最好的 JS 深入书籍之一
+- [《JavaScript 忍者秘籍》第 2 版](https://book.douban.com/subject/30143702/)：对函数的讲解：闭包、重载、柯里化化讲解极好
+- [《JavaScript 核心技术开发解密》](https://book.douban.com/subject/30190189/)：短小精悍的介绍了一些重点
 
 其他优秀书籍：
 
@@ -91,23 +91,23 @@ DOM：
 
 **框架**：
 
--   [《Webpack 实战：入门、进阶与调优》](https://book.douban.com/subject/34430881/)
--   [《深入浅出 Vue.js》](https://book.douban.com/subject/32581281/)
--   [《Vue.js 应用测试》](https://book.douban.com/subject/34998070/)
--   [《深入 React 技术栈》](https://book.douban.com/subject/26918038/)
--   [《深入浅出 React 和 Redux》](https://book.douban.com/subject/27033213/)
--   [《React 状态管理与同构实战》](https://book.douban.com/subject/30290509/)
+- [《Webpack 实战：入门、进阶与调优》](https://book.douban.com/subject/34430881/)
+- [《深入浅出 Vue.js》](https://book.douban.com/subject/32581281/)
+- [《Vue.js 应用测试》](https://book.douban.com/subject/34998070/)
+- [《深入 React 技术栈》](https://book.douban.com/subject/26918038/)
+- [《深入浅出 React 和 Redux》](https://book.douban.com/subject/27033213/)
+- [《React 状态管理与同构实战》](https://book.douban.com/subject/30290509/)
 
 **综合提升**：
 
--   [《现代前端技术解析》](https://book.douban.com/subject/27021790/)：前端目前技术趋势的汇总，适合茶余饭后简单阅读。
--   [《高效前端：Web 高效编程与优化实践》](https://book.douban.com/subject/30170670/)
--   [《高性能 JavaScript》](https://book.douban.com/subject/5362856/)
--   [《Web 性能权威指南》](https://book.douban.com/subject/25856314/)
--   [《了不起的 JavaScript 工程师：从前端到全端高级进阶》](https://book.douban.com/subject/34788884/)
--   [《JavaScript 设计模式与开发实践》](https://book.douban.com/subject/26382780/)
--   [《JavaScript 模式》](https://book.douban.com/subject/11506062/)
--   [《jQuery 技术内幕》](https://book.douban.com/subject/25823709/):虽然 jQeury 现在应用面越来越窄，但其内部的实现思想仍可一看
+- [《现代前端技术解析》](https://book.douban.com/subject/27021790/)：前端目前技术趋势的汇总，适合茶余饭后简单阅读。
+- [《高效前端：Web 高效编程与优化实践》](https://book.douban.com/subject/30170670/)
+- [《高性能 JavaScript》](https://book.douban.com/subject/5362856/)
+- [《Web 性能权威指南》](https://book.douban.com/subject/25856314/)
+- [《了不起的 JavaScript 工程师：从前端到全端高级进阶》](https://book.douban.com/subject/34788884/)
+- [《JavaScript 设计模式与开发实践》](https://book.douban.com/subject/26382780/)
+- [《JavaScript 模式》](https://book.douban.com/subject/11506062/)
+- [《jQuery 技术内幕》](https://book.douban.com/subject/25823709/):虽然 jQeury 现在应用面越来越窄，但其内部的实现思想仍可一看
 
 其他优秀书籍：
 
@@ -117,22 +117,22 @@ DOM：
 
 ### Node
 
--   [overnote 笔记](https://github.com/overnote/over-javascript/tree/master/04-NodeJS)：市面上的入门书籍太过时，还是直接看本笔记吧 o(╯□╰)o
--   [《Node.js 设计模式（第 2 版）》](https://book.douban.com/subject/30159269/)：质内容上乘，但推荐看英文原版
--   [《深入浅出 Node.js》](https://book.douban.com/subject/25768396/)：Node 书籍的集大成者，部分内容已过时，但仍然值得精读
--   [《Node.js:来一打 C++扩展》](https://book.douban.com/subject/30247892/)：适合学习开发扩展使用
+- [overnote 笔记](https://github.com/overnote/over-javascript/tree/master/04-NodeJS)：市面上的入门书籍太过时，还是直接看本笔记吧 o(╯□╰)o
+- [《Node.js 设计模式（第 2 版）》](https://book.douban.com/subject/30159269/)：质内容上乘，但推荐看英文原版
+- [《深入浅出 Node.js》](https://book.douban.com/subject/25768396/)：Node 书籍的集大成者，部分内容已过时，但仍然值得精读
+- [《Node.js:来一打 C++扩展》](https://book.douban.com/subject/30247892/)：适合学习开发扩展使用
 
 ### 桌面开发
 
--   [《Electron 跨平台开发实战》](https://book.douban.com/subject/34838092/)
--   [《Electron 实战：入门、进阶与性能优化》](https://book.douban.com/subject/35069275/)
+- [《Electron 跨平台开发实战》](https://book.douban.com/subject/34838092/)
+- [《Electron 实战：入门、进阶与性能优化》](https://book.douban.com/subject/35069275/)
 
 ### 图形学、canvas 等
 
--   [《HTML5+JavaScript 动画基础》](https://book.douban.com/subject/24744218/)：目前最好的动画书籍
--   [《HTML5 Canvas 核心技术》](https://book.douban.com/subject/24533314/)：目前最好的 canvas 书籍
--   [《WebGL 编程指南》](https://book.douban.com/subject/25909351/)
--   [《Three.js 开发指南》](https://book.douban.com/subject/26349497/)
+- [《HTML5+JavaScript 动画基础》](https://book.douban.com/subject/24744218/)：目前最好的动画书籍
+- [《HTML5 Canvas 核心技术》](https://book.douban.com/subject/24533314/)：目前最好的 canvas 书籍
+- [《WebGL 编程指南》](https://book.douban.com/subject/25909351/)
+- [《Three.js 开发指南》](https://book.douban.com/subject/26349497/)
 
 ## 附
 
@@ -141,11 +141,11 @@ DOM：
 
 **OverNote 分类**：
 
--   [Golang](https://github.com/overnote/over-golang)：详尽的 Go 领域笔记：Go 语法、Go 并发编程、GoWeb 编程、Go 微服务等
--   [大前端](https://github.com/overnote/over-javascript)：包含 JavaScript、Node.js、vue/react、微信开发、Flutter 等大前端技术
--   [数据结构与算法](https://github.com/overnote/over-algorithm)：以 C/Go 实现为主记录数据结构与算法的笔记
--   [服务端架构](https://github.com/overnote/over-server)：分布式与微服务笔记，附 Nginx、Mysql、Redis 等常用服务端技术
--   [Python 与机器学习](https://github.com/overnote/over-python)：Python 相关笔记，完善中
--   [cs](https://github.com/overnote/over-cs)：计算机组成原理、操作系统、计算机网络、编译原理基础学科笔记
--   [大数据](https://github.com/overnote/over-bigdata)：大数据笔记，完善中
--   [Flutter](https://github.com/overnote/over-flutter)：完善中
+- [Golang](https://github.com/overnote/over-golang)：详尽的 Go 领域笔记：Go 语法、Go 并发编程、GoWeb 编程、Go 微服务等
+- [大前端](https://github.com/overnote/over-javascript)：包含 JavaScript、Node.js、vue/react、微信开发、Flutter 等大前端技术
+- [数据结构与算法](https://github.com/overnote/over-algorithm)：以 C/Go 实现为主记录数据结构与算法的笔记
+- [服务端架构](https://github.com/overnote/over-server)：分布式与微服务笔记，附 Nginx、Mysql、Redis 等常用服务端技术
+- [Python 与机器学习](https://github.com/overnote/over-python)：Python 相关笔记，完善中
+- [cs](https://github.com/overnote/over-cs)：计算机组成原理、操作系统、计算机网络、编译原理基础学科笔记
+- [大数据](https://github.com/overnote/over-bigdata)：大数据笔记，完善中
+- [Flutter](https://github.com/overnote/over-flutter)：完善中

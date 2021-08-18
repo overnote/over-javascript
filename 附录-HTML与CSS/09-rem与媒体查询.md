@@ -24,16 +24,16 @@
         max-width：可视区最大宽度
 */
 @media screen and (max-width: 800px) {
-    /* 在屏幕中，且设置最大宽度为800px */
-    body {
-        background-color: pink;
-    }
+  /* 在屏幕中，且设置最大宽度为800px */
+  body {
+    background-color: pink;
+  }
 }
 
 @media screen and (max-width: 500px) {
-    body {
-        background-color: green;
-    }
+  body {
+    background-color: green;
+  }
 }
 ```
 
@@ -43,16 +43,16 @@
 
 px 是一个实际的像素大小，rem（root em）、em 都是相对大小：
 
--   em：相对于当前元素的字体大小，没有则相对于父级。比如父元素的字体为 5px，子元素为 2em，则子元素的字体为 10px。
--   rem：相对于 html 根元素字体大小（默认为 16px）。比如 html 设置了 `font-size=10px`，若某个非根元素设置 `width:2rem;` 换算为 px 就是 20px。
+- em：相对于当前元素的字体大小，没有则相对于父级。比如父元素的字体为 5px，子元素为 2em，则子元素的字体为 10px。
+- rem：相对于 html 根元素字体大小（默认为 16px）。比如 html 设置了 `font-size=10px`，若某个非根元素设置 `width:2rem;` 换算为 px 就是 20px。
 
 当使用 rem 作为单位时，只要 html 元素中的字体大小发生改变，那么整体的布局就会相应发生改变，其适配的核心方案是随着屏幕的变化，字体发生相应变化，界面进行等比例缩放。
 
 rem 可以用来解决布局中一些大小问题，如：
 
--   传统布局、flex 布局中，文字都不能随着屏幕大小变化而变化
--   流式布局和 flex 布局主要针对宽度进行布局，高度不能很好的定义
--   在屏幕发生变化时，元素的宽高不能很好的进行等比例缩放
+- 传统布局、flex 布局中，文字都不能随着屏幕大小变化而变化
+- 流式布局和 flex 布局主要针对宽度进行布局，高度不能很好的定义
+- 在屏幕发生变化时，元素的宽高不能很好的进行等比例缩放
 
 这里就涉及 html 标签的 font-size 大小动态设置问题：
 
@@ -77,47 +77,48 @@ rem 可以用来解决布局中一些大小问题，如：
 
 ```html
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-    }
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 16px;
-    }
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+  }
 
-    .header {
-        background: #ff5555;
-        height: 0.82rem;
-        width: 100%;
-    }
+  .header {
+    background: #ff5555;
+    height: 0.82rem;
+    width: 100%;
+  }
 </style>
 
 <body>
-    <div class="header"></div>
+  <div class="header"></div>
 
-    <script>
-        ;(function (doc, win) {
-            let docElement = doc.documentElement
-            let resizeEvent = 'orientationchange' in window ? 'orientationchange' : 'resize'
+  <script>
+    ;(function (doc, win) {
+      let docElement = doc.documentElement
+      let resizeEvent =
+        'orientationchange' in window ? 'orientationchange' : 'resize'
 
-            let recalc = function () {
-                let clientWidth = docElement.clientWidth
-                if (!clientWidth) return
+      let recalc = function () {
+        let clientWidth = docElement.clientWidth
+        if (!clientWidth) return
 
-                // 设计稿基准为750px
-                if (clientWidth >= 750) {
-                    docElement.style.fontSize = '100px'
-                } else {
-                    docElement.style.fontSize = 100 * (clientWidth / 750) + 'px'
-                }
-            }
+        // 设计稿基准为750px
+        if (clientWidth >= 750) {
+          docElement.style.fontSize = '100px'
+        } else {
+          docElement.style.fontSize = 100 * (clientWidth / 750) + 'px'
+        }
+      }
 
-            if (!doc.addEventListener) return
-            win.addEventListener(resizeEvent, recalc, false)
-            doc.addEventListener('DOMContentLoaded', recalc, false)
-        })(document, window)
-    </script>
+      if (!doc.addEventListener) return
+      win.addEventListener(resizeEvent, recalc, false)
+      doc.addEventListener('DOMContentLoaded', recalc, false)
+    })(document, window)
+  </script>
 </body>
 ```
 
@@ -127,26 +128,26 @@ rem 可以用来解决布局中一些大小问题，如：
 
 ```css
 html {
-    font-size: 50px;
+  font-size: 50px;
 }
 
 @media screen and (min-width: 320px) {
-    html {
-        font-size: 21.3333px;
-    }
+  html {
+    font-size: 21.3333px;
+  }
 }
 
 @media screen and (min-width: 360px) {
-    html {
-        font-size: 24px;
-    }
+  html {
+    font-size: 24px;
+  }
 }
 
 /* iphone678 */
 @media screen and (min-width: 375px) {
-    html {
-        font-size: 25px;
-    }
+  html {
+    font-size: 25px;
+  }
 }
 
 /* 其他需要设置的常见屏幕：384 400 414 424 480 540 720 750 */
@@ -156,7 +157,11 @@ html {
 
 ```html
 /* 针对不同的屏幕尺寸，引入不同的css资源 */
-<link rel="stylesheet" href="./small.css" media="screen and (min-width:320px)" />
+<link
+  rel="stylesheet"
+  href="./small.css"
+  media="screen and (min-width:320px)"
+/>
 <link rel="stylesheet" href="./big.css" media="screen and (min-width:640px)" />
 ```
 
@@ -168,14 +173,14 @@ vw 布局是将屏幕划分为 100 份，即屏幕是 100vw（也即 vw 是 1%�
 
 ```html
 <style>
+  html {
+    font-size: 13.33333333vw;
+  }
+  @media (min-width: 750px) {
     html {
-        font-size: 13.33333333vw;
+      font-size: 100px;
     }
-    @media (min-width: 750px) {
-        html {
-            font-size: 100px;
-        }
-    }
+  }
 </style>
 ```
 
@@ -185,8 +190,8 @@ vw 布局是将屏幕划分为 100 份，即屏幕是 100vw（也即 vw 是 1%�
 
 目前有两种常见的实践方案：
 
--   less+媒体查询+rem：一般采用标准尺寸 750px，页面元素的 rem 值=750 像素下的 px 值/html 文字大小
--   flexible.js+rem：更简便，该库由淘宝推出，有了其支持，不再需要对不同屏幕进行媒体查询。其原理是将当前设备划分为了 10 等份，在不同设备下比例一致。如当前设计稿是 750px，那么只需要把 html 的字体设置为 750px/10 即可，当前元素的 rem 值就是：页面元素的 px 值/75，其他的交给了库自己运算
+- less+媒体查询+rem：一般采用标准尺寸 750px，页面元素的 rem 值=750 像素下的 px 值/html 文字大小
+- flexible.js+rem：更简便，该库由淘宝推出，有了其支持，不再需要对不同屏幕进行媒体查询。其原理是将当前设备划分为了 10 等份，在不同设备下比例一致。如当前设计稿是 750px，那么只需要把 html 的字体设置为 750px/10 即可，当前元素的 rem 值就是：页面元素的 px 值/75，其他的交给了库自己运算
 
 贴士：vscode 插件 cssrem 可以快速帮助运算。
 
@@ -196,16 +201,16 @@ vw 布局是将屏幕划分为 100 份，即屏幕是 100vw（也即 vw 是 1%�
 
 CSS 由于其不支持变量、函数运算等缺陷，在开发时候很不便，目前市面上有三种 CSS 扩展语言（预处理器）：
 
--   Less
--   Sass
--   Stylus
+- Less
+- Sass
+- Stylus
 
 扩展语言并没有减少 CSS 的功能，而是在现有语法基础上，添加一些特性，如：
 
--   变量
--   Mixin
--   运算
--   函数
+- 变量
+- Mixin
+- 运算
+- 函数
 
 Less 中文网址：<http://lesscss.cn>
 
@@ -222,29 +227,29 @@ HTML 页面无法直接使用 Less，需要将 Less 转换为 CSS，VSCode 中�
 @baseColor: yellowgreen;
 // 使用变量
 body {
-    background-color: @baseColor;
+  background-color: @baseColor;
 }
 
 // less 嵌套
 #app {
-    font-size: 14px;
-    .header {
-        height: 200px;
-        .header-left {
-            bacground-color: @baseColor;
-        }
-        .header-right {
-            bacground-color: #fff;
-        }
-
-        a {
-            color: red;
-            // &符号被解析为伪类、伪元素、交集选择器
-            &:hover {
-                color: #fff;
-            }
-        }
+  font-size: 14px;
+  .header {
+    height: 200px;
+    .header-left {
+      bacground-color: @baseColor;
     }
+    .header-right {
+      bacground-color: #fff;
+    }
+
+    a {
+      color: red;
+      // &符号被解析为伪类、伪元素、交集选择器
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
 }
 ```
 
@@ -254,7 +259,7 @@ Less 支持运算： `+ - * /`，运算符中间左右需要使用空格隔开�
 @border:5px + 5;
 
 body {
-    width: 200px - 50;
+  width: 200px - 50;
 }
 ```
 
@@ -270,6 +275,6 @@ less 中运算 rem：
 ```less
 @baseFont: 50;
 .box {
-    height: 100rem / @baseFont; /*高度为100px*/
+  height: 100rem / @baseFont; /*高度为100px*/
 }
 ```

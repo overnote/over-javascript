@@ -9,12 +9,12 @@
 ```html
 <a href="" id="down">下载</a>
 <script>
-    let str = `<div>hello world!</div>`
-    const b = new Blob([str], { type: 'text/html' }) // 将字符串转换为二进制
-    // 点击网页中的a链接实现下载这个二进制文件
-    let down = document.querySelector('#down')
-    down.setAttribute('download', 'index.html') // 设置下载文件名
-    down.href = URL.createObjectURL(b)
+  let str = `<div>hello world!</div>`
+  const b = new Blob([str], { type: 'text/html' }) // 将字符串转换为二进制
+  // 点击网页中的a链接实现下载这个二进制文件
+  let down = document.querySelector('#down')
+  down.setAttribute('download', 'index.html') // 设置下载文件名
+  down.href = URL.createObjectURL(b)
 </script>
 ```
 
@@ -23,19 +23,19 @@
 ```html
 <input type="file" id="fileList" />
 <script>
-    let fileList = document.querySelector('#fileList')
-    fileList.addEventListener('change', e => {
-        let file = e.target.files[0]
-        console.log(file) // 会打印该文件对象的基本信息
+  let fileList = document.querySelector('#fileList')
+  fileList.addEventListener('change', (e) => {
+    let file = e.target.files[0]
+    console.log(file) // 会打印该文件对象的基本信息
 
-        let reader = new FileReader()
-        reader.onload = function () {
-            let img = document.createElement('img') // 假定操作的是一个图片
-            img.src = reader.result
-            document.body.appendChild(img)
-        }
-        reader.readAsDataURL(file) // 这里不推荐该做法，只是演示，推荐的做法是仍然使用 URL.createObjectURL(b)
-    })
+    let reader = new FileReader()
+    reader.onload = function () {
+      let img = document.createElement('img') // 假定操作的是一个图片
+      img.src = reader.result
+      document.body.appendChild(img)
+    }
+    reader.readAsDataURL(file) // 这里不推荐该做法，只是演示，推荐的做法是仍然使用 URL.createObjectURL(b)
+  })
 </script>
 ```
 
@@ -72,8 +72,8 @@ Buffer 在文件 I/O，网络 I/O 中占据很大使用场合，网络传输中�
 const fs = require('fs')
 
 fs.readFile('./demo.html', (err, data) => {
-    console.log(data) // 二进制Buffer类型数据
-    console.log(data.toString()) // html文档转换为了字符串
+  console.log(data) // 二进制Buffer类型数据
+  console.log(data.toString()) // html文档转换为了字符串
 })
 ```
 
@@ -107,9 +107,9 @@ const buf5 = Buffer.from([257, 257.5, -255, '1'])
 const buf6 = Buffer.from('test', 'utf-8')
 
 for (let i = 0; i < buf6.length; i++) {
-    // 此 length 长度和字符串的长度有区别，指 buffer 的 bytes 大小
-    console.log(buf6[i].toString(16)) // buffer[index]: 获取或设置在指定 index 索引未知的 8 位字节内容
-    console.log(String.fromCharCode(bf[i])) // 依次输出 t e s t
+  // 此 length 长度和字符串的长度有区别，指 buffer 的 bytes 大小
+  console.log(buf6[i].toString(16)) // buffer[index]: 获取或设置在指定 index 索引未知的 8 位字节内容
+  console.log(String.fromCharCode(bf[i])) // 依次输出 t e s t
 }
 ```
 
@@ -183,11 +183,11 @@ let rs = fs.createReadStream('./demo.md')
 let data = ''
 
 rs.on('data', function (chunk) {
-    data += chunk
+  data += chunk
 })
 
 rs.end('end', function () {
-    console.log(data)
+  console.log(data)
 })
 ```
 
@@ -214,10 +214,10 @@ console.log('start:', buf.toString('UTF-8', 6, 9)) // 之  e4 b9 8b，e6 89 8b�
 let data = ''
 let rs = fs.createReadStream('./demo.txt', { highWaterMark: 4 })
 rs.on('data', function (chunk) {
-    data += chunk
+  data += chunk
 })
 rs.on('end', function () {
-    console.log('流式读取：', data) // 白�����手骑�����
+  console.log('流式读取：', data) // 白�����手骑�����
 })
 ```
 
@@ -242,12 +242,12 @@ fs.createReadStream('./test.txt', { highWaterMark: 10 })
 let dataArr = []
 
 rs.on('data', function (chunk) {
-    dataArr.push(chunk)
+  dataArr.push(chunk)
 })
 
 rs.on('end', function () {
-    let buf = Buffer.concat(dataArr)
-    console.log(buf.toString())
+  let buf = Buffer.concat(dataArr)
+  console.log(buf.toString())
 })
 ```
 
@@ -255,30 +255,30 @@ Buffer.concat() 方法封装了从小 Buffer 对象向大 Buffer 对象复制过
 
 ```js
 Buffer.concat = function (list, length) {
-    if (!Array.isArray(list)) {
-        throw new Error('Usage: Buffer.concat(list, [length])')
-    }
-    if (list.length === 0) {
-        return new Buffer(0)
-    } else if (list.length === 1) {
-        return list[0]
-    }
+  if (!Array.isArray(list)) {
+    throw new Error('Usage: Buffer.concat(list, [length])')
+  }
+  if (list.length === 0) {
+    return new Buffer(0)
+  } else if (list.length === 1) {
+    return list[0]
+  }
 
-    if (typeof length !== 'number') {
-        length = 0
-        for (let i = 0; i < list.length; i++) {
-            let buf = list[i]
-            length += buf.length
-        }
-    }
-
-    let buffer = new Buffer(length)
-    let pos = 0
+  if (typeof length !== 'number') {
+    length = 0
     for (let i = 0; i < list.length; i++) {
-        let buf = list[i]
-        buf.copy(buffer, pos)
-        pos += buf.length
+      let buf = list[i]
+      length += buf.length
     }
-    return buffer
+  }
+
+  let buffer = new Buffer(length)
+  let pos = 0
+  for (let i = 0; i < list.length; i++) {
+    let buf = list[i]
+    buf.copy(buffer, pos)
+    pos += buf.length
+  }
+  return buffer
 }
 ```

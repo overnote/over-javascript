@@ -6,20 +6,20 @@
 
 路由模式有两种：
 
--   hash 模式：默认的 vue 路由模式，地址为需要有#号："#/home"
--   history 模式
+- hash 模式：默认的 vue 路由模式，地址为需要有#号："#/home"
+- history 模式
 
 如下所示：
 
 ```js
 let router = new VueRouter({
-    mode: 'history', // 默认是hash，此时设置为history模式
-    routes: [
-        {
-            path: '/home',
-            component: Home,
-        },
-    ],
+  mode: 'history', // 默认是hash，此时设置为history模式
+  routes: [
+    {
+      path: '/home',
+      component: Home,
+    },
+  ],
 })
 ```
 
@@ -31,18 +31,18 @@ name 的使用场景一：
 
 ```js
 let router = new VueRouter({
-    routes: [
-        {
-            path: '/home',
-            component: Home,
-            name: 'Home', // 可选项
-            alias: '/index', // 别名：访问/index渲染Home
-        },
-        {
-            path: '*',
-            redirect: { name: 'Home' },
-        },
-    ],
+  routes: [
+    {
+      path: '/home',
+      component: Home,
+      name: 'Home', // 可选项
+      alias: '/index', // 别名：访问/index渲染Home
+    },
+    {
+      path: '*',
+      redirect: { name: 'Home' },
+    },
+  ],
 })
 ```
 
@@ -58,38 +58,38 @@ name 的使用场景二：
 
 ```js
 let router = new VueRouter({
-    routes: [
-        {
-            path: '/home',
-            component: Home,
-            name: 'Home',
-            alias: '/index',
-        },
-        {
-            path: '*', // 配置在最后，当所有路由都未被匹配到则如何处理
-            // component: Error,          // 可以直接调转到错误提示页
+  routes: [
+    {
+      path: '/home',
+      component: Home,
+      name: 'Home',
+      alias: '/index',
+    },
+    {
+      path: '*', // 配置在最后，当所有路由都未被匹配到则如何处理
+      // component: Error,          // 可以直接调转到错误提示页
 
-            // redirect会替换掉浏览器中的地址，alias不会
-            // redirect: '/index'         // 也可以配置重定向
-            // redirect: {path: '/home'} // 重定向方式二
-            // redirect: {name: 'Home'}   // 重定向方式三，name是路由的名字
-            redirect: to => {
-                // 重定向方式四,动态设置重定向的目标；
-                //     console.log(to);       // to目标路由对象，就是访问的路径的路由信息
-                //     return '/home'         // return值也可以写为  {path:} 或 {name:}
+      // redirect会替换掉浏览器中的地址，alias不会
+      // redirect: '/index'         // 也可以配置重定向
+      // redirect: {path: '/home'} // 重定向方式二
+      // redirect: {name: 'Home'}   // 重定向方式三，name是路由的名字
+      redirect: (to) => {
+        // 重定向方式四,动态设置重定向的目标；
+        //     console.log(to);       // to目标路由对象，就是访问的路径的路由信息
+        //     return '/home'         // return值也可以写为  {path:} 或 {name:}
 
-                //除了可以直接return重定向的路由外，还可以通过 path\hash\query 等判断，动态设置重定向的目标路由：
+        //除了可以直接return重定向的路由外，还可以通过 path\hash\query 等判断，动态设置重定向的目标路由：
 
-                if (to.path === '/123') {
-                    return '/home'
-                } else if (to.path === '/456') {
-                    return { path: '/document' }
-                } else {
-                    return { name: 'about' }
-                }
-            },
-        },
-    ],
+        if (to.path === '/123') {
+          return '/home'
+        } else if (to.path === '/456') {
+          return { path: '/document' }
+        } else {
+          return { name: 'about' }
+        }
+      },
+    },
+  ],
 })
 ```
 
@@ -109,23 +109,23 @@ routes: [{ path: '/user/:uid', component: User }]
 
 ```html
 <div id="app">
-    <router-link to="/home">显示home</router-link>
-    <router-view></router-view>
+  <router-link to="/home">显示home</router-link>
+  <router-view></router-view>
 </div>
 ```
 
 ### 1.2 router-link 的其他设置
 
--   to 的书写支持多种形式：`:to="home"`，`:to="{path: '/home'}"`
--   默认的触发组件事件是点击事件，也可以修改为别的事件：添加属性：`event="mouseover"`
--   添加`exact`属性会让样式渲染变为不包含形式（即精确匹配），`<router-link to="about" exact tag="li"> </router-link>`
+- to 的书写支持多种形式：`:to="home"`，`:to="{path: '/home'}"`
+- 默认的触发组件事件是点击事件，也可以修改为别的事件：添加属性：`event="mouseover"`
+- 添加`exact`属性会让样式渲染变为不包含形式（即精确匹配），`<router-link to="about" exact tag="li"> </router-link>`
 
 router-link 默认生成的是 a 标签，也可以生成 div、p 等标签，添加属性：`tag="div"`，此时 div 会自动拥有监听点击事件的功能。很多导航中，使用导航标签既包含图标又包含文字，router-link 可以这样配置：
 
 ```html
 <router-link :to="home" tag="li">
-    <i><img src="" /></i>
-    <span>首页</span>
+  <i><img src="" /></i>
+  <span>首页</span>
 </router-link>
 ```
 
@@ -160,17 +160,17 @@ router-view 是组件渲染的地方。
 
 ```html
 <ul class="nav">
-    <router-link to="/about" tag="li">
-        <a>study</a>
-    </router-link>
+  <router-link to="/about" tag="li">
+    <a>study</a>
+  </router-link>
 
-    <router-link to="/about/work" tag="li">
-        <a>work</a>
-    </router-link>
+  <router-link to="/about/work" tag="li">
+    <a>work</a>
+  </router-link>
 
-    <router-link to="/about/tel" tag="li">
-        <a>tel</a>
-    </router-link>
+  <router-link to="/about/tel" tag="li">
+    <a>tel</a>
+  </router-link>
 </ul>
 ```
 
@@ -209,47 +209,47 @@ path 值前面添加斜杠 '/'，表示相对于根路径。
 
 **router 实例提供的方法：**
 
--   back 回退一步
--   forward 前进一步
--   go 指定 前进/回退 步数
--   push 导航到不同的 url，向 history 栈 添加一个新的记录
--   replace 导航到不同的 url，替换 history 栈 中当前记录
+- back 回退一步
+- forward 前进一步
+- go 指定 前进/回退 步数
+- push 导航到不同的 url，向 history 栈 添加一个新的记录
+- replace 导航到不同的 url，替换 history 栈 中当前记录
 
 ```html
 <div>
-    <input type="button" value="后退" @click="backHandle" />
-    <input type="button" value="前进" @click="forwardHandle" />
-    <input type="button" value="前进/后退 到指定步数" @click="goHandle" />
-    <input type="button" value="控制指定的导航 push" @click="pushHandle" />
-    <input type="button" value="控制指定的导航 replace" @click="replaceHandle" />
+  <input type="button" value="后退" @click="backHandle" />
+  <input type="button" value="前进" @click="forwardHandle" />
+  <input type="button" value="前进/后退 到指定步数" @click="goHandle" />
+  <input type="button" value="控制指定的导航 push" @click="pushHandle" />
+  <input type="button" value="控制指定的导航 replace" @click="replaceHandle" />
 </div>
 
 <script>
-    export default {
-        methods: {
-            backHandle() {
-                this.$router.back()
-            },
-            forwardHandle() {
-                this.$router.forward()
-            },
-            goHandle() {
-                this.$router.go(-2) // 负数是后退，正数是前进，0是刷新当前页面，超过步数的话没有效果；
-            },
-            pushHandle() {
-                this.$router.push('/document') // 目标链接 -- 字符串形式
-                this.$router.push({ path: '/document', query: { uid: '1' } }) // 目标链接 -- 对象形式
-            },
-            replaceHandle() {
-                this.$router.replace('/document') // 目标链接 -- 字符串形式
-                this.$router.replace({ path: '/document', query: { uid: '1' } }) // 目标链接 -- 对象形式
-            },
-        },
-    }
+  export default {
+    methods: {
+      backHandle() {
+        this.$router.back()
+      },
+      forwardHandle() {
+        this.$router.forward()
+      },
+      goHandle() {
+        this.$router.go(-2) // 负数是后退，正数是前进，0是刷新当前页面，超过步数的话没有效果；
+      },
+      pushHandle() {
+        this.$router.push('/document') // 目标链接 -- 字符串形式
+        this.$router.push({ path: '/document', query: { uid: '1' } }) // 目标链接 -- 对象形式
+      },
+      replaceHandle() {
+        this.$router.replace('/document') // 目标链接 -- 字符串形式
+        this.$router.replace({ path: '/document', query: { uid: '1' } }) // 目标链接 -- 对象形式
+      },
+    },
+  }
 </script>
 ```
 
 ## 五 $router 与 $route
 
--   `$router`：VueRouter 的实例，用于路由切换，如`$router.push`
--   `$route`：用于获取当前路由跳转对象中的 name、path、query、params 等
+- `$router`：VueRouter 的实例，用于路由切换，如`$router.push`
+- `$route`：用于获取当前路由跳转对象中的 name、path、query、params 等

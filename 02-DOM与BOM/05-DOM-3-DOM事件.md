@@ -13,7 +13,7 @@ let btn = document.querySelector('#btn')
 
 // btn为事件源、click为事件，绑定的函数为事件处理程序
 btn.onclick = function () {
-    console.log('btn 被点击了')
+  console.log('btn 被点击了')
 }
 ```
 
@@ -42,8 +42,8 @@ mouseenter/mouseleave：只会触发一次。
 
 ```js
 btn.onclick = function () {
-    // btn.disabled = true;
-    this.disabled = true // 作用同上
+  // btn.disabled = true;
+  this.disabled = true // 作用同上
 }
 ```
 
@@ -73,7 +73,7 @@ obj.removeEventListener('click', function () {}, false) // 取消绑定
 // 多次绑定会按照相反的顺序执行！！！
 // 这2个事件只支持事件冒泡！！！
 obj.attachEvent('onclick', function () {
-    console.log(this === window) // true
+  console.log(this === window) // true
 })
 ```
 
@@ -83,33 +83,33 @@ obj.attachEvent('onclick', function () {
 
 ```js
 let EventUtil = {
-    addHandler: function (element, type, handler) {
-        if (element.addEventListener) {
-            element.addEventListener(type, handler, false)
-            return
-        }
+  addHandler: function (element, type, handler) {
+    if (element.addEventListener) {
+      element.addEventListener(type, handler, false)
+      return
+    }
 
-        if (element.attachEvent) {
-            element.attachEvent('on' + type, handler)
-            return
-        }
+    if (element.attachEvent) {
+      element.attachEvent('on' + type, handler)
+      return
+    }
 
-        element['on' + type] = handler
-    },
-    removeHandler: function (element, type, handler) {
-        if (element.removeEventListener) {
-            element.addEventListener(type, handler, false)
-            return
-        }
+    element['on' + type] = handler
+  },
+  removeHandler: function (element, type, handler) {
+    if (element.removeEventListener) {
+      element.addEventListener(type, handler, false)
+      return
+    }
 
-        if (element.detacheEvent) {
-            element.detacheEvent('on' + type, handler)
-            handler.call(element)
-            return
-        }
+    if (element.detacheEvent) {
+      element.detacheEvent('on' + type, handler)
+      handler.call(element)
+      return
+    }
 
-        element['on' + type] = null
-    },
+    element['on' + type] = null
+  },
 }
 ```
 
@@ -120,10 +120,10 @@ let EventUtil = {
 ```html
 <div id="div"></div>
 <script>
-    let div = document.querySelector('#div')
-    div.onclick = function (e) {
-        console.log(e)
-    }
+  let div = document.querySelector('#div')
+  div.onclick = function (e) {
+    console.log(e)
+  }
 </script>
 ```
 
@@ -144,32 +144,32 @@ function(e){
 
 ```js
 const EventUtil = {
-    addHandler: function (element, type, handler) {
-        // 为节省版面，删除了之前的代码
-    },
-    getEvent: function (event) {
-        return event ? event : window.event
-    },
-    getTarget: function (event) {
-        return event.target || event.srcElement
-    },
-    preventDefault: function (event) {
-        if (event.preventDefault) {
-            event.preventDefault()
-        } else {
-            event.returnValue = false
-        }
-    },
-    removeHandler: function (element, type, handler) {
-        // 为节省版面，删除了之前的代码
-    },
-    stopPropagation: function (event) {
-        if (event.stopPropagation) {
-            event.stopPropagation()
-        } else {
-            event.cancelBubble = true
-        }
-    },
+  addHandler: function (element, type, handler) {
+    // 为节省版面，删除了之前的代码
+  },
+  getEvent: function (event) {
+    return event ? event : window.event
+  },
+  getTarget: function (event) {
+    return event.target || event.srcElement
+  },
+  preventDefault: function (event) {
+    if (event.preventDefault) {
+      event.preventDefault()
+    } else {
+      event.returnValue = false
+    }
+  },
+  removeHandler: function (element, type, handler) {
+    // 为节省版面，删除了之前的代码
+  },
+  stopPropagation: function (event) {
+    if (event.stopPropagation) {
+      event.stopPropagation()
+    } else {
+      event.cancelBubble = true
+    }
+  },
 }
 ```
 
@@ -179,18 +179,18 @@ const EventUtil = {
 
 ```html
 <div id="div">
-    <div id="div1"></div>
-    <div id="div2"></div>
+  <div id="div1"></div>
+  <div id="div2"></div>
 </div>
 <script>
-    let div = document.querySelector('#div1')
-    div.onclick = function (e) {
-        e = e || window.event
-        // 本处示例点击div1
-        console.log(e.target === document.querySelector('#div1')) // true
-        console.log(e.currentTarget === this) // true
-        console.log(e.target === this) // false
-    }
+  let div = document.querySelector('#div1')
+  div.onclick = function (e) {
+    e = e || window.event
+    // 本处示例点击div1
+    console.log(e.target === document.querySelector('#div1')) // true
+    console.log(e.currentTarget === this) // true
+    console.log(e.target === this) // false
+  }
 </script>
 ```
 
@@ -198,8 +198,8 @@ const EventUtil = {
 
 当一个事件发生时，浏览器会默认做一些事情，比如点击链接就会发生跳转，这些默认行为也是可以阻止的：
 
--   方式一：适用于 on 方式绑定的事件函数，在事件处理函数中使用 `return false`
--   方式二：如果事件是以 addEventListner 绑定，那么在事件处理函数中添加：`event.preventDefault();`
+- 方式一：适用于 on 方式绑定的事件函数，在事件处理函数中使用 `return false`
+- 方式二：如果事件是以 addEventListner 绑定，那么在事件处理函数中添加：`event.preventDefault();`
 
 注意：只有事件的 cancelable 属性为 true，才能使用 `preventDefault()` 方法取消默认行为。
 
@@ -214,7 +214,23 @@ let btn = document.getElementById('myBtn')
 // 创建 event 对象
 let event = document.createEvent('MouseEvents')
 // 初始化 event 对象
-event.initMouseEvent('click', true, true, document.defaultView, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+event.initMouseEvent(
+  'click',
+  true,
+  true,
+  document.defaultView,
+  0,
+  0,
+  0,
+  0,
+  0,
+  false,
+  false,
+  false,
+  false,
+  0,
+  null
+)
 // 触发事件
 btn.dispatchEvent(event)
 ```
@@ -243,12 +259,21 @@ relatedTarget（对象）：与事件相关的对象。只在模拟 mouseover �
 
 ```js
 let textbox = document.getElementById('myTextbox'),
-    event
+  event
 // 按照 DOM3 的方式创建 event 对象
 if (document.implementation.hasFeature('KeyboardEvents', '3.0')) {
-    event = document.createEvent('KeyboardEvent')
-    // 初始化 event 对象
-    event.initKeyboardEvent('keydown', true, true, document.defaultView, 'a', 0, 'Shift', 0)
+  event = document.createEvent('KeyboardEvent')
+  // 初始化 event 对象
+  event.initKeyboardEvent(
+    'keydown',
+    true,
+    true,
+    document.defaultView,
+    'a',
+    0,
+    'Shift',
+    0
+  )
 }
 // 触发事件
 textbox.dispatchEvent(event)
@@ -281,20 +306,20 @@ DOM3 增加了自定义事件的类型。自定义事件不会触发原生 DOM �
 
 ```js
 let div = document.getElementById('myDiv'),
-    event
+  event
 
-div.addEventListener('myevent', event => {
-    console.log('DIV: ' + event.detail)
+div.addEventListener('myevent', (event) => {
+  console.log('DIV: ' + event.detail)
 })
 
-document.addEventListener('myevent', event => {
-    console.log('DOCUMENT: ' + event.detail)
+document.addEventListener('myevent', (event) => {
+  console.log('DOCUMENT: ' + event.detail)
 })
 
 if (document.implementation.hasFeature('CustomEvents', '3.0')) {
-    event = document.createEvent('CustomEvent')
-    event.initCustomEvent('myevent', true, false, 'Hello world!')
-    div.dispatchEvent(event)
+  event = document.createEvent('CustomEvent')
+  event.initCustomEvent('myevent', true, false, 'Hello world!')
+  div.dispatchEvent(event)
 }
 ```
 

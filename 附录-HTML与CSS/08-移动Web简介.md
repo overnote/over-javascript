@@ -6,8 +6,8 @@
 
 长度单位可以分为：
 
--   绝对长度单位：in 英寸、cm 厘米
--   相对长度单位：px 像素、em、pt
+- 绝对长度单位：in 英寸、cm 厘米
+- 相对长度单位：px 像素、em、pt
 
 px 是最常用的长度单位，此外还有 em、pt（点）、in（英寸）、cm（厘米）等可以作为开发中的长度单位。
 
@@ -15,8 +15,8 @@ px 是最常用的长度单位，此外还有 em、pt（点）、in（英寸）�
 
 移动设备与 PC 设备的最大差异在于屏幕的大小，包含两个关键因素：
 
--   屏幕尺寸：屏幕对角线的长度，一般使用英寸来度量
--   屏幕分辨率：屏幕水平和垂直方向的像素数，一般使用 px 来度量
+- 屏幕尺寸：屏幕对角线的长度，一般使用英寸来度量
+- 屏幕分辨率：屏幕水平和垂直方向的像素数，一般使用 px 来度量
 
 手机屏幕大小如 4.7、5.0、6.0 这些其实是其对角线的长度，单位一般是英寸：
 
@@ -82,17 +82,17 @@ minimum-scale：最小允许缩放比例，一般为1.0
 
 网页如果要在移动端通过浏览器、APP 内嵌页显示，则需要考虑移动端的适配问题。目前有两种选型方案：
 
--   **独立页面**：移动端页面与单独开发，与 PC 端页面脱离关系，是目前的主流方案，如 `m.jd.com`。
--   **响应式页面**：PC 与移动端共用一个网页，根据屏幕宽度进行响应式适配，开发难度较大，适合一些小型订阅网站。
+- **独立页面**：移动端页面与单独开发，与 PC 端页面脱离关系，是目前的主流方案，如 `m.jd.com`。
+- **响应式页面**：PC 与移动端共用一个网页，根据屏幕宽度进行响应式适配，开发难度较大，适合一些小型订阅网站。
 
 ### 2.3 移动端布局方案
 
 移动端浏览器内核一般为 webkit 内核，可以较大范围的使用 C3 技术，所以像弹性布局、媒体查询等技术都可以使用，常见的布局方式的实现有：
 
--   流式布局：即百分比布局，具有一定的局限性，往往与像素方式进行配合。
--   rem 方式：根据字体随着设备大小的改变而改变，设定元素的大小。是当前主流方式之一。
--   flex 布局：使用 flex 伸缩布局，是当前主流的方式之一。
--   栅格布局：适合制作响应式页面。
+- 流式布局：即百分比布局，具有一定的局限性，往往与像素方式进行配合。
+- rem 方式：根据字体随着设备大小的改变而改变，设定元素的大小。是当前主流方式之一。
+- flex 布局：使用 flex 伸缩布局，是当前主流的方式之一。
+- 栅格布局：适合制作响应式页面。
 
 实际开发中，往往是多种实现方式互相配合的。
 
@@ -109,8 +109,8 @@ minimum-scale：最小允许缩放比例，一般为1.0
 ```css
 /* 现在要展示的是50*50的图片，现在需要使用二倍图 100*100，然后手动将其修改为50*50 */
 img {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 ```
 
@@ -144,19 +144,19 @@ background-size: contain;
 ```css
 /* 点击后背景出现高亮，比如 a 标签。设置transparent完成透明， */
 a {
-    -webkit-tap-highligj-color: transparent;
+  -webkit-tap-highligj-color: transparent;
 }
 
 /* iOS上如果要对按钮、输入框等自定义样式，需要额外设置属性 appearance */
 button,
 input {
-    -webkit-appearance: none;
+  -webkit-appearance: none;
 }
 
 /* 禁用长按页面时的弹出菜单 */
 img,
 a {
-    -webkit-touch-callout: none;
+  -webkit-touch-callout: none;
 }
 ```
 
@@ -164,14 +164,14 @@ a {
 
 ```css
 body {
-    margin: 0 auto;
-    width: 100%; /*有了rem，可以设置为 15rem*/
-    /* 在合理的范围内100%宽度 */
-    min-width: 320px;
-    max-width: 640px;
-    font-family: -apple-system, 'Helvetica Neue', sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
-    background-color: #fff;
+  margin: 0 auto;
+  width: 100%; /*有了rem，可以设置为 15rem*/
+  /* 在合理的范围内100%宽度 */
+  min-width: 320px;
+  max-width: 640px;
+  font-family: -apple-system, 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: #fff;
 }
 ```

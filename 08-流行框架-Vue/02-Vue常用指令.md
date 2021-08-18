@@ -34,20 +34,20 @@
 <div id="app" v-text="msg"></div>
 
 <script>
-    new Vue({
-        el: '#app',
-        data: {
-            msg: 'hello ',
-        },
-    })
+  new Vue({
+    el: '#app',
+    data: {
+      msg: 'hello ',
+    },
+  })
 </script>
 ```
 
 注意：
 
--   `v-text`：填充普通文本，不会出现闪烁问题
--   `v-html`：填充 html 文本，能够额外将数据中的标签文本解析出来，所以很容易引起安全问题（XSS 攻击）。
--   `v-pre`：直接填充原始数据，作用是跳过编译，直接显示原始文本。比如要在界面中显示 `{{}}` 这 2 个括号，就需要该指令
+- `v-text`：填充普通文本，不会出现闪烁问题
+- `v-html`：填充 html 文本，能够额外将数据中的标签文本解析出来，所以很容易引起安全问题（XSS 攻击）。
+- `v-pre`：直接填充原始数据，作用是跳过编译，直接显示原始文本。比如要在界面中显示 `{{}}` 这 2 个括号，就需要该指令
 
 ### 2.3 v-bind 绑定属性
 
@@ -55,19 +55,19 @@
 <input type="button" v-bind:title="mytitle" />
 
 <script>
-    new Vue({
-        el: '#app',
-        data: {
-            mytitle: '自定义title',
-        },
-    })
+  new Vue({
+    el: '#app',
+    data: {
+      mytitle: '自定义title',
+    },
+  })
 </script>
 ```
 
 注意：
 
--   v-bind 可以省略，直接写冒号即可 `:title="mytitle"`
--   v-bind 中可以使用表达式： `:title="mytitle + '123'"`
+- v-bind 可以省略，直接写冒号即可 `:title="mytitle"`
+- v-bind 中可以使用表达式： `:title="mytitle + '123'"`
 
 ### 2.4 v-on 绑定事件
 
@@ -75,17 +75,17 @@
 <input type="button" v-on:click="show" />
 
 <script>
-    new Vue({
-        el: '#app',
-        data: {
-            mytitle: '自定义title',
-        },
-        methods: {
-            show: function () {
-                alert(this.mytitle) // this代表new出来的vm实例
-            },
-        },
-    })
+  new Vue({
+    el: '#app',
+    data: {
+      mytitle: '自定义title',
+    },
+    methods: {
+      show: function () {
+        alert(this.mytitle) // this代表new出来的vm实例
+      },
+    },
+  })
 </script>
 ```
 
@@ -104,24 +104,24 @@ v-on 可以缩写为 `@`，绑定的事件函数可以写函数名，也可以�
 
 事件修饰符是可以串联写的：如：`@click.prevent.once="clickHandler"`。常见事件修饰符有：
 
--   stop：阻止冒泡，所有冒泡行为都被阻止
--   self：阻止冒泡，只阻止了自己身上的冒泡行为
--   prevent：阻止默认事件
--   capture：添加事件侦听器时使用事件捕获模式
--   self：只有当事件在该元素本身（非子元素）触发时触发回调
--   once：事件只触发一次
--   一些特殊标签也拥有自身专属的事件修饰符，如按键修饰符：`@keyup.enter=''`等。
+- stop：阻止冒泡，所有冒泡行为都被阻止
+- self：阻止冒泡，只阻止了自己身上的冒泡行为
+- prevent：阻止默认事件
+- capture：添加事件侦听器时使用事件捕获模式
+- self：只有当事件在该元素本身（非子元素）触发时触发回调
+- once：事件只触发一次
+- 一些特殊标签也拥有自身专属的事件修饰符，如按键修饰符：`@keyup.enter=''`等。
 
 Vue 提供的按键修饰符很有限，但是开发者自己也可以自定义：
 
 ```html
 <div id="app">
-    <button @keyup.mubtn="handle"></button>
+  <button @keyup.mubtn="handle"></button>
 </div>
 
 <script>
-    // 全局中使用 Vue类本身
-    Vue.config.keyCodes.mybtn = 65 // 65代表 a 键 按该键触发函数
+  // 全局中使用 Vue类本身
+  Vue.config.keyCodes.mybtn = 65 // 65代表 a 键 按该键触发函数
 </script>
 ```
 
@@ -169,17 +169,17 @@ v-if 每次都会重新创建或移除元素，切换性能消耗高。v-show �
 
 ```html
 <div id="div">
-    <input type="text" v-model="msg" />
-    插值数据：{{msg}}
+  <input type="text" v-model="msg" />
+  插值数据：{{msg}}
 </div>
 
 <script>
-    let app = new Vue({
-        el: '#div',
-        data: {
-            msg: 1,
-        },
-    })
+  let app = new Vue({
+    el: '#div',
+    data: {
+      msg: 1,
+    },
+  })
 </script>
 ```
 
@@ -187,10 +187,10 @@ v-if 每次都会重新创建或移除元素，切换性能消耗高。v-show �
 
 ```html
 <label for="gender">
-    <input type="radio" v-model="gender" />
-    男
-    <input type="radio" v-model="gender" />
-    女
+  <input type="radio" v-model="gender" />
+  男
+  <input type="radio" v-model="gender" />
+  女
 </label>
 ```
 
@@ -198,9 +198,9 @@ v-if 每次都会重新创建或移除元素，切换性能消耗高。v-show �
 
 ```html
 <select v-model="fruit">
-    <option>苹果</option>
-    <option>香蕉</option>
-    <option>葡萄</option>
+  <option>苹果</option>
+  <option>香蕉</option>
+  <option>葡萄</option>
 </select>
 ```
 
@@ -235,16 +235,16 @@ vue 提供了简便的方式，即表单修饰符：
 
 ```html
 <div id="div">
-    <!--自动获取了焦点-->
-    <input type="text" v-focus />
+  <!--自动获取了焦点-->
+  <input type="text" v-focus />
 </div>
 
 <script>
-    Vue.directive('focus', {
-        inserted: function (el) {
-            el.focus()
-        },
-    })
+  Vue.directive('focus', {
+    inserted: function (el) {
+      el.focus()
+    },
+  })
 </script>
 ```
 
@@ -252,15 +252,15 @@ vue 提供了简便的方式，即表单修饰符：
 
 ```html
 <div id="div">
-    <input type="text" v-clorl='{color:"red"}' />
+  <input type="text" v-clorl='{color:"red"}' />
 </div>
 
 <script>
-    Vue.directive('color', {
-        inserted: function (el, binding) {
-            el.style.backgroundColor = binding.value.color
-        },
-    })
+  Vue.directive('color', {
+    inserted: function (el, binding) {
+      el.style.backgroundColor = binding.value.color
+    },
+  })
 </script>
 ```
 
@@ -268,18 +268,18 @@ vue 提供了简便的方式，即表单修饰符：
 
 ```js
 new Vue({
-    //..其他选项对象
-    directive: {
-        color: {
-            bind: function (el, binding) {
-                el.style.backgroundColor = binding.value.color
-            },
-        },
-        focus: {
-            inserted: function (el, binding) {
-                el.style.backgroundColor = binding.value.color
-            },
-        },
+  //..其他选项对象
+  directive: {
+    color: {
+      bind: function (el, binding) {
+        el.style.backgroundColor = binding.value.color
+      },
     },
+    focus: {
+      inserted: function (el, binding) {
+        el.style.backgroundColor = binding.value.color
+      },
+    },
+  },
 })
 ```

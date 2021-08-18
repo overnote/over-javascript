@@ -12,11 +12,11 @@ let cp = require('child_process')
 let childP = cp.fork('./worker.js')
 
 childP.on('message', function (msg) {
-    console.log('master get：', msg)
+  console.log('master get：', msg)
 })
 
 childP.send({
-    name: 'father',
+  name: 'father',
 })
 ```
 
@@ -24,11 +24,11 @@ childP.send({
 
 ```js
 process.on('message', function (msg) {
-    console.log('worker get: ', msg)
+  console.log('worker get: ', msg)
 })
 
 process.send({
-    name: 'child',
+  name: 'child',
 })
 ```
 
@@ -86,11 +86,11 @@ let child = cp.fork('child.js')
 let server = require('net').createServer()
 
 server.on('connection', function (socket) {
-    socket.end('handled by parent\n')
+  socket.end('handled by parent\n')
 })
 
 server.listen(1337, function () {
-    child.send('server', server)
+  child.send('server', server)
 })
 ```
 
@@ -98,11 +98,11 @@ server.listen(1337, function () {
 
 ```js
 process.on('message', function (msg, server) {
-    if (msg === 'server') {
-        server.on('connection', function (socket) {
-            socket.end('handled by child\n')
-        })
-    }
+  if (msg === 'server') {
+    server.on('connection', function (socket) {
+      socket.end('handled by child\n')
+    })
+  }
 })
 ```
 
@@ -132,12 +132,12 @@ let child2 = cp.fork('child.js')
 let server = require('net').createServer()
 
 server.on('connection', function (socket) {
-    socket.end('handled by parent\n')
+  socket.end('handled by parent\n')
 })
 
 server.listen(1337, function () {
-    child1.send('server', server)
-    child2.send('server', server)
+  child1.send('server', server)
+  child2.send('server', server)
 })
 ```
 
@@ -145,11 +145,11 @@ server.listen(1337, function () {
 
 ```js
 process.on('message', function (msg, server) {
-    if (msg === 'server') {
-        server.on('connection', function (socket) {
-            socket.end('handled by child, pid is ' + process.pid + '\n')
-        })
-    }
+  if (msg === 'server') {
+    server.on('connection', function (socket) {
+      socket.end('handled by child, pid is ' + process.pid + '\n')
+    })
+  }
 })
 ```
 
@@ -183,9 +183,9 @@ let child2 = cp.fork('worker.js')
 let server = require('net').createServer()
 
 server.listen(1337, function () {
-    child1.send('server', server)
-    child2.send('server', server)
-    server.close() // 关闭服务
+  child1.send('server', server)
+  child2.send('server', server)
+  server.close() // 关闭服务
 })
 ```
 
@@ -195,16 +195,16 @@ child.js 使用 http 模块处理业务：
 let http = require('http')
 
 let server = http.createServer(function (req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/plain' })
-    res.end('handled by child, pid is ' + process.pid + '\n')
+  res.writeHead(200, { 'Content-Type': 'text/plain' })
+  res.end('handled by child, pid is ' + process.pid + '\n')
 })
 
 process.on('message', function (msg, tcpSocket) {
-    if (msg === 'server') {
-        tcpSocket.on('connection', function (socket) {
-            server.emit('connection', socket)
-        })
-    }
+  if (msg === 'server') {
+    tcpSocket.on('connection', function (socket) {
+      server.emit('connection', socket)
+    })
+  }
 })
 ```
 
@@ -224,11 +224,11 @@ process.on('message', function (msg, tcpSocket) {
 
 目前子进程对象 send()方法可以发送的句柄类型有：
 
--   net.Socket:TCP 套接字
--   net.Server:TCP 服务器，可以是任意建立在 TCP 服务商应用服务
--   net.Native:C++层面的 TCP 套接字或者 IPC 管道
--   dgram.Socket:UDP 套接字
--   dgram.Native:C++层面的 UDP 套接字
+- net.Socket:TCP 套接字
+- net.Server:TCP 服务器，可以是任意建立在 TCP 服务商应用服务
+- net.Native:C++层面的 TCP 套接字或者 IPC 管道
+- dgram.Socket:UDP 套接字
+- dgram.Native:C++层面的 UDP 套接字
 
 send()方法在讲消息发送到 IPC 管道前，将消息组装成 2 个对象，一个是参数 handle，另外一个 message，message 参数如下：
 

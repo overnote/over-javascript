@@ -51,10 +51,10 @@ Streams API 诞生原因：Web 应用如何消费有序的小信息块，而不�
 
 ```js
 async function* ints() {
-    // 每 1000 毫秒生成一个递增的整数
-    for (let i = 0; i < 5; ++i) {
-        yield await new Promise(resolve => setTimeout(resolve, 1000, i))
-    }
+  // 每 1000 毫秒生成一个递增的整数
+  for (let i = 0; i < 5; ++i) {
+    yield await new Promise((resolve) => setTimeout(resolve, 1000, i))
+  }
 }
 ```
 
@@ -62,9 +62,9 @@ async function* ints() {
 
 ```js
 const readableStream = new ReadableStream({
-    start(controller) {
-        console.log(controller) // ReadableStreamDefaultController {}
-    },
+  start(controller) {
+    console.log(controller) // ReadableStreamDefaultController {}
+  },
 })
 ```
 
@@ -72,18 +72,18 @@ const readableStream = new ReadableStream({
 
 ```js
 async function* ints() {
-    // 每 1000 毫秒生成一个递增的整数
-    for (let i = 0; i < 5; ++i) {
-        yield await new Promise(resolve => setTimeout(resolve, 1000, i))
-    }
+  // 每 1000 毫秒生成一个递增的整数
+  for (let i = 0; i < 5; ++i) {
+    yield await new Promise((resolve) => setTimeout(resolve, 1000, i))
+  }
 }
 const readableStream = new ReadableStream({
-    async start(controller) {
-        for await (let chunk of ints()) {
-            controller.enqueue(chunk)
-        }
-        controller.close()
-    },
+  async start(controller) {
+    for await (let chunk of ints()) {
+      controller.enqueue(chunk)
+    }
+    controller.close()
+  },
 })
 ```
 
@@ -93,18 +93,18 @@ const readableStream = new ReadableStream({
 
 ```js
 async function* ints() {
-    // 每 1000 毫秒生成一个递增的整数
-    for (let i = 0; i < 5; ++i) {
-        yield await new Promise(resolve => setTimeout(resolve, 1000, i))
-    }
+  // 每 1000 毫秒生成一个递增的整数
+  for (let i = 0; i < 5; ++i) {
+    yield await new Promise((resolve) => setTimeout(resolve, 1000, i))
+  }
 }
 const readableStream = new ReadableStream({
-    async start(controller) {
-        for await (let chunk of ints()) {
-            controller.enqueue(chunk)
-        }
-        controller.close()
-    },
+  async start(controller) {
+    for await (let chunk of ints()) {
+      controller.enqueue(chunk)
+    }
+    controller.close()
+  },
 })
 
 console.log(readableStream.locked) // false
@@ -116,19 +116,19 @@ console.log(readableStream.locked) // true
 
 ```js
 async function* ints() {
-    // 每 1000 毫秒生成一个递增的整数
-    for (let i = 0; i < 5; ++i) {
-        yield await new Promise(resolve => setTimeout(resolve, 1000, i))
-    }
+  // 每 1000 毫秒生成一个递增的整数
+  for (let i = 0; i < 5; ++i) {
+    yield await new Promise((resolve) => setTimeout(resolve, 1000, i))
+  }
 }
 
 const readableStream = new ReadableStream({
-    async start(controller) {
-        for await (let chunk of ints()) {
-            controller.enqueue(chunk)
-        }
-        controller.close()
-    },
+  async start(controller) {
+    for await (let chunk of ints()) {
+      controller.enqueue(chunk)
+    }
+    controller.close()
+  },
 })
 
 console.log(readableStream.locked) // false
@@ -137,14 +137,14 @@ console.log(readableStream.locked) // true
 
 // 消费者
 ;(async function () {
-    while (true) {
-        const { done, value } = await readableStreamDefaultReader.read()
-        if (done) {
-            break
-        } else {
-            console.log(value)
-        }
+  while (true) {
+    const { done, value } = await readableStreamDefaultReader.read()
+    if (done) {
+      break
+    } else {
+      console.log(value)
     }
+  }
 })()
 // 0
 // 1
@@ -165,10 +165,10 @@ console.log(readableStream.locked) // true
 
 ```js
 async function* ints() {
-    // 每 1000 毫秒生成一个递增的整数
-    for (let i = 0; i < 5; ++i) {
-        yield await new Promise(resolve => setTimeout(resolve, 1000, i))
-    }
+  // 每 1000 毫秒生成一个递增的整数
+  for (let i = 0; i < 5; ++i) {
+    yield await new Promise((resolve) => setTimeout(resolve, 1000, i))
+  }
 }
 ```
 
@@ -176,9 +176,9 @@ async function* ints() {
 
 ```js
 const readableStream = new ReadableStream({
-    write(value) {
-        console.log(value)
-    },
+  write(value) {
+    console.log(value)
+  },
 })
 ```
 
@@ -188,16 +188,16 @@ const readableStream = new ReadableStream({
 
 ```js
 async function* ints() {
-    // 每 1000 毫秒生成一个递增的整数
-    for (let i = 0; i < 5; ++i) {
-        yield await new Promise(resolve => setTimeout(resolve, 1000, i))
-    }
+  // 每 1000 毫秒生成一个递增的整数
+  for (let i = 0; i < 5; ++i) {
+    yield await new Promise((resolve) => setTimeout(resolve, 1000, i))
+  }
 }
 
 const writableStream = new WritableStream({
-    write(value) {
-        console.log(value)
-    },
+  write(value) {
+    console.log(value)
+  },
 })
 
 console.log(writableStream.locked) // false
@@ -209,16 +209,16 @@ console.log(writableStream.locked) // true
 
 ```js
 async function* ints() {
-    // 每 1000 毫秒生成一个递增的整数
-    for (let i = 0; i < 5; ++i) {
-        yield await new Promise(resolve => setTimeout(resolve, 1000, i))
-    }
+  // 每 1000 毫秒生成一个递增的整数
+  for (let i = 0; i < 5; ++i) {
+    yield await new Promise((resolve) => setTimeout(resolve, 1000, i))
+  }
 }
 
 const writableStream = new WritableStream({
-    write(value) {
-        console.log(value)
-    },
+  write(value) {
+    console.log(value)
+  },
 })
 
 console.log(writableStream.locked) // false
@@ -227,11 +227,11 @@ console.log(writableStream.locked) // true
 
 // 生产者
 ;(async function () {
-    for await (let chunk of ints()) {
-        await writableStreamDefaultWriter.ready
-        writableStreamDefaultWriter.write(chunk)
-    }
-    writableStreamDefaultWriter.close()
+  for await (let chunk of ints()) {
+    await writableStreamDefaultWriter.ready
+    writableStreamDefaultWriter.write(chunk)
+  }
+  writableStreamDefaultWriter.close()
 })()
 ```
 
@@ -243,10 +243,10 @@ console.log(writableStream.locked) // true
 
 ```js
 async function* ints() {
-    // 每 1000 毫秒生成一个递增的整数
-    for (let i = 0; i < 5; ++i) {
-        yield await new Promise(resolve => setTimeout(resolve, 1000, i))
-    }
+  // 每 1000 毫秒生成一个递增的整数
+  for (let i = 0; i < 5; ++i) {
+    yield await new Promise((resolve) => setTimeout(resolve, 1000, i))
+  }
 }
 ```
 
@@ -254,15 +254,15 @@ async function* ints() {
 
 ```js
 async function* ints() {
-    // 每 1000 毫秒生成一个递增的整数
-    for (let i = 0; i < 5; ++i) {
-        yield await new Promise(resolve => setTimeout(resolve, 1000, i))
-    }
+  // 每 1000 毫秒生成一个递增的整数
+  for (let i = 0; i < 5; ++i) {
+    yield await new Promise((resolve) => setTimeout(resolve, 1000, i))
+  }
 }
 const { writable, readable } = new TransformStream({
-    transform(chunk, controller) {
-        controller.enqueue(chunk * 2)
-    },
+  transform(chunk, controller) {
+    controller.enqueue(chunk * 2)
+  },
 })
 ```
 
@@ -270,16 +270,16 @@ const { writable, readable } = new TransformStream({
 
 ```js
 async function* ints() {
-    // 每 1000 毫秒生成一个递增的整数
-    for (let i = 0; i < 5; ++i) {
-        yield await new Promise(resolve => setTimeout(resolve, 1000, i))
-    }
+  // 每 1000 毫秒生成一个递增的整数
+  for (let i = 0; i < 5; ++i) {
+    yield await new Promise((resolve) => setTimeout(resolve, 1000, i))
+  }
 }
 
 const { writable, readable } = new TransformStream({
-    transform(chunk, controller) {
-        controller.enqueue(chunk * 2)
-    },
+  transform(chunk, controller) {
+    controller.enqueue(chunk * 2)
+  },
 })
 
 const readableStreamDefaultReader = readable.getReader()
@@ -287,23 +287,23 @@ const writableStreamDefaultWriter = writable.getWriter()
 
 // 消费者
 ;(async function () {
-    while (true) {
-        const { done, value } = await readableStreamDefaultReader.read()
-        if (done) {
-            break
-        } else {
-            console.log(value)
-        }
+  while (true) {
+    const { done, value } = await readableStreamDefaultReader.read()
+    if (done) {
+      break
+    } else {
+      console.log(value)
     }
+  }
 })()
 
 // 生产者
 ;(async function () {
-    for await (let chunk of ints()) {
-        await writableStreamDefaultWriter.ready
-        writableStreamDefaultWriter.write(chunk)
-    }
-    writableStreamDefaultWriter.close()
+  for await (let chunk of ints()) {
+    await writableStreamDefaultWriter.ready
+    writableStreamDefaultWriter.write(chunk)
+  }
+  writableStreamDefaultWriter.close()
 })()
 ```
 
@@ -313,23 +313,23 @@ const writableStreamDefaultWriter = writable.getWriter()
 
 ```js
 async function* ints() {
-    // 每 1000 毫秒生成一个递增的整数
-    for (let i = 0; i < 5; ++i) {
-        yield await new Promise(resolve => setTimeout(resolve, 1000, i))
-    }
+  // 每 1000 毫秒生成一个递增的整数
+  for (let i = 0; i < 5; ++i) {
+    yield await new Promise((resolve) => setTimeout(resolve, 1000, i))
+  }
 }
 const integerStream = new ReadableStream({
-    async start(controller) {
-        for await (let chunk of ints()) {
-            controller.enqueue(chunk)
-        }
-        controller.close()
-    },
+  async start(controller) {
+    for await (let chunk of ints()) {
+      controller.enqueue(chunk)
+    }
+    controller.close()
+  },
 })
 const doublingStream = new TransformStream({
-    transform(chunk, controller) {
-        controller.enqueue(chunk * 2)
-    },
+  transform(chunk, controller) {
+    controller.enqueue(chunk * 2)
+  },
 })
 // 通过管道连接流
 const pipedStream = integerStream.pipeThrough(doublingStream)
@@ -337,14 +337,14 @@ const pipedStream = integerStream.pipeThrough(doublingStream)
 const pipedStreamDefaultReader = pipedStream.getReader()
 // 消费者
 ;(async function () {
-    while (true) {
-        const { done, value } = await pipedStreamDefaultReader.read()
-        if (done) {
-            break
-        } else {
-            console.log(value)
-        }
+  while (true) {
+    const { done, value } = await pipedStreamDefaultReader.read()
+    if (done) {
+      break
+    } else {
+      console.log(value)
     }
+  }
 })()
 // 0
 // 2
@@ -357,23 +357,23 @@ const pipedStreamDefaultReader = pipedStream.getReader()
 
 ```js
 async function* ints() {
-    // 每 1000 毫秒生成一个递增的整数
-    for (let i = 0; i < 5; ++i) {
-        yield await new Promise(resolve => setTimeout(resolve, 1000, i))
-    }
+  // 每 1000 毫秒生成一个递增的整数
+  for (let i = 0; i < 5; ++i) {
+    yield await new Promise((resolve) => setTimeout(resolve, 1000, i))
+  }
 }
 const integerStream = new ReadableStream({
-    async start(controller) {
-        for await (let chunk of ints()) {
-            controller.enqueue(chunk)
-        }
-        controller.close()
-    },
+  async start(controller) {
+    for await (let chunk of ints()) {
+      controller.enqueue(chunk)
+    }
+    controller.close()
+  },
 })
 const writableStream = new WritableStream({
-    write(value) {
-        console.log(value)
-    },
+  write(value) {
+    console.log(value)
+  },
 })
 const pipedStream = integerStream.pipeTo(writableStream)
 // 0

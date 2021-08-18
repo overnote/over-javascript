@@ -4,15 +4,15 @@
 
 Vue3 核心变化：
 
--   **按需编译**：使得 Vue3 项目的体积比 Vue2 小。
--   **Composition API**：即组合式 API，用来更好的组织、复用业务代码，其目的是用来替代 vue2 的生命周期函数
--   **性能提升**：性能相比 Vue2 提升较大
+- **按需编译**：使得 Vue3 项目的体积比 Vue2 小。
+- **Composition API**：即组合式 API，用来更好的组织、复用业务代码，其目的是用来替代 vue2 的生命周期函数
+- **性能提升**：性能相比 Vue2 提升较大
 
 Vue3 其他新特性：
 
--   更先进的组件：Fragment、Teleport、Suspense
--   更好的 TypeScript 支持：Vue3 本身是由 TS 书写，其对 TS 的支持度更高
--   暴露了自定义渲染 API（Custom Renderer API）
+- 更先进的组件：Fragment、Teleport、Suspense
+- 更好的 TypeScript 支持：Vue3 本身是由 TS 书写，其对 TS 的支持度更高
+- 暴露了自定义渲染 API（Custom Renderer API）
 
 ## 二 Vue3 性能提升原因
 
@@ -43,7 +43,11 @@ const _hoisted_1 = _createNode('p', null, '无变动节点1')
 const _hoisted_2 = _createNode('p', null, '无变动节点2')
 
 export function render() {
-    return _hoisted_1, _hoisted_2, _createVNode('p', null, _toDisplayString('有变动节点3'))
+  return (
+    _hoisted_1,
+    _hoisted_2,
+    _createVNode('p', null, _toDisplayString('有变动节点3'))
+  )
 }
 ```
 
@@ -97,18 +101,18 @@ setup 函数是 vue3 组合 API 的入口函数，项目启动时会运行一次
 
 ```html
 <template>
-    <h1>{{ data.count }}</h1>
+  <h1>{{ data.count }}</h1>
 </template>
 
 <script>
-    export default {
-        name: 'HelloWorld',
-        setup() {
-            return {
-                data: { count: 0 },
-            }
-        },
-    }
+  export default {
+    name: 'HelloWorld',
+    setup() {
+      return {
+        data: { count: 0 },
+      }
+    },
+  }
 </script>
 ```
 
@@ -120,40 +124,40 @@ ref() 用来包装基本类型，reactive()用来包装引用类型：
 
 ```html
 <template>
-    <!-- ref包装的数据在模板中有语法糖支持，无需使用 count.value -->
-    <h1>count:{{ count }}</h1>
-    <h2>age:{{ person.age }}</h2>
-    <button @click="updCount">count++</button>
-    <button @click="updAge">age++</button>
+  <!-- ref包装的数据在模板中有语法糖支持，无需使用 count.value -->
+  <h1>count:{{ count }}</h1>
+  <h2>age:{{ person.age }}</h2>
+  <button @click="updCount">count++</button>
+  <button @click="updAge">age++</button>
 </template>
 
 <script>
-    import { reactive, ref } from 'vue'
-    export default {
-        name: 'HelloWorld',
-        setup() {
-            let count = ref(10)
-            let person = reactive({
-                name: 'lisi',
-                age: 30,
-            })
+  import { reactive, ref } from 'vue'
+  export default {
+    name: 'HelloWorld',
+    setup() {
+      let count = ref(10)
+      let person = reactive({
+        name: 'lisi',
+        age: 30,
+      })
 
-            function updCount() {
-                count.value++ // 基本类型被包装为了对象，键名即 value
-            }
+      function updCount() {
+        count.value++ // 基本类型被包装为了对象，键名即 value
+      }
 
-            function updAge() {
-                person.age++
-            }
+      function updAge() {
+        person.age++
+      }
 
-            return {
-                count, // 返回属性
-                person,
-                updCount, // 返回方法
-                updAge,
-            }
-        },
-    }
+      return {
+        count, // 返回属性
+        person,
+        updCount, // 返回方法
+        updAge,
+      }
+    },
+  }
 </script>
 ```
 

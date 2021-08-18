@@ -44,26 +44,26 @@ const electronPath = require('electron')
 const path = require('path')
 
 describe('开始执行界面测试', () => {
-    this.timeout(10000)
+  this.timeout(10000)
 
-    beforeEach(() => {
-        this.app = new Application({
-            path: electronPath, // 导入 electron，其实是导出了本项目下 Electron 的课执行文件安装路径
-            args: [path.join(__dirname, '..')],
-        })
-        return this.app.start()
+  beforeEach(() => {
+    this.app = new Application({
+      path: electronPath, // 导入 electron，其实是导出了本项目下 Electron 的课执行文件安装路径
+      args: [path.join(__dirname, '..')],
     })
+    return this.app.start()
+  })
 
-    afterEach(() => {
-        if (this.app && this.app.isRunning()) {
-            return this.app.stop()
-        }
-    })
+  afterEach(() => {
+    if (this.app && this.app.isRunning()) {
+      return this.app.stop()
+    }
+  })
 
-    it('测试窗口是否启动', async function () {
-        let count = await this.app.client.getWindowCount()
-        assert.equal(count, 1)
-    })
+  it('测试窗口是否启动', async function () {
+    let count = await this.app.client.getWindowCount()
+    assert.equal(count, 1)
+  })
 })
 ```
 
@@ -83,22 +83,22 @@ Electron 应用的性能监控可以直接利用 Chrome 开发者工具中的 Pe
 
 ```js
 ;(async () => {
-    const { contentTracing } = require('electron')
+  const { contentTracing } = require('electron')
 
-    // 启动性能监控
-    await contentTracing.startRecording({
-        include_categories: ['*'],
-    })
+  // 启动性能监控
+  await contentTracing.startRecording({
+    include_categories: ['*'],
+  })
 
-    // 等待运行 6 秒
-    await new Promise(resolve => {
-        setTimeout(resolve, 6000)
-    })
+  // 等待运行 6 秒
+  await new Promise((resolve) => {
+    setTimeout(resolve, 6000)
+  })
 
-    // 关闭监控，查看日志位置
-    const path = await contentTracing.stopRecording()
-    console.log('日志地址：', path)
-    createWindow()
+  // 关闭监控，查看日志位置
+  const path = await contentTracing.stopRecording()
+  console.log('日志地址：', path)
+  createWindow()
 })()
 ```
 
@@ -135,10 +135,10 @@ Electron 应用打包后，就很难直接调试了，这时候可以使用字�
 ```js
 // 启动崩溃服务，会向地址发送 POST 请求
 electron.crashReporter.start({
-    productName: 'demo',
-    submitURL: 'www.demo.com',
-    uploadToServer: true,
-    extra: '',
+  productName: 'demo',
+  submitURL: 'www.demo.com',
+  uploadToServer: true,
+  extra: '',
 })
 
 // 手动发送崩溃原因

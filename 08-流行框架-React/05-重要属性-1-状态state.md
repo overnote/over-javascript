@@ -4,9 +4,9 @@
 
 在 React 组件**实例**上，挂载了三个重要属性：
 
--   **state**：组件的状态
--   **props**：收集组件的外部数据
--   **refs**：操作组件的 DOM
+- **state**：组件的状态
+- **props**：收集组件的外部数据
+- **refs**：操作组件的 DOM
 
 组件的内部数据称为状态（state），**状态的更改能够驱动视图的变更**。不过状态是无法直接更改的，需要借助 API：`setState()`。
 
@@ -16,27 +16,27 @@
 
 ```js
 class Comp extends React.Component {
-    constructor(props) {
-        super(props)
-        // 初始化状态
-        this.state = {
-            name: 'lisi',
-            age: 13,
-        }
+  constructor(props) {
+    super(props)
+    // 初始化状态
+    this.state = {
+      name: 'lisi',
+      age: 13,
     }
-    change = () => {
-        let { age } = this.state
-        age += 1
-        this.setState({ age: age }) // setState 会自动重新 render，而且是异步的！
-    }
-    render() {
-        return (
-            <div>
-                <button onClick={this.change}>点击改变状态</button>
-                <div>组件state数据：{this.state.age}</div>
-            </div>
-        )
-    }
+  }
+  change = () => {
+    let { age } = this.state
+    age += 1
+    this.setState({ age: age }) // setState 会自动重新 render，而且是异步的！
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.change}>点击改变状态</button>
+        <div>组件state数据：{this.state.age}</div>
+      </div>
+    )
+  }
 }
 ```
 
@@ -44,16 +44,16 @@ class Comp extends React.Component {
 
 ```js
 class Comp extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+  constructor(props) {
+    super(props)
+  }
 
-    state = {
-        name: 'lisi',
-        age: 13,
-    }
+  state = {
+    name: 'lisi',
+    age: 13,
+  }
 
-    // 其他代码...
+  // 其他代码...
 }
 ```
 
@@ -67,25 +67,25 @@ class Comp extends React.Component {
 import React from 'react'
 
 export default function Count(props) {
-    // useState 返回是数组，数组的两个元素是：状态值、更新状态的方法
-    let [count, setCount] = React.useState(0)
+  // useState 返回是数组，数组的两个元素是：状态值、更新状态的方法
+  let [count, setCount] = React.useState(0)
 
-    function add() {
-        // 函数式写法：
-        // setCount(count => {
-        //     return count + 1
-        // })
+  function add() {
+    // 函数式写法：
+    // setCount(count => {
+    //     return count + 1
+    // })
 
-        // 常规写法：是参数写法的语法糖
-        setCount(count + 1)
-    }
+    // 常规写法：是参数写法的语法糖
+    setCount(count + 1)
+  }
 
-    return (
-        <div>
-            状态值：{count}
-            <button onClick={add}>点我修改状态</button>
-        </div>
-    )
+  return (
+    <div>
+      状态值：{count}
+      <button onClick={add}>点我修改状态</button>
+    </div>
+  )
 }
 ```
 
@@ -95,26 +95,26 @@ export default function Count(props) {
 import React from 'react'
 
 export default function Count(props) {
-    let [count, setCount] = React.useState(0)
-    let [name, setName] = React.useState('Jack')
+  let [count, setCount] = React.useState(0)
+  let [name, setName] = React.useState('Jack')
 
-    function changeCount() {
-        setCount(count + 1)
-    }
+  function changeCount() {
+    setCount(count + 1)
+  }
 
-    function changeName() {
-        setName('Ross')
-    }
+  function changeName() {
+    setName('Ross')
+  }
 
-    return (
-        <div>
-            count值：{count}
-            <button onClick={changeCount}>点我修改count</button>
-            <hr />
-            name值：{name}
-            <button onClick={changeName}>点我修改name</button>
-        </div>
-    )
+  return (
+    <div>
+      count值：{count}
+      <button onClick={changeCount}>点我修改count</button>
+      <hr />
+      name值：{name}
+      <button onClick={changeName}>点我修改name</button>
+    </div>
+  )
 }
 ```
 
@@ -127,9 +127,9 @@ state = { count: 0 }
 
 // count 增加的触发函数
 add = () => {
-    const { count } = this.state
-    this.setState({ count: count + 1 })
-    console.log('count: ', this.state.count) // 仍然输出0
+  const { count } = this.state
+  this.setState({ count: count + 1 })
+  console.log('count: ', this.state.count) // 仍然输出0
 }
 ```
 
@@ -140,10 +140,10 @@ state = { count: 0 }
 
 // count 增加的触发函数
 add = () => {
-    const { count } = this.state
-    this.setState({ count: count + 1 }, () => {
-        console.log('count: ', this.state.count) // 仍然输出0
-    })
+  const { count } = this.state
+  this.setState({ count: count + 1 }, () => {
+    console.log('count: ', this.state.count) // 仍然输出0
+  })
 }
 ```
 

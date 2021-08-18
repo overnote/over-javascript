@@ -10,9 +10,9 @@
 
 ![mvc](../images/mvvm/mvc01.svg)
 
--   模型 model：对业务数据的抽象，如用户数据包括：uid、name、age 等，在模型层，将其抽象为 User 对象，包含上述字段，并附带基础的增删改查实例操作
--   视图 view：数据的可视化界面。更加面向普通用户，提供给了用户操作界面，即前端开发中最常见的网页
--   控制器 controller：数据流向的控制者，在数据发生变化时更新视图。控制层位于视图层与模型层中间，负责视图层数据的流转，即根据用户在视图层提交的数据，去模型层执行增删改查等操作
+- 模型 model：对业务数据的抽象，如用户数据包括：uid、name、age 等，在模型层，将其抽象为 User 对象，包含上述字段，并附带基础的增删改查实例操作
+- 视图 view：数据的可视化界面。更加面向普通用户，提供给了用户操作界面，即前端开发中最常见的网页
+- 控制器 controller：数据流向的控制者，在数据发生变化时更新视图。控制层位于视图层与模型层中间，负责视图层数据的流转，即根据用户在视图层提交的数据，去模型层执行增删改查等操作
 
 ### 1.2 MVVM
 
@@ -20,9 +20,9 @@ MVC 思想在传统后端领域实现较多，但是在前端，开发者更多�
 
 MVVM 是前端视图层的分层开发思想，将前端视图的结构划分为 M（model）、V（view）、VM（view-model）三层：
 
--   M：数据模型层，这里是接口请求到的数据结果集，封装于 data 对象中，专门用来保存每个页面里单独的数据。
--   V：视图层，vue 实例所控制的元素区域，即每个页面的 html 结构。
--   VM：VM 调度者，即 new 出来的 vue 实例对象，用来解耦视图层与数据模型层。视图层想要获取或保存数据的都需要由 vm 做中间处理。
+- M：数据模型层，这里是接口请求到的数据结果集，封装于 data 对象中，专门用来保存每个页面里单独的数据。
+- V：视图层，vue 实例所控制的元素区域，即每个页面的 html 结构。
+- VM：VM 调度者，即 new 出来的 vue 实例对象，用来解耦视图层与数据模型层。视图层想要获取或保存数据的都需要由 vm 做中间处理。
 
 MVC 里的 C 是控制器，由不同的控制函数/对象，手动实现调度数据与视图转换。MVVM 的 VM 内部往往也存在一个虚拟 DOM，有了该调度者，开发者不再需要反复关注 DOM，只用与后台进行数据交互即可，数据模型的变更能够自动驱动视图的变更。
 
@@ -30,8 +30,8 @@ MVC 里的 C 是控制器，由不同的控制函数/对象，手动实现调度
 
 在 MVVM 中：
 
--   模型层数据发生变动，通过数据绑定形式驱动界面发生改变；
--   界面上的数据发生改变时，通过对 DOM 的监听驱动模型层数据发生改变！
+- 模型层数据发生变动，通过数据绑定形式驱动界面发生改变；
+- 界面上的数据发生改变时，通过对 DOM 的监听驱动模型层数据发生改变！
 
 负责数据绑定、DOM 监听的就是 MVVM 编程的核心 VM 层，Vue/React 框架便是在其内部实现了这些机制。
 
@@ -43,8 +43,8 @@ React 是 Facebook 2013 年开源的一款用于构建前端界面的 JS 库，�
 
 React 与原生 JS 的对比：
 
--   DOM 操作：原生 JS 如果要操作 UI，需要频繁操作 DOM，效率较低。（注意：jQuery 只是优化了 DOM 操作的代码写法而已，本质与原生 JS 一致）。React 框架内部实现了虚拟 DOM，在界面需要更新时，React 会在虚拟 DOM 中比较渲染前后的差异，决定最优更新哪些 DOM，由于虚拟 DOM 是内存数据，对实际 DOM 操作的仅仅是 Diff 部分，因而提高了性能。
--   组件化：原生 JS 组件化方案支持度不足，React 有完善的组件化支持（声明式）
+- DOM 操作：原生 JS 如果要操作 UI，需要频繁操作 DOM，效率较低。（注意：jQuery 只是优化了 DOM 操作的代码写法而已，本质与原生 JS 一致）。React 框架内部实现了虚拟 DOM，在界面需要更新时，React 会在虚拟 DOM 中比较渲染前后的差异，决定最优更新哪些 DOM，由于虚拟 DOM 是内存数据，对实际 DOM 操作的仅仅是 Diff 部分，因而提高了性能。
+- 组件化：原生 JS 组件化方案支持度不足，React 有完善的组件化支持（声明式）
 
 贴士：虚拟 DOM 上绑定的属性极少，更加轻量（因为只有框架自己使用）
 
@@ -69,16 +69,22 @@ React 与 Vue 共同点：
 ```html
 <div id="app"></div>
 <!--React 核心库-->
-<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script
+  src="https://unpkg.com/react@16/umd/react.development.js"
+  crossorigin
+></script>
 <!--React 支持DOM库-->
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script
+  src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+  crossorigin
+></script>
 <!--支持JSX语法-->
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
 <script type="text/babel">
-    const app = document.querySelector('#app')
-    const vdom = <h1>Hello World</h1> // 这里是JSX语法，不需要引号
-    ReactDOM.render(vdom, app)
+  const app = document.querySelector('#app')
+  const vdom = <h1>Hello World</h1> // 这里是JSX语法，不需要引号
+  ReactDOM.render(vdom, app)
 </script>
 ```
 
@@ -110,8 +116,8 @@ npm start
 
 项目源码中：
 
--   index.js：全局入口文件
--   App.js：根组件
+- index.js：全局入口文件
+- App.js：根组件
 
 注意：使用新版脚手架创建的 react 项目默认是不暴露 webpack 配置的，一旦使用其创建时提供的脚本 `yarn eject` 暴露了 webpack 就彻底无法返回。
 
@@ -128,17 +134,17 @@ proxy: 'http://192.168.1.1:5000'
 const proxy = require('http-proxy-middleware')
 
 module.exports = function (app) {
-    app.use(
-        proxy('/api/v1', {
-            target: 'http://192.168.1.1:5001', // 请求转发给谁
-            changeOrigin: true, // 默认为false，为true时服务器的host的端口值为5001，而不是客户端React服务的端口
-            pathRewrite: { '^/api/v1': '/api' }, // 将地址重写
-        }),
-        proxy('/api/v2', {
-            target: 'http://192.168.1.1:5002',
-            changeOrigin: true,
-            pathRewrite: { '^/api/v2': '/api' },
-        })
-    )
+  app.use(
+    proxy('/api/v1', {
+      target: 'http://192.168.1.1:5001', // 请求转发给谁
+      changeOrigin: true, // 默认为false，为true时服务器的host的端口值为5001，而不是客户端React服务的端口
+      pathRewrite: { '^/api/v1': '/api' }, // 将地址重写
+    }),
+    proxy('/api/v2', {
+      target: 'http://192.168.1.1:5002',
+      changeOrigin: true,
+      pathRewrite: { '^/api/v2': '/api' },
+    })
+  )
 }
 ```

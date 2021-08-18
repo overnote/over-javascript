@@ -8,17 +8,17 @@ fetch 是基于 Promise 实现的，示例：
 
 ```js
 fetch('/getDemo')
-    .then(
-        res => {
-            console.log(response.status) // 200
-            console.log(response.statusText) // OK
-            return res.text() // text() 返回Promise实例对象,包装的是真实的后台返回数据
-        },
-        err => {} // 因为服务器没有响应而导致浏览器超时
-    )
-    .then(data => {
-        console.log('请求到的数据：', data)
-    })
+  .then(
+    (res) => {
+      console.log(response.status) // 200
+      console.log(response.statusText) // OK
+      return res.text() // text() 返回Promise实例对象,包装的是真实的后台返回数据
+    },
+    (err) => {} // 因为服务器没有响应而导致浏览器超时
+  )
+  .then((data) => {
+    console.log('请求到的数据：', data)
+  })
 ```
 
 ## 二 基本使用
@@ -32,13 +32,13 @@ fetch()既可以发送数据也可以接收数据。使用 init 对象参数，�
 ```js
 let params = 'foo=bar&baz=qux'
 let headers = new Headers({
-    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+  'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
 })
 
 fetch('/getDemo', {
-    method: 'get', // 必须使用一种方法
-    body: params,
-    headers: headers,
+  method: 'get', // 必须使用一种方法
+  body: params,
+  headers: headers,
 })
 ```
 
@@ -51,9 +51,9 @@ let params = JSON.stringify({ id: 1001 })
 let headers = new Headers({ 'Content-Type': 'application/json' })
 
 fetch('/postDemo', {
-    method: 'post', // 必须使用一种方法
-    body: params,
-    headers: headers,
+  method: 'post', // 必须使用一种方法
+  body: params,
+  headers: headers,
 })
 ```
 
@@ -67,8 +67,8 @@ let imageInput = document.querySelector("input[type='file']")
 imageFormData.append('image', imageInput.files[0])
 
 fetch('/upload', {
-    method: 'POST',
-    body: imageFormData,
+  method: 'POST',
+  body: imageFormData,
 })
 ```
 
@@ -78,12 +78,12 @@ fetch('/upload', {
 let imageFormData = new FormData()
 let imageInput = document.querySelector("input[type='file'][multiple]")
 for (let i = 0; i < imageInput.files.length; ++i) {
-    imageFormData.append('image', imageInput.files[i])
+  imageFormData.append('image', imageInput.files[i])
 }
 
 fetch('/upload', {
-    method: 'POST',
-    body: imageFormData,
+  method: 'POST',
+  body: imageFormData,
 })
 ```
 
@@ -95,10 +95,10 @@ Fetch API 也能提供 Blob 类型的响应，而 Blob 又可以兼容多种浏�
 const imageElement = document.querySelector('img')
 
 fetch('my-image.png')
-    .then(response => response.blob())
-    .then(blob => {
-        imageElement.src = URL.createObjectURL(blob)
-    })
+  .then((response) => response.blob())
+  .then((blob) => {
+    imageElement.src = URL.createObjectURL(blob)
+  })
 ```
 
 ### 2.5 发送跨源请求
@@ -114,7 +114,9 @@ fetch('//cross-origin.com')
 如果代码不需要访问响应，也可以发送 no-cors 请求。此时响应的 type 属性值为 opaque，因此无法读取响应内容。这种方适合发送探测请求或者将响应缓存起来供以后使用。
 
 ```js
-fetch('//cross-origin.com', { method: 'no-cors' }).then(response => console.log(response.type))
+fetch('//cross-origin.com', { method: 'no-cors' }).then((response) =>
+  console.log(response.type)
+)
 // opaque
 ```
 
@@ -157,8 +159,8 @@ Headers 与 Map 类似，支持 get()、 set()、 has()和 delete()等实例方�
 
 ```js
 let seed = [
-    ['foo', 'bar'],
-    ['baz', 'qux'],
+  ['foo', 'bar'],
+  ['baz', 'qux'],
 ]
 let h = new Headers(seed)
 console.log(h.get('foo')) // bar
@@ -315,8 +317,8 @@ statusText：表示 HTTP 响应状态的字符串，默认为空字符串
 
 ```js
 let r = new Response('foobar', {
-    status: 418,
-    statusText: "I'm a teapot",
+  status: 418,
+  statusText: "I'm a teapot",
 })
 console.log(r)
 ```

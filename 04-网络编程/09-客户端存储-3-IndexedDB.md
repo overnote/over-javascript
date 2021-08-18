@@ -18,12 +18,12 @@ IndexedDB 是类似于 MySQL 或 Web SQL Database 的数据库。与传统数据
 
 ```js
 let db,
-    request,
-    version = 1
+  request,
+  version = 1
 request = indexedDB.open('admin', version)
-request.onerror = event => alert(`Failed to open: ${event.target.errorCode}`)
-request.onsuccess = event => {
-    db = event.target.result
+request.onerror = (event) => alert(`Failed to open: ${event.target.errorCode}`)
+request.onsuccess = (event) => {
+  db = event.target.result
 }
 ```
 
@@ -39,10 +39,10 @@ request.onsuccess = event => {
 
 ```js
 let user = {
-    username: '007',
-    firstName: 'James',
-    lastName: 'Bond',
-    password: 'foo',
+  username: '007',
+  firstName: 'James',
+  lastName: 'Bond',
+  password: 'foo',
 }
 ```
 
@@ -53,14 +53,14 @@ let user = {
 下面的代码演示了为存储上述用户信息如何创建对象存储：
 
 ```js
-request.onupgradeneeded = event => {
-    const db = event.target.result
-    // 如果存在则删除当前 objectStore。测试的时候可以这样做
-    // 但这样会在每次执行事件处理程序时删除已有数据
-    if (db.objectStoreNames.contains('users')) {
-        db.deleteObjectStore('users')
-    }
-    db.createObjectStore('users', { keyPath: 'username' })
+request.onupgradeneeded = (event) => {
+  const db = event.target.result
+  // 如果存在则删除当前 objectStore。测试的时候可以这样做
+  // 但这样会在每次执行事件处理程序时删除已有数据
+  if (db.objectStoreNames.contains('users')) {
+    db.deleteObjectStore('users')
+  }
+  db.createObjectStore('users', { keyPath: 'username' })
 }
 ```
 
@@ -98,20 +98,20 @@ let transaction = db.transaction('users', 'readwrite')
 
 ```js
 const transaction = db.transaction('users'),
-    store = transaction.objectStore('users'),
-    request = store.get('007')
-request.onerror = event => alert('Did not get the object!')
-request.onsuccess = event => alert(event.target.result.firstName)
+  store = transaction.objectStore('users'),
+  request = store.get('007')
+request.onerror = (event) => alert('Did not get the object!')
+request.onsuccess = (event) => alert(event.target.result.firstName)
 ```
 
 因为一个事务可以完成任意多个请求，所以事务对象本身也有事件处理程序： onerror 和 oncomplete。这两个事件可以用来获取事务级的状态信息：
 
 ```js
-transaction.onerror = event => {
-    // 整个事务被取消
+transaction.onerror = (event) => {
+  // 整个事务被取消
 }
-transaction.oncomplete = event => {
-    // 整个事务成功完成
+transaction.oncomplete = (event) => {
+  // 整个事务成功完成
 }
 ```
 
@@ -124,7 +124,7 @@ transaction.oncomplete = event => {
 ```js
 // users 是一个用户数据的数组
 for (let user of users) {
-    store.add(user)
+  store.add(user)
 }
 ```
 
@@ -133,16 +133,16 @@ for (let user of users) {
 ```js
 // users 是一个用户数据的数组
 let request,
-    requests = []
+  requests = []
 for (let user of users) {
-    request = store.add(user)
-    request.onerror = () => {
-        // 处理错误
-    }
-    request.onsuccess = () => {
-        // 处理成功
-    }
-    requests.push(request)
+  request = store.add(user)
+  request.onerror = () => {
+    // 处理错误
+  }
+  request.onsuccess = () => {
+    // 处理成功
+  }
+  requests.push(request)
 }
 ```
 
@@ -156,13 +156,13 @@ for (let user of users) {
 
 ```js
 const transaction = db.transaction('users'),
-    store = transaction.objectStore('users'),
-    request = store.openCursor()
-request.onsuccess = event => {
-    // 处理成功
+  store = transaction.objectStore('users'),
+  request = store.openCursor()
+request.onsuccess = (event) => {
+  // 处理成功
 }
-request.onerror = event => {
-    // 处理错误
+request.onerror = (event) => {
+  // 处理错误
 }
 ```
 
@@ -182,12 +182,12 @@ primaryKey：游标使用的键。可能是对象键或索引键
 可以像下面这样取得一个结果：
 
 ```js
-request.onsuccess = event => {
-    const cursor = event.target.result
-    if (cursor) {
-        // 永远要检查
-        console.log(`Key: ${cursor.key}, Value: ${JSON.stringify(cursor.value)}`)
-    }
+request.onsuccess = (event) => {
+  const cursor = event.target.result
+  if (cursor) {
+    // 永远要检查
+    console.log(`Key: ${cursor.key}, Value: ${JSON.stringify(cursor.value)}`)
+  }
 }
 ```
 
@@ -196,44 +196,44 @@ request.onsuccess = event => {
 游标可用于更新个别记录。 update()方法使用指定的对象更新当前游标对应的值。与其他类似操作一样，调用 update()会创建一个新请求，因此如果想知道结果，需要为 onsuccess 和 onerror 赋值：
 
 ```js
-request.onsuccess = event => {
-    const cursor = event.target.result
-    let value, updateRequest
-    if (cursor) {
-        // 永远要检查
-        if (cursor.key == 'foo') {
-            value = cursor.value // 取得当前对象
-            value.password = 'magic!' // 更新密码
-            updateRequest = cursor.update(value) // 请求保存更新后的对象
-            updateRequest.onsuccess = () => {
-                // 处理成功
-            }
-            updateRequest.onerror = () => {
-                // 处理错误
-            }
-        }
+request.onsuccess = (event) => {
+  const cursor = event.target.result
+  let value, updateRequest
+  if (cursor) {
+    // 永远要检查
+    if (cursor.key == 'foo') {
+      value = cursor.value // 取得当前对象
+      value.password = 'magic!' // 更新密码
+      updateRequest = cursor.update(value) // 请求保存更新后的对象
+      updateRequest.onsuccess = () => {
+        // 处理成功
+      }
+      updateRequest.onerror = () => {
+        // 处理错误
+      }
     }
+  }
 }
 ```
 
 也可以调用 delelte()来删除游标位置的记录，与 update()一样，这也会创建一个请求：
 
 ```js
-request.onsuccess = event => {
-    const cursor = event.target.result
-    let value, deleteRequest
-    if (cursor) {
-        // 永远要检查
-        if (cursor.key == 'foo') {
-            deleteRequest = cursor.delete() // 请求删除对象
-            deleteRequest.onsuccess = () => {
-                // 处理成功
-            }
-            deleteRequest.onerror = () => {
-                // 处理错误
-            }
-        }
+request.onsuccess = (event) => {
+  const cursor = event.target.result
+  let value, deleteRequest
+  if (cursor) {
+    // 永远要检查
+    if (cursor.key == 'foo') {
+      deleteRequest = cursor.delete() // 请求删除对象
+      deleteRequest.onsuccess = () => {
+        // 处理成功
+      }
+      deleteRequest.onerror = () => {
+        // 处理错误
+      }
     }
+  }
 }
 ```
 
@@ -248,15 +248,15 @@ advance(count)：游标向前移动指定的 count 条记录。
 这两个方法都会让游标重用相同的请求，因此也会重用 onsuccess 和 onerror 处理程序，直至不再需要。例如，下面的代码迭代了一个对象存储中的所有记录：
 
 ```js
-request.onsuccess = event => {
-    const cursor = event.target.result
-    if (cursor) {
-        // 永远要检查
-        console.log(`Key: ${cursor.key}, Value: ${JSON.stringify(cursor.value)}`)
-        cursor.continue() // 移动到下一条记录
-    } else {
-        console.log('Done!')
-    }
+request.onsuccess = (event) => {
+  const cursor = event.target.result
+  if (cursor) {
+    // 永远要检查
+    console.log(`Key: ${cursor.key}, Value: ${JSON.stringify(cursor.value)}`)
+    cursor.continue() // 移动到下一条记录
+  } else {
+    console.log('Done!')
+  }
 }
 ```
 
@@ -317,17 +317,17 @@ const boundRange = IDBKeyRange.bound('007', 'ace', false, true)
 
 ```js
 const store = db.transaction('users').objectStore('users'),
-    range = IDBKeyRange.bound('007', 'ace')
+  range = IDBKeyRange.bound('007', 'ace')
 request = store.openCursor(range)
 request.onsuccess = function (event) {
-    const cursor = event.target.result
-    if (cursor) {
-        // 永远要检查
-        console.log(`Key: ${cursor.key}, Value: ${JSON.stringify(cursor.value)}`)
-        cursor.continue() // 移动到下一条记录
-    } else {
-        console.log('Done!')
-    }
+  const cursor = event.target.result
+  if (cursor) {
+    // 永远要检查
+    console.log(`Key: ${cursor.key}, Value: ${JSON.stringify(cursor.value)}`)
+    cursor.continue() // 移动到下一条记录
+  } else {
+    console.log('Done!')
+  }
 }
 ```
 
@@ -339,8 +339,8 @@ openCursor()方法实际上可以接收两个参数，第一个是 IDBKeyRange �
 
 ```js
 const transaction = db.transaction('users'),
-    store = transaction.objectStore('users'),
-    request = store.openCursor(null, 'nextunique')
+  store = transaction.objectStore('users'),
+  request = store.openCursor(null, 'nextunique')
 ```
 
 注意， openCursor()的第一个参数是 null，表示默认的键范围是所有值。此游标会遍历对象存储中的记录，从第一条记录开始迭代，到最后一条记录，但会跳过重复的记录。
@@ -349,8 +349,8 @@ const transaction = db.transaction('users'),
 
 ```js
 const transaction = db.transaction('users'),
-    store = transaction.objectStore('users'),
-    request = store.openCursor(null, 'prevunique')
+  store = transaction.objectStore('users'),
+  request = store.openCursor(null, 'prevunique')
 ```
 
 在使用"prev"或"prevunique"打开游标时，每次调用 continue()或 advance()都会在对象存储中反向移动游标。
@@ -361,8 +361,8 @@ const transaction = db.transaction('users'),
 
 ```js
 const transaction = db.transaction('users'),
-    store = transaction.objectStore('users'),
-    index = store.createIndex('username', 'username', { unique: true })
+  store = transaction.objectStore('users'),
+  index = store.createIndex('username', 'username', { unique: true })
 ```
 
 createIndex()的第一个参数是索引的名称，第二个参数是索引属性的名称，第三个参数是包含键 unique 的 options 对象。这个选项中的 unique 应该必须指定，表示这个键是否在所有记录中唯一。因为 username 可能不会重复，所以这个键是唯一的。
@@ -371,19 +371,19 @@ createIndex()返回的是 IDBIndex 实例。在对象存储上调用 index()方�
 
 ```js
 const transaction = db.transaction('users'),
-    store = transaction.objectStore('users'),
-    index = store.index('username')
+  store = transaction.objectStore('users'),
+  index = store.index('username')
 ```
 
 索引非常像对象存储。可以在索引上使用 openCursor()方法创建新游标，这个游标与在对象存储上调用 openCursor()创建的游标完全一样。只是其 result.key 属性中保存的是索引键，而不是主键。下面看一个例子：
 
 ```js
 const transaction = db.transaction('users'),
-    store = transaction.objectStore('users'),
-    index = store.index('username'),
-    request = index.openCursor()
-request.onsuccess = event => {
-    // 处理成功
+  store = transaction.objectStore('users'),
+  index = store.index('username'),
+  request = index.openCursor()
+request.onsuccess = (event) => {
+  // 处理成功
 }
 ```
 
@@ -391,12 +391,12 @@ request.onsuccess = event => {
 
 ```js
 const transaction = db.transaction('users'),
-    store = transaction.objectStore('users'),
-    index = store.index('username'),
-    request = index.openKeyCursor()
-request.onsuccess = event => {
-    // 处理成功
-    // event.result.key 是索引键， event.result.value 是主键
+  store = transaction.objectStore('users'),
+  index = store.index('username'),
+  request = index.openKeyCursor()
+request.onsuccess = (event) => {
+  // 处理成功
+  // event.result.key 是索引键， event.result.value 是主键
 }
 ```
 
@@ -404,14 +404,14 @@ request.onsuccess = event => {
 
 ```js
 const transaction = db.transaction('users'),
-    store = transaction.objectStore('users'),
-    index = store.index('username'),
-    request = index.get('007')
-request.onsuccess = event => {
-    // 处理成功
+  store = transaction.objectStore('users'),
+  index = store.index('username'),
+  request = index.get('007')
+request.onsuccess = (event) => {
+  // 处理成功
 }
-request.onerror = event => {
-    // 处理错误
+request.onerror = (event) => {
+  // 处理错误
 }
 ```
 
@@ -419,12 +419,12 @@ request.onerror = event => {
 
 ```js
 const transaction = db.transaction('users'),
-    store = transaction.objectStore('users'),
-    index = store.index('username'),
-    request = index.getKey('007')
-request.onsuccess = event => {
-    // 处理成功
-    // event.target.result.key 是索引键， event.target.result.value 是主键
+  store = transaction.objectStore('users'),
+  index = store.index('username'),
+  request = index.getKey('007')
+request.onsuccess = (event) => {
+  // 处理成功
+  // event.target.result.key 是索引键， event.target.result.value 是主键
 }
 ```
 
@@ -443,11 +443,13 @@ unique：表示索引键是否唯一的布尔值。
 
 ```js
 const transaction = db.transaction('users'),
-    store = transaction.objectStore('users'),
-    indexNames = store.indexNames
+  store = transaction.objectStore('users'),
+  indexNames = store.indexNames
 for (let indexName in indexNames) {
-    const index = store.index(indexName)
-    console.log(`Index name: ${index.name} KeyPath: ${index.keyPath} Unique: ${index.unique}`)
+  const index = store.index(indexName)
+  console.log(
+    `Index name: ${index.name} KeyPath: ${index.keyPath} Unique: ${index.unique}`
+  )
 }
 ```
 
@@ -472,9 +474,9 @@ IndexedDB 虽然是网页中的异步 API，但仍存在并发问题。如果两
 ```js
 let request, database
 request = indexedDB.open('admin', 1)
-request.onsuccess = event => {
-    database = event.target.result
-    database.onversionchange = () => database.close()
+request.onsuccess = (event) => {
+  database = event.target.result
+  database.onversionchange = () => database.close()
 }
 ```
 

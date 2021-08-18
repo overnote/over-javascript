@@ -32,20 +32,20 @@ XHR.onreadystatechange = function(){
 
 ```js
 function double(value, success, failure) {
-    setTimeout(() => {
-        try {
-            if (typeof value !== 'number') {
-                throw 'Must provide number as first argument'
-            }
-            success(2 * value)
-        } catch (e) {
-            failure(e)
-        }
-    }, 1000)
+  setTimeout(() => {
+    try {
+      if (typeof value !== 'number') {
+        throw 'Must provide number as first argument'
+      }
+      success(2 * value)
+    } catch (e) {
+      failure(e)
+    }
+  }, 1000)
 }
 
-const successCallback = x => console.log(`Success: ${x}`)
-const failureCallback = e => console.log(`Failure: ${e}`)
+const successCallback = (x) => console.log(`Success: ${x}`)
+const failureCallback = (e) => console.log(`Failure: ${e}`)
 double(3, successCallback, failureCallback) // Success: 6（大约 1000 毫秒之后）
 double('b', successCallback, failureCallback) // Failure: Must provide number as first argument（大约 1000 毫秒之后）
 ```
@@ -54,9 +54,9 @@ double('b', successCallback, failureCallback) // Failure: Must provide number as
 
 ECMAScript 提出了三个解决方案：
 
--   Promise 方案：基本的异步解决方案
--   generator 生成器方案：ES6 过渡方案
--   async/await 方案：ES7 提出的方案，配合 Promise 能够完美解决 JS 异步问题
+- Promise 方案：基本的异步解决方案
+- generator 生成器方案：ES6 过渡方案
+- async/await 方案：ES7 提出的方案，配合 Promise 能够完美解决 JS 异步问题
 
 ## 二 期约 Promise 基础
 
@@ -70,25 +70,25 @@ ES6 对市面流行的第三方 Promise/A+规范提供了完善支持，即 Prom
 // 构造函数必须传参，否则报错，一般该参数称为执行器 executor
 // 传入的函数用来修改 Promise 的执行结果，正确与错误的结果分别位于 resolve、reject 中
 let p = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        // 模拟ajax
-        let err = null
-        let data = { uid: 1001 }
-        if (err) {
-            reject('发生了错误: ', null)
-        }
-        resolve(data)
-    })
+  setTimeout(() => {
+    // 模拟ajax
+    let err = null
+    let data = { uid: 1001 }
+    if (err) {
+      reject('发生了错误: ', null)
+    }
+    resolve(data)
+  })
 })
 
 // 实例方法 then：用于处理状态改变后的业务
 p.then(
-    data => {
-        console.log(data)
-    },
-    err => {
-        console.log(err)
-    }
+  (data) => {
+    console.log(data)
+  },
+  (err) => {
+    console.log(err)
+  }
 )
 
 // 输出结果：
@@ -106,18 +106,18 @@ let flag = false
 
 // 在该函数内执行异步操作，并修改结果的状态值。
 let p = new Promise(function (resolve, reject) {
-    if (flag) {
-        resolve('true...')
-    } else {
-        reject('false...')
-    }
+  if (flag) {
+    resolve('true...')
+  } else {
+    reject('false...')
+  }
 })
 
-p.then(data => {
-    console.log('处理成功，结果为：', data)
-}).catch(err => {
-    // 实例方法 catch： 用于捕获错误
-    console.log('处理失败，错误为：', err)
+p.then((data) => {
+  console.log('处理成功，结果为：', data)
+}).catch((err) => {
+  // 实例方法 catch： 用于捕获错误
+  console.log('处理失败，错误为：', err)
 })
 ```
 
@@ -150,11 +150,11 @@ setTimeout(console.log, 0, p8) // Promise <resolved>: foo
 
 每个 Promise 的生命周期都有两个阶段：`未决`，`已决`。在这两个阶段中，Promise 会出现三种状态：
 
--   未决（unsettled）：表示异步操作尚未结束，此时的 Promise 只有挂起态一种状态
--   **待定**（pending）：也即挂起，可以转化为 兑现、拒绝两种状态中的一种。
--   已决（settled）：此时 Promise 已经执行结束，但是可能绵连执行成功、执行失败两种状态
--   **兑现**（fulfilled）：Promise 的异步操作成功结束，调用 resolve()将状态转换为兑现，对应完成处理函数 `fulfillment handler`
--   **拒绝**（rejected）： Promise 的异步操作未成功结束，调用 reject()将状态转换为拒绝，对应错误处理函数 `rejection handler`
+- 未决（unsettled）：表示异步操作尚未结束，此时的 Promise 只有挂起态一种状态
+- **待定**（pending）：也即挂起，可以转化为 兑现、拒绝两种状态中的一种。
+- 已决（settled）：此时 Promise 已经执行结束，但是可能绵连执行成功、执行失败两种状态
+- **兑现**（fulfilled）：Promise 的异步操作成功结束，调用 resolve()将状态转换为兑现，对应完成处理函数 `fulfillment handler`
+- **拒绝**（rejected）： Promise 的异步操作未成功结束，调用 reject()将状态转换为拒绝，对应错误处理函数 `rejection handler`
 
 注意：期约的状态是私有的，无法被 JS 检测到，也无法被修改。
 
@@ -198,7 +198,7 @@ let p2 = Promise.reject()
 ```js
 let p = Promise.reject(3)
 setTimeout(console.log, 0, p) // Promise <rejected>: 3
-p.then(null, e => setTimeout(console.log, 0, e)) // 3
+p.then(null, (e) => setTimeout(console.log, 0, e)) // 3
 ```
 
 注意：Promise.reject()并没有照搬 Promise.resolve()的幂等逻辑。如果给它传一个期约对象，则这个期约会成为它返回的拒绝期约的理由：
@@ -212,16 +212,16 @@ setTimeout(console.log, 0, Promise.reject(Promise.resolve()))
 
 ```js
 try {
-    throw new Error('foo')
+  throw new Error('foo')
 } catch (e) {
-    console.log(e) // Error: foo
+  console.log(e) // Error: foo
 }
 
 // Uncaught (in promise) Error: bar
 try {
-    Promise.reject(new Error('bar'))
+  Promise.reject(new Error('bar'))
 } catch (e) {
-    console.log(e)
+  console.log(e)
 }
 ```
 
@@ -238,26 +238,26 @@ let p = Promise.reject(42)
 // 此时 p 不会被处理
 
 // 一段时间之后
-p.catch(value => {
-    // 现在 p 才被处理
-    console.log(value)
+p.catch((value) => {
+  // 现在 p 才被处理
+  console.log(value)
 })
 ```
 
 在未来的 ES 版本中才会解决该问题，Node 和浏览器目前已经做出了支持：若没有拒绝处理事件，会执行默认的错误处理函数。
 
--   unhandledRejection ： 当一个 Promise 被拒绝，而在事件循环的一个轮次中没有任何拒绝处理函数被调用， 该事件就会被触发；
--   rejectionHandled ： 若一个 Promise 被拒绝，并在事件循环的一个轮次之后有了拒绝处理函数被调用，该事件就会被触发。
+- unhandledRejection ： 当一个 Promise 被拒绝，而在事件循环的一个轮次中没有任何拒绝处理函数被调用， 该事件就会被触发；
+- rejectionHandled ： 若一个 Promise 被拒绝，并在事件循环的一个轮次之后有了拒绝处理函数被调用，该事件就会被触发。
 
 这两个事件旨在共同帮助识别已被拒绝但未曾被处理 promise。
 
 ## 五 Promise 其他 API
 
--   `Promise.all`：参数数组中**所有**Promise 实例的状态为 resolved 或者 rejected 时，调用 then 方法
--   示例：`Promise.all([fn1, fn2])`
--   `Promise.race`：参数数组中**任一**Promise 实例的状态修改，调用 then 方法
--   示例：`Promise.all([fn1, fn2])`
--   示例：`Promise.race([fn1, fn2])`
+- `Promise.all`：参数数组中**所有**Promise 实例的状态为 resolved 或者 rejected 时，调用 then 方法
+- 示例：`Promise.all([fn1, fn2])`
+- `Promise.race`：参数数组中**任一**Promise 实例的状态修改，调用 then 方法
+- 示例：`Promise.all([fn1, fn2])`
+- 示例：`Promise.race([fn1, fn2])`
 
 ## 六 期约的取消、追踪
 
@@ -269,32 +269,32 @@ ES6 的期约不支持取消，可以利用令牌机制取消：
 <button id="start">Start</button>
 <button id="cancel">Cancel</button>
 <script>
-    class CancelToken {
-        constructor(cancelFn) {
-            this.promise = new Promise((resolve, reject) => {
-                cancelFn(() => {
-                    setTimeout(console.log, 0, 'delay cancelled')
-                    resolve()
-                })
-            })
-        }
-    }
-    const startButton = document.querySelector('#start')
-    const cancelButton = document.querySelector('#cancel')
-    function cancellableDelayedResolve(delay) {
-        setTimeout(console.log, 0, 'set delay')
-        return new Promise((resolve, reject) => {
-            const id = setTimeout(() => {
-                setTimeout(console.log, 0, 'delayed resolve')
-                resolve()
-            }, delay)
-            const cancelToken = new CancelToken(cancelCallback =>
-                cancelButton.addEventListener('click', cancelCallback)
-            )
-            cancelToken.promise.then(() => clearTimeout(id))
+  class CancelToken {
+    constructor(cancelFn) {
+      this.promise = new Promise((resolve, reject) => {
+        cancelFn(() => {
+          setTimeout(console.log, 0, 'delay cancelled')
+          resolve()
         })
+      })
     }
-    startButton.addEventListener('click', () => cancellableDelayedResolve(1000))
+  }
+  const startButton = document.querySelector('#start')
+  const cancelButton = document.querySelector('#cancel')
+  function cancellableDelayedResolve(delay) {
+    setTimeout(console.log, 0, 'set delay')
+    return new Promise((resolve, reject) => {
+      const id = setTimeout(() => {
+        setTimeout(console.log, 0, 'delayed resolve')
+        resolve()
+      }, delay)
+      const cancelToken = new CancelToken((cancelCallback) =>
+        cancelButton.addEventListener('click', cancelCallback)
+      )
+      cancelToken.promise.then(() => clearTimeout(id))
+    })
+  }
+  startButton.addEventListener('click', () => cancellableDelayedResolve(1000))
 </script>
 ```
 
@@ -302,30 +302,30 @@ ES6 的期约不支持取消，可以利用令牌机制取消：
 
 ```js
 class TrackablePromise extends Promise {
-    constructor(executor) {
-        const notifyHandlers = []
-        super((resolve, reject) => {
-            return executor(resolve, reject, status => {
-                notifyHandlers.map(handler => handler(status))
-            })
-        })
-        this.notifyHandlers = notifyHandlers
-    }
-    notify(notifyHandler) {
-        this.notifyHandlers.push(notifyHandler)
-        return this
-    }
+  constructor(executor) {
+    const notifyHandlers = []
+    super((resolve, reject) => {
+      return executor(resolve, reject, (status) => {
+        notifyHandlers.map((handler) => handler(status))
+      })
+    })
+    this.notifyHandlers = notifyHandlers
+  }
+  notify(notifyHandler) {
+    this.notifyHandlers.push(notifyHandler)
+    return this
+  }
 }
 
 let p = new TrackablePromise((resolve, reject, notify) => {
-    function countdown(x) {
-        if (x > 0) {
-            notify(`${20 * x}% remaining`)
-            setTimeout(() => countdown(x - 1), 1000)
-        } else {
-            resolve()
-        }
+  function countdown(x) {
+    if (x > 0) {
+      notify(`${20 * x}% remaining`)
+      setTimeout(() => countdown(x - 1), 1000)
+    } else {
+      resolve()
     }
-    countdown(5)
+  }
+  countdown(5)
 })
 ```

@@ -11,28 +11,28 @@ react 组件内可以引用其他组件，这就形成了组件树，下层组�
 ```js
 // 外部向组件内部传递数据示例
 function App() {
-    let data = 'lisi'
-    return (
-        <div className="App">
-            <FuncComp name={data}></FuncComp>
-            <ClasComp name={data}></ClasComp>
-        </div>
-    )
+  let data = 'lisi'
+  return (
+    <div className="App">
+      <FuncComp name={data}></FuncComp>
+      <ClasComp name={data}></ClasComp>
+    </div>
+  )
 }
 
 // 函数组件接收数据
 function FuncComp(props) {
-    return <div>传递过来的数据：{props.name}</div>
+  return <div>传递过来的数据：{props.name}</div>
 }
 
 // 类组件接收数据
 class ClaComp extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-    render() {
-        return <div>组件props数据：{this.props.name}</div>
-    }
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return <div>组件props数据：{this.props.name}</div>
+  }
 }
 ```
 
@@ -66,12 +66,12 @@ ClaComp。defaultProps = {
 
 ```js
 function FuncComp(props) {
-    // 若参数props无name属性，则显示默认属性值
-    return <div>默认数据：{props.name}</div>
+  // 若参数props无name属性，则显示默认属性值
+  return <div>默认数据：{props.name}</div>
 }
 
 FuncComp.defaultProps = {
-    name: 'zs',
+  name: 'zs',
 }
 ```
 
@@ -88,12 +88,12 @@ props.name = props.name || '默认值'
 ```js
 // 传递 name、age
 let data = {
-    name: 'lisi',
-    age: 30,
+  name: 'lisi',
+  age: 30,
 }
 
 // 传递方式
-<Comp {...data}></Comp>
+;<Comp {...data}></Comp>
 ```
 
 ### 3.3 props 验证
@@ -113,22 +113,22 @@ import PropTypes from 'prop-types'
 
 // 类组件属性验证示例
 class Comp extends React.Component {
-    // 类型限制
-    static propTypes = {
-        name: PropTypes.string,
-        age: PropTypes.number,
-        info: PropTypes.func,
-    }
+  // 类型限制
+  static propTypes = {
+    name: PropTypes.string,
+    age: PropTypes.number,
+    info: PropTypes.func,
+  }
 }
 
 // 函数组件属性验证示例
 function FuncComp(props) {
-    return <div>默认数据：{props.name}</div>
+  return <div>默认数据：{props.name}</div>
 }
 FuncComp.propTypes = {
-    name: PropTypes.string,
-    age: PropTypes.number,
-    info: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  info: PropTypes.func,
 }
 ```
 

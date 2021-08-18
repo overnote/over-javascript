@@ -8,17 +8,17 @@
 
 一般节点至少拥有三个基本属性：
 
--   nodeType：节点类型，是个整数值，为 1 是元素节点，为 2 是属性节点，为 3 是文本节点（文字、空格、换行等）
--   nodeName：节点名称
--   nodeValue：节点值
+- nodeType：节点类型，是个整数值，为 1 是元素节点，为 2 是属性节点，为 3 是文本节点（文字、空格、换行等）
+- nodeName：节点名称
+- nodeValue：节点值
 
 ```html
 <div id="div">111</div>
 <script>
-    let div = document.getElementById('div')
-    console.log(div.nodeType) // 1
-    console.log(div.nodeName) // DIV，元素标签名
-    console.log(div.nodeValue) // null，始终为null
+  let div = document.getElementById('div')
+  console.log(div.nodeType) // 1
+  console.log(div.nodeName) // DIV，元素标签名
+  console.log(div.nodeValue) // null，始终为null
 </script>
 ```
 
@@ -43,14 +43,14 @@ Node.NOTATION_NODE(12)
 
 ```js
 if (someNode.nodeType == Node.ELEMENT_NODE) {
-    //在 IE 中无效
-    alert('Node is an element.')
+  //在 IE 中无效
+  alert('Node is an element.')
 }
 
 // 推荐写法
 if (someNode.nodeType == 1) {
-    //适用于所有浏览器
-    alert('Node is an element.')
+  //适用于所有浏览器
+  alert('Node is an element.')
 }
 ```
 
@@ -82,9 +82,9 @@ nextSibling 属性也是 null，如下所示：
 
 ```js
 if (someNode.nextSibling === null) {
-    alert("Last node in the parent's childNodes list.")
+  alert("Last node in the parent's childNodes list.")
 } else if (someNode.previousSibling === null) {
-    alert("First node in the parent's childNodes list.")
+  alert("First node in the parent's childNodes list.")
 }
 ```
 
@@ -100,9 +100,9 @@ Document 是 HTML 页面对象 HTMLDocument 的实例，挂载在 window 对象�
 
 `document.doctype`可以访问`<!DOCTYPE>`标签，但是该节点在不同浏览器中表现不同：
 
--   IE8：会将该子节点错误的解释为一个注释并把它当作 Comment 节点，document.doctype 的值始终为 null。
--   IE9+/Firefox：被作为文档的第一个子节点
--   Chrome/Safari：不会被作为文档的子节点
+- IE8：会将该子节点错误的解释为一个注释并把它当作 Comment 节点，document.doctype 的值始终为 null。
+- IE9+/Firefox：被作为文档的第一个子节点
+- Chrome/Safari：不会被作为文档的子节点
 
 ### 2.2 Element 类型
 
@@ -218,10 +218,10 @@ element.getAttribute('backgroundColor') // 获取背景色
 ```html
 <div index="a" id="box">111</div>
 <script>
-    let box = document.querySelector('#box')
-    console.log(box.getAttribute('index')) // a
-    box.setAttribute('index', 'b')
-    console.log(box.getAttribute('index')) // b
+  let box = document.querySelector('#box')
+  console.log(box.getAttribute('index')) // a
+  box.setAttribute('index', 'b')
+  console.log(box.getAttribute('index')) // b
 </script>
 ```
 
@@ -230,9 +230,9 @@ element.getAttribute('backgroundColor') // 获取背景色
 ```html
 <div data-index="a" id="box">111</div>
 <script>
-    let box = document.querySelector('#box')
-    // dataset 只能获取 data- 开头的自定义属性，所以 getAttribute 的兼容性更好
-    console.log(box.dataset.index) // 输出 a。也可以使用  dataset["index"]
+  let box = document.querySelector('#box')
+  // dataset 只能获取 data- 开头的自定义属性，所以 getAttribute 的兼容性更好
+  console.log(box.dataset.index) // 输出 a。也可以使用  dataset["index"]
 </script>
 ```
 
@@ -281,15 +281,15 @@ DOM2 Traversal and Range 模块定义了两个类型用于辅助顺序遍历 DOM
 ```html
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Example</title>
-    </head>
-    <body>
-        <p>
-            <b>Hello</b>
-            world!
-        </p>
-    </body>
+  <head>
+    <title>Example</title>
+  </head>
+  <body>
+    <p>
+      <b>Hello</b>
+      world!
+    </p>
+  </body>
 </html>
 ```
 
@@ -303,36 +303,36 @@ DOM2 Traversal and Range 模块定义了两个类型用于辅助顺序遍历 DOM
 
 ```html
 <html>
-    <body>
-        <div id="div">
-            <p>
-                <b>Hello</b>
-                world!
-            </p>
-            <ul>
-                <li>List item 1</li>
-                <li>List item 2</li>
-                <li>List item 3</li>
-            </ul>
-        </div>
+  <body>
+    <div id="div">
+      <p>
+        <b>Hello</b>
+        world!
+      </p>
+      <ul>
+        <li>List item 1</li>
+        <li>List item 2</li>
+        <li>List item 3</li>
+      </ul>
+    </div>
 
-        <script>
-            let div = document.getElementById('div')
+    <script>
+      let div = document.getElementById('div')
 
-            let iterator = document.createNodeIterator(
-                div, // 从哪个节点开始遍历
-                NodeFilter.SHOW_ELEMENT, // whatToShow 参数：应该访问哪些节点
-                null, // filter参数：是否接收或跳过特定节点
-                false // 是否扩展实体引用，在HTML中无效！
-            )
+      let iterator = document.createNodeIterator(
+        div, // 从哪个节点开始遍历
+        NodeFilter.SHOW_ELEMENT, // whatToShow 参数：应该访问哪些节点
+        null, // filter参数：是否接收或跳过特定节点
+        false // 是否扩展实体引用，在HTML中无效！
+      )
 
-            let node = iterator.nextNode()
-            while (node !== null) {
-                console.log(node.tagName) // 输出标签名
-                node = iterator.nextNode()
-            }
-        </script>
-    </body>
+      let node = iterator.nextNode()
+      while (node !== null) {
+        console.log(node.tagName) // 输出标签名
+        node = iterator.nextNode()
+      }
+    </script>
+  </body>
 </html>
 ```
 
@@ -361,21 +361,35 @@ let whatToShow = NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT
 ```js
 // 创建过滤器方式一
 let filter1 = {
-    acceptNode(node) {
-        return node.tagName.toLowerCase() == 'p' ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP
-    },
+  acceptNode(node) {
+    return node.tagName.toLowerCase() == 'p'
+      ? NodeFilter.FILTER_ACCEPT
+      : NodeFilter.FILTER_SKIP
+  },
 }
 
 // 创建过滤器方式二
 let filter2 = function (node) {
-    return node.tagName.toLowerCase() == 'p' ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP
+  return node.tagName.toLowerCase() == 'p'
+    ? NodeFilter.FILTER_ACCEPT
+    : NodeFilter.FILTER_SKIP
 }
 
 // 创建迭代器
-let iterator1 = document.createNodeIterator(root, NodeFilter.SHOW_ELEMENT, filter, false)
+let iterator1 = document.createNodeIterator(
+  root,
+  NodeFilter.SHOW_ELEMENT,
+  filter,
+  false
+)
 
 // 创建一个简单的遍历所有节点的迭代器
-let iterator2 = document.createNodeIterator(document, NodeFilter.SHOW_ALL, null, false)
+let iterator2 = document.createNodeIterator(
+  document,
+  NodeFilter.SHOW_ALL,
+  null,
+  false
+)
 ```
 
 ### 4.2 TreeWalker
@@ -386,14 +400,21 @@ TreeWalker 是 NodeIterator 的高级版，额外添加了遍历的方向，示�
 let div = document.getElementById('div1')
 
 let filter = function (node) {
-    return node.tagName.toLowerCase() == 'li' ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP
+  return node.tagName.toLowerCase() == 'li'
+    ? NodeFilter.FILTER_ACCEPT
+    : NodeFilter.FILTER_SKIP
 }
 
-let walker = document.createTreeWalker(div, NodeFilter.SHOW_ELEMENT, filter, false)
+let walker = document.createTreeWalker(
+  div,
+  NodeFilter.SHOW_ELEMENT,
+  filter,
+  false
+)
 let node = iterator.nextNode()
 while (node !== null) {
-    console.log(node.tagName) // 输出标签名
-    node = iterator.nextNode()
+  console.log(node.tagName) // 输出标签名
+  node = iterator.nextNode()
 }
 ```
 
@@ -415,13 +436,18 @@ TreeWalker 真正的威力是可以在 DOM 结构中四处游走。如果不使�
 
 ```js
 let div = document.getElementById('div1')
-let walker = document.createTreeWalker(div, NodeFilter.SHOW_ELEMENT, null, false)
+let walker = document.createTreeWalker(
+  div,
+  NodeFilter.SHOW_ELEMENT,
+  null,
+  false
+)
 walker.firstChild() // 前往<p>
 walker.nextSibling() // 前往<ul>
 let node = walker.firstChild() // 前往第一个<li>
 while (node !== null) {
-    console.log(node.tagName)
-    node = walker.nextSibling()
+  console.log(node.tagName)
+  node = walker.nextSibling()
 }
 ```
 

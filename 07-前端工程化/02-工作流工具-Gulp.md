@@ -4,9 +4,9 @@
 
 Gulp 的作用：
 
--   对 HTML/CSS/JS 等文件进行压缩合并
--   语法转换：es6 转换为 es5，less 转换为 css
--   公共文件抽取
+- 对 HTML/CSS/JS 等文件进行压缩合并
+- 语法转换：es6 转换为 es5，less 转换为 css
+- 公共文件抽取
 
 Gulp 也提供了大量的插件来完成更多、更复杂的任务。
 
@@ -37,9 +37,10 @@ npx gulp default // 由于default是默认任务，这里可以省略
 const gulp = reuqire('gulp')
 
 gulp.task('copyJS', function () {
-    // 定义一个任务，名称为 copyJS
-    gulp.src('src/js/**/*.js') // src()获取资源路径
-        .pipe(gulp.dest('dist/')) // pipe()将资源传输给插件。dest()资源构建完毕后自动创建的路径
+  // 定义一个任务，名称为 copyJS
+  gulp
+    .src('src/js/**/*.js') // src()获取资源路径
+    .pipe(gulp.dest('dist/')) // pipe()将资源传输给插件。dest()资源构建完毕后自动创建的路径
 })
 ```
 
@@ -57,18 +58,18 @@ npx gulp copyJS
 
 ### 2.3 Gulp 常见 API
 
--   gulp.src()：获取资源文件
--   gulp.dest()：输出资源文件
--   gulp.task()：建立 gulp 任务
--   gulp.watch()：监控文件变化
--   gulp.pipe()：导出获取到的资源
+- gulp.src()：获取资源文件
+- gulp.dest()：输出资源文件
+- gulp.task()：建立 gulp 任务
+- gulp.watch()：监控文件变化
+- gulp.pipe()：导出获取到的资源
 
 watch 用于监视文件的改变，自动构建：
 
 ```js
 gulp.task('js', function () {
-    //src下文件发生改变，自动执行default任务
-    gulp.watch('src/*', ['default'])
+  //src下文件发生改变，自动执行default任务
+  gulp.watch('src/*', ['default'])
 })
 ```
 
@@ -89,9 +90,10 @@ const gulp = require('gulp')
 const less = require('gulp-less')
 
 gulp.task('less', function () {
-    gulp.src('src/**/*.less')
-        .pipe(less()) // 调用插件
-        .pipe(gulp.dest('dist/'))
+  gulp
+    .src('src/**/*.less')
+    .pipe(less()) // 调用插件
+    .pipe(gulp.dest('dist/'))
 })
 ```
 

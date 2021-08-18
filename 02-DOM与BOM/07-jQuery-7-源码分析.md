@@ -13,7 +13,7 @@ jQuery 是 JS 的第三方库，库在 JS 中可以理解为一个单独的模�
 ```js
 // 基于jQuery1.X版本
 ;(function () {
-    // do somethin
+  // do somethin
 })(window)
 ```
 
@@ -21,11 +21,11 @@ jQuery 与\$两个变量可以直接调用，说明他们被挂载到了全局�
 
 ```js
 ;(function (w) {
-    var jQuery = function () {}
+  var jQuery = function () {}
 
-    // do something
+  // do something
 
-    w.$ = w.jQuery = jQuery
+  w.$ = w.jQuery = jQuery
 })(window)
 ```
 
@@ -73,33 +73,33 @@ jQuery 扩展插件的实现：
 
 ```js
 ;(function (w) {
-    // ....
+  // ....
 
-    jQuery.extend = jQuery.fn.extend = function (options) {
-        var target = this // 根据参数进行判断，这里设定只有一种
-        var copy
-        for (v in options) {
-            copy = options[name]
-            target[name] = copy
-        }
-        return target
+  jQuery.extend = jQuery.fn.extend = function (options) {
+    var target = this // 根据参数进行判断，这里设定只有一种
+    var copy
+    for (v in options) {
+      copy = options[name]
+      target[name] = copy
     }
+    return target
+  }
 
-    // 添加静态方法：也是工具方法
-    jQuery.extend({
-        isFunction: function () {},
-        type: function () {},
-        ajax: function () {},
-        //....
-    })
+  // 添加静态方法：也是工具方法
+  jQuery.extend({
+    isFunction: function () {},
+    type: function () {},
+    ajax: function () {},
+    //....
+  })
 
-    // 添加原型方法
-    jQuery.fn.extend({
-        val: function () {},
-        css: function () {},
-        // ...
-    })
+  // 添加原型方法
+  jQuery.fn.extend({
+    val: function () {},
+    css: function () {},
+    // ...
+  })
 
-    w.jQuery = w.$ = jQuery
+  w.jQuery = w.$ = jQuery
 })(window)
 ```

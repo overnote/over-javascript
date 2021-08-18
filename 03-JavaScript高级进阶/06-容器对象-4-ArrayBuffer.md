@@ -29,10 +29,10 @@ console.log(buf2.byteLength) // 8
 
 ArrayBuffer 与 C++ 中的 malloc 很相似，区别如下：
 
--   ArrayBuffer 在分配失败时抛出错误，而 malloc() 则返回 null 指针
--   ArrayBuffer 可分配内存不能超过 Number.MAX_SAFE_INTEGER 字节，malloc() 则可以使用虚拟内存
--   ArrayBuffer 声明后，所有二进制位都被初始化为 0，malloc()则不会初始化实际地址
--   ArrayBuffer 申请的内存支持垃圾回收，malloc()则需要使用 free()手动释放
+- ArrayBuffer 在分配失败时抛出错误，而 malloc() 则返回 null 指针
+- ArrayBuffer 可分配内存不能超过 Number.MAX_SAFE_INTEGER 字节，malloc() 则可以使用虚拟内存
+- ArrayBuffer 声明后，所有二进制位都被初始化为 0，malloc()则不会初始化实际地址
+- ArrayBuffer 申请的内存支持垃圾回收，malloc()则需要使用 free()手动释放
 
 注意：**ArrayBuffer 内存储的二进制数据不能直接读取，必须通过视图**，如：DataView。
 
@@ -95,8 +95,8 @@ console.log(view.getInt16(0)) // -1
 
 字节序默认为大端字节序。字节序”指的是计算系统维护的一种字节顺序的约定，一般有两种：
 
--   大端字节序：最高有效位保存在第一个字节，最低有效位保存在最后一个字节
--   小端字节序：最低有效位保存在第一个字节，最高有效位保存在最后一个字节
+- 大端字节序：最高有效位保存在第一个字节，最低有效位保存在最后一个字节
+- 小端字节序：最低有效位保存在第一个字节，最高有效位保存在最后一个字节
 
 JavaScript 的运行时所在的操作系统会决定如何读取、写入字节，但是 DataView 会遵循开发者指定的字节序，默认是大端字节序：
 
@@ -225,7 +225,7 @@ console.log(floats[2]) // 1.6180000305175781
 console.log(Int16Array.BYTES_PER_ELEMENT) // 2
 console.log(Int32Array.BYTES_PER_ELEMENT) // 4
 const ints = new Int32Array(1),
-    floats = new Float64Array(1)
+  floats = new Float64Array(1)
 console.log(ints.BYTES_PER_ELEMENT) // 4
 console.log(floats.BYTES_PER_ELEMENT) // 8
 ```
@@ -294,23 +294,23 @@ console.log(partialCopy) // [4, 6]
 // 第一个参数是应该返回的数组类型
 // 其余参数是应该拼接在一起的定型数组
 function typedArrayConcat(typedArrayConstructor, ...typedArrays) {
-    // 计算所有数组中包含的元素总数
-    const numElements = typedArrays.reduce((x, y) => (x.length || x) + y.length)
-    // 按照提供的类型创建一个数组，为所有元素留出空间
-    const resultArray = new typedArrayConstructor(numElements)
-    // 依次转移数组
-    let currentOffset = 0
-    typedArrays.map(x => {
-        resultArray.set(x, currentOffset)
-        currentOffset += x.length
-    })
-    return resultArray
+  // 计算所有数组中包含的元素总数
+  const numElements = typedArrays.reduce((x, y) => (x.length || x) + y.length)
+  // 按照提供的类型创建一个数组，为所有元素留出空间
+  const resultArray = new typedArrayConstructor(numElements)
+  // 依次转移数组
+  let currentOffset = 0
+  typedArrays.map((x) => {
+    resultArray.set(x, currentOffset)
+    currentOffset += x.length
+  })
+  return resultArray
 }
 const concatArray = typedArrayConcat(
-    Int32Array,
-    Int8Array.of(1, 2, 3),
-    Int16Array.of(4, 5, 6),
-    Float32Array.of(7, 8, 9)
+  Int32Array,
+  Int8Array.of(1, 2, 3),
+  Int16Array.of(4, 5, 6),
+  Float32Array.of(7, 8, 9)
 )
 console.log(concatArray) // [1, 2, 3, 4, 5, 6, 7, 8, 9]
 console.log(concatArray instanceof Int32Array) // true

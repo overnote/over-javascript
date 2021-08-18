@@ -45,8 +45,8 @@ did-frame-finish-load： 框架加载完成。页面中可能有多个 iframe，
 
 页面的跳转事件有两种类型：
 
--   以 navigate 命名的事件：一般是由客户端控制的跳转
--   以 redirect 命名的事件：一般是由服务端控制的跳转
+- 以 navigate 命名的事件：一般是由客户端控制的跳转
+- 以 redirect 命名的事件：一般是由服务端控制的跳转
 
 webContents 的跳转事件有：
 
@@ -98,8 +98,8 @@ webFrame.firstChild()
 
 ```js
 let win = new BrowserWindow({
-    // ... 一系列配置
-    nideIntegrationSubFrames: true,
+  // ... 一系列配置
+  nideIntegrationSubFrames: true,
 })
 ```
 
@@ -121,15 +121,19 @@ Electron 额外提供了一个专有标签 webview，可以在网页中实现直
 
 ```js
 let win = new BrowserWindow({
-    // ... 一系列配置
-    webviewTag: true,
+  // ... 一系列配置
+  webviewTag: true,
 })
 ```
 
 使用方式：
 
 ```html
-<webview id="myview" src="https://www.baidu.com" style="width:100px; height:100px;"></webview>
+<webview
+  id="myview"
+  src="https://www.baidu.com"
+  style="width:100px; height:100px;"
+></webview>
 ```
 
 ### 2.3 BrowserView
@@ -140,7 +144,7 @@ BrowserView 完全依托于 BrowserWindow 存在，可以绑定在 BrowserWindow
 
 ```js
 let view = new BrowserView({
-    webPreferences: { preload },
+  webPreferences: { preload },
 })
 
 win.setBrowserView(view) // win是BrowserWindow对象，这里为自己设置一个 BrowserView容器
@@ -148,15 +152,15 @@ win.setBrowserView(view) // win是BrowserWindow对象，这里为自己设置一
 let size = win.getSize()
 // 设定绑定区域
 view.setBounds({
-    x: 0,
-    y: 80,
-    width: size[0],
-    height: size[1] - 80,
+  x: 0,
+  y: 80,
+  width: size[0],
+  height: size[1] - 80,
 })
 // 自适应
 view.setAutoResize({
-    width: true,
-    heigth: true,
+  width: true,
+  heigth: true,
 })
 view.webContents.loadURL(url)
 ```
@@ -199,7 +203,7 @@ preload.js 文件示例：
 
 ```js
 window.onload = function () {
-    alert("I'm watching u")
+  alert("I'm watching u")
 }
 ```
 

@@ -56,8 +56,8 @@ socket.send(blobData)
 
 ```js
 socket.onmessage = function (event) {
-    let data = event.data
-    // 对数据执行某些操作
+  let data = event.data
+  // 对数据执行某些操作
 }
 ```
 
@@ -78,13 +78,13 @@ WebSocket 对象不支持 DOM Level 2 事件监听器，因此需要使用 DOM L
 ```js
 let socket = new WebSocket('ws://www.example.com/server.php')
 socket.onopen = function () {
-    alert('Connection established.')
+  alert('Connection established.')
 }
 socket.onerror = function () {
-    alert('Connection error.')
+  alert('Connection error.')
 }
 socket.onclose = function () {
-    alert('Connection closed.')
+  alert('Connection closed.')
 }
 ```
 
@@ -92,6 +92,8 @@ socket.onclose = function () {
 
 ```js
 socket.onclose = function (event) {
-    console.log(`as clean? ${event.wasClean} Code=${event.code} Reason=${event.reason}`)
+  console.log(
+    `as clean? ${event.wasClean} Code=${event.code} Reason=${event.reason}`
+  )
 }
 ```

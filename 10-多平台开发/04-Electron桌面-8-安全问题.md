@@ -6,10 +6,10 @@
 
 ```js
 new BrowserWindow({
-    // 其他配置
-    webPreferces: {
-        devTools: false,
-    },
+  // 其他配置
+  webPreferces: {
+    devTools: false,
+  },
 })
 ```
 
@@ -52,9 +52,9 @@ npx asar pack your-app app.asar
 
 ```js
 let win = new BrowserWindow({
-    webPreferences: {
-        sandbox: true,
-    },
+  webPreferences: {
+    sandbox: true,
+  },
 })
 ```
 
@@ -66,15 +66,15 @@ let win = new BrowserWindow({
 
 ```js
 app.on('web-contents-created', (event, contents) => {
-    // 一旦有 webview 被创建则触发该事件
-    contents.on('will-attach-webview', (event, webPreferences, params) => {
-        delete webPreferences.preload
-        delete webPreferences.preloadURL
-        webPreferences.nodeIntegration = false
-        if (!params.src.startsWith('https://demo.com/')) {
-            event.preventDefault()
-        }
-    })
+  // 一旦有 webview 被创建则触发该事件
+  contents.on('will-attach-webview', (event, webPreferences, params) => {
+    delete webPreferences.preload
+    delete webPreferences.preloadURL
+    webPreferences.nodeIntegration = false
+    if (!params.src.startsWith('https://demo.com/')) {
+      event.preventDefault()
+    }
+  })
 })
 ```
 
@@ -89,12 +89,12 @@ let session = win.webContents.session
 
 // 当前会话的钩子函数
 session.setCertificateVerifyProc((request, callback) => {
-    if (request.certificate.issuer.commonName == 'DO_NOT_TRUST_FiddlerRoot') {
-        // 假设现在安装的是 Fiddler 的证书
-        callback(-2) // 如果不符合预期，传入-2 驳回
-    } else {
-        callback(-3) // -3 表示使用 Chromium 的验证结果，0 表示成功并禁止使用证书透明度验证
-    }
+  if (request.certificate.issuer.commonName == 'DO_NOT_TRUST_FiddlerRoot') {
+    // 假设现在安装的是 Fiddler 的证书
+    callback(-2) // 如果不符合预期，传入-2 驳回
+  } else {
+    callback(-3) // -3 表示使用 Chromium 的验证结果，0 表示成功并禁止使用证书透明度验证
+  }
 })
 ```
 
@@ -106,16 +106,16 @@ session.setCertificateVerifyProc((request, callback) => {
 let session = win.webContents.session
 
 let requestFilter = {
-    urls: ['http://*/*', 'https://*/*'],
+  urls: ['http://*/*', 'https://*/*'],
 }
 
 session.webRequest.onBeforeSendHeaders(requestFilter, (details, callback) => {
-    if (details.resourceType == 'image' && details.method == 'GET') {
-        delete details.requestHeades['Referer']
-    }
-    callback({
-        requestHeades: details.requestHeades6t,
-    })
+  if (details.resourceType == 'image' && details.method == 'GET') {
+    delete details.requestHeades['Referer']
+  }
+  callback({
+    requestHeades: details.requestHeades6t,
+  })
 })
 ```
 
@@ -129,10 +129,10 @@ electron-store 模块内置了加密解密功能：
 const Store = require('electron-store')
 
 const schema = {
-    foo: {
-        type: 'number',
-        default: 100,
-    },
+  foo: {
+    type: 'number',
+    default: 100,
+  },
 }
 
 const store = new Store({ schema, encryptionKey: 'myKey' })
@@ -154,7 +154,7 @@ Electron 捕获全局异常方式：
 
 ```js
 process.on('uncaughtException', (err, origin) => {
-    // 执行日志收集，显示异常信息并重新加载界面
+  // 执行日志收集，显示异常信息并重新加载界面
 })
 ```
 
@@ -166,13 +166,13 @@ process.on('uncaughtException', (err, origin) => {
 const { dialog } = require('electron')
 
 win.webContents.on('crashed', async (e, killed) => {
-    // 加入日志收集
-    let result = await dialog.showMessageBox({
-        type: 'error',
-        title: '应用程序崩溃',
-        message: '当前应用程序发生异常，是否退出？',
-        buttons: ['是', '否'],
-    })
+  // 加入日志收集
+  let result = await dialog.showMessageBox({
+    type: 'error',
+    title: '应用程序崩溃',
+    message: '当前应用程序发生异常，是否退出？',
+    buttons: ['是', '否'],
+  })
 })
 ```
 

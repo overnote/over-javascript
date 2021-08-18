@@ -4,15 +4,15 @@
 
 JavaScript 的代码要被书写于脚本标签中，但是 HTML5 和 HTML4 的脚本标签规范不尽一致：
 
--   HTML4 规范：`<script type="application/javascript"> </script>`
--   HTML5 规范：`<script> </script>`
+- HTML4 规范：`<script type="application/javascript"> </script>`
+- HTML5 规范：`<script> </script>`
 
 脚本标签有三种书写位置：
 
 ```html
 <!-- 直接在html网页中书写代码，HelloWorld中使用了内嵌式 -->
 <script>
-    console.log('Hello World!')
+  console.log('Hello World!')
 </script>
 
 <!-- 推荐方式。代码位于专门的js文件，由脚本标签引入 -->
@@ -30,10 +30,10 @@ JavaScript 的代码要被书写于脚本标签中，但是 HTML5 和 HTML4 的�
 
 script 标签常用的属性有：
 
--   src：表示要包含的外部文件。
--   type：表示脚本语言类型，默认都是`type="application/javascript"`，该属性已经替代了 `language` 属性。
--   defer：立即下载脚本，延迟到文档解析后执行。该属性值对外部文件有效。写法：`defer="defer"`，H5 中简写为：`defer`。
--   async：立即下载脚本，且不阻止其他页面动作。该属性只对外部文件有效。写法：`sync="sync"`，H5 中简写为：`sync`。
+- src：表示要包含的外部文件。
+- type：表示脚本语言类型，默认都是`type="application/javascript"`，该属性已经替代了 `language` 属性。
+- defer：立即下载脚本，延迟到文档解析后执行。该属性值对外部文件有效。写法：`defer="defer"`，H5 中简写为：`defer`。
+- async：立即下载脚本，且不阻止其他页面动作。该属性只对外部文件有效。写法：`sync="sync"`，H5 中简写为：`sync`。
 
 注意：`type="application/module"`表示可以出现 import 和 export 关键字，代码被作为 ES6 模块使用。
 
@@ -44,12 +44,12 @@ script 标签常用的属性有：
 ```html
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="./demo1.js"></script>
-        <script src="./demo2.js"></script>
-    </head>
+  <head>
+    <script src="./demo1.js"></script>
+    <script src="./demo2.js"></script>
+  </head>
 
-    <body></body>
+  <body></body>
 </html>
 ```
 
@@ -60,12 +60,12 @@ script 标签常用的属性有：
 ```html
 <!DOCTYPE html>
 <html>
-    <head></head>
+  <head></head>
 
-    <body>
-        <script src="./demo1.js"></script>
-        <script src="./demo2.js"></script>
-    </body>
+  <body>
+    <script src="./demo1.js"></script>
+    <script src="./demo2.js"></script>
+  </body>
 </html>
 ```
 
@@ -97,5 +97,5 @@ defer 属性表示告诉浏览器立即下载 JS 外部文件，但是会延迟�
 
 注意：
 
--   异步脚本 async 一定会在页面的 load 事件前执行，但可能会在 DOMContentLoaded 事件触发前、后都有可能执行
--   延迟脚本 defer 在 H5 规范中要求要先于 DOMContentLoaded 事件执行，但是现实中不一定！
+- 异步脚本 async 一定会在页面的 load 事件前执行，但可能会在 DOMContentLoaded 事件触发前、后都有可能执行
+- 延迟脚本 defer 在 H5 规范中要求要先于 DOMContentLoaded 事件执行，但是现实中不一定！

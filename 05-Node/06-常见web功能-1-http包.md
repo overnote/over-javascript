@@ -8,8 +8,8 @@
 var http = require('http')
 
 var server = http.createServer(function (req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/plain;charset=UTF8' })
-    res.end('hello world')
+  res.writeHead(200, { 'Content-Type': 'text/plain;charset=UTF8' })
+  res.end('hello world')
 })
 
 server.listen(8000)
@@ -34,9 +34,9 @@ Php：   Php开发的 Web 软件，需要将源码放置在其专用的 web 服�
 
 http.Server 的主要事件有：
 
--   request：客户端发起请求时，被处罚，提供 req，res 参数
--   connection：TCP 建立连接时候处罚，提供一个 scoket 参数，是 net.Socket 的实例。
--   close：服务器关闭时，触发。
+- request：客户端发起请求时，被处罚，提供 req，res 参数
+- connection：TCP 建立连接时候处罚，提供一个 scoket 参数，是 net.Socket 的实例。
+- close：服务器关闭时，触发。
 
 http.createServer()方法其实就是添加了一个 Reuqest 事件监听，如下所示：
 
@@ -46,16 +46,16 @@ var http = require('http')
 var server = http.createServer()
 
 server.on('error', function (err) {
-    console.log(err)
+  console.log(err)
 })
 
 server.on('request', function (req, res) {
-    console.log('有用户请求了')
-    console.log(req)
+  console.log('有用户请求了')
+  console.log(req)
 })
 
 server.listen(8081, function () {
-    console.log('server run...')
+  console.log('server run...')
 })
 ```
 
@@ -63,22 +63,22 @@ server.listen(8081, function () {
 
 `http.IncomingMessage` 是 http 请求信息，提供了 3 个事件：
 
--   data：当请求数据到来时触发；
--   end：当请求体数据传输完毕时候触发；
--   close：当用户请求结束时候触发。
+- data：当请求数据到来时触发；
+- end：当请求体数据传输完毕时候触发；
+- close：当用户请求结束时候触发。
 
 `http.IncomingMessage` 提供的属性有：
 
--   method：请求方式
--   headers：请求头
--   url：请求路径
--   httpVersion：http 版本
+- method：请求方式
+- headers：请求头
+- url：请求路径
+- httpVersion：http 版本
 
 `http.ServerResponse` 是返回客户端的信息，主要方法有：
 
--   `res.writeHead(statusCode,[headers];`：向请求的客户端发送响应头
--   `res.write(data,[encoding]);`：向请求发送内容
--   `res.end([data],[encoding);`：结束请求
+- `res.writeHead(statusCode,[headers];`：向请求的客户端发送响应头
+- `res.write(data,[encoding]);`：向请求发送内容
+- `res.end([data],[encoding);`：结束请求
 
 ## 一 请求处理参数处理
 
@@ -91,11 +91,11 @@ var http = require('http')
 var url = require('url')
 
 var server = http.createServer(function (req, res) {
-    //true代表直接将结果解析为json
-    var params = url.parse(req.url, true).query
-    console.log(params) // GET请求参数被解析为json对象，如：{name:'lisi'}
+  //true代表直接将结果解析为json
+  var params = url.parse(req.url, true).query
+  console.log(params) // GET请求参数被解析为json对象，如：{name:'lisi'}
 
-    res.end('hello')
+  res.end('hello')
 })
 
 server.listen(8000)
@@ -140,8 +140,8 @@ http.createServer( function(req,res){
 var http = require('http')
 
 var server = http.createServer(function (req, res) {
-    res.write('<h1>hello world</h1>')
-    res.end()
+  res.write('<h1>hello world</h1>')
+  res.end()
 })
 
 server.listen(8000)
@@ -188,7 +188,7 @@ Node 的 http 模块其实是对 HTTP 报文的头进行解析，然后触发了
 
 ```js
 function hasBody(req) {
-    return 'transter-encoding' in req.headers || 'content-length' in req.headers
+  return 'transter-encoding' in req.headers || 'content-length' in req.headers
 }
 ```
 
@@ -252,16 +252,16 @@ Node 直接解析 JSON 文件：
 
 ```js
 function handle(req, res) {
-    if (mime(req) === 'application/json') {
-        try {
-            req.body = JSON.parse(req.rawBody)
-        } catch (e) {
-            res.writeHead(400)
-            res.end('Invalid JSON')
-            return
-        }
+  if (mime(req) === 'application/json') {
+    try {
+      req.body = JSON.parse(req.rawBody)
+    } catch (e) {
+      res.writeHead(400)
+      res.end('Invalid JSON')
+      return
     }
-    // 业务代码
+  }
+  // 业务代码
 }
 ```
 
@@ -273,18 +273,18 @@ function handle(req, res) {
 var xml2js = require('xml2js')
 
 function handle(req, res) {
-    if (mime(req) === 'application/xml') {
-        xm2js.parseString(req.rawBody, function (err, xml) {
-            if (err) {
-                console.log('解析XML异常：', err)
-                res.writeHead(400)
-                res.end('Invalid XML')
-                return
-            }
+  if (mime(req) === 'application/xml') {
+    xm2js.parseString(req.rawBody, function (err, xml) {
+      if (err) {
+        console.log('解析XML异常：', err)
+        res.writeHead(400)
+        res.end('Invalid XML')
+        return
+      }
 
-            req.body = xml
-            // 业务代码
-        })
-    }
+      req.body = xml
+      // 业务代码
+    })
+  }
 }
 ```

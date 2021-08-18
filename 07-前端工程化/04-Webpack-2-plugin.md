@@ -33,13 +33,13 @@ const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    // .... 省略了其他配置
-    plugins: [
-        new htmlWebpackPlugin({
-            template: path.resolve(__dirname, 'src/index.html'),
-            filename: 'index.html',
-        }),
-    ],
+  // .... 省略了其他配置
+  plugins: [
+    new htmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src/index.html'),
+      filename: 'index.html',
+    }),
+  ],
 }
 ```
 
@@ -55,8 +55,8 @@ module.exports = {
 const webpack = require('webpack')
 //插件数组添加如下元素
 new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery',
+  $: 'jquery',
+  jQuery: 'jquery',
 })
 ```
 
@@ -86,25 +86,25 @@ mini-css-extract-plugin 使用：
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-    // ... 省略其他配置
-    module: {
-        rules: [
-            {
-                test: /\/css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'], // 不再使用 style-loader
-            },
-            {
-                test: /\/less$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'], // 不再使用 style-loader
-            },
-        ],
-    },
-    plugins: [
-        // ... 省略其他配置
-        new MiniCssExtractPlugin({
-            filename: 'main.css',
-        }),
+  // ... 省略其他配置
+  module: {
+    rules: [
+      {
+        test: /\/css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'], // 不再使用 style-loader
+      },
+      {
+        test: /\/less$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'], // 不再使用 style-loader
+      },
     ],
+  },
+  plugins: [
+    // ... 省略其他配置
+    new MiniCssExtractPlugin({
+      filename: 'main.css',
+    }),
+  ],
 }
 ```
 
@@ -139,14 +139,14 @@ vendor 是默认该项目引入的一系列第三方包，其他入口的功用�
 
 ```js
 new webpack.optimize.CommonsChunkPlugin({
-    name: ['vendor', 'manifest'],
-    minChunks: Infinity,
+  name: ['vendor', 'manifest'],
+  minChunks: Infinity,
 })
 
 new webpack.optimize.CommonsChunkPlugin({
-    name: 'common',
-    minChunks: 2,
-    chunks: ['pageA', 'pageB'],
+  name: 'common',
+  minChunks: 2,
+  chunks: ['pageA', 'pageB'],
 })
 ```
 
@@ -160,10 +160,10 @@ JS 的代码在打包时就会被压缩，而 CSS 不会，需要借助插件的
 const optimizeCss = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
-    optimization: {
-        // 优化项
-        minimizer: [new optimizeCss()],
-    },
+  optimization: {
+    // 优化项
+    minimizer: [new optimizeCss()],
+  },
 }
 ```
 
@@ -174,18 +174,18 @@ module.exports = {
 const uglifyJS = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-    // 优化项
-    optimization: {
-        minimizer: [
-            // 优化JS：压缩
-            new uglifyJS({
-                cache: true,
-                parallel: true, // 并发打包
-                sourceMap: true,
-            }),
-            // 优化CSS
-            new optimizeCss(),
-        ],
-    },
+  // 优化项
+  optimization: {
+    minimizer: [
+      // 优化JS：压缩
+      new uglifyJS({
+        cache: true,
+        parallel: true, // 并发打包
+        sourceMap: true,
+      }),
+      // 优化CSS
+      new optimizeCss(),
+    ],
+  },
 }
 ```

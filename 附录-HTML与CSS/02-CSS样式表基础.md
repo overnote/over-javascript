@@ -24,16 +24,16 @@ CSS 代码有三种书写位置：行内式（不推荐）、内嵌式（偶尔�
 
 ```html
 <head>
-    <style type="text/css">
-        /* type="text/css" 在CSS3中可以省略 */
-        div {
-            color: pink;
-            font-size: 18px;
-        }
-    </style>
+  <style type="text/css">
+    /* type="text/css" 在CSS3中可以省略 */
+    div {
+      color: pink;
+      font-size: 18px;
+    }
+  </style>
 </head>
 <body>
-    <div>Hello</div>
+  <div>Hello</div>
 </body>
 ```
 
@@ -41,7 +41,7 @@ CSS 代码有三种书写位置：行内式（不推荐）、内嵌式（偶尔�
 
 ```html
 <head>
-    <link rel="stylesheet" href="./1.css" />
+  <link rel="stylesheet" href="./1.css" />
 </head>
 ```
 
@@ -49,19 +49,19 @@ CSS 代码有三种书写位置：行内式（不推荐）、内嵌式（偶尔�
 
 ```html
 <style>
-    /*@import 必须位于样式表开头*/
-    @import url(base.css) all;
-    @import './base.css' div {
-        background-color: blue;
-    } ;
+  /*@import 必须位于样式表开头*/
+  @import url(base.css) all;
+  @import './base.css' div {
+    background-color: blue;
+  } ;
 </style>
 ```
 
 link 与@import 的区别：
 
--   功能多样性不同：link 标签功能更多，可以加载 css、定义 rss、rel 等属性，@import 只能加载 CSS
--   加载书序不同：link 引入的内容与当前文档同时被加载，@import 引入的 css 将会在页面加载完毕后加载
--   link 的样式权重大于@import 的权重
+- 功能多样性不同：link 标签功能更多，可以加载 css、定义 rss、rel 等属性，@import 只能加载 CSS
+- 加载书序不同：link 引入的内容与当前文档同时被加载，@import 引入的 css 将会在页面加载完毕后加载
+- link 的样式权重大于@import 的权重
 
 ## 三 性能问题
 
@@ -75,11 +75,11 @@ link 与@import 的区别：
 
 常用前缀有：
 
--   `-epub`：国际数字出版社论坛定制 ePub 格式
--   `-moz-`：firefox 前缀
--   `ms`：微软 IE 前缀
--   `-o-`：Opera 前缀
--   `-webkit-`：基于 Webkit 的浏览器的前缀
+- `-epub`：国际数字出版社论坛定制 ePub 格式
+- `-moz-`：firefox 前缀
+- `ms`：微软 IE 前缀
+- `-o-`：Opera 前缀
+- `-webkit-`：基于 Webkit 的浏览器的前缀
 
 ## 五 CSS 注释
 

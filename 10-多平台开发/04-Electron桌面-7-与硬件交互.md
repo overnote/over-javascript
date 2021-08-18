@@ -9,10 +9,10 @@ H5 虽然新增了对计算机硬件设备的访问，但其限制极多，Elect
 ```js
 // 该配置用来确定是否从流中获取音频、视频
 let option = {
-    audio: true,
-    video: true,
-    // width: 1280, height: 720,     // 视频大小
-    // facingMode: "user"             // 获取前置摄像头，值 enviroment 表示后置摄像头
+  audio: true,
+  video: true,
+  // width: 1280, height: 720,     // 视频大小
+  // facingMode: "user"             // 获取前置摄像头，值 enviroment 表示后置摄像头
 }
 
 // 获取用户的音视频流
@@ -20,7 +20,7 @@ let mediaStream = await navigator.mediaDevices.getUserMedia(option)
 
 videoDom.srcObject = mediaStream // videoDom 为 HTML 中的 video 标签
 videoDom.onloadedmetadata = function (e) {
-    video.play()
+  video.play()
 }
 ```
 
@@ -33,19 +33,19 @@ const { desktopCapturer } = require('electron')
 
 // 获取所有桌面信息，根据参数进行过滤
 let sources = await desktopCapturer.getSources({
-    types: ['window', 'screen'],
+  types: ['window', 'screen'],
 })
 
-let target = sources.find(v => v.name == '微信')
+let target = sources.find((v) => v.name == '微信')
 
 let mediaStream = await navigator.mediaDevices.getUserMedia({
-    audio: false,
-    video: {
-        mandatory: {
-            chromeMediaSource: 'desktop',
-            chromeMediaSrouceId: target.id,
-        },
+  audio: false,
+  video: {
+    mandatory: {
+      chromeMediaSource: 'desktop',
+      chromeMediaSrouceId: target.id,
     },
+  },
 })
 ```
 
@@ -64,11 +64,11 @@ const { powerMonitor } = require('electron').remote
 
 // 该模块可以用于监控系统是否挂起、恢复
 powerMonitor.on('suspend', () => {
-    console.log('中断...')
+  console.log('中断...')
 })
 
 powerMonitor.on('resume', () => {
-    console.log('恢复...')
+  console.log('恢复...')
 })
 ```
 
@@ -81,12 +81,12 @@ let { remote } = require('electron')
 
 let webContents = remote.getCurrentWebContents()
 webContents.print(
-    {
-        silent: false,
-        printBackground: true,
-        deviceName: '',
-    },
-    (success, erroType) => {}
+  {
+    silent: false,
+    printBackground: true,
+    deviceName: '',
+  },
+  (success, erroType) => {}
 )
 ```
 
@@ -106,7 +106,7 @@ const fs = reuqire('fs')
 let webContents = remote.getCurrentWebContents()
 let data = await webContents.printToPDF({}) // 返回一个 Buffer缓存
 let filePaht = path.join(__static, 'demo.pdf')
-fs.writeFile(filePath, data, error => {})
+fs.writeFile(filePath, data, (error) => {})
 ```
 
 ## 四 显示器与自助机
@@ -126,17 +126,17 @@ let mainScreen = remote.screen.getPrimaryDisplay() // 主显示器包括显示�
 const { screen } = require('electron') // ready事件后才可以使用
 
 let displays = screen.getAllDisplay()
-let externalDisplay = displays.find(display => {
-    return display.bounds.x !== 0 || display.bounds.y !== 0
+let externalDisplay = displays.find((display) => {
+  return display.bounds.x !== 0 || display.bounds.y !== 0
 })
 
 if (externalDisplay) {
-    win = new BrowserWindow({
-        x: externalDisplay.bounds.x + 50,
-        y: externalDisplay.bounds.y + 50,
-        // ... 其他配置
-    })
-    win.loadURL('https://www.qq.com')
+  win = new BrowserWindow({
+    x: externalDisplay.bounds.x + 50,
+    y: externalDisplay.bounds.y + 50,
+    // ... 其他配置
+  })
+  win.loadURL('https://www.qq.com')
 }
 ```
 
@@ -146,8 +146,8 @@ if (externalDisplay) {
 
 自助机的操作系统一般为 Win、Linux、Android，如果是 PC 系统，则可以使用 Electron 开发，但是这类应用一般有以下特点：
 
--   大部分不允许用户退出
--   大部分支持触屏
+- 大部分不允许用户退出
+- 大部分支持触屏
 
 在 `new BrowserWindow()` 时，Electron 为自助机提供了专用参数 kiosk。若该参数为 true，则窗口自动处于全屏状态，操作系统任务栏、窗口的默认标题都不再显示，窗口的高度与宽度设置也会失效。
 
@@ -155,7 +155,7 @@ if (externalDisplay) {
 
 ```css
 body {
-    cursor: none;
+  cursor: none;
 }
 ```
 

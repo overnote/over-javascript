@@ -10,9 +10,9 @@ ECMAScript 是 JavaScript 的语法核心，但是仅仅有语法，没有一些
 
 所以 JavaScript 包含三个方面：
 
--   ECMAScript：JavaScript 语法标准，如：类型、关键字、基本对象等，有 ES5、ES6(即 ES2015)、ES7(即 ES2016)，后续皆以年代为规范的名称
--   DOM：`Document Object Model`，JavaScript 操作网页元素的 API
--   BOM：`Browser Object Model`，JavaScript 操作浏览器部分功能的 API
+- ECMAScript：JavaScript 语法标准，如：类型、关键字、基本对象等，有 ES5、ES6(即 ES2015)、ES7(即 ES2016)，后续皆以年代为规范的名称
+- DOM：`Document Object Model`，JavaScript 操作网页元素的 API
+- BOM：`Browser Object Model`，JavaScript 操作浏览器部分功能的 API
 
 > API：Application Programming Interface，即用用程序编程接口，是包装好后提供给开发人员使用的工具
 
@@ -28,12 +28,12 @@ BOM 是浏览器为开发者提供的 JavaScript 浏览器对象模型（Browser
 
 BOM 提供的一些常见操作，示例：
 
--   **window 对象**：BOM 的核心对象，即浏览器的实例
--   navigator 对象：提供浏览器本身的信息
--   location 对象：提供加载页面的信息
--   performance 对象：提供浏览器内存、时间统计等信息
--   支持 cookie
--   自持 Ajax
+- **window 对象**：BOM 的核心对象，即浏览器的实例
+- navigator 对象：提供浏览器本身的信息
+- location 对象：提供加载页面的信息
+- performance 对象：提供浏览器内存、时间统计等信息
+- 支持 cookie
+- 自持 Ajax
 
 ### 2.2 DOM 概念
 
@@ -43,14 +43,14 @@ HTML 加载完毕后，渲染引擎会在内存中把 HTML 文档，生成一个
 
 ```html
 <body>
-    <!-- script的位置推荐位于body标签的最后位置 -->
-    <script>
-        // 入口函数：页面的结构、样式、节点等加载完毕后才去执行函数体。
-        window.onload = function () {
-            console.log('hello DOM')
-            console.log(document) // 查看 document 文档对象
-        }
-    </script>
+  <!-- script的位置推荐位于body标签的最后位置 -->
+  <script>
+    // 入口函数：页面的结构、样式、节点等加载完毕后才去执行函数体。
+    window.onload = function () {
+      console.log('hello DOM')
+      console.log(document) // 查看 document 文档对象
+    }
+  </script>
 </body>
 ```
 

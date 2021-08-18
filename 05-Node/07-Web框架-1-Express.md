@@ -20,7 +20,7 @@ var express = require('express')
 var app = express()
 
 app.get('/', function (req, res) {
-    res.send('hello world!')
+  res.send('hello world!')
 })
 
 app.listen(3000)
@@ -159,8 +159,8 @@ app.all('网址', function () {}) //处理这个网址的任何类型请求
 
 注意：
 
--   所有的 GET 参数，? 后面的都已经被忽略，锚点#也被忽略，路由到/a ， 实际/a?id=2&sex=nan 也能被处理；
--   正则表达式中，未知部分用圆括号分组，然后可以用 req.params[0]、[1]得到，req.params 是一个类数组对象。
+- 所有的 GET 参数，? 后面的都已经被忽略，锚点#也被忽略，路由到/a ， 实际/a?id=2&sex=nan 也能被处理；
+- 正则表达式中，未知部分用圆括号分组，然后可以用 req.params[0]、[1]得到，req.params 是一个类数组对象。
 
 如果 get、post 回调函数中，没有 next 参数，那么就匹配上第一个路由，就不会往下匹配了。如果想往下匹配的话，那么需要写 next()：
 
@@ -244,8 +244,8 @@ app.use()他的网址不是精确匹配的，使用 user(path,fn())时候，user
 
 ```js
 function middleware(req, res, next) {
-    // 业务代码
-    next()
+  // 业务代码
+  next()
 }
 ```
 
@@ -261,8 +261,8 @@ function middleware(req, res, next) {
 
 ```js
 module.exports = function (req, res, next) {
-    //中间件函数在这里调用
-    next() //记得使用next()或者 next(route)
+  //中间件函数在这里调用
+  next() //记得使用next()或者 next(route)
 }
 ```
 
@@ -347,20 +347,20 @@ isLogin 中间件的写法：
 
 ```js
 function isLogin(req, res, next) {
-    var cookie = req.headers.cookie
-    var cookies = {}
+  var cookie = req.headers.cookie
+  var cookies = {}
 
-    if (!cookie) {
-        console.log('cookie不存在')
-        return
-    }
+  if (!cookie) {
+    console.log('cookie不存在')
+    return
+  }
 
-    if (!cookie.isLogin) {
-        console.log('用户未登录')
-        return
-    }
+  if (!cookie.isLogin) {
+    console.log('用户未登录')
+    return
+  }
 
-    next()
+  next()
 }
 ```
 
@@ -382,18 +382,18 @@ app.use = function(){
 
 ```js
 function match(pathname, routes) {
-    for (var i = 0; i < routes.length; i++) {
-        var route = routes[i]
-        var reg = route.path.regexp
-        var matched = reg.exec(pathname)
+  for (var i = 0; i < routes.length; i++) {
+    var route = routes[i]
+    var reg = route.path.regexp
+    var matched = reg.exec(pathname)
 
-        if (matched) {
-            handle(req, res, route.stack)
-            return true
-        }
+    if (matched) {
+      handle(req, res, route.stack)
+      return true
     }
+  }
 
-    return false
+  return false
 }
 ```
 
@@ -401,16 +401,16 @@ function match(pathname, routes) {
 
 ```js
 function handle(req, res, stack) {
-    function next() {
-        // 从stack数组中取出中间件并执行
-        var middleware = stack.shift()
-        if (middleware) {
-            // 传入next()函数自身，使中间件能够执行结束后递归
-            middleware(req, res, next)
-        }
+  function next() {
+    // 从stack数组中取出中间件并执行
+    var middleware = stack.shift()
+    if (middleware) {
+      // 传入next()函数自身，使中间件能够执行结束后递归
+      middleware(req, res, next)
     }
-    // 启动执行
-    next()
+  }
+  // 启动执行
+  next()
 }
 ```
 
@@ -426,24 +426,24 @@ app.use(isLogin)
 
 ```js
 app.use = function (path) {
-    var handle
+  var handle
 
-    if (typeof path === 'string') {
-        handle = {
-            // 第一个参数作为路径
-            path: pathRegexp(path),
-            // 其他的都是处理单元
-            stack: Array.prototype.slice.call(arguments, 1),
-        }
-    } else {
-        handle = {
-            // 第一个参数作为路径
-            path: pathRegexp('/'),
-            // 其他的都是处理单元
-            stack: Array.prototype.slice.call(arguments, 0),
-        }
+  if (typeof path === 'string') {
+    handle = {
+      // 第一个参数作为路径
+      path: pathRegexp(path),
+      // 其他的都是处理单元
+      stack: Array.prototype.slice.call(arguments, 1),
     }
-    routes.all.push(handle)
+  } else {
+    handle = {
+      // 第一个参数作为路径
+      path: pathRegexp('/'),
+      // 其他的都是处理单元
+      stack: Array.prototype.slice.call(arguments, 0),
+    }
+  }
+  routes.all.push(handle)
 }
 ```
 
@@ -451,19 +451,19 @@ app.use = function (path) {
 
 ```js
 function match(pathname, routes) {
-    var stacks = []
+  var stacks = []
 
-    for (var i = 0; i < routes.length; i++) {
-        var route = routes[i]
-        var reg = route.path.regexp
-        var matched = reg.exec(pathname)
-        if (matched) {
-            // 抽取具体值.....将中间件保存
-            stacks = stacks.concat(route.stack)
-        }
+  for (var i = 0; i < routes.length; i++) {
+    var route = routes[i]
+    var reg = route.path.regexp
+    var matched = reg.exec(pathname)
+    if (matched) {
+      // 抽取具体值.....将中间件保存
+      stacks = stacks.concat(route.stack)
     }
+  }
 
-    return stacks
+  return stacks
 }
 ```
 
@@ -498,25 +498,25 @@ function (req, res) {
 
 ```js
 function handle(req, res, stack) {
-    function next(err) {
-        if (err) {
-            return handle500(err, req, res, stack)
-        }
-
-        // 从stack数组中取出中间件执行
-        var middleware = stack.shift()
-        if (middleware) {
-            // 传入next()函数自身，使中间件能够执行结束后递归
-            try {
-                middleware(req, res, next)
-            } catch (ex) {
-                next(err)
-            }
-        }
+  function next(err) {
+    if (err) {
+      return handle500(err, req, res, stack)
     }
 
-    // 启动执行
-    next()
+    // 从stack数组中取出中间件执行
+    var middleware = stack.shift()
+    if (middleware) {
+      // 传入next()函数自身，使中间件能够执行结束后递归
+      try {
+        middleware(req, res, next)
+      } catch (ex) {
+        next(err)
+      }
+    }
+  }
+
+  // 启动执行
+  next()
 }
 ```
 
@@ -524,18 +524,18 @@ function handle(req, res, stack) {
 
 ```js
 function isLogin() {
-    var uid = req.cookie.session_id
+  var uid = req.cookie.session_id
 
-    // 假设是个异步方法，产生了错误
-    store.get(uid, function (err, session) {
-        if (err) {
-            next(err)
-            return
-        }
+  // 假设是个异步方法，产生了错误
+  store.get(uid, function (err, session) {
+    if (err) {
+      next(err)
+      return
+    }
 
-        req.session = session
-        next()
-    })
+    req.session = session
+    next()
+  })
 }
 ```
 
@@ -543,7 +543,7 @@ function isLogin() {
 
 ```js
 function middleware(err, req, res, next) {
-    // ...
-    next()
+  // ...
+  next()
 }
 ```

@@ -6,9 +6,9 @@ Redux 是一款集中状态管理库，适用于 React、Angular、Vue 等库，
 
 redux 使用场景：
 
--   多个组件的状态需要其他组件随时使用（共享）
+- 多个组件的状态需要其他组件随时使用（共享）
 
--   存在很多组件之间更改对方状态（通信）场景
+- 存在很多组件之间更改对方状态（通信）场景
 
 redux 工作如图：
 
@@ -39,51 +39,51 @@ import { createStore } from 'redux'
 
 // reducer
 const initCount = {
-    count: 0,
+  count: 0,
 }
 function counterReducer(state = initCount, action) {
-    switch (action.type) {
-        case 'INCREMENT':
-            return {
-                ...state,
-                count: state.count + action.payload.num,
-            }
-        case 'DECREMENT':
-            return {
-                ...state,
-                count: state.count - action.payload.num,
-            }
-        default:
-            console.log('未执行操作')
-            return state
-    }
+  switch (action.type) {
+    case 'INCREMENT':
+      return {
+        ...state,
+        count: state.count + action.payload.num,
+      }
+    case 'DECREMENT':
+      return {
+        ...state,
+        count: state.count - action.payload.num,
+      }
+    default:
+      console.log('未执行操作')
+      return state
+  }
 }
 
 // 创建Store
 const store = createStore(
-    counterReducer,
-    // 支持redux-devtools谷歌插件
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  counterReducer,
+  // 支持redux-devtools谷歌插件
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
 // 创建第一个Action：对count+1
 function countAddAction() {
-    return {
-        type: 'INCREMENT',
-        payload: {
-            num: 1,
-        },
-    }
+  return {
+    type: 'INCREMENT',
+    payload: {
+      num: 1,
+    },
+  }
 }
 
 // 创建第二个Action：对count-2
 function countMinusAction() {
-    return {
-        type: 'DECREMENT',
-        payload: {
-            num: 2,
-        },
-    }
+  return {
+    type: 'DECREMENT',
+    payload: {
+      num: 2,
+    },
+  }
 }
 
 // 执行action，改变数据
@@ -102,12 +102,15 @@ store 在创建时，可以支持多个 reducer，使用 combine 合并：
 import { createStore, combineReducers } from 'redux'
 
 const rootReducers = combineReducers({
-    counter: counterReducer,
-    other: otherRerucer,
+  counter: counterReducer,
+  other: otherRerucer,
 })
 
 // 创建Store
-const store = createStore(rootReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+const store = createStore(
+  rootReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 ```
 
 **注意：合并时 reducer 的名字会将状态数据分组，会决定 state 中的属性的获取方式，比如合并前在组件中获取属性为：state.count，合并的名字为 counter，则获取方式为：state.counter.count**。
@@ -126,15 +129,15 @@ let isDev = true
 
 // logger 中间件
 const logger = createLogger({
-    predicate: isDev,
-    collapsed: true,
+  predicate: isDev,
+  collapsed: true,
 })
 
 // 集成中间件:apply函数用于加载中间件
 let appliedMiddlewares = applyMiddleware(...[thunk, logger])
 if (isDev) {
-    const { composeWithDevTools } = require('redux-devtools-extension')
-    appliedMiddlewares = composeWithDevTools(appliedMiddlewares)
+  const { composeWithDevTools } = require('redux-devtools-extension')
+  appliedMiddlewares = composeWithDevTools(appliedMiddlewares)
 }
 
 // 创建Store
@@ -169,14 +172,14 @@ import CompA from './components/CompA'
 import CompB from './components/CompB'
 
 function App() {
-    return (
-        <Provider store={Store}>
-            <div className="App">
-                <CompA />
-                <CompB />
-            </div>
-        </Provider>
-    )
+  return (
+    <Provider store={Store}>
+      <div className="App">
+        <CompA />
+        <CompB />
+      </div>
+    </Provider>
+  )
 }
 
 export default App
@@ -196,15 +199,15 @@ import { reducer } from './reducers/countReducer'
 // 环境
 let isDev = true
 const logger = createLogger({
-    predicate: isDev,
-    collapsed: true,
+  predicate: isDev,
+  collapsed: true,
 })
 
 // 集成中间件
 let appliedMiddlewares = applyMiddleware(...[thunk, logger])
 if (isDev) {
-    const { composeWithDevTools } = require('redux-devtools-extension')
-    appliedMiddlewares = composeWithDevTools(appliedMiddlewares)
+  const { composeWithDevTools } = require('redux-devtools-extension')
+  appliedMiddlewares = composeWithDevTools(appliedMiddlewares)
 }
 
 const store = createStore(reducer, appliedMiddlewares)
@@ -218,16 +221,16 @@ export default store
 
 ```js
 const ActionTypes = {
-    counter: {
-        INCREMENT: 'INCREMENT',
-        DECREMENT: 'DECREMENT',
-    },
-    user: {
-        GET_USER: 'GET_USER',
-        GET_USER_LOADING: 'GET_USER_LOADING', // 正在请求中
-        GET_USER_SUCCESS: 'GET_USER_SUCCESS',
-        GET_USER_FAIL: 'GET_USER_FAIL',
-    },
+  counter: {
+    INCREMENT: 'INCREMENT',
+    DECREMENT: 'DECREMENT',
+  },
+  user: {
+    GET_USER: 'GET_USER',
+    GET_USER_LOADING: 'GET_USER_LOADING', // 正在请求中
+    GET_USER_SUCCESS: 'GET_USER_SUCCESS',
+    GET_USER_FAIL: 'GET_USER_FAIL',
+  },
 }
 
 export default ActionTypes
@@ -243,43 +246,43 @@ countActions：
 import ActionTypes from '../contants'
 
 export function addAction() {
-    return {
-        type: ActionTypes.counter.INCREMENT,
-        payload: {},
-    }
+  return {
+    type: ActionTypes.counter.INCREMENT,
+    payload: {},
+  }
 }
 
 export function subAction() {
-    return {
-        type: ActionTypes.counter.DECREMENT,
-        payload: {
-            num: 1,
-        },
-    }
+  return {
+    type: ActionTypes.counter.DECREMENT,
+    payload: {
+      num: 1,
+    },
+  }
 }
 
 export function addActionAsync() {
-    return dispatch => {
-        setTimeout(() => {
-            dispatch({
-                type: ActionTypes.counter.INCREMENT,
-                payload: {},
-            })
-        }, 1500)
-    }
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch({
+        type: ActionTypes.counter.INCREMENT,
+        payload: {},
+      })
+    }, 1500)
+  }
 }
 
 export function subActionAsync() {
-    return dispatch => {
-        setTimeout(() => {
-            dispatch({
-                type: ActionTypes.counter.DECREMENT,
-                payload: {
-                    num: 1,
-                },
-            })
-        }, 1000)
-    }
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch({
+        type: ActionTypes.counter.DECREMENT,
+        payload: {
+          num: 1,
+        },
+      })
+    }, 1000)
+  }
 }
 ```
 
@@ -289,51 +292,51 @@ userAtions，包含异步请求：
 import ActionTypes from '../contants'
 
 export const getUserLoadingAction = () => {
-    return {
-        type: ActionTypes.user.GET_USER_LOADING,
-    }
+  return {
+    type: ActionTypes.user.GET_USER_LOADING,
+  }
 }
 
-export const getUserSuccessAction = data => {
-    return {
-        type: ActionTypes.user.GET_USER_SUCCESS,
-        payload: {
-            data: data,
-        },
-    }
+export const getUserSuccessAction = (data) => {
+  return {
+    type: ActionTypes.user.GET_USER_SUCCESS,
+    payload: {
+      data: data,
+    },
+  }
 }
 
-export const getUserFailAction = error => {
-    return {
-        type: ActionTypes.user.GET_USER_FAIL,
-        payload: {
-            error: error,
-        },
-    }
+export const getUserFailAction = (error) => {
+  return {
+    type: ActionTypes.user.GET_USER_FAIL,
+    payload: {
+      error: error,
+    },
+  }
 }
 
-export const fetchUser = params => {
-    const { isUpdate } = params
+export const fetchUser = (params) => {
+  const { isUpdate } = params
 
-    return dispatch => {
-        // 状态一：加载中状态
-        dispatch(getUserLoadingAction())
+  return (dispatch) => {
+    // 状态一：加载中状态
+    dispatch(getUserLoadingAction())
 
-        // 开始请求
-        fetch(`http://localhost:3100/user?isUpdate=${isUpdate}`)
-            .then(res => {
-                return res.json()
-            })
-            .then(data => {
-                console.log('fetch data:', data)
-                // 状态二：请求成功状态
-                dispatch(getUserSuccessAction(data))
-            })
-            .catch(err => {
-                // 状态三：请求失败状态
-                dispatch(getUserFailAction(err))
-            })
-    }
+    // 开始请求
+    fetch(`http://localhost:3100/user?isUpdate=${isUpdate}`)
+      .then((res) => {
+        return res.json()
+      })
+      .then((data) => {
+        console.log('fetch data:', data)
+        // 状态二：请求成功状态
+        dispatch(getUserSuccessAction(data))
+      })
+      .catch((err) => {
+        // 状态三：请求失败状态
+        dispatch(getUserFailAction(err))
+      })
+  }
 }
 ```
 
@@ -345,25 +348,25 @@ reducers 文件夹内全部是 actions 对应的 reducer，以 count 组件为�
 import ActionTypes from '../contants'
 
 const initialState = {
-    count: 0,
+  count: 0,
 }
 
 const countReducer = (state = initialState, action) => {
-    const cur = state.count
-    switch (action.type) {
-        case ActionTypes.counter.INCREMENT:
-            return {
-                ...state,
-                count: cur + 1,
-            }
-        case ActionTypes.counter.DECREMENT:
-            return {
-                ...state,
-                count: cur - action.payload.num,
-            }
-        default:
-            return state
-    }
+  const cur = state.count
+  switch (action.type) {
+    case ActionTypes.counter.INCREMENT:
+      return {
+        ...state,
+        count: cur + 1,
+      }
+    case ActionTypes.counter.DECREMENT:
+      return {
+        ...state,
+        count: cur - action.payload.num,
+      }
+    default:
+      return state
+  }
 }
 
 export default countReducer
@@ -373,22 +376,26 @@ userReducers:
 
 ```js
 const initialState = {
-    data: [{ name: '', age: 0 }], // 请求的数据结果
-    loading: false, // 正在请求中
-    error: null, // 请求发生错误
+  data: [{ name: '', age: 0 }], // 请求的数据结果
+  loading: false, // 正在请求中
+  error: null, // 请求发生错误
 }
 
 const userReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case 'GET_USER_LOADING':
-            return { data: [{ name: '', age: 0 }], loading: true, error: null }
-        case 'GET_USER_SUCCESS':
-            return { data: action.payload.data, loading: false, error: null }
-        case 'GET_USER_FAIL':
-            return { data: [{ name: '', age: 0 }], loading: false, error: action.payload.error }
-        default:
-            return state
-    }
+  switch (action.type) {
+    case 'GET_USER_LOADING':
+      return { data: [{ name: '', age: 0 }], loading: true, error: null }
+    case 'GET_USER_SUCCESS':
+      return { data: action.payload.data, loading: false, error: null }
+    case 'GET_USER_FAIL':
+      return {
+        data: [{ name: '', age: 0 }],
+        loading: false,
+        error: action.payload.error,
+      }
+    default:
+      return state
+  }
 }
 
 export default userReducer
@@ -403,8 +410,8 @@ import countReducer from './countReducer'
 import userReducer from './userReducer'
 
 const rootReducer = combineReducers({
-    counter: countReducer,
-    user: userReducer,
+  counter: countReducer,
+  user: userReducer,
 })
 
 export default rootReducer
@@ -423,44 +430,44 @@ import * as countActions from '../../store/actions/countActions'
 import { bindActionCreators } from 'redux'
 
 class CompA extends React.Component {
-    handleAdd = () => {
-        // this.props.addAction()
-        this.props.countActions.addAction()
-    }
-    handleSub = () => {
-        // this.props.subAction()
-        this.props.countActions.subAction()
-    }
-    handleAddAsync = () => {
-        // this.props.addActionAsync()
-        this.props.countActions.addActionAsync()
-    }
-    handleSubAsync = () => {
-        // this.props.subActionAsync()
-        this.props.countActions.subActionAsync()
-    }
-    render() {
-        return (
-            <div>
-                <button onClick={this.handleAdd}> count + </button>
-                <button onClick={this.handleSub}> count - </button>
-                <button onClick={this.handleAddAsync}> 异步count + </button>
-                <button onClick={this.handleSubAsync}> 异步count - </button>
-            </div>
-        )
-    }
+  handleAdd = () => {
+    // this.props.addAction()
+    this.props.countActions.addAction()
+  }
+  handleSub = () => {
+    // this.props.subAction()
+    this.props.countActions.subAction()
+  }
+  handleAddAsync = () => {
+    // this.props.addActionAsync()
+    this.props.countActions.addActionAsync()
+  }
+  handleSubAsync = () => {
+    // this.props.subActionAsync()
+    this.props.countActions.subActionAsync()
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleAdd}> count + </button>
+        <button onClick={this.handleSub}> count - </button>
+        <button onClick={this.handleAddAsync}> 异步count + </button>
+        <button onClick={this.handleSubAsync}> 异步count - </button>
+      </div>
+    )
+  }
 }
 
-const mapDispatchToProps = dispatch => {
-    // return {
-    //     addAction: ()=>{ dispatch(addAction()) },
-    //     subAction: ()=>{ dispatch(subAction()) },
-    //     addActionAsync: ()=>{ dispatch(addActionAsync())},
-    //     subActionAsync: ()=>{ dispatch(subActionAsync())}
-    // }
-    return {
-        countActions: bindActionCreators(countActions, dispatch),
-    }
+const mapDispatchToProps = (dispatch) => {
+  // return {
+  //     addAction: ()=>{ dispatch(addAction()) },
+  //     subAction: ()=>{ dispatch(subAction()) },
+  //     addActionAsync: ()=>{ dispatch(addActionAsync())},
+  //     subActionAsync: ()=>{ dispatch(subActionAsync())}
+  // }
+  return {
+    countActions: bindActionCreators(countActions, dispatch),
+  }
 }
 
 export default connect(null, mapDispatchToProps)(CompA)
@@ -473,15 +480,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 class CompB extends React.Component {
-    render() {
-        return <div>count:{this.props.counter.count}</div>
-    }
+  render() {
+    return <div>count:{this.props.counter.count}</div>
+  }
 }
 
-const mapStateToProps = state => {
-    return {
-        counter: state.counter, // state内部counter的产生是因为 combineReducers 包裹reducer操作
-    }
+const mapStateToProps = (state) => {
+  return {
+    counter: state.counter, // state内部counter的产生是因为 combineReducers 包裹reducer操作
+  }
 }
 
 export default connect(mapStateToProps)(CompB)
@@ -497,36 +504,36 @@ import * as userActions from '../../store/actions/userActions'
 import { bindActionCreators } from 'redux'
 
 class User extends React.Component {
-    componentDidMount() {
-        this.props.userActions.fetchUser({ isUpdate: 0 })
-    }
+  componentDidMount() {
+    this.props.userActions.fetchUser({ isUpdate: 0 })
+  }
 
-    handlUpdateUser = () => {
-        this.props.userActions.fetchUser({ isUpdate: 1 })
-    }
+  handlUpdateUser = () => {
+    this.props.userActions.fetchUser({ isUpdate: 1 })
+  }
 
-    render() {
-        console.log('CompUser props:', this.props.user.data[0].name)
-        return (
-            <div>
-                <button onClick={this.handlUpdateUser}>点击更新用户信息</button>
-                <div>用户信息：{this.props.user.data[0].name}</div>
-            </div>
-        )
-    }
+  render() {
+    console.log('CompUser props:', this.props.user.data[0].name)
+    return (
+      <div>
+        <button onClick={this.handlUpdateUser}>点击更新用户信息</button>
+        <div>用户信息：{this.props.user.data[0].name}</div>
+      </div>
+    )
+  }
 }
 
-const mapStateToProps = state => {
-    console.log('map User:', state)
-    return {
-        user: state.user,
-    }
+const mapStateToProps = (state) => {
+  console.log('map User:', state)
+  return {
+    user: state.user,
+  }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        userActions: bindActionCreators(userActions, dispatch),
-    }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    userActions: bindActionCreators(userActions, dispatch),
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(User)

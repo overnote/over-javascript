@@ -11,30 +11,30 @@ const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    entry: {
-        //多个entry
-        main1: path.resolve(__dirname, './src/index.js'),
-        main2: path.resolve(__dirname, './src/index.js'),
-    },
-    output: {
-        //name变成了上述的入口名
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(css|scss)$/,
-                use: ['style-loader', 'css-loader'],
-            },
-        ],
-    },
-    plugins: [
-        new htmlWebpackPlugin({
-            template: path.resolve(__dirname, 'src/index.html'),
-            filename: 'index.html',
-        }),
+  entry: {
+    //多个entry
+    main1: path.resolve(__dirname, './src/index.js'),
+    main2: path.resolve(__dirname, './src/index.js'),
+  },
+  output: {
+    //name变成了上述的入口名
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(css|scss)$/,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
+  },
+  plugins: [
+    new htmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src/index.html'),
+      filename: 'index.html',
+    }),
+  ],
 }
 ```
 
@@ -42,7 +42,7 @@ module.exports = {
 
 output 的其他配置：
 
--   publicPath: 会给注入到 html 中的 JS 的 src 添加该前缀
+- publicPath: 会给注入到 html 中的 JS 的 src 添加该前缀
 
 ### 1.2 sourceMap
 
@@ -57,13 +57,13 @@ devtool: 'source-map'
 
 常见配置：
 
--   `source-map`：打包后生成外部的 source-map 文件，能够准确提供错误代码位置
--   `inline-source-map`：打包后的 JS 文件内部追加一个 source-map 代码，能够准确提供错误代码位置
--   `hidden-source-map`：打包后生成外部 source-map 文件，只能够提示错误原因，不能追踪到错误的源码位置，只能追踪到构建后的代码错误位置
--   `eval-source-map`：打包后的 JS 文件内部中，每个被打包的 js 文件后追加一个 eval()函数，eval 内部执行的是 source-map 源码，源码以 base64 形式存在，也能提供准确的错误代码位置
--   `nosources-source-map`：打包后生成外部的 source-map 文件，能够准确提供错误代码位置，但是没有源码信息
--   `cheap-source-map`：打包后生成外部的 source-map 文件，能够准确提供错误代码位置，但是报错位置的全部一行代码都会提示错误
--   module 可以显示第三方模块的问题
+- `source-map`：打包后生成外部的 source-map 文件，能够准确提供错误代码位置
+- `inline-source-map`：打包后的 JS 文件内部追加一个 source-map 代码，能够准确提供错误代码位置
+- `hidden-source-map`：打包后生成外部 source-map 文件，只能够提示错误原因，不能追踪到错误的源码位置，只能追踪到构建后的代码错误位置
+- `eval-source-map`：打包后的 JS 文件内部中，每个被打包的 js 文件后追加一个 eval()函数，eval 内部执行的是 source-map 源码，源码以 base64 形式存在，也能提供准确的错误代码位置
+- `nosources-source-map`：打包后生成外部的 source-map 文件，能够准确提供错误代码位置，但是没有源码信息
+- `cheap-source-map`：打包后生成外部的 source-map 文件，能够准确提供错误代码位置，但是报错位置的全部一行代码都会提示错误
+- module 可以显示第三方模块的问题
 
 source-map 打包为内部代码时，构建速度快。所以一般如下采用：
 
@@ -111,8 +111,8 @@ npm i -D webpack-dev-server
 
 注意：
 
--   webpack-dev-server 打包的 dist 目录内是没有文件的，文件位于内存中。
--   当开启 hot 与 hotOnly 时，需要引入 webpack 自带的插件，如下所示:
+- webpack-dev-server 打包的 dist 目录内是没有文件的，文件位于内存中。
+- 当开启 hot 与 hotOnly 时，需要引入 webpack 自带的插件，如下所示:
 
 ```js
 new webpack.HotModuleReplacementPlugin()
@@ -124,9 +124,9 @@ new webpack.HotModuleReplacementPlugin()
 
 ```js
 if (module.hot) {
-    moduel.hot.accept('a', () => {
-        //业务代码
-    })
+  moduel.hot.accept('a', () => {
+    //业务代码
+  })
 }
 ```
 
@@ -156,23 +156,23 @@ const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    entry: {
-        main: path.resolve(__dirname, './src/index.js'),
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(css|scss)$/,
-                use: ['style-loader', 'css-loader'],
-            },
-        ],
-    },
-    plugins: [
-        new htmlWebpackPlugin({
-            template: path.resolve(__dirname, 'src/index.html'),
-            filename: 'index.html',
-        }),
+  entry: {
+    main: path.resolve(__dirname, './src/index.js'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(css|scss)$/,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
+  },
+  plugins: [
+    new htmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src/index.html'),
+      filename: 'index.html',
+    }),
+  ],
 }
 ```
 
@@ -186,21 +186,21 @@ const webpack = require('webpack')
 const baseConfig = require('./webpack.config.base')
 
 const devConfig = {
-    mode: 'development',
-    devtool: 'cheap-module-source-map',
-    output: {
-        //name变成了上述的入口名
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-    },
-    devServer: {
-        contentBase: path.join(__dirname, 'dist'),
-        open: true, //启动时，会打开浏览器并渲染页面
-        port: 3000, //默认是3000
-        hot: true, //开启hotModule功能
-        hotOnly: true,
-    },
-    plugins: [new webpack.HotModuleReplacementPlugin()],
+  mode: 'development',
+  devtool: 'cheap-module-source-map',
+  output: {
+    //name变成了上述的入口名
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    open: true, //启动时，会打开浏览器并渲染页面
+    port: 3000, //默认是3000
+    hot: true, //开启hotModule功能
+    hotOnly: true,
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 }
 
 module.exports = merge(baseConfig, devConfig)
@@ -215,12 +215,12 @@ const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
 
 const prodConfig = {
-    mode: 'production',
-    output: {
-        //name变成了上述的入口名
-        path: path.resolve(__dirname, 'build'),
-        filename: '[name].js',
-    },
+  mode: 'production',
+  output: {
+    //name变成了上述的入口名
+    path: path.resolve(__dirname, 'build'),
+    filename: '[name].js',
+  },
 }
 
 module.exports = merge(baseConfig, prodConfig)
@@ -243,9 +243,9 @@ const compiler = webpack(webpackCfg)
 app.use(middle(compiler))
 
 app.get('/foo', (req, res) => {
-    res.json({
-        data: 'bar',
-    })
+  res.json({
+    data: 'bar',
+  })
 })
 
 app.listen(3000)
@@ -257,12 +257,12 @@ app.listen(3000)
 
 ```js
 module.exports = {
-    resolve: {
-        modules: [path.resolve('node_modules')], // 只在当前目录查找第三方模块
-        alias: {
-            // 别名
-            bootstrap: 'bootstrap/dist/css/bootstrap.css', // 此时代码中引入 bootstrap的样式就可以书写为 import 'bootstrap'
-        },
+  resolve: {
+    modules: [path.resolve('node_modules')], // 只在当前目录查找第三方模块
+    alias: {
+      // 别名
+      bootstrap: 'bootstrap/dist/css/bootstrap.css', // 此时代码中引入 bootstrap的样式就可以书写为 import 'bootstrap'
     },
+  },
 }
 ```

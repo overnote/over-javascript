@@ -21,7 +21,7 @@ Web Cryptography API 的 CSPRNG 可以通过 crypto.getRandomValues()在全局 C
 ```js
 const array = new Uint8Array(1)
 for (let i = 0; i < 5; ++i) {
-    console.log(crypto.getRandomValues(array))
+  console.log(crypto.getRandomValues(array))
 }
 // Uint8Array [41]
 // Uint8Array [250]
@@ -34,12 +34,12 @@ for (let i = 0; i < 5; ++i) {
 
 ```js
 function randomFloat() {
-    // 生成 32 位随机值
-    const fooArray = new Uint32Array(1)
-    // 最大值是 2^32 –1
-    const maxUint32 = 0xffffffff
-    // 用最大可能的值来除
-    return crypto.getRandomValues(fooArray)[0] / maxUint32
+  // 生成 32 位随机值
+  const fooArray = new Uint32Array(1)
+  // 最大值是 2^32 –1
+  const maxUint32 = 0xffffffff
+  // 用最大可能的值来除
+  return crypto.getRandomValues(fooArray)[0] / maxUint32
 }
 console.log(randomFloat()) // 0.5033651619458955
 ```
@@ -54,10 +54,10 @@ SubtleCrypto.digest()方法用于生成消息摘要：
 
 ```js
 ;(async function () {
-    const textEncoder = new TextEncoder()
-    const message = textEncoder.encode('foo')
-    const messageDigest = await crypto.subtle.digest('SHA-256', message)
-    console.log(new Uint32Array(messageDigest))
+  const textEncoder = new TextEncoder()
+  const message = textEncoder.encode('foo')
+  const messageDigest = await crypto.subtle.digest('SHA-256', message)
+  console.log(new Uint32Array(messageDigest))
 })()
 // Uint32Array(8) [1806968364, 2412183400, 1011194873, 876687389,
 // 1882014227, 2696905572, 2287897337, 2934400610]
@@ -67,13 +67,13 @@ SubtleCrypto.digest()方法用于生成消息摘要：
 
 ```js
 ;(async function () {
-    const textEncoder = new TextEncoder()
-    const message = textEncoder.encode('foo')
-    const messageDigest = await crypto.subtle.digest('SHA-256', message)
-    const hexDigest = Array.from(new Uint8Array(messageDigest))
-        .map(x => x.toString(16).padStart(2, '0'))
-        .join('')
-    console.log(hexDigest)
+  const textEncoder = new TextEncoder()
+  const message = textEncoder.encode('foo')
+  const messageDigest = await crypto.subtle.digest('SHA-256', message)
+  const hexDigest = Array.from(new Uint8Array(messageDigest))
+    .map((x) => x.toString(16).padStart(2, '0'))
+    .join('')
+  console.log(hexDigest)
 })()
 // 2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae
 ```
@@ -100,14 +100,14 @@ window.crypto.subtle 对象包含一组方法，用于执行常见的密码学�
 
 ```js
 ;(async function () {
-    const params = {
-        name: 'AES-CTR',
-        length: 128,
-    }
-    const keyUsages = ['encrypt', 'decrypt']
-    const key = await crypto.subtle.generateKey(params, false, keyUsages)
-    console.log(key)
-    // CryptoKey {type: "secret", extractable: true, algorithm: {...}, usages: Array(2)}
+  const params = {
+    name: 'AES-CTR',
+    length: 128,
+  }
+  const keyUsages = ['encrypt', 'decrypt']
+  const key = await crypto.subtle.generateKey(params, false, keyUsages)
+  console.log(key)
+  // CryptoKey {type: "secret", extractable: true, algorithm: {...}, usages: Array(2)}
 })()
 ```
 
@@ -115,16 +115,20 @@ window.crypto.subtle 对象包含一组方法，用于执行常见的密码学�
 
 ```js
 ;(async function () {
-    const params = {
-        name: 'ECDSA',
-        namedCurve: 'P-256',
-    }
-    const keyUsages = ['sign', 'verify']
-    const { publicKey, privateKey } = await crypto.subtle.generateKey(params, true, keyUsages)
-    console.log(publicKey)
-    // CryptoKey {type: "public", extractable: true, algorithm: {...}, usages: Array(1)}
-    console.log(privateKey)
-    // CryptoKey {type: "private", extractable: true, algorithm: {...}, usages: Array(1)}
+  const params = {
+    name: 'ECDSA',
+    namedCurve: 'P-256',
+  }
+  const keyUsages = ['sign', 'verify']
+  const { publicKey, privateKey } = await crypto.subtle.generateKey(
+    params,
+    true,
+    keyUsages
+  )
+  console.log(publicKey)
+  // CryptoKey {type: "public", extractable: true, algorithm: {...}, usages: Array(1)}
+  console.log(privateKey)
+  // CryptoKey {type: "private", extractable: true, algorithm: {...}, usages: Array(1)}
 })()
 ```
 
@@ -134,16 +138,16 @@ window.crypto.subtle 对象包含一组方法，用于执行常见的密码学�
 
 ```js
 ;(async function () {
-    const params = {
-        name: 'AES-CTR',
-        length: 128,
-    }
-    const keyUsages = ['encrypt', 'decrypt']
-    const key = await crypto.subtle.generateKey(params, true, keyUsages)
-    const rawKey = await crypto.subtle.exportKey('raw', key)
-    console.log(new Uint8Array(rawKey))
-    // Uint8Array[93, 122, 66, 135, 144, 182, 119, 196, 234, 73, 84, 7, 139, 43, 238,
-    // 110]
+  const params = {
+    name: 'AES-CTR',
+    length: 128,
+  }
+  const keyUsages = ['encrypt', 'decrypt']
+  const key = await crypto.subtle.generateKey(params, true, keyUsages)
+  const rawKey = await crypto.subtle.exportKey('raw', key)
+  console.log(new Uint8Array(rawKey))
+  // Uint8Array[93, 122, 66, 135, 144, 182, 119, 196, 234, 73, 84, 7, 139, 43, 238,
+  // 110]
 })()
 ```
 
@@ -151,18 +155,24 @@ window.crypto.subtle 对象包含一组方法，用于执行常见的密码学�
 
 ```js
 ;(async function () {
-    const params = {
-        name: 'AES-CTR',
-        length: 128,
-    }
-    const keyUsages = ['encrypt', 'decrypt']
-    const keyFormat = 'raw'
-    const isExtractable = true
-    const key = await crypto.subtle.generateKey(params, isExtractable, keyUsages)
-    const rawKey = await crypto.subtle.exportKey(keyFormat, key)
-    const importedKey = await crypto.subtle.importKey(keyFormat, rawKey, params.name, isExtractable, keyUsages)
-    console.log(importedKey)
-    // CryptoKey {type: "secret", extractable: true, algorithm: {...}, usages: Array(2)}
+  const params = {
+    name: 'AES-CTR',
+    length: 128,
+  }
+  const keyUsages = ['encrypt', 'decrypt']
+  const keyFormat = 'raw'
+  const isExtractable = true
+  const key = await crypto.subtle.generateKey(params, isExtractable, keyUsages)
+  const rawKey = await crypto.subtle.exportKey(keyFormat, key)
+  const importedKey = await crypto.subtle.importKey(
+    keyFormat,
+    rawKey,
+    params.name,
+    isExtractable,
+    keyUsages
+  )
+  console.log(importedKey)
+  // CryptoKey {type: "secret", extractable: true, algorithm: {...}, usages: Array(2)}
 })()
 ```
 
@@ -174,32 +184,35 @@ deriveBits()方法接收一个算法参数对象、主密钥和输出的位长�
 
 ```js
 ;(async function () {
-    const ellipticCurve = 'P-256'
-    const algoIdentifier = 'ECDH'
-    const derivedKeySize = 128
-    const params = {
-        name: algoIdentifier,
-        namedCurve: ellipticCurve,
-    }
-    const keyUsages = ['deriveBits']
-    const keyPairA = await crypto.subtle.generateKey(params, true, keyUsages)
-    const keyPairB = await crypto.subtle.generateKey(params, true, keyUsages)
-    // 从 A 的公钥和 B 的私钥派生密钥位
-    const derivedBitsAB = await crypto.subtle.deriveBits(
-        Object.assign({ public: keyPairA.publicKey }, params),
-        keyPairB.privateKey,
-        derivedKeySize
-    )
-    // 从 B 的公钥和 A 的私钥派生密钥位
-    const derivedBitsBA = await crypto.subtle.deriveBits(
-        Object.assign({ public: keyPairB.publicKey }, params),
-        keyPairA.privateKey,
-        derivedKeySize
-    )
-    const arrayAB = new Uint32Array(derivedBitsAB)
-    const arrayBA = new Uint32Array(derivedBitsBA)
-    // 确保密钥数组相等
-    console.log(arrayAB.length === arrayBA.length && arrayAB.every((val, i) => val === arrayBA[i])) // true
+  const ellipticCurve = 'P-256'
+  const algoIdentifier = 'ECDH'
+  const derivedKeySize = 128
+  const params = {
+    name: algoIdentifier,
+    namedCurve: ellipticCurve,
+  }
+  const keyUsages = ['deriveBits']
+  const keyPairA = await crypto.subtle.generateKey(params, true, keyUsages)
+  const keyPairB = await crypto.subtle.generateKey(params, true, keyUsages)
+  // 从 A 的公钥和 B 的私钥派生密钥位
+  const derivedBitsAB = await crypto.subtle.deriveBits(
+    Object.assign({ public: keyPairA.publicKey }, params),
+    keyPairB.privateKey,
+    derivedKeySize
+  )
+  // 从 B 的公钥和 A 的私钥派生密钥位
+  const derivedBitsBA = await crypto.subtle.deriveBits(
+    Object.assign({ public: keyPairB.publicKey }, params),
+    keyPairA.privateKey,
+    derivedKeySize
+  )
+  const arrayAB = new Uint32Array(derivedBitsAB)
+  const arrayBA = new Uint32Array(derivedBitsBA)
+  // 确保密钥数组相等
+  console.log(
+    arrayAB.length === arrayBA.length &&
+      arrayAB.every((val, i) => val === arrayBA[i])
+  ) // true
 })()
 ```
 
@@ -207,32 +220,32 @@ deriveKey()方法是类似的，只不过返回的是 CryptoKey 的实例而不�
 
 ```js
 ;(async function () {
-    const password = 'foobar'
-    const salt = crypto.getRandomValues(new Uint8Array(16))
-    const algoIdentifier = 'PBKDF2'
-    const keyFormat = 'raw'
-    const isExtractable = false
-    const params = { name: algoIdentifier }
-    const masterKey = await window.crypto.subtle.importKey(
-        keyFormat,
-        new TextEncoder().encode(password),
-        params,
-        isExtractable,
-        ['deriveKey']
-    )
-    const deriveParams = {
-        name: 'AES-GCM',
-        length: 128,
-    }
-    const derivedKey = await window.crypto.subtle.deriveKey(
-        Object.assign({ salt, iterations: 1e5, hash: 'SHA-256' }, params),
-        masterKey,
-        deriveParams,
-        isExtractable,
-        ['encrypt']
-    )
-    console.log(derivedKey)
-    // CryptoKey {type: "secret", extractable: false, algorithm: {...}, usages: Array(1)}
+  const password = 'foobar'
+  const salt = crypto.getRandomValues(new Uint8Array(16))
+  const algoIdentifier = 'PBKDF2'
+  const keyFormat = 'raw'
+  const isExtractable = false
+  const params = { name: algoIdentifier }
+  const masterKey = await window.crypto.subtle.importKey(
+    keyFormat,
+    new TextEncoder().encode(password),
+    params,
+    isExtractable,
+    ['deriveKey']
+  )
+  const deriveParams = {
+    name: 'AES-GCM',
+    length: 128,
+  }
+  const derivedKey = await window.crypto.subtle.deriveKey(
+    Object.assign({ salt, iterations: 1e5, hash: 'SHA-256' }, params),
+    masterKey,
+    deriveParams,
+    isExtractable,
+    ['encrypt']
+  )
+  console.log(derivedKey)
+  // CryptoKey {type: "secret", extractable: false, algorithm: {...}, usages: Array(1)}
 })()
 ```
 
@@ -244,20 +257,24 @@ deriveKey()方法是类似的，只不过返回的是 CryptoKey 的实例而不�
 
 ```js
 ;(async function () {
-    const keyParams = {
-        name: 'ECDSA',
-        namedCurve: 'P-256',
-    }
-    const keyUsages = ['sign', 'verify']
-    const { publicKey, privateKey } = await crypto.subtle.generateKey(keyParams, true, keyUsages)
-    const message = new TextEncoder().encode('I am Satoshi Nakamoto')
-    const signParams = {
-        name: 'ECDSA',
-        hash: 'SHA-256',
-    }
-    const signature = await crypto.subtle.sign(signParams, privateKey, message)
-    console.log(new Uint32Array(signature))
-    // Uint32Array(16) [2202267297, 698413658, 1501924384, 691450316, 778757775, ... ]
+  const keyParams = {
+    name: 'ECDSA',
+    namedCurve: 'P-256',
+  }
+  const keyUsages = ['sign', 'verify']
+  const { publicKey, privateKey } = await crypto.subtle.generateKey(
+    keyParams,
+    true,
+    keyUsages
+  )
+  const message = new TextEncoder().encode('I am Satoshi Nakamoto')
+  const signParams = {
+    name: 'ECDSA',
+    hash: 'SHA-256',
+  }
+  const signature = await crypto.subtle.sign(signParams, privateKey, message)
+  console.log(new Uint32Array(signature))
+  // Uint32Array(16) [2202267297, 698413658, 1501924384, 691450316, 778757775, ... ]
 })()
 ```
 
@@ -265,20 +282,29 @@ deriveKey()方法是类似的，只不过返回的是 CryptoKey 的实例而不�
 
 ```js
 ;(async function () {
-    const keyParams = {
-        name: 'ECDSA',
-        namedCurve: 'P-256',
-    }
-    const keyUsages = ['sign', 'verify']
-    const { publicKey, privateKey } = await crypto.subtle.generateKey(keyParams, true, keyUsages)
-    const message = new TextEncoder().encode('I am Satoshi Nakamoto')
-    const signParams = {
-        name: 'ECDSA',
-        hash: 'SHA-256',
-    }
-    const signature = await crypto.subtle.sign(signParams, privateKey, message)
-    const verified = await crypto.subtle.verify(signParams, publicKey, signature, message)
-    console.log(verified) // true
+  const keyParams = {
+    name: 'ECDSA',
+    namedCurve: 'P-256',
+  }
+  const keyUsages = ['sign', 'verify']
+  const { publicKey, privateKey } = await crypto.subtle.generateKey(
+    keyParams,
+    true,
+    keyUsages
+  )
+  const message = new TextEncoder().encode('I am Satoshi Nakamoto')
+  const signParams = {
+    name: 'ECDSA',
+    hash: 'SHA-256',
+  }
+  const signature = await crypto.subtle.sign(signParams, privateKey, message)
+  const verified = await crypto.subtle.verify(
+    signParams,
+    publicKey,
+    signature,
+    message
+  )
+  console.log(verified) // true
 })()
 ```
 
@@ -290,24 +316,32 @@ SubtleCrypto 对象支持使用公钥和对称算法加密和解密消息。这�
 
 ```js
 ;(async function () {
-    const algoIdentifier = 'AES-CBC'
-    const keyParams = {
-        name: algoIdentifier,
-        length: 256,
-    }
-    const keyUsages = ['encrypt', 'decrypt']
-    const key = await crypto.subtle.generateKey(keyParams, true, keyUsages)
-    const originalPlaintext = new TextEncoder().encode('I am Satoshi Nakamoto')
-    const encryptDecryptParams = {
-        name: algoIdentifier,
-        iv: crypto.getRandomValues(new Uint8Array(16)),
-    }
-    const ciphertext = await crypto.subtle.encrypt(encryptDecryptParams, key, originalPlaintext)
-    console.log(ciphertext)
-    // ArrayBuffer(32) {}
-    const decryptedPlaintext = await crypto.subtle.decrypt(encryptDecryptParams, key, ciphertext)
-    console.log(new TextDecoder().decode(decryptedPlaintext))
-    // I am Satoshi Nakamoto
+  const algoIdentifier = 'AES-CBC'
+  const keyParams = {
+    name: algoIdentifier,
+    length: 256,
+  }
+  const keyUsages = ['encrypt', 'decrypt']
+  const key = await crypto.subtle.generateKey(keyParams, true, keyUsages)
+  const originalPlaintext = new TextEncoder().encode('I am Satoshi Nakamoto')
+  const encryptDecryptParams = {
+    name: algoIdentifier,
+    iv: crypto.getRandomValues(new Uint8Array(16)),
+  }
+  const ciphertext = await crypto.subtle.encrypt(
+    encryptDecryptParams,
+    key,
+    originalPlaintext
+  )
+  console.log(ciphertext)
+  // ArrayBuffer(32) {}
+  const decryptedPlaintext = await crypto.subtle.decrypt(
+    encryptDecryptParams,
+    key,
+    ciphertext
+  )
+  console.log(new TextDecoder().decode(decryptedPlaintext))
+  // I am Satoshi Nakamoto
 })()
 ```
 
@@ -319,39 +353,48 @@ SubtleCrypto 对象支持包装和解包密钥，以便在非信任渠道传输�
 
 ```js
 ;(async function () {
-    const keyFormat = 'raw'
-    const extractable = true
-    const wrappingKeyAlgoIdentifier = 'AES-KW'
-    const wrappingKeyUsages = ['wrapKey', 'unwrapKey']
-    const wrappingKeyParams = {
-        name: wrappingKeyAlgoIdentifier,
-        length: 256,
-    }
-    const keyAlgoIdentifier = 'AES-GCM'
-    const keyUsages = ['encrypt']
-    const keyParams = {
-        name: keyAlgoIdentifier,
-        length: 256,
-    }
-    const wrappingKey = await crypto.subtle.generateKey(wrappingKeyParams, extractable, wrappingKeyUsages)
-    console.log(wrappingKey)
-    // CryptoKey {type: "secret", extractable: true, algorithm: {...}, usages: Array(2)}
-    const key = await crypto.subtle.generateKey(keyParams, extractable, keyUsages)
-    console.log(key)
-    // CryptoKey {type: "secret", extractable: true, algorithm: {...}, usages: Array(1)}
-    const wrappedKey = await crypto.subtle.wrapKey(keyFormat, key, wrappingKey, wrappingKeyAlgoIdentifier)
-    console.log(wrappedKey)
-    // ArrayBuffer(40) {}
-    const unwrappedKey = await crypto.subtle.unwrapKey(
-        keyFormat,
-        wrappedKey,
-        wrappingKey,
-        wrappingKeyParams,
-        keyParams,
-        extractable,
-        keyUsages
-    )
-    console.log(unwrappedKey)
-    // CryptoKey {type: "secret", extractable: true, algorithm: {...}, usages: Array(1)}
+  const keyFormat = 'raw'
+  const extractable = true
+  const wrappingKeyAlgoIdentifier = 'AES-KW'
+  const wrappingKeyUsages = ['wrapKey', 'unwrapKey']
+  const wrappingKeyParams = {
+    name: wrappingKeyAlgoIdentifier,
+    length: 256,
+  }
+  const keyAlgoIdentifier = 'AES-GCM'
+  const keyUsages = ['encrypt']
+  const keyParams = {
+    name: keyAlgoIdentifier,
+    length: 256,
+  }
+  const wrappingKey = await crypto.subtle.generateKey(
+    wrappingKeyParams,
+    extractable,
+    wrappingKeyUsages
+  )
+  console.log(wrappingKey)
+  // CryptoKey {type: "secret", extractable: true, algorithm: {...}, usages: Array(2)}
+  const key = await crypto.subtle.generateKey(keyParams, extractable, keyUsages)
+  console.log(key)
+  // CryptoKey {type: "secret", extractable: true, algorithm: {...}, usages: Array(1)}
+  const wrappedKey = await crypto.subtle.wrapKey(
+    keyFormat,
+    key,
+    wrappingKey,
+    wrappingKeyAlgoIdentifier
+  )
+  console.log(wrappedKey)
+  // ArrayBuffer(40) {}
+  const unwrappedKey = await crypto.subtle.unwrapKey(
+    keyFormat,
+    wrappedKey,
+    wrappingKey,
+    wrappingKeyParams,
+    keyParams,
+    extractable,
+    keyUsages
+  )
+  console.log(unwrappedKey)
+  // CryptoKey {type: "secret", extractable: true, algorithm: {...}, usages: Array(1)}
 })()
 ```

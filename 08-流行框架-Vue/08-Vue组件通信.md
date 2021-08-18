@@ -6,66 +6,66 @@
 
 传递数据操作步骤：
 
--   第一步：父组件中使用 v-bind 绑定要传递的数据
--   第二步：子组件在 props 属性中定义传递过来的数据
+- 第一步：父组件中使用 v-bind 绑定要传递的数据
+- 第二步：子组件在 props 属性中定义传递过来的数据
 
 ```html
 <div id="app">
-    <father></father>
+  <father></father>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 <script>
-    // 定义父组件：将父组件数据 fatherMsg 绑定到了子组件属性 sonMsg 上，将父组件方法 fatherShow 绑定到子组件 sonClick上
-    Vue.component('father', {
-        data: function () {
-            return {
-                fatherMsg: '姓氏为李',
-            }
-        },
-        // 父组件将数据绑定在子组件属性上
-        template: `
+  // 定义父组件：将父组件数据 fatherMsg 绑定到了子组件属性 sonMsg 上，将父组件方法 fatherShow 绑定到子组件 sonClick上
+  Vue.component('father', {
+    data: function () {
+      return {
+        fatherMsg: '姓氏为李',
+      }
+    },
+    // 父组件将数据绑定在子组件属性上
+    template: `
       <div>
         <p>父组件</p>
         <son :sonMsg="fatherMsg"></son>
       </div>
     `,
-    })
+  })
 
-    // 定义子组件：在props中接收父组件数据，在template中使用
-    Vue.component('son', {
-        props: ['sonMsg'],
-        data: function () {
-            return {
-                name: 'xxx',
-            }
-        },
-        template: `
+  // 定义子组件：在props中接收父组件数据，在template中使用
+  Vue.component('son', {
+    props: ['sonMsg'],
+    data: function () {
+      return {
+        name: 'xxx',
+      }
+    },
+    template: `
       <p>子组件,接收到的数据为：{{sonMsg}}</p>
     `,
-    })
+  })
 
-    new Vue({
-        el: '#app',
-        data: {},
-    })
+  new Vue({
+    el: '#app',
+    data: {},
+  })
 </script>
 ```
 
 data 与 props 对比：
 
--   data 中一般放置请求到的数据，props 里面放置的是传递过来的数据。
--   data 中的数据都是可读写的，而 props 中的数据是只读的
+- data 中一般放置请求到的数据，props 里面放置的是传递过来的数据。
+- data 中的数据都是可读写的，而 props 中的数据是只读的
 
 贴士：在 props 中使用驼峰形式，模板中需要使用短横线拼接的形式，但字符串模板没有这个限制。
 
 ```html
 <!-- props: userInfo -->
 <template>
-    <div>
-        <h2 :user-info>{{userInfo}}</h2>
-    </div>
+  <div>
+    <h2 :user-info>{{userInfo}}</h2>
+  </div>
 </template>
 ```
 
@@ -75,58 +75,58 @@ data 与 props 对比：
 
 传递方法操作步骤：
 
--   第一步：父组件中使用 v-on 绑定要传递的方法
--   第二步：子组件在 methods 中使用 \$emit 来触发父组件方法
+- 第一步：父组件中使用 v-on 绑定要传递的方法
+- 第二步：子组件在 methods 中使用 \$emit 来触发父组件方法
 
 ```html
 <div id="app">
-    <father></father>
+  <father></father>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 <script>
-    // 定义父组件：将父组件数据 fatherMsg 绑定到了子组件属性 sonMsg 上，将父组件方法 fatherShow 绑定到子组件 sonClick上
-    Vue.component('father', {
-        // 父组件将数据绑定在子组件属性上
-        template: `
+  // 定义父组件：将父组件数据 fatherMsg 绑定到了子组件属性 sonMsg 上，将父组件方法 fatherShow 绑定到子组件 sonClick上
+  Vue.component('father', {
+    // 父组件将数据绑定在子组件属性上
+    template: `
       <div>
         <p>父组件</p>
         <son @sonClick="fatherShow"></son>
       </div>
     `,
-        data: function () {
-            return {
-                fatherMsg: '姓氏为李',
-            }
-        },
-        methods: {
-            fatherShow: function (arg) {
-                alert(arg)
-            },
-        },
-    })
+    data: function () {
+      return {
+        fatherMsg: '姓氏为李',
+      }
+    },
+    methods: {
+      fatherShow: function (arg) {
+        alert(arg)
+      },
+    },
+  })
 
-    // 定义子组件：在props中接收父组件数据，在template中使用
-    Vue.component('son', {
-        data: function () {
-            return {
-                name: 'xxx',
-            }
-        },
-        props: ['sonMsg'],
-        template: `<div @click="sonShow">子组件</div>`,
-        methods: {
-            sonShow: function () {
-                this.$emit('sonClick', this.name)
-            },
-        },
-    })
+  // 定义子组件：在props中接收父组件数据，在template中使用
+  Vue.component('son', {
+    data: function () {
+      return {
+        name: 'xxx',
+      }
+    },
+    props: ['sonMsg'],
+    template: `<div @click="sonShow">子组件</div>`,
+    methods: {
+      sonShow: function () {
+        this.$emit('sonClick', this.name)
+      },
+    },
+  })
 
-    new Vue({
-        el: '#app',
-        data: {},
-    })
+  new Vue({
+    el: '#app',
+    data: {},
+  })
 </script>
 ```
 
@@ -167,22 +167,22 @@ ref 可以获取到原生节点，用于在父组件中直接操作子组件：
 
 ```html
 <div id="app">
-    <input type="text" ref="mytext" />
-    <button @click="add">点击</button>
+  <input type="text" ref="mytext" />
+  <button @click="add">点击</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 <script>
-    new Vue({
-        el: '#app',
-        data: {},
-        methods: {
-            add() {
-                alert(this.$refs.mytext.value)
-            },
-        },
-    })
+  new Vue({
+    el: '#app',
+    data: {},
+    methods: {
+      add() {
+        alert(this.$refs.mytext.value)
+      },
+    },
+  })
 </script>
 ```
 
@@ -202,44 +202,44 @@ Vue 为非父子关系组件提供了事件总线机制来实现通信。事件�
 
 ```html
 <div id="app">
-    <publish></publish>
-    <subcribe></subcribe>
+  <publish></publish>
+  <subcribe></subcribe>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 <script>
-    let bus = new Vue() // 新建中央事件总线
+  let bus = new Vue() // 新建中央事件总线
 
-    Vue.component('publish', {
-        template: `
+  Vue.component('publish', {
+    template: `
                 <div>
                     <input type="text" />
                     <button @click="handleClick()">发布</button>
                 </div>`,
-        methods: {
-            handleClick() {
-                bus.$emit('msg', 'helloworld')
-            },
-        },
-    })
+    methods: {
+      handleClick() {
+        bus.$emit('msg', 'helloworld')
+      },
+    },
+  })
 
-    Vue.component('subcribe', {
-        template: `
+  Vue.component('subcribe', {
+    template: `
                 <div>
                     数据为：
                 </div>`,
-        mounted() {
-            // 这里让组件尽早的订阅总线消息
-            bus.$on('msg', data => {
-                alert(data)
-            })
-        },
-    })
+    mounted() {
+      // 这里让组件尽早的订阅总线消息
+      bus.$on('msg', (data) => {
+        alert(data)
+      })
+    },
+  })
 
-    let app = new Vue({
-        el: '#app',
-        data: {},
-    })
+  let app = new Vue({
+    el: '#app',
+    data: {},
+  })
 </script>
 ```

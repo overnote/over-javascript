@@ -27,25 +27,25 @@ Accept: application/json,application/xml
 
 ```js
 const routes = {
-    all: [],
+  all: [],
 }
 
 const app = {}
 
 app.use = function (path, action) {
-    routes.all.push(pathRegexp(path), action)
+  routes.all.push(pathRegexp(path), action)
 }
 
 const funcArr = ['get', 'put', 'delete', 'post']
 
 funcArr.forEach(function (method) {
-    routes[method] = []
-    app[method] = function (path, action) {
-        routes[method].push({
-            regexp: pathRegexp(path),
-            action: action,
-        })
-    }
+  routes[method] = []
+  app[method] = function (path, action) {
+    routes[method].push({
+      regexp: pathRegexp(path),
+      action: action,
+    })
+  }
 })
 ```
 
@@ -61,29 +61,29 @@ app.get('/user/:username', infoUser)
 
 ```js
 function match(pathname, routes) {
-    for (var i = 0; i < routes.length; i++) {
-        // 正则匹配
-        let matched = red.exec(pathname)
-        if (!matched) {
-            return false
-        }
-
-        let reg = routes[i].regexp
-        let keys = route[i].keys
-
-        let params = {}
-        for (let j = 0; j < kyes.length; j++) {
-            let value = matched[j + 1]
-            if (value) {
-                params[keys[i]] = value
-            }
-        }
-
-        req.params = params
-        let action = routes[i].action
-        action(req, res)
-        return true
+  for (var i = 0; i < routes.length; i++) {
+    // 正则匹配
+    let matched = red.exec(pathname)
+    if (!matched) {
+      return false
     }
+
+    let reg = routes[i].regexp
+    let keys = route[i].keys
+
+    let params = {}
+    for (let j = 0; j < kyes.length; j++) {
+      let value = matched[j + 1]
+      if (value) {
+        params[keys[i]] = value
+      }
+    }
+
+    req.params = params
+    let action = routes[i].action
+    action(req, res)
+    return true
+  }
 }
 ```
 

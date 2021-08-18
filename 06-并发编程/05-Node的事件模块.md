@@ -11,11 +11,11 @@ let emitter = new events()
 
 // 订阅事件 event1
 emitter.on('event1', () => {
-    console.log('1--')
+  console.log('1--')
 })
 
-emitter.on('event1', msg => {
-    console.log('2--', msg)
+emitter.on('event1', (msg) => {
+  console.log('2--', msg)
 })
 
 // 发布
@@ -45,7 +45,7 @@ Node 还有一个内部定义的特殊事件：`newListener`：
 
 ```js
 // 每次用户调用了一次on，则执行该事件的方法
-emitter.on('newListener', type => {})
+emitter.on('newListener', (type) => {})
 ```
 
 ## 二 理解发布订阅模式
@@ -58,29 +58,29 @@ emitter.on('newListener', type => {})
 
 ```js
 var options = {
-    host: 'www.google.com',
-    port: 80,
-    path: '/upload',
-    method: 'POST',
+  host: 'www.google.com',
+  port: 80,
+  path: '/upload',
+  method: 'POST',
 }
 
 var req = http.request(options, function (res) {
-    console.log('STATUS: ' + res.statusCode)
-    console.log('HEADERS: ' + JSON.stringify(res.headers))
+  console.log('STATUS: ' + res.statusCode)
+  console.log('HEADERS: ' + JSON.stringify(res.headers))
 
-    res.setEncoding('utf8')
+  res.setEncoding('utf8')
 
-    res.on('data', function (chunk) {
-        console.log('BODY: ' + chunk)
-    })
+  res.on('data', function (chunk) {
+    console.log('BODY: ' + chunk)
+  })
 
-    res.on('end', function () {
-        // TODO
-    })
+  res.on('end', function () {
+    // TODO
+  })
 })
 
 req.on('error', function (e) {
-    console.log('problem with request: ' + e.message)
+  console.log('problem with request: ' + e.message)
 })
 
 // write data to request body
@@ -93,8 +93,8 @@ req.end()
 
 Node 对发布订阅机制增加了健壮性处理：
 
--   事件侦听器超过 10 个，将会触发警告，以避免内存泄露等现象产生
--   在运行期间如果触发了 error 事件，EventEmitter 对象会检查是否有对 error 事件添加过侦听器，如果添加了则 erro 事件由侦听器处理，否则将抛出异常
+- 事件侦听器超过 10 个，将会触发警告，以避免内存泄露等现象产生
+- 在运行期间如果触发了 error 事件，EventEmitter 对象会检查是否有对 error 事件添加过侦听器，如果添加了则 erro 事件由侦听器处理，否则将抛出异常
 
 实现一个继承自 EventEmitter 类的方式：
 
@@ -102,7 +102,7 @@ Node 对发布订阅机制增加了健壮性处理：
 var events = require('events')
 
 function Stream() {
-    events.EventEmitter.call(this)
+  events.EventEmitter.call(this)
 }
 util.inherits(Stream, events.EventEmitter)
 ```
@@ -117,9 +117,9 @@ util.inherits(Stream, events.EventEmitter)
 
 ```js
 function select(callback) {
-    db.select('SQL', function (results) {
-        callback(results)
-    })
+  db.select('SQL', function (results) {
+    callback(results)
+  })
 }
 ```
 
@@ -128,13 +128,13 @@ function select(callback) {
 ```js
 var status = 'ready'
 function select(callback) {
-    if (status === 'ready') {
-        status = 'pending'
-        db.select('SQL', function (results) {
-            status = 'ready'
-            callback(results)
-        })
-    }
+  if (status === 'ready') {
+    status = 'pending'
+    db.select('SQL', function (results) {
+      status = 'ready'
+      callback(results)
+    })
+  }
 }
 ```
 
@@ -144,15 +144,15 @@ function select(callback) {
 var proxy = new events.EventEmitter()
 var status = 'ready'
 function select(callback) {
-    proxy.once('selected', callback)
+  proxy.once('selected', callback)
 
-    if (status === 'ready') {
-        status = 'pending'
-        db.select('SQL', function (results) {
-            proxy.emit('selected', results)
-            status = 'ready'
-        })
-    }
+  if (status === 'ready') {
+    status = 'pending'
+    db.select('SQL', function (results) {
+      proxy.emit('selected', results)
+      status = 'ready'
+    })
+  }
 }
 ```
 
@@ -162,45 +162,45 @@ function select(callback) {
 
 ```js
 function Event() {
-    this._events = {}
+  this._events = {}
 }
 
 Event.prototype.on = function (eName, callback) {
-    // 支持继承类调用
-    if (!this._events) {
-        this._events[eName] = Object.create(null)
-    }
+  // 支持继承类调用
+  if (!this._events) {
+    this._events[eName] = Object.create(null)
+  }
 
-    if (this._events[eName]) {
-        this._events[eName].push(callback)
-    } else {
-        this._events[eName] = [callback]
-    }
+  if (this._events[eName]) {
+    this._events[eName].push(callback)
+  } else {
+    this._events[eName] = [callback]
+  }
 }
 
 Event.prototype.emit = function (eName, ...args) {
-    if (this._events[eName]) {
-        this._events[eName].forEach(fn => fn(...args))
-    }
+  if (this._events[eName]) {
+    this._events[eName].forEach((fn) => fn(...args))
+  }
 }
 
 Event.prototype.off = function (eName, callback) {
-    if (!this._events) {
-        return
-    }
-    this._events[eName] = this._events[eName].filter(fn => {
-        fn !== callback && fn.l !== callback
-    })
+  if (!this._events) {
+    return
+  }
+  this._events[eName] = this._events[eName].filter((fn) => {
+    fn !== callback && fn.l !== callback
+  })
 }
 
 Event.prototype.once = function (eName, callback) {
-    const once = (...args) => {
-        callback(...args)
-        this.off(eName, once)
-    }
-    // 标识这个once是谁的
-    once.l = callback
-    this.on(eName, once)
+  const once = (...args) => {
+    callback(...args)
+    this.off(eName, once)
+  }
+  // 标识这个once是谁的
+  once.l = callback
+  this.on(eName, once)
 }
 
 module.exports = Event

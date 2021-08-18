@@ -87,7 +87,11 @@ document.cookie = encodeURIComponent('name') + '=' + encodeURIComponent('Lisi')
 要为创建的 cookie 指定额外的信息，只要像 Set-Cookie 头部一样直接在后面追加相同格式的字符串即可：
 
 ```js
-document.cookie = encodeURIComponent('name') + '=' + encodeURIComponent('Lisi') + '; domain=.wrox.com; path=/'
+document.cookie =
+  encodeURIComponent('name') +
+  '=' +
+  encodeURIComponent('Lisi') +
+  '; domain=.wrox.com; path=/'
 ```
 
 ### 2.2 CookieUtil
@@ -96,38 +100,40 @@ document.cookie = encodeURIComponent('name') + '=' + encodeURIComponent('Lisi') 
 
 ```js
 class CookieUtil {
-    static get(name) {
-        let cookieName = `${encodeURIComponent(name)}=`,
-            cookieStart = document.cookie.indexOf(cookieName),
-            cookieValue = null
-        if (cookieStart > -1) {
-            let cookieEnd = document.cookie.indexOf(';', cookieStart)
-            if (cookieEnd == -1) {
-                cookieEnd = document.cookie.length
-            }
-            cookieValue = decodeURIComponent(document.cookie.substring(cookieStart + cookieName.length, cookieEnd))
-        }
-        return cookieValue
+  static get(name) {
+    let cookieName = `${encodeURIComponent(name)}=`,
+      cookieStart = document.cookie.indexOf(cookieName),
+      cookieValue = null
+    if (cookieStart > -1) {
+      let cookieEnd = document.cookie.indexOf(';', cookieStart)
+      if (cookieEnd == -1) {
+        cookieEnd = document.cookie.length
+      }
+      cookieValue = decodeURIComponent(
+        document.cookie.substring(cookieStart + cookieName.length, cookieEnd)
+      )
     }
-    static set(name, value, expires, path, domain, secure) {
-        let cookieText = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
-        if (expires instanceof Date) {
-            cookieText += `; expires=${expires.toGMTString()}`
-        }
-        if (path) {
-            cookieText += `; path=${path}`
-        }
-        if (domain) {
-            cookieText += `; domain=${domain}`
-        }
-        if (secure) {
-            cookieText += '; secure'
-        }
-        document.cookie = cookieText
+    return cookieValue
+  }
+  static set(name, value, expires, path, domain, secure) {
+    let cookieText = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
+    if (expires instanceof Date) {
+      cookieText += `; expires=${expires.toGMTString()}`
     }
-    static unset(name, path, domain, secure) {
-        CookieUtil.set(name, '', new Date(0), path, domain, secure)
+    if (path) {
+      cookieText += `; path=${path}`
     }
+    if (domain) {
+      cookieText += `; domain=${domain}`
+    }
+    if (secure) {
+      cookieText += '; secure'
+    }
+    document.cookie = cookieText
+  }
+  static unset(name, path, domain, secure) {
+    CookieUtil.set(name, '', new Date(0), path, domain, secure)
+  }
 }
 ```
 
@@ -148,7 +154,13 @@ alert(CookieUtil.get('book')) // "Professional JavaScript"
 CookieUtil.unset('name')
 CookieUtil.unset('book')
 // 设置有路径、域和过期时间的 cookie
-CookieUtil.set('name', 'Nicholas', '/books/projs/', 'www.wrox.com', new Date('January 1, 2010'))
+CookieUtil.set(
+  'name',
+  'Nicholas',
+  '/books/projs/',
+  'www.wrox.com',
+  new Date('January 1, 2010')
+)
 // 删除刚刚设置的 cookie
 CookieUtil.unset('name', '/books/projs/', 'www.wrox.com')
 // 设置安全 cookie
@@ -173,36 +185,39 @@ name=name1=value1&name2=value2&name3=value3&name4=value4&name5=value5
 
 ```js
 class SubCookieUtil {
-    static get(name, subName) {
-        let subCookies = SubCookieUtil.getAll(name)
-        return subCookies ? subCookies[subName] : null
-    }
-    static getAll(name) {
-        let cookieName = encodeURIComponent(name) + '=',
-            cookieStart = document.cookie.indexOf(cookieName),
-            cookieValue = null,
-            cookieEnd,
-            subCookies,
-            parts,
-            result = {}
-        if (cookieStart > -1) {
-            cookieEnd = document.cookie.indexOf(';', cookieStart)
-            if (cookieEnd == -1) {
-                cookieEnd = document.cookie.length
-            }
-            cookieValue = document.cookie.substring(cookieStart + cookieName.length, cookieEnd)
-            if (cookieValue.length > 0) {
-                subCookies = cookieValue.split('&')
-                for (let i = 0, len = subCookies.length; i < len; i++) {
-                    parts = subCookies[i].split('=')
-                    result[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1])
-                }
-                return result
-            }
+  static get(name, subName) {
+    let subCookies = SubCookieUtil.getAll(name)
+    return subCookies ? subCookies[subName] : null
+  }
+  static getAll(name) {
+    let cookieName = encodeURIComponent(name) + '=',
+      cookieStart = document.cookie.indexOf(cookieName),
+      cookieValue = null,
+      cookieEnd,
+      subCookies,
+      parts,
+      result = {}
+    if (cookieStart > -1) {
+      cookieEnd = document.cookie.indexOf(';', cookieStart)
+      if (cookieEnd == -1) {
+        cookieEnd = document.cookie.length
+      }
+      cookieValue = document.cookie.substring(
+        cookieStart + cookieName.length,
+        cookieEnd
+      )
+      if (cookieValue.length > 0) {
+        subCookies = cookieValue.split('&')
+        for (let i = 0, len = subCookies.length; i < len; i++) {
+          parts = subCookies[i].split('=')
+          result[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1])
         }
-        return null
+        return result
+      }
     }
-    // 省略其他代码
+    return null
+  }
+  // 省略其他代码
 }
 ```
 
@@ -225,41 +240,43 @@ alert(SubCookieUtil.get('data', 'book')) // "Professional JavaScript"
 
 ```js
 class SubCookieUtil {
-    // 省略之前的代码
-    static set(name, subName, value, expires, path, domain, secure) {
-        let subcookies = SubCookieUtil.getAll(name) || {}
-        subcookies[subName] = value
-        SubCookieUtil.setAll(name, subcookies, expires, path, domain, secure)
+  // 省略之前的代码
+  static set(name, subName, value, expires, path, domain, secure) {
+    let subcookies = SubCookieUtil.getAll(name) || {}
+    subcookies[subName] = value
+    SubCookieUtil.setAll(name, subcookies, expires, path, domain, secure)
+  }
+  static setAll(name, subcookies, expires, path, domain, secure) {
+    let cookieText = encodeURIComponent(name) + '=',
+      subcookieParts = new Array(),
+      subName
+    for (subName in subcookies) {
+      if (subName.length > 0 && subcookies.hasOwnProperty(subName)) {
+        subcookieParts.push(
+          '${encodeURIComponent(subName)}=${encodeURIComponent(subcookies[subName])}'
+        )
+      }
     }
-    static setAll(name, subcookies, expires, path, domain, secure) {
-        let cookieText = encodeURIComponent(name) + '=',
-            subcookieParts = new Array(),
-            subName
-        for (subName in subcookies) {
-            if (subName.length > 0 && subcookies.hasOwnProperty(subName)) {
-                subcookieParts.push('${encodeURIComponent(subName)}=${encodeURIComponent(subcookies[subName])}')
-            }
-        }
-        if (cookieParts.length > 0) {
-            cookieText += subcookieParts.join('&')
-            if (expires instanceof Date) {
-                cookieText += `; expires=${expires.toGMTString()}`
-            }
-            if (path) {
-                cookieText += `; path=${path}`
-            }
-            if (domain) {
-                cookieText += `; domain=${domain}`
-            }
-            if (secure) {
-                cookieText += '; secure'
-            }
-        } else {
-            cookieText += `; expires=${new Date(0).toGMTString()}`
-        }
-        document.cookie = cookieText
+    if (cookieParts.length > 0) {
+      cookieText += subcookieParts.join('&')
+      if (expires instanceof Date) {
+        cookieText += `; expires=${expires.toGMTString()}`
+      }
+      if (path) {
+        cookieText += `; path=${path}`
+      }
+      if (domain) {
+        cookieText += `; domain=${domain}`
+      }
+      if (secure) {
+        cookieText += '; secure'
+      }
+    } else {
+      cookieText += `; expires=${new Date(0).toGMTString()}`
     }
-    // 省略其他代码
+    document.cookie = cookieText
+  }
+  // 省略其他代码
 }
 ```
 
@@ -271,7 +288,11 @@ class SubCookieUtil {
 SubCookieUtil.set('data', 'name', 'Nicholas')
 SubCookieUtil.set('data', 'book', 'Professional JavaScript')
 // 设置所有子 cookie 并传入过期时间
-SubCookieUtil.setAll('data', { name: 'Nicholas', book: 'Professional JavaScript' }, new Date('January 1, 2010'))
+SubCookieUtil.setAll(
+  'data',
+  { name: 'Nicholas', book: 'Professional JavaScript' },
+  new Date('January 1, 2010')
+)
 // 修改"name"的值并修改整个 cookie 的过期时间
 SubCookieUtil.set('data', 'name', 'Michael', new Date('February 1, 2010'))
 ```
@@ -282,17 +303,17 @@ SubCookieUtil.set('data', 'name', 'Michael', new Date('February 1, 2010'))
 
 ```js
 class SubCookieUtil {
-    // 省略之前的代码
-    static unset(name, subName, path, domain, secure) {
-        let subcookies = SubCookieUtil.getAll(name)
-        if (subcookies) {
-            delete subcookies[subName] // 删除
-            SubCookieUtil.setAll(name, subcookies, null, path, domain, secure)
-        }
+  // 省略之前的代码
+  static unset(name, subName, path, domain, secure) {
+    let subcookies = SubCookieUtil.getAll(name)
+    if (subcookies) {
+      delete subcookies[subName] // 删除
+      SubCookieUtil.setAll(name, subcookies, null, path, domain, secure)
     }
-    static unsetAll(name, path, domain, secure) {
-        SubCookieUtil.setAll(name, null, new Date(0), path, domain, secure)
-    }
+  }
+  static unsetAll(name, path, domain, secure) {
+    SubCookieUtil.setAll(name, null, new Date(0), path, domain, secure)
+  }
 }
 ```
 

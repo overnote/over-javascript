@@ -6,23 +6,23 @@ React 仍然能够使用原生的 DOM 事件绑定方式，只是 React 推荐�
 
 ```js
 class Title extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-    render() {
-        return (
-            <h1 id="title" onClick={this.test}>
-                hello
-            </h1>
-        )
-    }
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return (
+      <h1 id="title" onClick={this.test}>
+        hello
+      </h1>
+    )
+  }
 
-    // 原生方式：通过获取 id 为 title 的元素绑定事件，或者直接在标签内添加： onclick="test()"
-    // react 推荐方式：行内 onClick={test}。注意这里只是一个赋值语句，如果写 test() 则赋值的是该函数返回值，且会被默认首先调用一次
-    test = () => {
-        console.log('hello world!')
-        console.log(this) // 输出Title组件实例
-    }
+  // 原生方式：通过获取 id 为 title 的元素绑定事件，或者直接在标签内添加： onclick="test()"
+  // react 推荐方式：行内 onClick={test}。注意这里只是一个赋值语句，如果写 test() 则赋值的是该函数返回值，且会被默认首先调用一次
+  test = () => {
+    console.log('hello world!')
+    console.log(this) // 输出Title组件实例
+  }
 }
 ```
 
@@ -47,13 +47,13 @@ test(){
 
 ```js
 class Person {
-    constructor(name, age) {
-        this.name = name
-        this.age = age
-    }
-    info() {
-        console.log(this)
-    }
+  constructor(name, age) {
+    this.name = name
+    this.age = age
+  }
+  info() {
+    console.log(this)
+  }
 }
 
 const p = new Person('Jack', 18)
@@ -75,20 +75,20 @@ o() // undefined
 
 ```js
 class Comp extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-    fn = () => {
-        console.log(this)
-    }
-    render() {
-        return (
-            <div>
-                组件
-                <button onClick={this.fn}>点击</button>
-            </div>
-        )
-    }
+  constructor(props) {
+    super(props)
+  }
+  fn = () => {
+    console.log(this)
+  }
+  render() {
+    return (
+      <div>
+        组件
+        <button onClick={this.fn}>点击</button>
+      </div>
+    )
+  }
 }
 ```
 
@@ -96,21 +96,21 @@ class Comp extends React.Component {
 
 ```js
 class Comp extends React.Component {
-    constructor(props) {
-        super(props)
-        this.fn = this.fn.bind(this) // 在实例上挂载一个新函数fn
-    }
-    fn() {
-        console.log(this)
-    }
-    render() {
-        return (
-            <div>
-                组件
-                <button onClick={this.fn}>点击</button>
-            </div>
-        )
-    }
+  constructor(props) {
+    super(props)
+    this.fn = this.fn.bind(this) // 在实例上挂载一个新函数fn
+  }
+  fn() {
+    console.log(this)
+  }
+  render() {
+    return (
+      <div>
+        组件
+        <button onClick={this.fn}>点击</button>
+      </div>
+    )
+  }
 }
 ```
 
@@ -118,19 +118,19 @@ class Comp extends React.Component {
 
 ```js
 class Comp extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-    fn() {
-        console.log(this)
-    }
-    render() {
-        return (
-            <div>
-                组件
-                <button onClick={this.fn.bind(this)}>点击</button>
-            </div>
-        )
-    }
+  constructor(props) {
+    super(props)
+  }
+  fn() {
+    console.log(this)
+  }
+  render() {
+    return (
+      <div>
+        组件
+        <button onClick={this.fn.bind(this)}>点击</button>
+      </div>
+    )
+  }
 }
 ```

@@ -81,21 +81,21 @@ Electron 支持在 package.json 中设置 build 的配置、针对操作系统�
 
 ```js
 module.exports = {
-    productionSourceMap: false,
-    pluginOptions: {
-        electronBuilder: {
-            builderOptions: {
-                win: {
-                    signingHashAlgorithms: ['sha1', 'sha256'],
-                    certificateFile: '证书文件',
-                    certificatePassword: '证书密码',
-                    certificateSubjectName: '',
-                    // ...
-                },
-            },
-            mainProcessFile: 'public/background/start.js',
+  productionSourceMap: false,
+  pluginOptions: {
+    electronBuilder: {
+      builderOptions: {
+        win: {
+          signingHashAlgorithms: ['sha1', 'sha256'],
+          certificateFile: '证书文件',
+          certificatePassword: '证书密码',
+          certificateSubjectName: '',
+          // ...
         },
+      },
+      mainProcessFile: 'public/background/start.js',
     },
+  },
 }
 ```
 
@@ -110,15 +110,15 @@ electron 遵守 node 规范，打包时是不会将 dev 依赖打包的。主要
 ```js
 const path = require('path')
 module.exports = {
-    target: 'electron-main',
-    entry: './main.js',
-    output: {
-        path: path.resolve(__dirname, './build'),
-        filename: 'main.js',
-    },
-    node: {
-        __dirname: fale,
-    },
+  target: 'electron-main',
+  entry: './main.js',
+  output: {
+    path: path.resolve(__dirname, './build'),
+    filename: 'main.js',
+  },
+  node: {
+    __dirname: fale,
+  },
 }
 ```
 
@@ -170,46 +170,46 @@ url 是升级的地址在哪儿，还需要在主进程加入：
 const { autoUpdater } = require('electron-updater')
 
 app.on('ready', () => {
-    // 其他代码
+  // 其他代码
 
-    // 自动升级代码
-    autoUpdater.autoDownload = false
-    autoUpdater.checkForUpdates()
-    autoUpdater.on('error', error => {
-        dialog.showErrorBox('更新失败')
-        console.log('更新失败:', error)
+  // 自动升级代码
+  autoUpdater.autoDownload = false
+  autoUpdater.checkForUpdates()
+  autoUpdater.on('error', (error) => {
+    dialog.showErrorBox('更新失败')
+    console.log('更新失败:', error)
+  })
+  autoUpdater.on('update-available', () => {
+    dialog.showMessageBox(
+      {
+        type: 'info',
+        title: '应用有新版本',
+        message: '应用有新版本，是否现在更新',
+        buttons: ['是', '否'],
+      },
+      (buttonIndex) => {
+        if (buttonIndex === 0) {
+          autoUpdater.downloadUpdate()
+        }
+      }
+    )
+  })
+  autoUpdater.on('update-not-available', () => {
+    dialog.showMessageBox({
+      title: '没有新版本',
+      message: '当前没有版本',
     })
-    autoUpdater.on('update-available', () => {
-        dialog.showMessageBox(
-            {
-                type: 'info',
-                title: '应用有新版本',
-                message: '应用有新版本，是否现在更新',
-                buttons: ['是', '否'],
-            },
-            buttonIndex => {
-                if (buttonIndex === 0) {
-                    autoUpdater.downloadUpdate()
-                }
-            }
-        )
-    })
-    autoUpdater.on('update-not-available', () => {
-        dialog.showMessageBox({
-            title: '没有新版本',
-            message: '当前没有版本',
-        })
-    })
+  })
 
-    // 其他代码
+  // 其他代码
 })
 
 autoUpdater.on('update-download', () => {
-    this.mainWin.webContents.send('updateDownLoaded')
+  this.mainWin.webContents.send('updateDownLoaded')
 })
 
-ipcMain.on('quitAndInstall', event => {
-    autoUpdater.quitAndInstall()
+ipcMain.on('quitAndInstall', (event) => {
+  autoUpdater.quitAndInstall()
 })
 ```
 
@@ -231,8 +231,8 @@ provider: github
 
 ```js
 app.on('ready', () => {
-    if (isDev) {
-        autoUpdater.updateConfigPaht = path.join(__dirname, 'dev-app-update.yml')
-    }
+  if (isDev) {
+    autoUpdater.updateConfigPaht = path.join(__dirname, 'dev-app-update.yml')
+  }
 })
 ```

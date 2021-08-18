@@ -22,8 +22,8 @@ box.css('border', '1px solid red')
 
 // 或者直接采用链式写法
 $('#box')
-    .bind('click', function () {})
-    .css('border', '1px solid red')
+  .bind('click', function () {})
+  .css('border', '1px solid red')
 ```
 
 ### 1.3 循环操作 DOM
@@ -58,23 +58,23 @@ $(#div).html(list.join(''))
 
 ```js
 $(document).ready(function () {
-    $('input.text1').val('Enter your search text here')
-    textFill($('input.text1'))
+  $('input.text1').val('Enter your search text here')
+  textFill($('input.text1'))
 })
 function textFill(input) {
-    //input focus text function
-    var originalvalue = input.val()
-    input
-        .focus(function () {
-            if ($.trim(input.val()) == originalvalue) {
-                input.val('')
-            }
-        })
-        .blur(function () {
-            if ($.trim(input.val()) == '') {
-                input.val(originalvalue)
-            }
-        })
+  //input focus text function
+  var originalvalue = input.val()
+  input
+    .focus(function () {
+      if ($.trim(input.val()) == originalvalue) {
+        input.val('')
+      }
+    })
+    .blur(function () {
+      if ($.trim(input.val()) == '') {
+        input.val(originalvalue)
+      }
+    })
 }
 ```
 
@@ -82,30 +82,30 @@ function textFill(input) {
 
 ```js
 $(document).ready(function () {
-    // Firefox 2 and above
-    if ($.browser.mozilla && $.browser.version >= '1.8') {
-        // do something
-    }
-    // Safari
-    if ($.browser.safari) {
-        // do something
-    }
-    // Chrome
-    if ($.browser.chrome) {
-        // do something
-    }
-    // Opera
-    if ($.browser.opera) {
-        // do something
-    }
-    // IE6 and below
-    if ($.browser.msie && $.browser.version <= 6) {
-        // do something
-    }
-    // anything above IE6
-    if ($.browser.msie && $.browser.version > 6) {
-        // do something
-    }
+  // Firefox 2 and above
+  if ($.browser.mozilla && $.browser.version >= '1.8') {
+    // do something
+  }
+  // Safari
+  if ($.browser.safari) {
+    // do something
+  }
+  // Chrome
+  if ($.browser.chrome) {
+    // do something
+  }
+  // Opera
+  if ($.browser.opera) {
+    // do something
+  }
+  // IE6 and below
+  if ($.browser.msie && $.browser.version <= 6) {
+    // do something
+  }
+  // anything above IE6
+  if ($.browser.msie && $.browser.version > 6) {
+    // do something
+  }
 })
 ```
 
@@ -113,14 +113,14 @@ $(document).ready(function () {
 
 ```js
 jQuery.fn.scrollTo = function (speed) {
-    var targetOffset = $(this).offset().top
-    $('html,body').stop().animate({ scrollTop: targetOffset }, speed)
-    return this
+  var targetOffset = $(this).offset().top
+  $('html,body').stop().animate({ scrollTop: targetOffset }, speed)
+  return this
 }
 // use
 $('#goheader').click(function () {
-    $('body').scrollTo(500)
-    return false
+  $('body').scrollTo(500)
+  return false
 })
 ```
 
@@ -128,14 +128,20 @@ $('#goheader').click(function () {
 
 ```js
 $(document).ready(function () {
-    jQuery.fn.center = function () {
-        this.css('position', 'absolute')
-        this.css('top', ($(window).height() - this.height()) / 2 + $(window).scrollTop() + 'px')
-        this.css('left', ($(window).width() - this.width()) / 2 + $(window).scrollLeft() + 'px')
-        return this
-    }
-    //use
-    $('#XY').center()
+  jQuery.fn.center = function () {
+    this.css('position', 'absolute')
+    this.css(
+      'top',
+      ($(window).height() - this.height()) / 2 + $(window).scrollTop() + 'px'
+    )
+    this.css(
+      'left',
+      ($(window).width() - this.width()) / 2 + $(window).scrollLeft() + 'px'
+    )
+    return this
+  }
+  //use
+  $('#XY').center()
 })
 ```
 
@@ -151,8 +157,8 @@ $('#someElement option:selected')
 ```js
 var tog = false
 $('button').click(function () {
-    $('input[type=checkbox]').attr('checked', !tog)
-    tog = !tog
+  $('input[type=checkbox]').attr('checked', !tog)
+  tog = !tog
 })
 ```
 
@@ -160,6 +166,6 @@ $('button').click(function () {
 
 ```js
 $('#nav li').click(function () {
-    $(this).addClass('active').siblings().removeClass('active')
+  $(this).addClass('active').siblings().removeClass('active')
 })
 ```

@@ -4,8 +4,8 @@
 
 一个 Electron 应用只有一个主进程，但可以有多个渲染进程：
 
--   主进程：由 Electron 创建，并从口文件开始执行代码的进程。主进程用来监听程序的生命周期事件、管理窗口（渲染进程）、加载页面、程序关闭后回收资源等。
--   渲染进程：一个 BrowserWindow 实例代表一个渲染进程，若该实例被销毁，则渲染进程也会终结。渲染界面负责完成界面渲染、接收用户输入、响应用户交互。
+- 主进程：由 Electron 创建，并从口文件开始执行代码的进程。主进程用来监听程序的生命周期事件、管理窗口（渲染进程）、加载页面、程序关闭后回收资源等。
+- 渲染进程：一个 BrowserWindow 实例代表一个渲染进程，若该实例被销毁，则渲染进程也会终结。渲染界面负责完成界面渲染、接收用户输入、响应用户交互。
 
 ![electron应用架构](./../images/node/electron-00.svg)
 
@@ -13,8 +13,8 @@
 
 贴士：
 
--   主进程负责管理所有窗口及其对应的渲染进程，开启 `nodeIntegration` 后，渲染进程也有能力访问 Node 的 API。
--   GUI 的操作，如：创建窗口、创建菜单只能在主进程中完成，如果需要渲染进程来执行创建，必须让渲染进程发送消息给主进程，主进程接收到消息后执行创建，也可以使用 remote 模块来完成。
+- 主进程负责管理所有窗口及其对应的渲染进程，开启 `nodeIntegration` 后，渲染进程也有能力访问 Node 的 API。
+- GUI 的操作，如：创建窗口、创建菜单只能在主进程中完成，如果需要渲染进程来执行创建，必须让渲染进程发送消息给主进程，主进程接收到消息后执行创建，也可以使用 remote 模块来完成。
 
 Electron 中模块的归属：
 
@@ -35,26 +35,26 @@ Electron 中模块的归属：
 
 ```json
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "调试主进程",
-            "skipFiles": ["<node_internals>/**"],
-            "program": "${workspaceFolder}/main.js",
-            "cwd": "${workspaceFolder}",
-            "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
-            "windows": {
-                "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
-            },
-            "args": ["."],
-            "outputCapture": "std"
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "调试主进程",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/main.js",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
+      "windows": {
+        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
+      },
+      "args": ["."],
+      "outputCapture": "std"
+    }
+  ]
 }
 ```
 
@@ -110,10 +110,10 @@ Electron 使用 IPC（interprocess communication）在进程之间进行通信�
 ```html
 <button id="btn">操作</button>
 <script>
-    const { ipcRenderer } = require('electron')
-    document.querySelector('#btn').addEventListener('click', function () {
-        ipcRenderer.send('msg_renderUsers', { name: 'lisi' }, { age: 30 }) // 参数可以是多个
-    })
+  const { ipcRenderer } = require('electron')
+  document.querySelector('#btn').addEventListener('click', function () {
+    ipcRenderer.send('msg_renderUsers', { name: 'lisi' }, { age: 30 }) // 参数可以是多个
+  })
 </script>
 ```
 
@@ -125,9 +125,9 @@ Electron 使用 IPC（interprocess communication）在进程之间进行通信�
 // 主进程添加的消息处理代码
 let { ipcMain } = require('electron')
 ipcMain.on('msg_renderUsers', (event, param1, param2) => {
-    // event.sender是渲染进程的webContents实例
-    console.log('param1：', param1)
-    console.log('param2：', param2)
+  // event.sender是渲染进程的webContents实例
+  console.log('param1：', param1)
+  console.log('param2：', param2)
 })
 ```
 
@@ -144,10 +144,10 @@ ipcMain.on('msg_renderUsers', (event, param1, param2) => {
 ```js
 let { ipcMain } = require('electron')
 ipcMain.on('msg_renderUsers', (event, param1, param2) => {
-    console.log('param1：', param1)
-    console.log('param2：', param2)
-    param2.age += 100
-    mainWindow.webContents.send('msg_main2View', param1, param2)
+  console.log('param1：', param1)
+  console.log('param2：', param2)
+  param2.age += 100
+  mainWindow.webContents.send('msg_main2View', param1, param2)
 })
 ```
 
@@ -156,14 +156,14 @@ ipcMain.on('msg_renderUsers', (event, param1, param2) => {
 ```html
 <button id="btn">操作</button>
 <script>
-    const { ipcRenderer } = require('electron')
-    document.querySelector('#btn').addEventListener('click', function () {
-        ipcRenderer.send('msg_renderUsers', { name: 'lisi' }, { age: 30 })
-    })
-    ipcRenderer.on('msg_main2View', (event, param1, param2) => {
-        console.log('param1：', param1)
-        console.log('param2：', param2)
-    })
+  const { ipcRenderer } = require('electron')
+  document.querySelector('#btn').addEventListener('click', function () {
+    ipcRenderer.send('msg_renderUsers', { name: 'lisi' }, { age: 30 })
+  })
+  ipcRenderer.on('msg_main2View', (event, param1, param2) => {
+    console.log('param1：', param1)
+    console.log('param2：', param2)
+  })
 </script>
 ```
 
@@ -177,10 +177,10 @@ ipcMain.on('msg_renderUsers', (event, param1, param2) => {
 
 ```js
 ipcMain.on('msg_renderUsers', (event, param1, param2) => {
-    console.log('param1：', param1)
-    console.log('param2：', param2)
-    param2.age += 100
-    event.sender.send('msg_main2View', param1, param2) // 也可以同理使用：event.reply("msg_main2View", param1, param2)
+  console.log('param1：', param1)
+  console.log('param2：', param2)
+  param2.age += 100
+  event.sender.send('msg_main2View', param1, param2) // 也可以同理使用：event.reply("msg_main2View", param1, param2)
 })
 ```
 
@@ -207,12 +207,12 @@ remote 模块可以帮助开发者在渲染进程中访问主进程对象。
 ```html
 <button id="openView">打开百度</button>
 <script>
-    const { remote } = require('electron')
-    const BrowserWindow = remote.BrowserWindow
-    document.querySelector('#openView').addEventListener('click', function () {
-        let win = new BrowserWindow({ width: 800, height: 600 })
-        win.loadURL('https://www.baidu.com')
-    })
+  const { remote } = require('electron')
+  const BrowserWindow = remote.BrowserWindow
+  document.querySelector('#openView').addEventListener('click', function () {
+    let win = new BrowserWindow({ width: 800, height: 600 })
+    win.loadURL('https://www.baidu.com')
+  })
 </script>
 ```
 
@@ -220,10 +220,10 @@ remote 模块可以帮助开发者在渲染进程中访问主进程对象。
 
 ```js
 mainWindow = new BrowserWindow({
-    webPreferences: {
-        nodeIntegration: true, // 允许界面使用node
-        enableRemoteModule: true, // 开启remote模块，Electron10这里默认是false
-    },
+  webPreferences: {
+    nodeIntegration: true, // 允许界面使用node
+    enableRemoteModule: true, // 开启remote模块，Electron10这里默认是false
+  },
 })
 ```
 
@@ -235,8 +235,8 @@ remote 对象的属性和方法都是主进程的属性和方法的映射，使�
 
 remote 模块可以降低主进程与渲染进程之间访问的难度，但是也带来了相当多的问题，在 Electron10 中，该模块已经被默认关闭：
 
--   性能损耗很大：跨进程操作的性能损耗是计算机中最严重的性能消耗点之一。
--   容易产生错误：
--   如：remote 模块使用了主进程某个对象，该对象在某一时刻会触发事件，但是事件处理程序位于渲染进程，这时候消息传递造成的延时很容易让渲染进程中一些代码失效，如：`event.preventDefault()`
--   如：remote 模块的对象其实是代理对象，并不是真实的原始对象。代理对象原型链上的属性不会映射到渲染进程的代理对象上。其次，类似 NaN、Infinity 这些值不能被正确的映射到渲染进程，如果一个主进程方法返回 NaN，则渲染进程 remote 模块获取的是 undefined。
--   安全问题：IPC 管道通信时，如果要加载第三方网页，恶意代码能够通过原型污染攻击来模拟 remote 模块的远程消息，以获取访问主进程模块的权利，从而逃离沙箱。
+- 性能损耗很大：跨进程操作的性能损耗是计算机中最严重的性能消耗点之一。
+- 容易产生错误：
+- 如：remote 模块使用了主进程某个对象，该对象在某一时刻会触发事件，但是事件处理程序位于渲染进程，这时候消息传递造成的延时很容易让渲染进程中一些代码失效，如：`event.preventDefault()`
+- 如：remote 模块的对象其实是代理对象，并不是真实的原始对象。代理对象原型链上的属性不会映射到渲染进程的代理对象上。其次，类似 NaN、Infinity 这些值不能被正确的映射到渲染进程，如果一个主进程方法返回 NaN，则渲染进程 remote 模块获取的是 undefined。
+- 安全问题：IPC 管道通信时，如果要加载第三方网页，恶意代码能够通过原型污染攻击来模拟 remote 模块的远程消息，以获取访问主进程模块的权利，从而逃离沙箱。

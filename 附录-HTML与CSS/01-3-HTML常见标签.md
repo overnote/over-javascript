@@ -4,8 +4,8 @@
 
 网页的内容都是由大量的 HTML 标签构成，按照标签的开合可以将标签分为分类：
 
--   单标签：只有开始没有结束，如：`<hr> <!-- --> <br> <hr>`
--   双标签：有开始有结束，如：`<p></p> <em></em>`
+- 单标签：只有开始没有结束，如：`<hr> <!-- --> <br> <hr>`
+- 双标签：有开始有结束，如：`<p></p> <em></em>`
 
 ## 二 区域类标签
 
@@ -69,9 +69,9 @@ src：图片路径，可以是绝对路径（/开头）或者相对路径（./�
 
 图片的格式的不同是有区别的，理论环境下：
 
--   gif 文件较大，且不清晰，但是支持动画
--   jpg 格式则更加清晰，且文件更小，网页中的大图推荐使用 jpg
--   png 是无损压缩，可以保持图片的星系，但是其文件较大，小图适合使用 png（比如 LOGO），当然小图标使用字体图标更加优秀。此外 png 还能支持图片透明。
+- gif 文件较大，且不清晰，但是支持动画
+- jpg 格式则更加清晰，且文件更小，网页中的大图推荐使用 jpg
+- png 是无损压缩，可以保持图片的星系，但是其文件较大，小图适合使用 png（比如 LOGO），当然小图标使用字体图标更加优秀。此外 png 还能支持图片透明。
 
 ### 3.5 链接标签
 
@@ -99,8 +99,7 @@ target：  网页打开方式，常见打开方式有：_self：默认值，在�
 a 链接特殊写法：可以制造点击不执行，一般在 tab 栏切换中使用
 
 ```html
-<a href="”javascript:;”"></a>
-<a href="”javascript:void(0);”"></a>
+<a href="”javascript:;”"></a> <a href="”javascript:void(0);”"></a>
 ```
 
 ### 3.6 列表标签
@@ -109,8 +108,8 @@ a 链接特殊写法：可以制造点击不执行，一般在 tab 栏切换中�
 
 ```html
 <ul>
-    <li>新闻1</li>
-    <li>新闻2</li>
+  <li>新闻1</li>
+  <li>新闻2</li>
 </ul>
 ```
 
@@ -125,8 +124,8 @@ type="circle"：列表样式为小圆圈
 
 ```html
 <ol type="a" start="3">
-    <li>新闻1</li>
-    <li>新闻2</li>
+  <li>新闻1</li>
+  <li>新闻2</li>
 </ol>
 ```
 
@@ -142,9 +141,9 @@ start="3" ：li 前面的显示从第几个开始计数
 
 ```html
 <dl>
-    <dt>新闻汇总</dt>
-    <dd>新闻1</dd>
-    <dd>新闻2</dd>
+  <dt>新闻汇总</dt>
+  <dd>新闻1</dd>
+  <dd>新闻2</dd>
 </dl>
 ```
 
@@ -155,19 +154,27 @@ start="3" ：li 前面的显示从第几个开始计数
 ### 4.1 table 组成
 
 ```html
-<table border="1" width="300" height="100" cellspacing="0" cellpadding="5" align="center" bgcolor="pink">
-    <tr>
-        <th>姓名</th>
-        <th>性别</th>
-    </tr>
-    <tr>
-        <td>111</td>
-        <td>122</td>
-    </tr>
-    <tr>
-        <td>211</td>
-        <td>222</td>
-    </tr>
+<table
+  border="1"
+  width="300"
+  height="100"
+  cellspacing="0"
+  cellpadding="5"
+  align="center"
+  bgcolor="pink"
+>
+  <tr>
+    <th>姓名</th>
+    <th>性别</th>
+  </tr>
+  <tr>
+    <td>111</td>
+    <td>122</td>
+  </tr>
+  <tr>
+    <td>211</td>
+    <td>222</td>
+  </tr>
 </table>
 ```
 
@@ -188,26 +195,26 @@ align：设置对齐方式，包括 left、right、center
 
 ### 4.2 合并单元格
 
--   横向合并 colspan：设置 td 的横向合并
--   纵向合并 rowspan：设置 td 的纵向合并
+- 横向合并 colspan：设置 td 的横向合并
+- 纵向合并 rowspan：设置 td 的纵向合并
 
 ```html
 <table width="300" height="200" cellspacing="0" border="1">
-    <tr>
-        <td colspan="2">111</td>
-        <td>122</td>
-        <td>133</td>
-    </tr>
-    <tr>
-        <td>211</td>
-        <td>222</td>
-        <td rowspan="2">233</td>
-    </tr>
-    <tr>
-        <td>311</td>
-        <td>322</td>
-        <td>333</td>
-    </tr>
+  <tr>
+    <td colspan="2">111</td>
+    <td>122</td>
+    <td>133</td>
+  </tr>
+  <tr>
+    <td>211</td>
+    <td>222</td>
+    <td rowspan="2">233</td>
+  </tr>
+  <tr>
+    <td>311</td>
+    <td>322</td>
+    <td>333</td>
+  </tr>
 </table>
 ```
 
@@ -239,9 +246,9 @@ src：       值为 资源地址
 
 ```html
 <audio controls="controls">
-    <source src="demo.mp3" type="audio/mpeg" />
-    <source src="demo.ogg" type="audio/ogg" />
-    您的浏览器不兼容该音频格式
+  <source src="demo.mp3" type="audio/mpeg" />
+  <source src="demo.ogg" type="audio/ogg" />
+  您的浏览器不兼容该音频格式
 </audio>
 ```
 
@@ -271,5 +278,5 @@ muted：     值为 muted，静音播放
 
 贴士：
 
--   Chrome 将多媒体的自动播放禁止了
--   音频无法实现自定义播放
+- Chrome 将多媒体的自动播放禁止了
+- 音频无法实现自定义播放

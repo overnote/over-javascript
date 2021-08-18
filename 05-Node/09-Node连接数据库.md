@@ -113,17 +113,17 @@ const Redis = require('ioredis')
 // 指定地址访问
 // let redis = new Redis(6379, '127.0.0.1');
 let redis = new Redis({
-    port: 6379, // Redis port
-    host: '1****', // Redis host
-    family: 4, // 4 (IPv4) or 6 (IPv6)
-    password: 'test',
-    db: 0,
+  port: 6379, // Redis port
+  host: '1****', // Redis host
+  family: 4, // 4 (IPv4) or 6 (IPv6)
+  password: 'test',
+  db: 0,
 })
 
 redis.set('name', 'lisi', function () {
-    redis.get('name', function (error, result) {
-        console.log(result)
-    })
+  redis.get('name', function (error, result) {
+    console.log(result)
+  })
 })
 ```
 
@@ -135,17 +135,17 @@ let multi = redis.multi()
 multi.set('foo1', 'bar1')
 multi.sadd('foo2', 'bar2')
 multi.exec(function (err, replies) {
-    console.log(replies) //[ [ null, 'OK' ], [ null, 1 ] ]
+  console.log(replies) //[ [ null, 'OK' ], [ null, 1 ] ]
 })
 
 //或者链式调用：
 redis
-    .multi()
-    .set('foo3', 'bar3')
-    .sadd('set', 'b')
-    .exec(function (err, replies) {
-        console.log(replies) //[ [ null, 'OK' ], [ null, 1 ] ]
-    })
+  .multi()
+  .set('foo3', 'bar3')
+  .sadd('set', 'b')
+  .exec(function (err, replies) {
+    console.log(replies) //[ [ null, 'OK' ], [ null, 1 ] ]
+  })
 ```
 
 发布订阅：创建两个连接，分别充当发布者和订阅者
@@ -156,11 +156,11 @@ let pub = new Redis({})
 let sub = new Redis({})
 
 sub.subscribe('chat', function () {
-    pub.publish('chat', 'hi!')
+  pub.publish('chat', 'hi!')
 })
 
 sub.on('message', function (channel1, message) {
-    console.log('收到 ' + channel1 + ' 频道的消息：' + message) //收到 chat 频道的消息 hi
+  console.log('收到 ' + channel1 + ' 频道的消息：' + message) //收到 chat 频道的消息 hi
 })
 ```
 
@@ -170,8 +170,8 @@ sub.on('message', function (channel1, message) {
 
 一般来说，消息队列有两种场景：
 
--   发布订阅模式：发布者向某个频道发布一条消息后，多个订阅者都会收到同一个消息
--   生产消费模式：生产者生产消息放到队列里，消费者同时监听队列，如果队列里有了新的消息就将其取走，对于单条消息，只能由一个消费者消费
+- 发布订阅模式：发布者向某个频道发布一条消息后，多个订阅者都会收到同一个消息
+- 生产消费模式：生产者生产消息放到队列里，消费者同时监听队列，如果队列里有了新的消息就将其取走，对于单条消息，只能由一个消费者消费
 
 发布订阅模式：
 
@@ -180,22 +180,22 @@ sub.on('message', function (channel1, message) {
 let redis = require('redis')
 let client = redis.createClient(6379, '127.0.0.1')
 client.on('error', function (err) {
-    console.log(err)
+  console.log(err)
 })
 client.on('ready', function () {
-    client.publish('channel1', 'hello')
+  client.publish('channel1', 'hello')
 })
 
 //subsciber
 let redis = require('redis')
 let client = redis.createClient(6379, '127.0.0.1')
 client.on('error', function (err) {
-    console.log(err)
+  console.log(err)
 })
 client.subscribe('channel1')
 client.on('message', function (channel, message) {
-    console.log('channel: ', channel)
-    console.log('message: ', message)
+  console.log('channel: ', channel)
+  console.log('message: ', message)
 })
 ```
 

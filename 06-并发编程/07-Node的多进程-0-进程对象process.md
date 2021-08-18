@@ -39,14 +39,14 @@ process.stderr.write('err\n')
 ```js
 process.stdin.setEncoding('utf8') //控制台接受输入
 process.stdin.on('readable', function () {
-    let chunk = process.stdin.read()
-    if (chunk != null) {
-        process.stdout.write(chunk)
-    }
+  let chunk = process.stdin.read()
+  if (chunk != null) {
+    process.stdout.write(chunk)
+  }
 })
 
 process.stdin.on('end', function () {
-    process.stdout.write('end') //控制台结案数输入
+  process.stdout.write('end') //控制台结案数输入
 })
 ```
 
@@ -56,10 +56,10 @@ process.stdin.on('end', function () {
 
 ```js
 process.on('SIGHUP', function () {
-    console.log('get SIGHUP')
+  console.log('get SIGHUP')
 })
 setTimeout(function () {
-    process.exit(0) //真正的杀死进程
+  process.exit(0) //真正的杀死进程
 }, 1000)
 process.kill(process.pid, 'SIGHUP') //kill方法只是发送一个sighup信号
 ```
@@ -71,13 +71,13 @@ process.kill(process.pid, 'SIGHUP') //kill方法只是发送一个sighup信号
 ```js
 console.time('timeout---')
 setTimeout(function () {
-    console.log('test timeout')
+  console.log('test timeout')
 }, 0)
 console.timeEnd('timeout---')
 
 console.time('timeout---')
 process.nextTick(function () {
-    console.log('test nextTick')
+  console.log('test nextTick')
 })
 console.timeEnd('timeout---')
 ```
@@ -143,10 +143,10 @@ console.log(process.argv.slice(2))
 
 ```js
 let cfg = process.argv.slice(2).reduce((mem, cur, index, arr) => {
-    if (cur.startsWith('--')) {
-        mem[cur.slice(2)] = arr[index + 1]
-    }
-    return mem
+  if (cur.startsWith('--')) {
+    mem[cur.slice(2)] = arr[index + 1]
+  }
+  return mem
 }, {})
 
 // 启动命令：node app --port 3000 --config webpack.config.js

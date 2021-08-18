@@ -10,9 +10,9 @@
 
 Web 开发，其本质其实是：
 
--   1. 请求：客户端发起请求
--   2. 处理：服务端处理请求
--   3. 响应：服务端返回处理结果给客户端
+- 1. 请求：客户端发起请求
+- 2. 处理：服务端处理请求
+- 3. 响应：服务端返回处理结果给客户端
 
 常见服务器有：Nginx、Tomcat、Apache 等。
 
@@ -20,8 +20,8 @@ Web 开发，其本质其实是：
 
 基于请求 - 响应模型，目前的开发方式主要有两种，他们各有优劣：
 
--   C/S 架构（Client/Server）：客户端与服务端完全分离，如：QQ、迅雷、精灵宝可梦等软件。能够合理利用操作系统 API,具有较高的性能与操作体验，但新版发布会带来更新的不便
--   B/S 架构（Browser/Server）：基于浏览器作为客户端的开发方式，如：招商银行官网、页游。能够快速发布新版不影响用户使用，但会受限于浏览器本身的能力
+- C/S 架构（Client/Server）：客户端与服务端完全分离，如：QQ、迅雷、精灵宝可梦等软件。能够合理利用操作系统 API,具有较高的性能与操作体验，但新版发布会带来更新的不便
+- B/S 架构（Browser/Server）：基于浏览器作为客户端的开发方式，如：招商银行官网、页游。能够快速发布新版不影响用户使用，但会受限于浏览器本身的能力
 
 ## 二 网页的访问
 
@@ -35,9 +35,9 @@ DNS 服务就是用来提供域名到 IP 地址之间的转换解析服务的！
 
 为了提升效率，DNS 服务是有缓存的，依照就近原则，来进行网址与 IP 的解析，当访问一个网址时：
 
--   优先从本地 host 文件中查找 ip 地址
--   然后查找本地的 DNS 缓存服务
--   去 DNS 服务商中查找
+- 优先从本地 host 文件中查找 ip 地址
+- 然后查找本地的 DNS 缓存服务
+- 去 DNS 服务商中查找
 
 所以一个请求的真实访问过程如下所示：
 
@@ -49,12 +49,12 @@ DNS 服务就是用来提供域名到 IP 地址之间的转换解析服务的！
 
 这个访问过程大致如下：
 
--   第一步：查找 DNS 服务
--   第二步：根据 DNS 服务查找该网页所在服务器 IP
--   第三步：浏览器与网页所在服务器建立连接
--   第四步：浏览器发出获取文件请求，服务端响应请求返回文件内容
--   第五步：浏览器与服务端双方断开连接
--   第六步：浏览器将获取到的数据通过解析引擎展示给用户
+- 第一步：查找 DNS 服务
+- 第二步：根据 DNS 服务查找该网页所在服务器 IP
+- 第三步：浏览器与网页所在服务器建立连接
+- 第四步：浏览器发出获取文件请求，服务端响应请求返回文件内容
+- 第五步：浏览器与服务端双方断开连接
+- 第六步：浏览器将获取到的数据通过解析引擎展示给用户
 
 ### 2.2 关于网址
 
@@ -62,8 +62,8 @@ URI：是一个紧凑的字符串，用来表示抽象、物理资源，可以�
 
 URL 是 URI 的一种，但不是所有的 URI 都是 URL，访问机制决定了他们的不同，有访问机制的 URI 才是 URL，示例如下：
 
--   URL：`ftp://ftp.down/1.txt`
--   URI：`tel:+1-010-11-1311`
+- URL：`ftp://ftp.down/1.txt`
+- URI：`tel:+1-010-11-1311`
 
 ## 三 通信实现
 
@@ -71,10 +71,10 @@ URL 是 URI 的一种，但不是所有的 URI 都是 URL，访问机制决定�
 
 实现网页客户端与服务端通信的方式有两种：
 
--   表单：利用表单提交给服务端
--   Ajax：Asynchronous JavaScript+XML，利用浏览器提供的原生 Ajax 对象提交数据给服务端，有两种实现：
--   XHR 对象：即 XMLHttpRequest 对象，比较难用，适合较老的浏览器
--   fetch()：新的标准，支持 promise 、服务线程等，很强大
+- 表单：利用表单提交给服务端
+- Ajax：Asynchronous JavaScript+XML，利用浏览器提供的原生 Ajax 对象提交数据给服务端，有两种实现：
+- XHR 对象：即 XMLHttpRequest 对象，比较难用，适合较老的浏览器
+- fetch()：新的标准，支持 promise 、服务线程等，很强大
 
 Ajax 优点：在 Ajax 诞生之前，如果网速很慢，页面加载时间很长，就会导致用户一直在等待，而无法进行别的操作。在带表单的网页中，表单提交后，如果出现内容不合法，则会重新渲染页面，之前填写的内容就会消失。这些都是用户体验极差的现象，虽然可以通过一些手段避免，但是实现起来较为复杂。**Ajax 可以实现页面无刷新更新数据，极大提高了用户体验！**
 
@@ -84,13 +84,13 @@ Ajax 优点：在 Ajax 诞生之前，如果网速很慢，页面加载时间很
 
 ```html
 <form action="/upload" enctype="multipart/form-data" method="post">
-    Username:
-    <input type="text" name="username" />
-    Password:
-    <input type="password" name="password" />
-    File:
-    <input type="file" name="file" />
-    <input type="submit" />
+  Username:
+  <input type="text" name="username" />
+  Password:
+  <input type="password" name="password" />
+  File:
+  <input type="file" name="file" />
+  <input type="submit" />
 </form>
 ```
 
@@ -108,18 +108,18 @@ package.json 内容如下：
 
 ```json
 {
-    "name": "demo-ajax",
-    "version": "1.0.0",
-    "description": "",
-    "main": "app.js",
-    "scripts": {
-        "dev": "node app.js"
-    },
-    "dependencies": {
-        "body-parser": "^1.19.0",
-        "express": "^4.17.1",
-        "formidable": "^1.2.2"
-    }
+  "name": "demo-ajax",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "formidable": "^1.2.2"
+  }
 }
 ```
 
@@ -141,65 +141,65 @@ let urlencodedParser = bodyParser.urlencoded({ extended: false })
 let jsonParser = bodyParser.json()
 
 app.get('/hi', (req, res) => {
-    res.send({ hi: 'hello get' })
+  res.send({ hi: 'hello get' })
 })
 
 app.post('/hi', (req, res) => {
-    res.send({ hi: 'hello post' })
+  res.send({ hi: 'hello post' })
 })
 
 app.get('/getDemo', (req, res) => {
-    console.log('GET请求参数:', req.query)
-    res.send({ cid: 1001, title: '新闻一', content: '内容一一一...' })
+  console.log('GET请求参数:', req.query)
+  res.send({ cid: 1001, title: '新闻一', content: '内容一一一...' })
 })
 
 app.post('/postDemo', jsonParser, (req, res) => {
-    console.log('POST请求参数:', req.body)
-    res.send([{ cid: 1001, title: '新闻二', content: '内容二一一...' }])
+  console.log('POST请求参数:', req.body)
+  res.send([{ cid: 1001, title: '新闻二', content: '内容二一一...' }])
 })
 
 app.post('/formDataDemo', (req, res) => {
-    const form = new formidable.IncomingForm()
-    form.parse(req, (err, fileds, files) => {
-        if (err) {
-            res.send({ error: err })
-            return
-        }
-        // fileds 保存了普通键值对，files保存了上传的文件
-        console.log('FormData参数:', fileds)
-        res.send([{ cid: 1001, title: '新闻三', content: '内容三一一...' }])
-    })
+  const form = new formidable.IncomingForm()
+  form.parse(req, (err, fileds, files) => {
+    if (err) {
+      res.send({ error: err })
+      return
+    }
+    // fileds 保存了普通键值对，files保存了上传的文件
+    console.log('FormData参数:', fileds)
+    res.send([{ cid: 1001, title: '新闻三', content: '内容三一一...' }])
+  })
 })
 
 app.post('/uploadDemo', () => {
-    const form = new formidable.IncomingForm()
-    form.uploadDir = path.joind(__dirname, 'uploads')
-    form.parse(req, (err, fileds, files) => {
-        if (err) {
-            res.send({ error: err })
-            return
-        }
-        res.send([{ cid: 1001, title: '新闻三', content: '内容三一一...' }])
-    })
+  const form = new formidable.IncomingForm()
+  form.uploadDir = path.joind(__dirname, 'uploads')
+  form.parse(req, (err, fileds, files) => {
+    if (err) {
+      res.send({ error: err })
+      return
+    }
+    res.send([{ cid: 1001, title: '新闻三', content: '内容三一一...' }])
+  })
 })
 
 app.get('/crosDemo', (req, res) => {
-    res.send("let user = {'uid':'1001'}")
+  res.send("let user = {'uid':'1001'}")
 })
 
 app.get('/crosDemo2', (req, res) => {
-    // 获取回调函数名称
-    let callback = req.query.callback
+  // 获取回调函数名称
+  let callback = req.query.callback
 
-    // 定义要返回的数据
-    let data = JSON.stringify({ uid: '1001' })
+  // 定义要返回的数据
+  let data = JSON.stringify({ uid: '1001' })
 
-    // 返回数据
-    res.send(`${callback}(${data});`)
+  // 返回数据
+  res.send(`${callback}(${data});`)
 })
 
 app.listen(3000, () => {
-    console.log('服务器启动成功')
+  console.log('服务器启动成功')
 })
 ```
 

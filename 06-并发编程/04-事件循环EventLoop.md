@@ -48,14 +48,14 @@ JavaScript 在浏览器、Node 这两个运行时中都采用了单线程异步 
 
 从上图看出，任务三交给磁盘自己处理后，单线程的运行时间只需要 3 秒，极大缩短了线程的卡顿时间，但是这时候依然有问题需要处理：
 
--   磁盘处理完文件读写后，业务单线程如何知道读写结束？
--   线程全部任务处理完毕，运行结束，又来一个新的任务，这个线程又要重启一次（重启非常耗时）
+- 磁盘处理完文件读写后，业务单线程如何知道读写结束？
+- 线程全部任务处理完毕，运行结束，又来一个新的任务，这个线程又要重启一次（重启非常耗时）
 
 我们可以让这个核心业务线程一直运行下去，并在任务调度时设计一个通知行为，让磁盘在完成 IO 后将结果通知给线程，这样就能完整的解决上述问题了，该调度系统我们可以简单的视为：事件循环，其解决机制如下：
 
--   使用死循环确保线程一直运行
--   将任务存储在队列中，线程从队列中取出进行调度
--   通过事件机制将被调度任务的处理结果通知给线程
+- 使用死循环确保线程一直运行
+- 将任务存储在队列中，线程从队列中取出进行调度
+- 通过事件机制将被调度任务的处理结果通知给线程
 
 如下所示：
 
@@ -63,9 +63,9 @@ JavaScript 在浏览器、Node 这两个运行时中都采用了单线程异步 
 
 线程从队列的队首中依次循环取出任务：
 
--   取出任务一，运算出结果
--   取出任务二，运算出结果
--   取出任务三，发现是耗时较长的 I/O，将该任务交给系统的 I/O 线程处理。
+- 取出任务一，运算出结果
+- 取出任务二，运算出结果
+- 取出任务三，发现是耗时较长的 I/O，将该任务交给系统的 I/O 线程处理。
 
 任务 3 处理如图：
 
@@ -95,19 +95,19 @@ JavaScript 在浏览器、Node 这两个运行时中都采用了单线程异步 
 console.log('aaa')
 
 setTimeout(() => {
-    console.log(111)
+  console.log(111)
 })
 
 console.log('bbb')
 
 setTimeout(() => {
-    console.log(222)
+  console.log(222)
 })
 
 console.log('ccc')
 
 setTimeout(() => {
-    console.log(333)
+  console.log(333)
 })
 
 console.log('ddd')
@@ -135,8 +135,8 @@ ddd
 
 不同的任务会被分发到不同的队列中：
 
--   微任务（micro-task）：Promise、MutationObserve、MessageChannel
--   宏任务（macro-task）：setTimeout、setInterval、setImmediate（IE 浏览器 才拥有）、I/O
+- 微任务（micro-task）：Promise、MutationObserve、MessageChannel
+- 宏任务（macro-task）：setTimeout、setInterval、setImmediate（IE 浏览器 才拥有）、I/O
 
 一般情况下微任务会优于宏任务执行，其具体执行规则是：先完全执行微任务队列，然后每执行一个宏任务，就会重新再去完全执行微任务队列：
 
@@ -145,14 +145,14 @@ console.log('aaa')
 
 // 宏任务
 setTimeout(() => {
-    console.log(111)
+  console.log(111)
 })
 
 console.log('bbb')
 
 // 微任务
-Promise.resolve().then(data => {
-    console.log(222)
+Promise.resolve().then((data) => {
+  console.log(222)
 })
 
 console.log('ccc')
@@ -178,19 +178,19 @@ ccc
 console.log('aaa')
 
 setTimeout(() => {
-    console.log(222, '-t1')
-    Promise.resolve().then(data => {
-        console.log(222, '-p1')
-    })
+  console.log(222, '-t1')
+  Promise.resolve().then((data) => {
+    console.log(222, '-p1')
+  })
 })
 
 console.log('bbb')
 
-Promise.resolve().then(data => {
-    console.log(333, '-p2')
-    setTimeout(() => {
-        console.log(333, '-t2')
-    })
+Promise.resolve().then((data) => {
+  console.log(333, '-p2')
+  setTimeout(() => {
+    console.log(333, '-t2')
+  })
 })
 
 console.log('ccc')
@@ -235,12 +235,12 @@ Node 旧版与浏览器的循环有少许不同，为了与社区同步，Node11
 
 在 Node11 之前，Node 的一轮 evetnloop 包含六个循环阶段
 
--   timers（定时器）：执行由 `setTimeout()`、`setInterval()`调度的回调函数
--   I/O callbacks(I/O 回调)：执行几乎所有回调函数，除了 close callbacks、timers、setImmediate()调度的回调。
--   idle(空转),prepare()：Node 内部使用
--   **poll（轮询）**：检索新的 I/O 事件，在恰当的时候 Node 会在该阶段阻塞
--   check（检查）：调用 `setImmediate()` 回调
--   close callbacks（关闭事件回调）：调用如 `socket.on('close')`等回调
+- timers（定时器）：执行由 `setTimeout()`、`setInterval()`调度的回调函数
+- I/O callbacks(I/O 回调)：执行几乎所有回调函数，除了 close callbacks、timers、setImmediate()调度的回调。
+- idle(空转),prepare()：Node 内部使用
+- **poll（轮询）**：检索新的 I/O 事件，在恰当的时候 Node 会在该阶段阻塞
+- check（检查）：调用 `setImmediate()` 回调
+- close callbacks（关闭事件回调）：调用如 `socket.on('close')`等回调
 
 poll 是最重要的阶段，进入 poll 阶段后：
 
@@ -252,11 +252,11 @@ setImmdiate 是 Node 独有的标准，不接受时间作为参数，他的事�
 
 ```js
 setImmediate(function (args) {
-    console.log('executing immediate', args)
+  console.log('executing immediate', args)
 }, 'so immediate')
 
 process.nextTick(function () {
-    console.log('tick...')
+  console.log('tick...')
 })
 console.log('console...')
 ```
@@ -275,12 +275,12 @@ executing immediate so immediate
 
 ```js
 function recurse(i, end) {
-    if (i > end) {
-        console.log('Done!')
-    } else {
-        console.log(i)
-        setImmediate(recurse, i + 1, end)
-    }
+  if (i > end) {
+    console.log('Done!')
+  } else {
+    console.log(i)
+    setImmediate(recurse, i + 1, end)
+  }
 }
 
 recurse(0, 9999999999)
@@ -290,9 +290,9 @@ recurse(0, 9999999999)
 
 ```js
 function recurse(i) {
-    while (i < 9999) {
-        process.nextTick(recurse(i++))
-    }
+  while (i < 9999) {
+    process.nextTick(recurse(i++))
+  }
 }
 
 recurse(0)
@@ -305,40 +305,40 @@ recurse(0)
 
 // 在主模块调用，会根据性能影响，执行的顺序有所不同
 setTimeout(() => {
-    console.log('1-setTimeout')
+  console.log('1-setTimeout')
 })
 
 setImmediate(() => {
-    console.log('2-setImmediate')
+  console.log('2-setImmediate')
 })
 
 // 但是在IO中，是固定的.
 // poll队列并不一定是在无限循环，如果有 setImmediate，会进入check，执行setImmediate,然后回到第一步从timer阶段开始重新循环
 // 如果没有setImmediate，则会等待然后回到timer阶段
-fs.readFile('./demo.txt', data => {
-    setTimeout(() => {
-        console.log('1-setTimeout')
-    })
+fs.readFile('./demo.txt', (data) => {
+  setTimeout(() => {
+    console.log('1-setTimeout')
+  })
 
-    setImmediate(() => {
-        console.log('2-setImmediate')
-    })
+  setImmediate(() => {
+    console.log('2-setImmediate')
+  })
 })
 ```
 
 ```js
 setTimeout(() => {
-    console.log('timeout1')
-    process.nextTick(() => {
-        console.log('nextTick1')
-    })
+  console.log('timeout1')
+  process.nextTick(() => {
+    console.log('nextTick1')
+  })
 })
 
 setTimeout(() => {
-    console.log('timeout2')
-    process.nextTick(() => {
-        console.log('nextTick2')
-    })
+  console.log('timeout2')
+  process.nextTick(() => {
+    console.log('nextTick2')
+  })
 })
 ```
 
@@ -348,10 +348,10 @@ setImmediate 方法会在 poll 阶段结束后执行，而 setImmediate 会在�
 
 ```js
 setTimeout(function () {
-    console.log('setTimeout')
+  console.log('setTimeout')
 }, 0)
 setImmediate(function () {
-    console.log('setImmediate')
+  console.log('setImmediate')
 })
 ```
 
@@ -359,12 +359,12 @@ setImmediate(function () {
 
 ```js
 require('fs').readFile('./foo.js', function () {
-    setTimeout(function () {
-        console.log('setTimeout')
-    }, 0)
-    setImmediate(function () {
-        console.log('setImmediate')
-    })
+  setTimeout(function () {
+    console.log('setTimeout')
+  }, 0)
+  setImmediate(function () {
+    console.log('setImmediate')
+  })
 })
 ```
 
@@ -378,23 +378,23 @@ require('fs').readFile('./foo.js', function () {
 
 Node 将事件循环分成了 6 个阶段，每个阶段都维护了一个回调函数队列，在不同的阶段，事件循环处理不同类型的事件，事件循环的阶段依次是：
 
--   Timers:用来处理 setTimeout 和 setTimeInterval 的回调
--   IO callbacks:大多数的回调方法在这个阶段执行，除了 timers、close、setImmediate 事件的回调
--   idle,prepare:仅仅 Node 内部使用
--   Poll:轮询，不断检查有没有新的 IO 事件，事件循环可能会在这里阻塞
--   Check:处理 setImmediate 事件回调
--   close.callback:处理一些 close 相关的事件，如：socket.on("close",...)
+- Timers:用来处理 setTimeout 和 setTimeInterval 的回调
+- IO callbacks:大多数的回调方法在这个阶段执行，除了 timers、close、setImmediate 事件的回调
+- idle,prepare:仅仅 Node 内部使用
+- Poll:轮询，不断检查有没有新的 IO 事件，事件循环可能会在这里阻塞
+- Check:处理 setImmediate 事件回调
+- close.callback:处理一些 close 相关的事件，如：socket.on("close",...)
 
 上述的处理用伪代码展示：
 
 ```js
 while (true) {
-    uv_run_timers()
-    uv_run_pending(loop)
-    uv_run_idle()
-    uv_io_poll()
-    uv_run_check()
-    uv_run_closeing_handles()
+  uv_run_timers()
+  uv_run_pending(loop)
+  uv_run_idle()
+  uv_io_poll()
+  uv_run_check()
+  uv_run_closeing_handles()
 }
 ```
 
@@ -413,27 +413,27 @@ let startTime = Date.now()
 
 //setTimeout 的异步
 setTimeout(function () {
-    let delay = Date.now() - startTime
-    console.log(delay + ' 毫秒后才开始执行setTimeout回调')
+  let delay = Date.now() - startTime
+  console.log(delay + ' 毫秒后才开始执行setTimeout回调')
 }, 100)
 
 //文件读取的异步：假设耗时95ms
 fs.readFile('./foo.js', function (err, data) {
-    let beginCallbackTime = Date.now()
-    while (Date.now() - beginCallbackTime < 10) {
-        // 使用while阻塞10ms
-        console.log('阻塞中')
-    }
+  let beginCallbackTime = Date.now()
+  while (Date.now() - beginCallbackTime < 10) {
+    // 使用while阻塞10ms
+    console.log('阻塞中')
+  }
 })
 ```
 
 上述代码中，存在 readfile 和 timer 两个异步操作，启动文件后，运行时开始轮询：
 
--   首先检查 timers，timers 对应的事件队列目前还为空，因为 100ms 后才会有事件产生
--   进入 poll 阶段，没有事件出现，代码中也没有 setImmediate 操作，事件循环便在此一直等待新的事件出现
--   直到 95ms 读取文件完毕，产生了一个事件，加入 poll 队列中，此时事件循环将该队列的事件去除，准备执行之后的 callback，readFile 的回调方法什么都没做，只是暂停了 10ms。
--   事件循环本身也被阻塞 10ms，按照通常的思维，95+10=105>100，timers 队列的事件已经就绪，应该先执行对应的回调方法才对，但是由于事件循环本身是单线程运行，因为也会被停止 10ms，如果 readFile 中出现了一个死循环，那么整个事件循环都会被阻塞，setTimeout 回调永远不会执行。
--   readFile 的回调完成后，事件循环切换到了 timers 阶段，接着取出 timers 队列中的事件执行对应的回调方法
+- 首先检查 timers，timers 对应的事件队列目前还为空，因为 100ms 后才会有事件产生
+- 进入 poll 阶段，没有事件出现，代码中也没有 setImmediate 操作，事件循环便在此一直等待新的事件出现
+- 直到 95ms 读取文件完毕，产生了一个事件，加入 poll 队列中，此时事件循环将该队列的事件去除，准备执行之后的 callback，readFile 的回调方法什么都没做，只是暂停了 10ms。
+- 事件循环本身也被阻塞 10ms，按照通常的思维，95+10=105>100，timers 队列的事件已经就绪，应该先执行对应的回调方法才对，但是由于事件循环本身是单线程运行，因为也会被停止 10ms，如果 readFile 中出现了一个死循环，那么整个事件循环都会被阻塞，setTimeout 回调永远不会执行。
+- readFile 的回调完成后，事件循环切换到了 timers 阶段，接着取出 timers 队列中的事件执行对应的回调方法
 
 ### 3.6 Node 中回调的完成
 
@@ -451,8 +451,8 @@ var forEach = funtion(list, cb) {
 
 ```js
 fs.open = function (path, flags, callback) {
-    // ...
-    binding.open(pathModule._makeLong(path), stringToFlags(flags), mode, callback)
+  // ...
+  binding.open(pathModule._makeLong(path), stringToFlags(flags), mode, callback)
 }
 ```
 
@@ -473,17 +473,17 @@ Node 的 nextTick() 方法，不是事件循环的一部分，只是一个异步
 ```js
 // 宏任务
 setTimeout(() => {
-    console.log('1-setTimeout')
+  console.log('1-setTimeout')
 })
 
 // 微任务
 Promise.resolve().then(() => {
-    console.log('2-Promise')
+  console.log('2-Promise')
 })
 
 // 微任务：但是该微任务在当前执行站执行完毕后会立即调用，优于Promise.then()
 process.nextTick(() => {
-    console.log('3-nextTick')
+  console.log('3-nextTick')
 })
 ```
 

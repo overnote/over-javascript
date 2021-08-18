@@ -13,8 +13,8 @@ const koa = require('koa')
 
 let app = new koa()
 
-app.use(ctx => {
-    ctx.body = 'hello world'
+app.use((ctx) => {
+  ctx.body = 'hello world'
 })
 
 app.listen(3000)
@@ -36,8 +36,8 @@ this.response
 
 Koa 与 Express 的不同：
 
--   Express 内部支持路由，Koa 没有路由管理
--   Express 的中间件模型是传统的顺序式，而 Koa 是洋葱模型
+- Express 内部支持路由，Koa 没有路由管理
+- Express 的中间件模型是传统的顺序式，而 Koa 是洋葱模型
 
 ## 二 洋葱模型
 
@@ -51,17 +51,17 @@ const koa = require('koa')
 let app = new koa()
 
 app.use((ctx, next) => {
-    console.log('1')
-    next()
-    console.log('2')
-    ctx.body = 'hello world1'
+  console.log('1')
+  next()
+  console.log('2')
+  ctx.body = 'hello world1'
 })
 
 app.use((ctx, next) => {
-    console.log('3')
-    ctx.body = 'hello world2'
-    next()
-    console.log('4')
+  console.log('3')
+  ctx.body = 'hello world2'
+  next()
+  console.log('4')
 })
 
 app.listen(3000)
@@ -87,17 +87,17 @@ app.listen(3000)
 
 ```js
 app.use(async (ctx, next) => {
-    console.log('2')
-    await next()
-    console.log('2')
-    ctx.body = 'hello world1'
+  console.log('2')
+  await next()
+  console.log('2')
+  ctx.body = 'hello world1'
 })
 
 app.use(async (ctx, next) => {
-    console.log('3')
-    ctx.body = 'hello world2'
-    await next()
-    console.log('4')
+  console.log('3')
+  ctx.body = 'hello world2'
+  await next()
+  console.log('4')
 })
 
 // 顺序不变：1 3 4 2
@@ -107,17 +107,17 @@ app.use(async (ctx, next) => {
 
 ```js
 app.use((ctx, next) => {
-    console.log('1')
-    next()
-    console.log('2')
-    ctx.body = 'hello world1'
+  console.log('1')
+  next()
+  console.log('2')
+  ctx.body = 'hello world1'
 })
 
 app.use(async (ctx, next) => {
-    console.log('3')
-    ctx.body = 'hello world2'
-    await next()
-    console.log('4')
+  console.log('3')
+  ctx.body = 'hello world2'
+  await next()
+  console.log('4')
 })
 
 // 顺序变了：1 3 2 4
@@ -132,10 +132,10 @@ app.use(async (ctx, next) => {
 ```js
 // 第一个中间件
 app.use(async (ctx, next) => {
-    console.time()
-    await next()
-    // next 之后的代码表示 中间件已经全部执行完毕了
-    console.timeEnd()
+  console.time()
+  await next()
+  // next 之后的代码表示 中间件已经全部执行完毕了
+  console.timeEnd()
 })
 ```
 
@@ -149,13 +149,13 @@ app.use(async (ctx, next) => {
 
 ```js
 function middleware1(ctx, next) {
-    console.log('midlle1...')
-    next()
+  console.log('midlle1...')
+  next()
 }
 
 function middleware2(ctx, next) {
-    console.log('midlle2...')
-    next()
+  console.log('midlle2...')
+  next()
 }
 
 const all = compose([middleware1, middleware2])
@@ -165,10 +165,10 @@ app.use(all)
 
 ### 3.2 koa 常用中间件
 
--   koa-bodyparser:获取 POST 请求参数
--   koa-router:路由中间件
--   koa-static:静态文件目录
--   koa-views:加载模板文件
+- koa-bodyparser:获取 POST 请求参数
+- koa-router:路由中间件
+- koa-static:静态文件目录
+- koa-views:加载模板文件
 
 综合案例：
 
@@ -198,9 +198,9 @@ app.use(favicon(__dirname + '/static/favicon.ico'))
 
 // 加载ejs模板引擎:html后缀方式
 app.use(
-    views(path.join(__dirname, 'views'), {
-        map: { html: 'ejs' },
-    })
+  views(path.join(__dirname, 'views'), {
+    map: { html: 'ejs' },
+  })
 )
 
 //post解析中间件
@@ -208,14 +208,14 @@ app.use(bodyParser())
 
 //路由->渲染模板
 router.get('/', async (ctx, next) => {
-    await ctx.render('test', {
-        msg: 'hello',
-    })
+  await ctx.render('test', {
+    msg: 'hello',
+  })
 })
 router.post('/', (ctx, next) => {
-    let data = ctx.request.body
-    console.log(JSON.stringify(data))
-    ctx.body = data
+  let data = ctx.request.body
+  console.log(JSON.stringify(data))
+  ctx.body = data
 })
 
 app.use(router.routes()) //启动路由中间件
@@ -237,14 +237,14 @@ const Router = require('koa-router')
 
 const app = new Koa()
 const router = new Router({
-    prefix: '/test', //路由前缀---全局的
+  prefix: '/test', //路由前缀---全局的
 })
 
 router.get('/', function (ctx, next) {
-    ctx.body = 'index....'
+  ctx.body = 'index....'
 })
 router.get('/todo', function (ctx, next) {
-    ctx.body = 'todo....'
+  ctx.body = 'todo....'
 })
 
 app.use(router.routes()) //启动路由中间件
@@ -259,16 +259,18 @@ app.listen(3000)
 let home = new Router() //子路由
 let page = new Router() //子路由
 
-home.get('/test', async ctx => {
+home
+  .get('/test', async (ctx) => {
     //http://localhost:8000/home/test
     ctx.body = 'home test...'
-}).get('/todo', async ctx => {
+  })
+  .get('/todo', async (ctx) => {
     //http://localhost:8000/home/todo
     ctx.body = 'home todo...'
-})
+  })
 
-page.get('/test', async ctx => {
-    ctx.body = 'page router...'
+page.get('/test', async (ctx) => {
+  ctx.body = 'page router...'
 })
 
 //父路由
@@ -300,23 +302,23 @@ router.all() 可以用来模糊匹配
 
 ```js
 router.get('/', async (ctx, next) => {
-    console.log('111')
-    ctx.response.body = '111'
-    await next() // 如果 注释该段，则不执行all
-    console.log('222')
+  console.log('111')
+  ctx.response.body = '111'
+  await next() // 如果 注释该段，则不执行all
+  console.log('222')
 })
 
 router.all('/', async (ctx, next) => {
-    console.log('all...111')
-    await next()
-    console.log('all...222')
+  console.log('all...111')
+  await next()
+  console.log('all...222')
 })
 ```
 
 ### 3.5 路由中多中间件处理方式
 
 ```js
-router.get('/', middleware, midlleware, ctx => {})
+router.get('/', middleware, midlleware, (ctx) => {})
 ```
 
 ### 3.6 嵌套路由
@@ -328,11 +330,15 @@ const userRouter = new Router()
 const userAction = new Router()
 
 userAction.get('/:pid', (ctx, next) => {
-    console.log('/:pid')
+  console.log('/:pid')
 })
 
 // /user/123/login/123    /user/123/login
-userRouter.use('/user/:fid/login', userAction.routes(), userAction.allowedMethods())
+userRouter.use(
+  '/user/:fid/login',
+  userAction.routes(),
+  userAction.allowedMethods()
+)
 
 app.use(userRouter.routes())
 ```
@@ -381,9 +387,9 @@ app.listen(3000)
 requireDirectory(module, './routers', { visit: whenLoadModule })
 
 function whenLoadModule(obj) {
-    if (obj instanceof Router) {
-        app.use(obj.routes())
-    }
+  if (obj instanceof Router) {
+    app.use(obj.routes())
+  }
 }
 ```
 
@@ -395,19 +401,19 @@ function whenLoadModule(obj) {
 
 ```js
 app.use(async function (ctx) {
-    console.log(ctx.url) //login?name=lisi
-    console.log(ctx.querystring) //name=lisi
+  console.log(ctx.url) //login?name=lisi
+  console.log(ctx.querystring) //name=lisi
 
-    // 参数方式一： /login?name=lisi
-    console.log(ctx.query) //{ name: 'lisi' }
+  // 参数方式一： /login?name=lisi
+  console.log(ctx.query) //{ name: 'lisi' }
 
-    // 参数方式二：/login/:name   实际路由：/login/lisi
-    console.log(ctx.params) // 获取动态路由参数
+  // 参数方式二：/login/:name   实际路由：/login/lisi
+  console.log(ctx.params) // 获取动态路由参数
 
-    // 参数方式三：body传参
-    console.log(ctx.body) // 获取动态路由参数
+  // 参数方式三：body传参
+  console.log(ctx.body) // 获取动态路由参数
 
-    // 参数方式四：headers传参
-    console.log(ctx.header)
+  // 参数方式四：headers传参
+  console.log(ctx.header)
 })
 ```
