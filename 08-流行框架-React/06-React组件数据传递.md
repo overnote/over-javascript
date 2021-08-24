@@ -271,3 +271,275 @@ render(){
     }
 }
 ```
+
+## 五 状态提升
+
+在树形组件结构中，a->b->c->d，四个组件，d 和 b 都用到了某个状态，那么状态应该存储在 a 组件中。
+
+状态提升也有助于实现 props 改变触发组件更新，这也是推荐做法：
+
+```js
+const Father = () => {
+  const [params, setParams] = useState({
+    id: 0,
+    name: '',
+  })
+
+  return (
+    <div>
+      <Son params={params} setParams={setParams} />
+    </div>
+  )
+}
+
+const Son = (props) => {
+  const { params, setParams } = props
+
+  const changeSonData = () => {
+    setParams({
+      id: Math.random() * 10,
+      name: 'lisi',
+    })
+  }
+
+  return (
+    <div>
+      params: {params.id}
+      <button onClick={changeSonData}>点击改变Son接收到的数据</button>
+    </div>
+  )
+}
+```
+
+## 六 props 变化触发组件更新
+
+### 6.0 示例
+
+一个用户列表，可以新增和编辑用户:
+
+```js
+class Father extends React.Component {
+  state = {
+    users: [
+      { id: 1, name: 'zs' },
+      { id: 2, name: 'lisi' },
+    ],
+    targetUser: {},
+  }
+
+  onSubmit = (user) => {
+    const { users } = this.state
+    const target = users.find((u) => u.id === user.id)
+
+    if (target) {
+      this.setState({
+        users: [
+          ...users.slice(0, users.indexOf(target)),
+          user,
+          ...users.slice(users.indexOf(target) + 1),
+        ],
+      })
+    } else {
+      const id = Math.max(...users.map((u) => u.id)) + 1
+      this.setState({
+        users: [
+          ...users,
+          {
+            ...user,
+            id,
+          },
+        ],
+      })
+    }
+  }
+
+  render() {
+    const { users, targetUser } = this.state
+    return (
+      <div>
+        <ul>
+          {users.map((u) => (
+            <li key={u.id}>
+              {u.name}
+              <button
+                onClick={() => {
+                  this.setState({ targetUser: u })
+                }}
+              >
+                编辑
+              </button>
+            </li>
+          ))}
+        </ul>
+        <Son user={targetUser} onSubmit={this.onSubmit} />
+      </div>
+    )
+  }
+}
+
+class Son extends React.Component {
+  state = {
+    user: this.props.user,
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      user: nextProps.user,
+    })
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      user: {
+        ...this.state.user,
+        name: e.target.value,
+      },
+    })
+  }
+
+  render() {
+    const { onSubmit } = this.props
+    const { user } = this.state
+    return (
+      <div>
+        <input value={user.name || ''} onChange={this.handleChange} />
+        <button
+          onClick={() => {
+            onSubmit(user)
+          }}
+        >
+          提交
+        </button>
+      </div>
+    )
+  }
+}
+```
+
+需要实现 props 改变引发 state 更新，需要在子组件添加：
+
+```js
+// 方式一
+componentWillReceiveProps(nextProps) {
+ this.setState({
+  user: nextProps.user
+ });
+}
+
+// 方式二：
+static getDerivedStateFromProps(props, state) {
+ return {
+  user: props.user
+ };
+}
+```
+
+这时候会产生新的问题：
+
+- 当在修改一个用户的时候，点击‘确定'按钮，输入框里的文字又变成了修改之前的文字。这是因为点击提交，App 会 re-render，App 又将之前的 user 作为 props 传递给了 Son。我们当然可以在每次点击确定之后将 targetUser 重置为一个空对象，
+- 假设页面加载完成后，会异步请求一些数据然后更新页面，如果用户在请求完成页面刷新之前已经在输入框中输入了一些文字，随着页面的刷新输入框中的文字会被清除。
+
+比如：
+
+```js
+componentDidMount() {
+ setTimeout(() => {
+  this.setState({
+   text: 'fake request'
+  })
+ }, 5000);
+}
+```
+
+导致这个问题的原因在于，当异步请求完成，setState 后 App 会 re-render，而组件的 componentWillReceiveProps 会在父组件每次 render 的时候执行，而此时传入的 user 是一个空对象，所以 Son 的内容被清空了。而 getDerivedStateFromProps 调用的更频繁，会在组件每次 render 的时候调用，所以也会产生该问题。
+
+为了解决这个问题我们可以在 componentWillReceiveProps 中判断新传入的 user 和当前的 user 是否一样，如果不一样才设置 state：
+
+```js
+componentWillReceiveProps(nextProps) {
+ if (nextProps.user.id !== this.props.user.id) {
+  this.setState({
+   user: nextProps.user
+  });
+ }
+}
+```
+
+### 6.1 使用状态提升
+
+```js
+class Son extends React.Component {
+  render() {
+    const { user, onConfirm, onChange } = this.props
+    return (
+      <div>
+        <input value={user.name || ''} onChange={onChange} />
+        <button
+          onClick={() => {
+            onSubmit(user)
+          }}
+        >
+          确定
+        </button>
+      </div>
+    )
+  }
+}
+
+// 父类中使用该组件
+;<Son
+  user={targetUser}
+  onChange={(e) => {
+    this.setState({
+      targetUser: {
+        id: targetUser.id,
+        name: e.target.value,
+      },
+    })
+  }}
+  onSubmit={this.onSubmit}
+/>
+```
+
+### 6.2 数据由子组件管理
+
+组件的数据完全由自己管理，因此 componentWillReceiveProps 中的代码都可以移除，但保留传入 props 来设置 state 初始值：
+
+```js
+class Son extends React.Component {
+  state = {
+    user: this.props.user,
+  }
+
+  onChange = (e) => {
+    this.setState({
+      user: {
+        ...this.state.user,
+        name: e.target.value,
+      },
+    })
+  }
+
+  render() {
+    const { user } = this.state
+    const { onConfirm } = this.props
+    return (
+      <div>
+        <input value={user.name || ''} onChange={this.onChange} />
+        <button
+          onClick={() => {
+            onSubmit(user)
+          }}
+        >
+          确定
+        </button>
+      </div>
+    )
+  }
+}
+
+// 父类调用
+;<Son user={targetUser} onConfirm={this.onSubmit} key={targetUser.id} />
+```
+
+如果某些情况下没有合适的属性作为 key，那么可以传入一个随机数或者自增的数字作为 key，或者我们可以在组件中定义一个设置 state 的方法并通过 ref 暴露给父组件使用。

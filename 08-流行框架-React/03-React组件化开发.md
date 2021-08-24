@@ -221,7 +221,7 @@ class App extends Component {
 
 ### 4.2 非受控组件
 
-如果一个表单组件没有 value props（单选按钮和复选框对应的是 checked prop）时，就可以称为非受控组件。相应地，你可以使用 defaultValue 和 defaultChecked prop 来表示组件的默认状态。
+如果一个表单组件没有 value props（单选按钮和复选框对应的是 checked prop）时，就可以称为非。相应地，你可以使用 defaultValue 和 defaultChecked prop 来表示组件的默认状态。
 
 ```js
 import React, { Component } from 'react'
@@ -281,6 +281,91 @@ React 的 form 组件提供了几个重要的属性，用于展示组件的状�
 - value：类型为 text 的 input 组件、 textarea 组件以及 select 组件都借助 value prop 来展示应用的状态。
 - checked：类型为 radio 或 checkbox 的组件借助值为 boolean 类型的 selected prop 来展示应用的状态。
 - selected：该属性可作用于 select 组件下面的 option 上， React 并不建议使用这种方式表示状态，而推荐在 select 组件上使用 value 的方式。
+
+### 4.5 受控组件输入中文 BUG
+
+受控组件使用 onChange 时，经常会出现中文未输入完就触发了 onChange 事件，这是因为 input 输入框其实还有三个事件未做处理：
+
+```js
+class Demo extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  compositionstart(event) {
+    console.log('开始输入', event.data)
+  }
+
+  compositionupdate(event) {
+    document.getElementById('data').innerHTML = event.data
+    console.log('正在输入的数据', event.data)
+  }
+
+  compositionend(event) {
+    console.log('结束输入', event.data)
+  }
+
+  changeEvent() {
+    console.log('改变')
+  }
+
+  render() {
+    return (
+      <div>
+        <input
+          type="text"
+          id="test"
+          onChange={this.changeEvent.bind(this)}
+          onCompositionStart={this.compositionstart.bind(this)}
+          onCompositionUpdate={this.compositionupdate.bind(this)}
+          onCompositionEnd={this.compositionend.bind(this)}
+        />
+        输入的数据为 <span id="data"></span>
+      </div>
+    )
+  }
+}
+```
+
+定义一个中间变量 isOncomposition,默认为 true,当触发 compositionend 事件时，我们把它赋为 false，这样 change 事件就会执行，但是在 Chrome 浏览器中，compositionend 事件是后于 change 事件触发的，所以还要考虑该情况：
+
+```js
+let isOnComposition = false;
+const isChrome = !!window.chrome && !!window.chrome.webstore
+
+class App extends React.Component {
+
+	handleComposition(e) {
+		if (e.type === 'compositionend') {
+			// composition is end
+			isOnComposition = false
+
+			if (!isOnComposition && isChrome) {
+				// fire onChange
+				this.changeEvent(e);
+			}
+		} else {
+			// in composition
+			isOnComposition = true
+		}
+	}
+
+	changeEvent() {
+		if (!isOnComposition) {
+			console.log('改变');
+		}
+	}
+  render() {
+		return (
+          <div>
+              <input type="text" id="test" onChange={this.changeEvent.bind(this)}
+                     onCompositionStart={this.handleComposition.bind(this)}
+                     onCompositionUpdate={this.handleComposition.bind(this)}
+                     onCompositionEnd={this.handleComposition.bind(this)}/>
+          </div>
+		)
+	}
+```
 
 ## 五 组件性能优化
 
