@@ -93,10 +93,9 @@ DOM：
 
 - [《Webpack 实战：入门、进阶与调优》](https://book.douban.com/subject/34430881/)
 - [《深入浅出 Vue.js》](https://book.douban.com/subject/32581281/)
-- [《Vue.js 应用测试》](https://book.douban.com/subject/34998070/)
-- [《深入 React 技术栈》](https://book.douban.com/subject/26918038/)
-- [《深入浅出 React 和 Redux》](https://book.douban.com/subject/27033213/)
-- [《React 状态管理与同构实战》](https://book.douban.com/subject/30290509/)
+- [《深入 React 技术栈》](https://book.douban.com/subject/26918038/)：知识内容版本较老
+- [《深入浅出 React 和 Redux》](https://book.douban.com/subject/27033213/)：知识内容版本较老
+- [《React 状态管理与同构实战》](https://book.douban.com/subject/30290509/)：知识内容版本较老
 
 **综合提升**：
 
