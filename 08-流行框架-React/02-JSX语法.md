@@ -16,6 +16,8 @@ const vdom = React.createElement('h1', {id: 'title', React.createElement('span',
 const vdom = <h1 id="title"><span>Hello World!</span></h1>
 ```
 
+**jsx 存在的意义就是为了创建虚拟 DOM**
+
 ## 二 JSX 基础语法
 
 ### 2.1 插值表达式
