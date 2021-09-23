@@ -76,8 +76,11 @@ React 与 Vue 共同点：
 ```txt
 都具备MVVM思想
 内部都采用虚拟DOM方式进行视图更新
-具备组件化开发理念
+具备组件化开发理念，且采用声明式编码，可以让编码人员无需直接操作DOM，提高开发效率。
 ```
+
+声明式编码：
+![声明式编码](../images/mvvm/statement.png)
 
 他们在组件化开发方式上：React 采用 JSX 来编写组件，而 Vue 使用单文件组件方式开发组件。
 
@@ -122,7 +125,7 @@ Vue 的 MVVM 的原理图：
 每一个应用都是通过 Vue 这个构造函数来创建根实例来启动的：
 
 ```js
-    let app = new Vue({
+    const app = new Vue({
         选项对象1,
         选项对象2,
         ...
@@ -135,7 +138,7 @@ Vue 的 MVVM 的原理图：
 - data：代理数据
 - methods：定义方法
 
-Vue 代理 data 数据在 HTML 中使用插值 `{{}}` 进行渲染，除了绑定属性外，可以使用 js 表达式进行简单的运算，以及使用三元运算符，但不支持语句与流程控制。如果要真的输出 {{}} 此时可以使用 v-pre 指令：`<div v-pre>{{hi}}</div>`。
+Vue 代理 data 数据在 HTML 中使用插值 `{{ msg }}` 进行渲染，除了绑定属性外，可以使用 js 表达式进行简单的运算，以及使用三元运算符，但不支持语句与流程控制。如果要真的输出 {{}} 此时可以使用 v-pre 指令：`<div v-pre>{{hi}}</div>`。
 
 每个 Vue 实例都会代理其对应 data 对象中的所有属性：
 
@@ -144,28 +147,57 @@ Vue 代理 data 数据在 HTML 中使用插值 `{{}}` 进行渲染，除了绑�
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-  let result = {
+  const result = {
     a: 1,
   }
 
   let app = new Vue({
     el: '.div',
     data: {
-      a: 1,
+      a: result.a,
     },
   })
 
+  // 获取代理中的数据
   console.log('app.a = ', app.a) // 1
-  console.log('app._data.a = ', app._data.a) // 1
 
-  // 修改代理数据中的值，不会修改原始数据的值
-  app.a = 2
-  console.log('修改代理数据为2，原始数据值为：', result.a) // 1
-
-  // 修改原始数据中的值，也不会再修改代理数据中的值
+  // 修改原始数据，代理数据会被改变
   result.a = 3
   console.log('修改原始数据为3，代理数据为：', app.a) // 2
+
+  // 修改代理数据，不会更改原始数据
+  app.a = 2
+  console.log('修改代理数据为2，原始数据值为：', result.a) // 1
 </script>
 ```
 
-贴士： `{{}}` 表示插值，可以将数据直接渲染在浏览器上。
+注意：视图上显示的是代理数据的值，所以修改 vue 实例上的选项对象、修改原始值都会造成视图更新！
+
+贴士：在 Vue 的实例上，我们不但可以看到绑定的 a 的值，也看到了一个 `_data` 的属性，该属性内也有 a 的值，这是 vue 对数据的劫持，内部为 data 数据都包装了 getter/setter 方法，用于实现数据在界面的响应式（自动更新）。Vue2 采用 defineproperty 实现代理，Vue3 采用 Relect 实现代理。Vue2 的基本原理如下所示：
+
+```js
+// 用户给出的原始数据：即vue中的data属性
+const data = {
+  name: 'lisi',
+  age: 30,
+}
+
+// 实现代理属性，即Vue实例上的 _data属性
+const _data = new Observer(data)
+console.log(_data)
+
+function Observer(obj) {
+  const keys = Object.keys(obj)
+  keys.forEach((key) => {
+    Objec.defineProperty(this, key, {
+      get() {
+        return obj[key]
+      },
+      set(val) {
+        // 发生变化：解析模板、生成虚拟DOM，进行渲染
+        obj[key] = val
+      },
+    })
+  })
+}
+```

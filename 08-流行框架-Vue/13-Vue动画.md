@@ -19,7 +19,7 @@ v-enter：
         在元素被插入之前生效，在元素被插入之后的下一帧移除。
 
 v-enter-to：
-        动画进入完成之后的借宿状态；
+        动画进入完成之后的结束状态；
         在元素被插入之后下一帧生效 (与此同时 v-enter 被移除)，在过渡/动画完成之后移除。
 
 v-enter-active：
@@ -53,11 +53,13 @@ v-leave-active：
 使用 transition 元素，把 需要被动画控制的元素 包裹起来，自定义两组样式，来控制 transition 内部元素实现动画；
 
 ```html
-<button @click="flag=!flag">显示/隐藏</button>
+<template>
+  <button @click="flag=!flag">显示/隐藏</button>
 
-<transition>
-  <p v-show="flag">我想通过动画显示隐藏</p>
-</transition>
+  <transition>
+    <p v-show="flag">我想通过动画显示隐藏</p>
+  </transition>
+</template>
 
 <script>
   new Vue({
@@ -83,7 +85,7 @@ v-leave-active：
 
 **8.2.1 步骤**：
 
-- 在 transition 标签上添加 name 属性，并给 name 属性赋值，赋的值替换 ‘v-’ 来作为过渡类类名的前缀；
+- 在 transition 标签上添加 name 属性，并给 name 属性赋值，赋的值替换 `v-` 来作为过渡类类名的前缀；
 - 使用自定义过渡类名 定义两组样式，来控制 transition 内部元素实现动画；
 
 ```html
@@ -131,9 +133,10 @@ v-leave-active：
   v-on:after-leave="afterLeave"
   v-on:leave-cancelled="leaveCancelled"
 >
-  上面四个是入场的动画生命周期函数； 后面四个是出场的动画生命周期函数；
 </transition>
 ```
+
+上面四个是入场的动画生命周期函数； 后面四个是出场的动画生命周期函数；
 
 当只用 JavaScript 过渡的时候，在 enter 和 leave 中必须使用 done 进行回调。否则，它们将被同步调用，过渡会立即完成。
 
@@ -156,4 +159,37 @@ methods: {
   enterCancelled: function (el) {
     // ...
   },
+```
+
+## 三 多元素过渡
+
+transition 只能让一个元素实现动画，如果要多个元素实现过渡，需要使用 `transition-group`：
+
+```html
+<transition-group appear>
+  <div key="1"></div>
+  <div key="2"></div>
+</transition-group>
+```
+
+## 四 集成第三方库
+
+较为成熟的动画库为：animate.css，vue 集成方式：
+
+```html
+<template>
+  <transition-group
+    appear
+    name="animate_animated animate_bounce"
+    enter-active-class="animate_swing"
+    leave-active-class="animate_backOutup"
+  >
+    <div key="1"></div>
+    <div key="2"></div>
+  </transition-group>
+  ></template
+>
+<script>
+  import 'animate.css'
+</script>
 ```

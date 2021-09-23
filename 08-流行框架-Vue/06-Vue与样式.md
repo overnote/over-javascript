@@ -1,6 +1,6 @@
-# 05-Vue 与样式
+# 06-Vue 与样式
 
-## 一 Vue 设置样式
+## 一 标签上设置样式
 
 ### 1.1 内联方式 `:style`
 
@@ -64,6 +64,8 @@
 </script>
 ```
 
+贴士： `:class` 是动态绑定，其值为表达式，如果不加冒号，`class` 则是 DOM 中的原生 class 样式。
+
 ### 1.3 .vue 文件中直接设置 class
 
 如果使用了组件化开发模式，则可以在 `.vue` 后缀的文件中直接设置 class：
@@ -85,7 +87,7 @@
 </style>
 ```
 
-### 1.4 引入 css 文件
+## 二 引入 css 文件
 
 在 js 文件中可以直接引用 css 文件：
 
@@ -110,7 +112,7 @@ import 'element-ui/lib/theme-default/index.css'
 <style scoped src="../static/css/user.css"></style>
 ```
 
-## 二 样式的作用域
+## 三 样式的作用域
 
 默认情况下引入的样式也是全局的，如果想要组件的样式私有化，就要添加 scoped，如：
 
@@ -123,7 +125,7 @@ import 'element-ui/lib/theme-default/index.css'
 </style>
 ```
 
-注意： 使用 scoped 后，父组件的样式将不会渗透到子组件中。想要在子组件中重新设置父组件的样式，可以使用深度作用选择器 /deep/，如：
+注意： 使用 scoped 后，父组件的样式将不会渗透到子组件中，想要在子组件中重新设置父组件的样式，可以使用深度作用选择器 /deep/，如：
 
 ```html
 <style scoped>
@@ -133,7 +135,7 @@ import 'element-ui/lib/theme-default/index.css'
 </style>
 ```
 
-## 三 css 预处理器的使用
+## 四 css 预处理器的使用
 
 在 style 标签上设置属性 lang 的值，如：lang="less"
 

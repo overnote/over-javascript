@@ -2,21 +2,21 @@
 
 ## 一 Vue 插件编写方式
 
-Vue 有两种方式自定义插件：
-
-- 第一种就是直接在 prototype 身上定义；
-- 第二种，可以定义一个对象为插件,然后在 use()里调用；
+Vue 插件用于扩展 Vue，有两种方式自定义插件。
 
 方式一：
 
 ```js
+// 直接在 prototype 身上定义
 Vue.prototype.$aaa = '这是定义的插件'
 ```
 
 方式二：
 
 ```js
+// 定义一个对象为插件，然后在 use()里调用
     let obj = {
+        // 必须有一个install函数，由vue调用
         install:function(Vue,opt){
             Vue.prototype.$aaa = '这是定义的插件';
         }
