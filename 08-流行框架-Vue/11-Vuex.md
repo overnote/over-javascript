@@ -337,3 +337,42 @@ const store = new Vuex.Store({
   actions: actions,
 })
 ```
+
+## 六
+
+如果当前组件使用的 vuex 的成员过多，使用起来较为繁琐，如：
+
+```js
+this.$store.state.user
+this.$store.state.order
+this.$store.state.category
+```
+
+vuex 提供了 mapState/mapGetters 优化为计算属性：
+
+```html
+<template> </template>
+
+<script>
+  import {mapState, mapGetters} from 'vuex
+  export defatul {
+    computed: {
+      ...mapState(['user','order', 'category']),  // 映射sate数据
+      ...mapGetters(['name'])  // 映射getters数据
+      ...mapMutations(['infoUser', 'infoOrder']), //映射 commit
+      ...mapActions(['getUser', 'getOrder'])//映射dispatch()的函数
+
+    },
+  }
+</script>
+```
+
+其本质是：
+
+```js
+computed: {
+  user(){
+    return this.$store.state.user
+  }
+}
+```
