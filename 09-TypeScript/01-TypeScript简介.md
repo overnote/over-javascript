@@ -49,15 +49,13 @@ int add(int num) {
 
 ### 2.1 TypeScript 简介与安装
 
-TypeScript 是 2012 年由微软发布的编程语言，是一门非常年轻的语言。
-
-TypeScript 是 JavaScript 的超集，即：TS 会遵循 ECMAScript 的语法规范，但是额外扩展了原生 JS 语法，适合开发大型企业项目。
+TypeScript 是 2012 年由微软发布的编程语言，是一门非常年轻的语言，为 JavaScript 的超集，即：TS 会遵循 ECMAScript 的语法规范，但是额外扩展了原生 JS 语法，适合开发大型企业项目。
 
 环境配置：
 
 ```txt
 # 安装typescript
-npm install -g typescript
+npm i -g typescript
 
 # 测试环境：tsc是在安装typescript时默认安装的TS编译器
 tsc --version
