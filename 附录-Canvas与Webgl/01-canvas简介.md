@@ -35,8 +35,34 @@ canvas 元素本身拥有属性 width、height，不推荐使用 css 控制，�
 - 元素本身大小：由 CSS 控制
 - 元素绘制表面的大小：CSS 无法控制
 
-canvas 的 width、height 属性会同时修改了该元素本身的大小和元素绘制表面的大小。
+canvas 的 width、height 属性会同时修改了该元素本身的大小和元素绘制表面的大小，而 CSS 修改则只修改元素本身大小，绘制面大小不变，浏览器会对绘图面进行缩放，从而产生了失真。
 
-## 三 相关网址
+## 四 canvas 元素 API
 
-- [基于脚本的定时动画控制](https://www.w3.org/TR/animation-timing/)：使用 window.requestAnimationFrame()来制作基于网络的动画，这适用于对性能要求很高的动画。
+canvas 元素只提供了 2 个属性，3 个方法：
+
+- width、height：元素的宽高。是个非负整数，不能给数值添加 px 后缀
+- getContext()：返回与该 canvas 元素相关的绘图环境对象。每个 canvas 元素均有且有一个这样的环境对象。
+- toDataURL(type, quality)：返回数据地址，可以将其设置为 img 元素的 src 属性值。type 表示图像类型，如 image/jpeg 或者 image/png(默认)。第二个参数是 0~1.0 之间的 double 值，表示 JPEG 图像的显示质量。
+- toBlob(callback, type, quality...)：创建一个用于表示此 canvas 元素图像文件的 Blob。浏览器会调用参数一（this 为 blob）。
+
+## 五 绘图环境
+
+canvas 元素仅仅是个容器，其内部的绘图环境真正提供了全部的绘制功能，包括：
+
+- 2d 绘图环境：getContext('2d')获取。
+- 3d 绘图环境：基于 WebGL 实现。
+
+## 六 绘图原理
+
+canvas 绘制图形步骤：
+
+- 1、将图形/图像绘制到一个透明位图中。绘制时遵从当前的填充模式、描边模式、线条样式。
+- 2、将图形/图像的每一个像素颜色分量，乘以绘图环境对象的 globalAlpha 属性值。
+- 3、将绘有图形/图像的位图，合成到当前经过剪辑区剪辑且过的 canvas 位图上，在曹组时使用当前的合成操作符（composition operator）。
+
+如果要启用引用效果，则会在 1、3 步骤之间加入：
+
+- 将图形/图像的阴影绘制到另一幅位图中，在绘制时使用当前绘图环境的阴影设定
+- 将阴影中每一个像素的 alpha 分量乘以绘图环境对象的 globalAlpha 属性值
+- 将绘有阴影的位图与经过剪辑区域剪切过的 canvas 进行图像和成，操作时使用当前的合成模式参数
