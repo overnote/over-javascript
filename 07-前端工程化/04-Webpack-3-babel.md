@@ -1,6 +1,54 @@
 # 04-webpack 与 babel
 
-## 一 webpack 配置 babel
+## 一 babel 基本使用
+
+ES6 React 等写法在浏览器中并未得到完全的支持，利用 Babel 工具可以将 ES6、React 等语法编译为浏览器识别的 ES5。
+
+使用步骤：
+
+```txt
+1 项目根目录安装：
+    旧版：npm i -D babel-cli babel-core babel-preset-env
+    新版：npm i -D @babel/cli @babel/core @babel/preset-env
+
+2 项目根目录创建 .babelrc ,内容如下:
+    旧版：{"presets":["env"]}
+    新版：{"presets":["@babel/env"]}
+
+3 编译src目录下所有文件到dist目录下
+    npx babel src -d dist                           // 若npm<5.2，则可以使用 ./node_modules/.bin/babel
+```
+
+babel-cli 只是一个执行 babel 命令行工具，本身不具备编译功能，编译功能是由插件 babel-preset-env 提供的。
+
+带 env 是指最新的 babel 编译工具，包含了所有的 ES\*功能，如果我们不需要这么多的新特性，可以有选择的安装编译插件：
+
+```txt
+# ES2015转码规则
+$ npm install --save-dev babel-preset-es2015
+# react转码规则
+$ npm install --save-dev babel-preset-react
+# ES7不同阶段语法提案的转码规则（共有4个阶段），选装一个
+$ npm install --save-dev babel-preset-stage-0
+$ npm install --save-dev babel-preset-stage-1
+$ npm install --save-dev babel-preset-stage-2
+$ npm install --save-dev babel-preset-stage-3
+```
+
+在命令行中敲击大量命令显然不是高效的，可以直接通过配置文件配置 babel，新建文件 `.babelrc`即可：
+
+```js
+  {
+    "presets": [
+      "es2015",
+      "react",
+      "stage-2"
+    ],
+    "plugins": []
+  }
+```
+
+## 二 webpack 配置 babel
 
 转译 ES6，ES7 需要 babel-loader 加载器。
 
@@ -47,9 +95,9 @@ module.exports = {
  },
 ```
 
-## 二 babel 转换函数
+## 三 babel 转换函数
 
-### 2.1 poyfill
+### 3.1 poyfill
 
 虽然 babel 把 ES6 解析为了 ES5，但是仍然有许多变量在低版本不支持，比如：Promise,Set,Symbol,Array.from,async 等。
 
@@ -67,7 +115,7 @@ presets: [
 import "@babel/pollyfill"
 ```
 
-### 2.2 transform-runtime
+### 3.2 transform-runtime
 
 如果当前书写的不是业务代码，而是一些插件、框架，那么 pollyfill 的方式不推荐。因为 pollyfill 生成的 map、promise 都是以全局变量的形式存在，会污染框架的环境。
 
@@ -92,7 +140,7 @@ options: {
 }
 ```
 
-### 2.3 原理解读
+### 3.3 原理解读
 
 ```js
 // 原生代码如下：
@@ -126,41 +174,4 @@ npm i - S @babel/plugin-transform-object-assign (注意旧版写法)
 
 # .babelrc配置：
  "plugins": ["@babel/transform-object-assign"]
-```
-
-## 三 配置 react
-
-安装 react：
-
-```txt
-npm i -S react react-dom
-```
-
-安装 babel：和配置 babel 一样，注意版本，额外安装 react 相关语法插件即可
-
-```txt
-# webpack4 版本
-npm i -D babel-preset-react@6
-# webpack3 版本
-npm i -D @babel/preset-react
-```
-
-配置 webpack：和配置 babel 一样
-
-```js
-{
- test: /(\.jsx|\.js)$/,
- use: {
-  loader: "babel-loader"
- },
- exclude: /node_modules/
-}
-```
-
-同样 babel 配置需要写在.babelrc 中：
-
-```js
-{
- "presets": ["@babel/env", "@babel/react"] //老版为["env", "react"]
-}
 ```

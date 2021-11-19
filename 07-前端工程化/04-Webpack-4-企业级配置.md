@@ -266,3 +266,10 @@ module.exports = {
   },
 }
 ```
+
+## 六 Mode
+
+Mode 配置会设定 webpack 的环境：
+
+- development：开发环境。会将 process.env.NODE_ENV 的值设定为 development，启用 NamedChunksPlugin、NameMoulesPlugin，支持代码本地调试
+- production：生产环境。会将 process.env.NODE_ENV 的值设定为 production，支持代码压缩等等功能，优化上线配置。

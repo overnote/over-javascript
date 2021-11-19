@@ -1,4 +1,4 @@
-# 01-webpack 基本使用
+# -打包工具-Webpack
 
 ## 一 webpack 简介
 
@@ -17,22 +17,35 @@ webpack 的优点：
 - 5. 可以将代码切割成不同的 chunk，实现按需加载，降低了初始化时间
 - 6. 支持 SourceUrls 和 SourceMaps，易于调试
 
+打包细节：
+![webpack打包细节](../images/webpack/webpack-00.png)
+
 ### 1.2 webpack 与 gulp 区别
 
 Gulp 的定位是 Task Runner, 用来跑一个一个任务，但是没有解决 js module 的问题。其工作方式是：指明对某些文件进行类似编译、组合、压缩等任务的具体步骤，之后 gulp 工具可以自动替你完成这些任务。
-![gulp原理](/images/JavaScript/webpack-01.png)
+
+![gulp原理](/images/webpack/webpack-01.png)
+
 Webpack 工作方式：把项目当做一个整体，通过一个给定的主文件（如 index.js），Webpack 将从这个文件开始找到项目的所有依赖文件，使用 loaders 处理它们，最后打包为一个（或多个）浏览器可识别的 JavaScript 文件。
-![webpack原理](/images/JavaScript/webpack-02.png)
+
+![webpack原理](/images/webpack/webpack-02.png)
+
+### 1.3 正确认识 webpack
+
+webpack 并不能实现 js 的编译，只能识别到 JS 中的 `import`语法，把 js 中引入的其他 js 文件打包到一起。
+
+如果要打包 html、css、编译 ES6 等，则需要 webpack 大量的 loader、plugin 来实现，其本身只是一个模块打包工具。
 
 ## 二 webpack 的安装与运行
 
-### 2.1 webpack4 安装
+### 2.1 webpack 安装
+
+目前，webpack 主要有 4 与 5 两个在使用的版本。
+
+下面是 webpack4 的安装方式：
 
 ```txt
-# 确保电脑已经安装Node，版本最好大于8.6
-node -v
-
-# 基本项目根目录后，安装 webpack。这里推荐本地安装，以保证版本的一致性。
+# 确保 node 版本在 8 以上，在项目根目录安装以下2个包（版本4后这2个包被分开）：
 npm i -D webpack@4 webpack-cli@3
 
 # 查看安装的webpack版本
@@ -41,31 +54,18 @@ npx webpack -v        # 本笔记基于webpack4，可以避免各种插件的版
 
 贴士：在本地安装的 webpack 需要使用 `npx webpack` 命令启动，或者使用 `.\node_modules\.bin\webpack`。也可以全局安装 webpack，就可以直接使用 webpack 命令了，但是笔者不推荐，因为不同的项目可能使用的 webpack 版本不同，全局安装后会影响对不同版本项目的支持。
 
-### 2.2 工程目录与打包
-
-工程目录比如是如下格式：
-
-![工程目录](/images/JavaScript/webpack-03.png)
+### 2.2 使用 webpack 打包
 
 webpack4 之后，无需配置文件即可实现打包，会自动在 src 目录下寻找 index.js 文件，开始执行打包。
 
 在根目录执行打包：
 
 ```txt
+# 也可以手动指定： npx webpack main.js
 npx webpack
 ```
 
 打包完毕后，会在根目录生成 `dist` 目录，打包后的文件都放在此处。
-
-### 2.3 使用 webpack 打包
-
-在工程根目录下输入打包命令：
-
-```txt
-npx webpack index.js
-```
-
-打包完毕后会在根目录下生成`dist`文件夹，内部包含一个`test.js`文件被打包后生成的`main.js`文件
 
 webpack 常用命令参数：
 
@@ -77,7 +77,7 @@ webpack 常用命令参数：
 --config a.js   手动指定配置文件，默认为根目录下的webpack.config.js
 ```
 
-### 2.4 npm 脚本运行
+### 2.3 npm 脚本运行
 
 反复输入上述命令很麻烦，可以配置一个 npm 脚本来替代：
 
@@ -88,12 +88,6 @@ webpack 常用命令参数：
 # 配置完成后使用npm来启动webpack
 npm run dev
 ```
-
-### 2.5 正确认识 webpack
-
-webpack 并不能实现 js 的编译，只能识别到 JS 中的 `import`语法，把 js 中引入的其他 js 文件打包到一起。
-
-如果要打包 html、css、编译 ES6 等，则需要 webpack 大量的 loader、plugin 来实现，其本身只是一个模块打包工具。
 
 ## 三 webpack 的配置
 
@@ -116,26 +110,72 @@ module.exports = {
 }
 ```
 
-贴士：在 webpack4.0 时，打包需要设置 mode，默认值为 production，也可以设置为 development，二者分别用于生产环境（会压缩）和开发环境
+贴士：在 webpack4.0 时，打包需要设置 mode，默认值为 production，也可以设置为 development，二者分别用于生产环境（会压缩）和开发环境。
 
-## 四 webpack5 的改变
+### 3.2 loader
 
-### 4.1 webpack5 新特性
+webpack 只能打包 JS 文件，如果要实现对 CSS、图片等文件的打包，就需要大量的加载器 loader。每个加载器都为 webpack 提供了一个功能，多个加载器组合后，才能实现完整的项目打包功能。
 
-webpack5 对 webpack 几个固有问题进行了优化：
+loader 在 webpack 配置文件的 module 字段中配置，位于 rules 字段中，其值可以是字符串、数组、json 等五花八门，比如打包 CSS 的加载器为：style-loader，css-loader，实现方式如下：
 
-- 打包后文件被大幅缩小，代码更加清爽
-- treashaking 进行了优化，打包后的捆绑包更小
-- 通过持久缓存提高构建性能！使用了更好的算法和默认值来改善长期缓存（hash 值算法改变）
-- 能够识别循环依赖
+```js
+// npm i -D style-loader css-loader
 
-webpack5 打包后的程序更加清爽，从而也避免了饱受诟病的打包后文件变大的毛病（一个 console 有 1KB，webpack5 打包后只有几十 B）：
-
-```txt
-// webpack5打包console后的代码：
-(()=>{"use strict";console.log("hello world!")})()
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+}
 ```
 
-## 五 Webpack 打包细节
+贴士：**多个 loader 的处理顺序是：从下到上，从右到左！**。
 
-![webpack打包细节](../images/javascript/webpack-00.png)
+### 3.3 plugin
+
+webpack 的各种 loader 提供了对对应类型文件的打包方式，plugins 则是 webpack 打包过程的便利性、增强型工具。
+
+常用插件有：
+
+```txt
+html-webpack-plugin
+  每次webpack打包，该插件可以将源码中的 html 页面从 src 拷贝到 dist 下，
+  且会自动将入口文件打包的 js 文件插入 html 页面的 script 标签中。
+
+clean-webpack-plugin
+  每次webpack打包，该插件会删除dist打包目录中原有文件
+
+copy-webpack-plugin
+  每次webpack打包，该插件会拷贝源码中的文件进入dist打包目录
+
+webpack-merge
+  该插件合并不同webpack配置文件
+
+uglifyjs-webpack-plugin
+  去除注释插件为，webpack4 不再需要该插件，因为在打包时候如果使用了`mode`为`production`，则自动去除注释。
+
+webpack.ProgressPlugin()
+  进度监控插件
+```
+
+html-webpack-plugin 插件使用示例：
+
+```js
+// npm i -D html-webpack-plugin
+
+const path = require('path')
+const htmlWebpackPlugin = require('html-webpack-plugin')
+
+module.exports = {
+  plugins: [
+    new htmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src/index.html'),
+      filename: 'index.html',
+    }),
+  ],
+}
+```

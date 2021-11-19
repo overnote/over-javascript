@@ -112,6 +112,11 @@ import 'element-ui/lib/theme-default/index.css'
 <style scoped src="../static/css/user.css"></style>
 ```
 
+CSS 引入顺序注意事项：
+
+- 应该在样式导入之后引入组件，以避免样式覆盖问题
+- 我们自己书写的全局样式应该在组件库样式后导入，才会生效、覆盖库里的样式
+
 ## 三 样式的作用域
 
 默认情况下引入的样式也是全局的，如果想要组件的样式私有化，就要添加 scoped，如：

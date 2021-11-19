@@ -179,3 +179,19 @@ optimization: {
     "@babel/polly-fill"   // 防止 import polyfill这样的文件 也被树摇
 ]
 ```
+
+### webpack5 新特性
+
+webpack5 对 webpack 几个固有问题进行了优化：
+
+- 打包后文件被大幅缩小，代码更加清爽
+- treashaking 进行了优化，打包后的捆绑包更小
+- 通过持久缓存提高构建性能！使用了更好的算法和默认值来改善长期缓存（hash 值算法改变）
+- 能够识别循环依赖
+
+webpack5 打包后的程序更加清爽，从而也避免了饱受诟病的打包后文件变大的毛病（一个 console 有 1KB，webpack5 打包后只有几十 B）：
+
+```txt
+// webpack5打包console后的代码：
+(()=>{"use strict";console.log("hello world!")})()
+```
