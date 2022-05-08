@@ -183,3 +183,41 @@ tsc --init
 # 设置vscode：
 # 击vscode菜单->终端->运行任务->显示所有任务->tsc 监视
 ```
+
+## 五 webpack 处理 typescript
+
+推荐使用官方的 loader：
+
+```txt
+npm i -D ts-loader
+```
+
+tsconfig.json 配置：
+
+```js
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "allowJs": true
+    },
+    "include": [
+        "./src/*"
+    ],
+    "exclude": [
+        "./node_module"
+    ]
+}
+
+```
+
+webpack 配置：
+
+```js
+                {
+                    test: /\.tsx?$/,
+                    use: {
+                        loader: 'ts-loader'
+                    }
+                }
+```

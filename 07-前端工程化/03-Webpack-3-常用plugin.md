@@ -1,6 +1,67 @@
-# 03-webpack 的 plugins
+# 03-Webpack-3-常用 plugin
 
-### 2.3 bootstrap 库的打包问题
+## 一 常用插件
+
+### 1.1 html-webpack-plugin
+
+html-webpack-plugin 插件用于 html 文件的一些处理，比如 以指定位置模板创建新模板、压缩 html 等，如下使用方式：
+
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+module.exports = {
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: 'index.html',
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+      },
+    }),
+  ],
+}
+```
+
+### 1.2 mini-css-extract-plugin CSS 打包插件
+
+mini-css-extract-plugin 插件可以帮助更正 css 打包路径：
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
+      },
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'css/build.css',
+    }),
+  ],
+}
+```
+
+### 1.3 optimize-css-assets-webpack-plugin CSS 压缩插件
+
+```js
+const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
+
+module.exports = {
+  plugins: [
+    new OptimizeCssAssetsWebpackPlugin({
+      filename: 'css/build.css',
+    }),
+  ],
+}
+```
+
+### 1.4 第三方库打包问题
 
 引入类似 jqueryui,bootstrap 这样的库，他们依赖于 jquery，打包配置方式如下：
 
@@ -15,9 +76,7 @@ new webpack.ProvidePlugin({
 
 此时 webpack 在 bootstrap 源码中偷偷加入`import "jquery"`
 
-## 三 提取公共代码插件
-
-### 3.2 提取 JS 公共代码插件
+## 二 提取 JS 公共代码插件
 
 webpack 内置了提取公共代码的插件，主要针对多入口配置：
 

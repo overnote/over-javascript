@@ -1,4 +1,4 @@
-# -打包工具-Webpack
+# 03-Webpack-1-打包介绍
 
 ## 一 webpack 简介
 
@@ -107,10 +107,15 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'), //输出目录
     filename: 'bundle.js', //输出文件名
   },
+  module: { rules: [] }, // 加载器配置
+  plugins: [], // 插件配置
 }
 ```
 
-贴士：在 webpack4.0 时，打包需要设置 mode，默认值为 production，也可以设置为 development，二者分别用于生产环境（会压缩）和开发环境。
+mode：
+
+- development：默认值，为开发环境。其本质是将 `process.env.NODE_ENV` 的值设置为 development，启用 NamedCunksPlugin 和 NamedModulesPlugin。
+- production：生产环境，该环境下会压缩 html 与 js 代码。其本质是将 `process.env.NODE_ENV` 的值设置为 development，启用 FlagDependencyUsagePlugin 和 UglifyJsPlugin 等插件
 
 ### 3.2 loader
 
@@ -120,7 +125,6 @@ loader 在 webpack 配置文件的 module 字段中配置，位于 rules 字段�
 
 ```js
 // npm i -D style-loader css-loader
-
 module.exports = {
   module: {
     rules: [

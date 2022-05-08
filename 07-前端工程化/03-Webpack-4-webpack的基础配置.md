@@ -1,8 +1,13 @@
-# 05-webpack 本身配置
+# 03-Webpack-4-webpack 的基础配置
 
-## 一 常见 webpack 本身配置
+## 一 mode 模式
 
-### 1.1 入口与出口
+Mode 配置会设定 webpack 的环境：
+
+- development：开发环境。会将 process.env.NODE_ENV 的值设定为 development，启用 NamedChunksPlugin、NameMoulesPlugin，支持代码本地调试
+- production：生产环境。会将 process.env.NODE_ENV 的值设定为 production，支持代码压缩等等功能，优化上线配置。
+
+## 二 entry、output
 
 入口与出口可以分别配置：
 
@@ -19,7 +24,7 @@ module.exports = {
   output: {
     //name变成了上述的入口名
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: '[name].[contenthash:10].js',
   },
   module: {
     rules: [
@@ -44,42 +49,13 @@ output 的其他配置：
 
 - publicPath: 会给注入到 html 中的 JS 的 src 添加该前缀
 
-### 1.2 sourceMap
+## 三 webpack-dev-server
 
-source-map 是源码到构建后代码之间的映射，如果构建后代码出错，通过该映射可以追踪到源码中的错误。
-
-webpack 中配置如下：
-
-```js
-// [inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map
-devtool: 'source-map'
-```
-
-常见配置：
-
-- `source-map`：打包后生成外部的 source-map 文件，能够准确提供错误代码位置
-- `inline-source-map`：打包后的 JS 文件内部追加一个 source-map 代码，能够准确提供错误代码位置
-- `hidden-source-map`：打包后生成外部 source-map 文件，只能够提示错误原因，不能追踪到错误的源码位置，只能追踪到构建后的代码错误位置
-- `eval-source-map`：打包后的 JS 文件内部中，每个被打包的 js 文件后追加一个 eval()函数，eval 内部执行的是 source-map 源码，源码以 base64 形式存在，也能提供准确的错误代码位置
-- `nosources-source-map`：打包后生成外部的 source-map 文件，能够准确提供错误代码位置，但是没有源码信息
-- `cheap-source-map`：打包后生成外部的 source-map 文件，能够准确提供错误代码位置，但是报错位置的全部一行代码都会提示错误
-- module 可以显示第三方模块的问题
-
-source-map 打包为内部代码时，构建速度快。所以一般如下采用：
-
-```txt
-生产环境：`eval-source-map`，生成内部代码构建快，代码错误精确到列方便调试
-
-开发环境：`source-map`
-```
-
-## 二 webpack-dev-server
-
-### 2.1 -watch 参数
+### 3.1 -watch 参数
 
 webpack 的打包命令如果添加了`watch`参数，则可以监听源码文件，当源码文件有改动时，则自动重新打包。
 
-### 2.2 webpack-dev-server
+### 3.2 webpack-dev-server
 
 如果我们要实现 watch 的效果，且能自动打开浏览器，刷新浏览器，那么需要使用 webpack-dev-server，该工具会使 contentBase 配置中的目录成为服务器静态文件目录。
 
@@ -109,30 +85,11 @@ npm i -D webpack-dev-server
     },
 ```
 
-注意：
+注意：webpack-dev-server 打包的 dist 目录内是没有文件的，文件位于内存中。
 
-- webpack-dev-server 打包的 dist 目录内是没有文件的，文件位于内存中。
-- 当开启 hot 与 hotOnly 时，需要引入 webpack 自带的插件，如下所示:
+## 四 webpack 打包模式
 
-```js
-new webpack.HotModuleReplacementPlugin()
-```
-
-这样配置可以更方便的调试 css，js，因为某块地方的更改不会改变其他模块已经产生的数据结果（即不会因为改变文件而全局重新生成）。
-
-比如有模块 a 与模块 b，模块 c 引用了模块 a，现在模块 a 改变了，只会改变模块 a 内部的数据，模块 c 不会变化，如果想要模块 c 也跟着改变，可以在模块 c 中的源码这样书写：
-
-```js
-if (module.hot) {
-  moduel.hot.accept('a', () => {
-    //业务代码
-  })
-}
-```
-
-## 三 webpack 打包模式
-
-webpack 在打包时有开发模式（development）和生产模式（prodction）两种，在 mode 中配置，那么为了对应不同的环境就需要不同的配置。
+webpack 在打包时有开发模式（development）和生产模式（prodction）两种，在 mode 中配置中。那么为了对应不同的环境就需要不同的配置。
 
 npm 脚本配置：
 
@@ -228,7 +185,7 @@ module.exports = merge(baseConfig, prodConfig)
 
 贴士：在开发时，使用 webpack-dev-server 往往不能查看打包后的代码了，也可以在 npm 脚本内再建一个`"dev-build": "webpack --config webpack.config.dev.js"`。
 
-## 四 webpack 配置本地代理
+## 五 webpack 配置本地代理
 
 使用 webpack-dev-server 也可以实现跨域问题解决，但是如果我们要自己为自己设置一定的接口，则需要手动创建一个本地服务器：
 
@@ -253,23 +210,18 @@ app.listen(3000)
 
 当使用 `node server.js` 启动时，会同时启动 webpack。
 
-## 五 resolve
+## 六 resolve
+
+resolve 用于配置解析模块的规则，比如配合路径别名等需求：
 
 ```js
 module.exports = {
   resolve: {
-    modules: [path.resolve('node_modules')], // 只在当前目录查找第三方模块
     alias: {
-      // 别名
-      bootstrap: 'bootstrap/dist/css/bootstrap.css', // 此时代码中引入 bootstrap的样式就可以书写为 import 'bootstrap'
+      @: path.resolve(__dirname, 'src ') // 别名
     },
+    extensions: ['.js', '.json', 'jsx'],  // 引入文件无需后缀名
+    modules: ['node_modules'] // 告诉webpack解析模块是去哪个目录查找
   },
 }
 ```
-
-## 六 Mode
-
-Mode 配置会设定 webpack 的环境：
-
-- development：开发环境。会将 process.env.NODE_ENV 的值设定为 development，启用 NamedChunksPlugin、NameMoulesPlugin，支持代码本地调试
-- production：生产环境。会将 process.env.NODE_ENV 的值设定为 production，支持代码压缩等等功能，优化上线配置。

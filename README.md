@@ -86,7 +86,7 @@ DOM：
 
 ```txt
 《Effective JavaScript》：内容被红宝书覆盖
-《JavaScript面向对象编程指南（第2版）》：部分内容被红宝书覆盖，后半部分的设计模式等内容可以看其他书籍
+《JavaScript面向对象编程指南（第3版）》：部分内容被红宝书覆盖，后半部分的设计模式等内容可以看其他书籍
 ```
 
 **框架**：
@@ -123,8 +123,10 @@ DOM：
 
 ### 桌面开发
 
-- [《Electron 跨平台开发实战》](https://book.douban.com/subject/34838092/)
 - [《Electron 实战：入门、进阶与性能优化》](https://book.douban.com/subject/35069275/)
+- [《深入浅出 Electron》](https://book.douban.com/subject/35693818/)
+
+其他书籍如：《Electron 跨平台开发实战》等过老。
 
 ### 图形学、canvas 等
 
