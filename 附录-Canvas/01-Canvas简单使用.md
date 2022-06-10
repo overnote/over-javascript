@@ -1,15 +1,15 @@
-# 01-canvas 简介
+# 01-Canvas 简单使用
 
-## 一 canvas 简介
+## 一 Canvas 简介
 
-canvas 是 html5 的一个画布标签，即一个矩形区域，可以控制其每一个像素，从而实现在网页绘制图像的功能。
+canvas 是 html5 提供饿画布标签，该变迁内形成一个矩形区域，可以控制其每一个像素，从而实现在网页绘制图像的功能。
+
+与 Flash 相比，Canvas 更加轻量，使用 Canvas 绘制图形，在绘制成功后，canvas 就会像素化，无法修改，只能通过 API 得到画布的内容再次绘制。所以 canvas 图形如果要实现动画，需要的编程逻辑是：清屏-更新-重新渲染。
 
 注意：**IE8 不支持 canvas！**，此时会显示`后备文本`，即只会显示 canvas 标签内的文本。如果需要 IE8 以下浏览器支持 canvas，可以使用：
 
 - explorecanvas
 - Google Chrome Frame
-
-与 Flash 相比，Canvas 更加轻量，使用 Canvas 绘制图形，在绘制成功后，canvas 就会像素化，无法修改，只能通过 API 得到画布的内容再次绘制。所以 canvas 图形如果要实现动画，需要的编程逻辑是：清屏-更新-重新渲染。
 
 ## 二 基本用法
 
