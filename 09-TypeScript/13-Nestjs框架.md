@@ -26,15 +26,15 @@ Nest 是 NodeJS 真正意义上的第一个 Web 框架。国内阿里的 MidwayJ
 node -v         # v12.10.0
 npm -v          # 6.10.3
 
-# 安装nest脚手架
+# 安装 nest 脚手架
 npm i -g @nestjs/cli
 
-# 创建nest项目
+# 创建 nest 项目
 nest new demo
 
 # 启动
 cd demo
-npm run start:dev           # :参数为启动形式，:dev支持热重启
+npm run start:dev           # :参数为启动形式，:dev 支持热重启
 
 # 访问
 http://localhost:3000
@@ -44,7 +44,7 @@ http://localhost:3000
 
 ```txt
 src
-├── main.ts                 # 入口：使用NestFactory 创建了实例
+├── main.ts                 # 入口：使用 NestFactory 创建了实例
 ├── app.module.ts           # 应用程序的根模块
 ├── app.controller.ts       # 带有单个路由的基本控制器示例
 ├── app.controller.spec.ts  # 具备拦截功能
@@ -62,7 +62,7 @@ nest 无需手动创建目录，并为目录中的 controller、service、module
 
 ```txt
 # 创建模块
-nest g mo user          # g 即 generator，mo是 module 的缩写
+nest g mo user          # g 即 generator，mo 是 module 的缩写
 
 # 在模块基础上创建控制层
 nest g co user          # co 是 controller 的缩写
@@ -72,55 +72,3 @@ nest g s user           # s 是 service 的缩写
 ```
 
 贴士：`nest --help` 可以查看缩写规范。
-
-## 三 配置 swagger
-
-nest 支持 swagger 接口文档：
-
-```txt
-npm i --save @nestjs/swagger swagger-ui-express
-```
-
-在 main.ts 中配置：
-
-```ts
-import { NestFactory } from '@nestjs/core'
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
-import { AppModule } from './app.module'
-
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule)
-
-  // 配置 swagger
-  const swaggerOptions = new DocumentBuilder()
-    .setTitle('Demo')
-    .setDescription('demo...')
-    .setVersion('1.0')
-    .addTag('demo')
-    .build()
-  const document = SwaggerModule.createDocument(app, swaggerOptions)
-  SwaggerModule.setup('api-docs', app, document)
-
-  await app.listen(3000)
-}
-bootstrap()
-```
-
-在控制器中书写接口信息：
-
-```ts
-import { Controller, Get } from '@nestjs/common'
-import { ApiOperation, ApiTags } from '@nestjs/swagger'
-
-@Controller('user')
-@ApiTags('user')
-export class UserController {
-  @Get()
-  @ApiOperation({ summary: '用户首页' })
-  index() {
-    return 'user...'
-  }
-}
-```
-
-访问接口信息：<http://localhost:3000/docs/>
