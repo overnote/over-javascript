@@ -2,7 +2,7 @@
 
 ## 一 关于本笔记
 
-OverNote 系列笔记是我在平时一些学习时间阅读书籍博客、观看视频后整理出来的一套体系化的笔记，着重将一个整套知识体系由浅入深的记录下来，并做**可持续的**扩展。由于笔记刚刚开始整理，许多地方仍然没有细化，笔误依然很多，敬请期待不断校正后的正式版。正式版会以类似 gitbook 的形式开放，便于阅读。
+OverNote 系列笔记是我在平时一些学习时间阅读书籍博客、观看视频后整理出来的一套体系化笔记，着重将一个整套知识体系由浅入深的记录下来，并做**可持续的**扩展。由于笔记刚刚开始整理，许多地方仍然没有细化，笔误依然很多，敬请期待不断校正后的正式版。正式版会以类似 gitbook 的形式开放，便于阅读。
 
 为何是笔记形式，而不是独立博客形式？
 
@@ -10,7 +10,7 @@ OverNote 系列笔记是我在平时一些学习时间阅读书籍博客、观�
 因为我个人不是很喜欢在类似博客这样的平台上分享零碎的知识点，
 独立博客的内容目录极度不清晰，久而久之只能成为一个自己也不会问津的垃圾收集器。
 
-像 OverNote 这样层次分明的结构，更方便基于 Git 在原来的基础上进行增删改。
+像 OverNote 这样层次分明的结构，更方便基于 Git 在原来的基础上进行增删改，这东西纯粹是一个记录不适合做专业的 blog。
 ```
 
 贴士：ES6 现在基本被各运行时接受，故 ES6 的内容已经完全被整合入对应章节，不再单独列出。如 let 声明已经并入了变量相关章节，class 并入了面向对象相关章节。
@@ -23,22 +23,22 @@ OverNote 系列笔记是我在平时一些学习时间阅读书籍博客、观�
 
 笔者推荐直接阅读新时期的一些必读著作：
 
-- [《深入解析 CSS》](https://book.douban.com/subject/35021471/)：新近较好的 CSS 基础与进阶书籍，有大量工作细节补充
+- [《CSS 设计指南》](https://book.douban.com/subject/23123255/)：CSS 入门
+- [《深入解析 CSS》](https://book.douban.com/subject/35021471/)：重点书籍，新近较好的 CSS 基础与进阶书籍，有大量工作细节补充
 - [《CSS 揭秘》](https://book.douban.com/subject/26745943/)：重点书籍，CSS 书籍瑰宝！！！
-- [《CSS 权威指南（第四版）》](https://book.douban.com/subject/33398314/)：经典 CSS 书籍，可以作为字典查阅
-- [《精通 CSS》第 3 版](https://book.douban.com/subject/30450258/)：翻译不佳，内容与《深入解析 CSS》重合
+- [《CSS 权威指南（第四版）》](https://book.douban.com/subject/33398314/)：经典书籍，可以作为 CSS 字典查阅
+- [《精通 CSS》第 3 版](https://book.douban.com/subject/30450258/)：内容与《深入解析 CSS》重合
 - [《CSS 实战手册》第四版](https://book.douban.com/subject/26898555/)：内容与《深入解析 CSS》重合
 
 其他优秀书籍：
 
 ```txt
-0基础入门类书籍：
+0 基础入门类书籍：
 《HTML & CSS 设计与构建网站》
-《Head First HTML 与 CSS》第2版
-《HTML5 与 CSS3 基础教程》第8版
-《CSS 设计指南》
+《Head First HTML 与 CSS》第 2 版
+《HTML5 与 CSS3 基础教程》第 8 版
 
-CSS提升类书籍：
+CSS 提升类书籍：
 《CSS 禅意花园》：不推荐，内容偏设计，非程序员读物，且时代较为久远
 《CSS 世界》：可阅读，深入 CSS 的一本书，但是作者行文风格较为特殊
 《CSS 选择器世界》：可阅读，内容较好，但是作者行文风格较为特殊
@@ -48,39 +48,31 @@ CSS提升类书籍：
 
 **JavaScript 语法基础**：
 
+- [《Effective JavaScript》](https://book.douban.com/subject/25786138/)：语法基础，版本有点老了
 - [《JavaScript 高级程序设计》第 4 版](https://book.douban.com/subject/35175321/)：红宝书，最好的 JS 入门、提升书籍之一
 - [《JavaScript 语言精髓与编程实践》第 3 版](https://book.douban.com/subject/35085910/)：国内非常深入优秀的 JS 书籍
 - [《JavaScript 权威指南》第 7 版](https://book.douban.com/subject/35396470/)：犀牛书，JS 的百科全书，与红宝书冲突过多
-- [《深入理解 ECMAScript6》](https://book.douban.com/subject/27072230/)： ES6 书籍，偏基础
-- [《ECMAScript6 入门》第 3 版](https://book.douban.com/subject/27127030/)： ES6 书籍，偏全面
-
-其他优秀书籍：
-
-```txt
-JavaScript语言学习：
-《Head First JavaScript程序设计》：零基础入门书籍
-《JavaScript编程精解 第3版》：佳作《Eloquent JavaScript》，深入浅出，整体偏基础，翻译不佳。
-《JavaScript语言精粹》修订版：即蝴蝶书，短小精悍，附录中对JS语言糟粕的汇总值得一看！但大多问题已被ES6相关书籍总结
-《JavaScript编程全解》-井上诚一郎 ：内容全面详细，但是被《红宝书》完全替代
-
-DOM编程学习：
-《JavaScript DOM 编程艺术》第 2 版：内容极简，适合零基础入门
-《HTML5 秘籍（第 2 版）》：内容较好，推荐学习
-《HTML5权威指南》：与 《HTML5 秘籍》冲突
-《锋利的 jQuery》第 2 版：适合初学jQuery时一看
-《JavaScript&jQuery交互式Web前端开发》：适合学习使用jQuery制作优秀的交互式网站
-```
-
-**JavaScript 技术提升**：
-
-- [《你不知道 JavaScript》上卷+中卷](https://book.douban.com/subject/26351021/)：笔者认为目前最好的 JS 深入书籍之一
+- [《深入理解 ECMAScript6》](https://book.douban.com/subject/27072230/)：ES6 书籍，偏基础
+- [《ECMAScript6 入门》第 3 版](https://book.douban.com/subject/27127030/)：ES6 书籍，偏全面
+- [《你不知道 JavaScript》上卷 + 中卷](https://book.douban.com/subject/26351021/)：笔者认为目前最好的 JS 深入书籍之一
 - [《JavaScript 忍者秘籍》第 2 版](https://book.douban.com/subject/30143702/)：对函数的讲解：闭包、重载、柯里化化讲解极好
 
 其他优秀书籍：
 
 ```txt
-《Effective JavaScript》：内容被红宝书覆盖
-《JavaScript面向对象编程指南》（第3版）：部分内容被红宝书覆盖，后半部分的设计模式等内容可以看其他书籍
+JavaScript 语言学习：
+《Head First JavaScript 程序设计》：零基础入门书籍
+《JavaScript 编程精解 第 3 版》：佳作《Eloquent JavaScript》，深入浅出，整体偏基础，翻译不佳。
+《JavaScript 语言精粹》修订版：即蝴蝶书，短小精悍，附录中对 JS 语言糟粕的汇总值得一看！但大多问题已被 ES6 相关书籍总结
+《JavaScript 编程全解》-井上诚一郎：内容全面详细，但是被《红宝书》完全替代
+《JavaScript 面向对象编程指南》（第 3 版）：部分内容被红宝书覆盖，后半部分的设计模式等内容可以看其他书籍
+
+DOM 编程学习：
+《JavaScript DOM 编程艺术》第 2 版：内容极简，适合零基础入门
+《HTML5 秘籍（第 2 版）》：内容较好，推荐学习
+《HTML5 权威指南》：与《HTML5 秘籍》冲突
+《锋利的 jQuery》第 2 版：适合初学 jQuery 时一看
+《JavaScript&jQuery 交互式 Web 前端开发》：适合学习使用 jQuery 制作优秀的交互式网站
 ```
 
 ### 2.3 TypeScript
@@ -121,7 +113,7 @@ DOM编程学习：
 其他优秀书籍：
 
 ```txt
-《编写可维护的 JavaScript》：不推荐，现在ESLint等工具已经成熟。
+《编写可维护的 JavaScript》：不推荐，现在 ESLint 等工具已经成熟。
 ```
 
 ### 2.6 桌面开发
