@@ -23,7 +23,7 @@
         "editor.tabSize": 4,
         "editor.useTabStops": true
     },
-    /*  vue的配置 */
+    /*  vue 的配置 */
     "vetur.format.defaultFormatter.html": "prettyhtml",
     "vetur.format.defaultFormatter.css": "prettier",
     "vetur.format.defaultFormatter.postcss": "prettier",
