@@ -10,7 +10,7 @@
 
 webpack 的优点：
 
-- 1. 对 CommonJS 、 AMD 、ES6 的语法规范都做了兼容
+- 1. 对 CommonJS、AMD、ES6 的语法规范都做了兼容
 - 2. 对 js、css、图片等资源文件都支持打包
 - 3. 串联式模块加载器以及插件机制，使用更加灵活，扩展性更强
 - 4. 有独立的配置文件 webpack.config.js
@@ -18,17 +18,17 @@ webpack 的优点：
 - 6. 支持 SourceUrls 和 SourceMaps，易于调试
 
 打包细节：
-![webpack打包细节](../images/webpack/webpack-00.png)
+![webpack 打包细节](../images/webpack/webpack-00.png)
 
 ### 1.2 webpack 与 gulp 区别
 
 Gulp 的定位是 Task Runner, 用来跑一个一个任务，但是没有解决 js module 的问题。其工作方式是：指明对某些文件进行类似编译、组合、压缩等任务的具体步骤，之后 gulp 工具可以自动替你完成这些任务。
 
-![gulp原理](/images/webpack/webpack-01.png)
+![gulp 原理](/images/webpack/webpack-01.png)
 
 Webpack 工作方式：把项目当做一个整体，通过一个给定的主文件（如 index.js），Webpack 将从这个文件开始找到项目的所有依赖文件，使用 loaders 处理它们，最后打包为一个（或多个）浏览器可识别的 JavaScript 文件。
 
-![webpack原理](/images/webpack/webpack-02.png)
+![webpack 原理](/images/webpack/webpack-02.png)
 
 ### 1.3 正确认识 webpack
 
@@ -45,11 +45,11 @@ webpack 并不能实现 js 的编译，只能识别到 JS 中的 `import`语法�
 下面是 webpack4 的安装方式：
 
 ```txt
-# 确保 node 版本在 8 以上，在项目根目录安装以下2个包（版本4后这2个包被分开）：
+# 确保 node 版本在 8 以上，在项目根目录安装以下 2 个包（版本 4 后这 2 个包被分开）：
 npm i -D webpack@4 webpack-cli@3
 
-# 查看安装的webpack版本
-npx webpack -v        # 本笔记基于webpack4，可以避免各种插件的版本错误
+# 查看安装的 webpack 版本
+npx webpack -v        # 本笔记基于 webpack4，可以避免各种插件的版本错误
 ```
 
 贴士：在本地安装的 webpack 需要使用 `npx webpack` 命令启动，或者使用 `.\node_modules\.bin\webpack`。也可以全局安装 webpack，就可以直接使用 webpack 命令了，但是笔者不推荐，因为不同的项目可能使用的 webpack 版本不同，全局安装后会影响对不同版本项目的支持。
@@ -61,7 +61,7 @@ webpack4 之后，无需配置文件即可实现打包，会自动在 src 目录
 在根目录执行打包：
 
 ```txt
-# 也可以手动指定： npx webpack main.js
+# 也可以手动指定：npx webpack main.js
 npx webpack
 ```
 
@@ -74,7 +74,7 @@ webpack 常用命令参数：
 --port          设置端口
 --contentBase   打开目的文件目录
 --hot           浏览器异步更新  主要针对样式的更改
---config a.js   手动指定配置文件，默认为根目录下的webpack.config.js
+--config a.js   手动指定配置文件，默认为根目录下的 webpack.config.js
 ```
 
 ### 2.3 npm 脚本运行
@@ -82,10 +82,10 @@ webpack 常用命令参数：
 反复输入上述命令很麻烦，可以配置一个 npm 脚本来替代：
 
 ```txt
-# 在package.json 中添加一行脚本
+# 在 package.json 中添加一行脚本
 "dev": "webpack --mode development"
 
-# 配置完成后使用npm来启动webpack
+# 配置完成后使用 npm 来启动 webpack
 npm run dev
 ```
 
@@ -147,17 +147,17 @@ webpack 的各种 loader 提供了对对应类型文件的打包方式，plugins
 
 ```txt
 html-webpack-plugin
-  每次webpack打包，该插件可以将源码中的 html 页面从 src 拷贝到 dist 下，
+  每次 webpack 打包，该插件可以将源码中的 html 页面从 src 拷贝到 dist 下，
   且会自动将入口文件打包的 js 文件插入 html 页面的 script 标签中。
 
 clean-webpack-plugin
-  每次webpack打包，该插件会删除dist打包目录中原有文件
+  每次 webpack 打包，该插件会删除 dist 打包目录中原有文件
 
 copy-webpack-plugin
-  每次webpack打包，该插件会拷贝源码中的文件进入dist打包目录
+  每次 webpack 打包，该插件会拷贝源码中的文件进入 dist 打包目录
 
 webpack-merge
-  该插件合并不同webpack配置文件
+  该插件合并不同 webpack 配置文件
 
 uglifyjs-webpack-plugin
   去除注释插件为，webpack4 不再需要该插件，因为在打包时候如果使用了`mode`为`production`，则自动去除注释。

@@ -74,7 +74,7 @@ new webpack.ProvidePlugin({
 })
 ```
 
-此时 webpack 在 bootstrap 源码中偷偷加入`import "jquery"`
+此时 webpack 在 bootstrap 源码中偷偷加入`import "jquery"`，业务代码中就无需引入 jquery，当开发者使用 $,jQuery 时，webpack 会自动引入。
 
 ## 二 提取 JS 公共代码插件
 

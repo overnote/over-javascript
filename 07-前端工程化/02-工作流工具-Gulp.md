@@ -35,7 +35,7 @@ Gulp 也提供了大量的插件来完成更多、更复杂的任务。
 Gulp 基础示例：
 
 ```txt
-第一步：本地安装gulp。进入项目文件夹后执行下列操作
+第一步：本地安装 gulp。进入项目文件夹后执行下列操作
 npm i gulp -D
 
 第二步：在根目录创建配置文件 gulpfile.js
@@ -45,8 +45,8 @@ npm i gulp -D
         console.log("hello gulp");
     });
 
-第三步：执行命令。这里要注意如果npm版本小于5.2，则不支持npx命令，需要全局安装一次gulp，然后直接运行gulp命令即可
-npx gulp default // 由于default是默认任务，这里可以省略
+第三步：执行命令。这里要注意如果 npm 版本小于 5.2，则不支持 npx 命令，需要全局安装一次 gulp，然后直接运行 gulp 命令即可
+npx gulp default // 由于 default 是默认任务，这里可以省略
 ```
 
 ### 2.2 使用 Gulp 创建任务
@@ -59,12 +59,12 @@ const gulp = reuqire('gulp')
 gulp.task('copyJS', function () {
   // 定义一个任务，名称为 copyJS
   gulp
-    .src('src/js/**/*.js') // src()获取资源路径
-    .pipe(gulp.dest('dist/')) // pipe()将资源传输给插件。dest()资源构建完毕后自动创建的路径
+    .src('src/js/**/*.js') // src() 获取资源路径
+    .pipe(gulp.dest('dist/')) // pipe() 将资源传输给插件。dest() 资源构建完毕后自动创建的路径
 })
 ```
 
-gulp.src() 也可以使用[]参数/正则，!表示不匹配， \*\*代表递归：
+gulp.src() 也可以使用 [] 参数/正则，! 表示不匹配， \*\*代表递归：
 
 ```js
 gulp.src(['src/js/**/*.*', '!src/demo.html'])
@@ -88,7 +88,7 @@ watch 用于监视文件的改变，自动构建：
 
 ```js
 gulp.task('js', function () {
-  //src下文件发生改变，自动执行default任务
+  //src 下文件发生改变，自动执行 default 任务
   gulp.watch('src/*', ['default'])
 })
 ```
@@ -96,7 +96,7 @@ gulp.task('js', function () {
 不同任务间存在依赖关系时，可以指定依赖，如下图：
 
 ```js
-gulp.task('less', ['依赖1', '依赖2', '依赖3'], function () {})
+gulp.task('less', ['依赖 1', '依赖 2', '依赖 3'], function () {})
 ```
 
 ### 2.4 Gulp 插件
@@ -120,17 +120,17 @@ gulp.task('less', function () {
 常用 gulp 插件：
 
 ```txt
-gulp-less   编译LESS文件
-gulp-cssmin   压缩CSS
+gulp-less   编译 LESS 文件
+gulp-cssmin   压缩 CSS
 gulp-rname  重命名
 gulp-imagemin  图片压缩
-gulp-uglify   压缩JS
+gulp-uglify   压缩 JS
 gulp-concat   合并
-gulp-htmlmin  压缩HTML
-gulp-autoprefixer 添加CSS私有前缀
+gulp-htmlmin  压缩 HTML
+gulp-autoprefixer 添加 CSS 私有前缀
 gulp-rev   添加版本号
 gulp-rev-collector 内容替换
-gulp-connect  创建服务器，默认监听8080端口
+gulp-connect  创建服务器，默认监听 8080 端口
 gulp-useref
 gulp-if
 ```

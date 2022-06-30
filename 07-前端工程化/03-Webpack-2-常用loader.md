@@ -42,7 +42,7 @@ babel-loader 提供对 ES6、ES7 等编译为 ES5 的功能，详细配置见 we
 打包 CSS 需要两个 loader 配合：
 
 - css-loader：让 JS 支持 `import` css 模块，会遍历 CSS 文件，然后找到 url() 表达式的关系并处理他们
-- style-loader： 把刚才分析得到的 css 代码插入页面 head 标签的 style 标签中。
+- style-loader：把刚才分析得到的 css 代码插入页面 head 标签的 style 标签中。
 
 安装 `style-loader` `css-loader`：
 
@@ -102,7 +102,7 @@ module: {
 }
 ```
 
-当然该 loader 还需要自己单的配置，根目录下创建 postcss.config.js,内容如下：
+当然该 loader 还需要自己单的配置，根目录下创建 postcss.config.js，内容如下：
 
 ```js
 module.exports = {
@@ -156,7 +156,7 @@ module: {
         options: {
           name: '[name]_[hash].[ext]',
           outputPath: 'public/images/',
-          limit: 2048, //如果图片超过2048字节不生成base64
+          limit: 2048, //如果图片超过 2048 字节不生成 base64
         },
       },
     },
@@ -180,7 +180,7 @@ module: {
             attrs: ['img:src', 'img:data-src'],
             limit: 8 * 1024,
             outputPath: 'public/images',
-            esModule: false, // 该加载器使用的是commonjs
+            esModule: false, // 该加载器使用的是 commonjs
           },
         },
       ],

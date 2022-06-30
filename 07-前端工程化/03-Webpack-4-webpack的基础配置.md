@@ -17,12 +17,12 @@ const htmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
-    //多个entry
+    //多个 entry
     main1: path.resolve(__dirname, './src/index.js'),
     main2: path.resolve(__dirname, './src/index.js'),
   },
   output: {
-    //name变成了上述的入口名
+    //name 变成了上述的入口名
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash:10].js',
   },
@@ -78,9 +78,9 @@ npm i -D webpack-dev-server
     devServer: {
         contentBase:  path.join(__dirname, "dist"),
         open: true,                 //启动时，会打开浏览器并渲染页面
-        port: 3000,                 //默认是3000
-        hot: true,                   //开启hotModule功能
-        hotOnly: true,               //html生效，则浏览器不刷新
+        port: 3000,                 //默认是 3000
+        hot: true,                   //开启 hotModule 功能
+        hotOnly: true,               //html 生效，则浏览器不刷新
         historyApiFallback:true      //单页面应用启用路由时候需要该设置
     },
 ```
@@ -146,15 +146,15 @@ const devConfig = {
   mode: 'development',
   devtool: 'cheap-module-source-map',
   output: {
-    //name变成了上述的入口名
+    //name 变成了上述的入口名
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     open: true, //启动时，会打开浏览器并渲染页面
-    port: 3000, //默认是3000
-    hot: true, //开启hotModule功能
+    port: 3000, //默认是 3000
+    hot: true, //开启 hotModule 功能
     hotOnly: true,
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
@@ -174,7 +174,7 @@ const baseConfig = require('./webpack.config.base')
 const prodConfig = {
   mode: 'production',
   output: {
-    //name变成了上述的入口名
+    //name 变成了上述的入口名
     path: path.resolve(__dirname, 'build'),
     filename: '[name].js',
   },
@@ -221,7 +221,7 @@ module.exports = {
       @: path.resolve(__dirname, 'src ') // 别名
     },
     extensions: ['.js', '.json', 'jsx'],  // 引入文件无需后缀名
-    modules: ['node_modules'] // 告诉webpack解析模块是去哪个目录查找
+    modules: ['node_modules'] // 告诉 webpack 解析模块是去哪个目录查找
   },
 }
 ```

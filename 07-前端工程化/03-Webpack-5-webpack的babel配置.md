@@ -11,12 +11,12 @@ ES6 React 等写法在浏览器中并未得到完全的支持，利用 Babel 工
     旧版：npm i -D babel-cli babel-core babel-preset-env
     新版：npm i -D @babel/cli @babel/core @babel/preset-env
 
-2 项目根目录创建 .babelrc ,内容如下:
+2 项目根目录创建 .babelrc ,内容如下：
     旧版：{"presets":["env"]}
     新版：{"presets":["@babel/env"]}
 
-3 编译src目录下所有文件到dist目录下
-    npx babel src -d dist                           // 若npm<5.2，则可以使用 ./node_modules/.bin/babel
+3 编译 src 目录下所有文件到 dist 目录下
+    npx babel src -d dist                           // 若 npm<5.2，则可以使用 ./node_modules/.bin/babel
 ```
 
 babel-cli 只是一个执行 babel 命令行工具，本身不具备编译功能，编译功能是由插件 babel-preset-env 提供的。
@@ -24,11 +24,11 @@ babel-cli 只是一个执行 babel 命令行工具，本身不具备编译功能
 带 env 是指最新的 babel 编译工具，包含了所有的 ES\*功能，如果我们不需要这么多的新特性，可以有选择的安装编译插件：
 
 ```txt
-# ES2015转码规则
+# ES2015 转码规则
 $ npm install --save-dev babel-preset-es2015
-# react转码规则
+# react 转码规则
 $ npm install --save-dev babel-preset-react
-# ES7不同阶段语法提案的转码规则（共有4个阶段），选装一个
+# ES7 不同阶段语法提案的转码规则（共有 4 个阶段），选装一个
 $ npm install --save-dev babel-preset-stage-0
 $ npm install --save-dev babel-preset-stage-1
 $ npm install --save-dev babel-preset-stage-2
@@ -80,7 +80,7 @@ module.exports = {
 
 ```js
 {
- "presets": ["@babel/preset-env"]   // 如果是 babel6，此处配置为：["babe-preset-env"]，安装的npm包名也如此
+ "presets": ["@babel/preset-env"]   // 如果是 babel6，此处配置为：["babe-preset-env"]，安装的 npm 包名也如此
 }
 ```
 
@@ -101,18 +101,13 @@ module.exports = {
 
 虽然 babel 把 ES6 解析为了 ES5，但是仍然有许多变量在低版本不支持，比如：Promise,Set,Symbol,Array.from,async 等。
 
-此时需要 poyfill，该模块的作用是当代码中用到了某个浏览器不支持的 ES6 变量，如 Map，则加载一个 Map 的实现类。
+此时需要 poyfill，该模块的作用是当代码中用到了某个浏览器不支持的 ES6 变量，如 Map，则加载一个 Map 的实现类。直接 import 导入 polyfill 文件过大，需要如下优化，进行按需导入：
 
 ```js
 // npm install -S @babel/polyfill
 
-// .babelrc 中配置
-presets: [
-  ["@babel/preset-env", {useBuiltIns: "usage}]
-]
-
-// 在业务源码的顶部引入 pollyfill，如果配置了useBuiltIns，则无需引入，会自动引入
-import "@babel/pollyfill"
+// .babelrc 中添加如下配置，会进行自动导入，无需 import
+presets: [['@babel/preset-env', { useBuiltIns: 'usage' }]]
 ```
 
 ### 3.2 transform-runtime
@@ -127,7 +122,7 @@ import "@babel/pollyfill"
 // npm i -S @babel/runtime
 // npm i -S @babel/runtime-corejs2
 
-// 删除presets配置，添加plugins
+// 删除 presets 配置，添加 plugins
 options: {
   "plugins":[
     ["@babel/plugin-transform-runtime",{
@@ -148,7 +143,7 @@ const foo = (a, b) => {
   return Object.assign(a, b)
 }
 
-//经过babel编译后为：
+//经过 babel 编译后为：
 ;('use strict')
 var foo = function foo(a, b) {
   return Object.assign(a, b)
@@ -172,6 +167,6 @@ babel 针对每个 API 都提供了对应的转换插件，如上述案例需要
 # 安装
 npm i - S @babel/plugin-transform-object-assign (注意旧版写法)
 
-# .babelrc配置：
+# .babelrc 配置：
  "plugins": ["@babel/transform-object-assign"]
 ```
