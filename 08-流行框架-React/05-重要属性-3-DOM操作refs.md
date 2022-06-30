@@ -1,4 +1,4 @@
-# 05-重要属性-3-DOM 操作 refs
+# 05-重要属性 -3-DOM 操作 refs
 
 ## 一 refs 概念
 
@@ -25,7 +25,7 @@ class Comp extends React.Component {
       <div>
         <input ref="input1" type="text" />
         <input ref="input2" type="password" />
-        <button onClick={this.showRefs}>点击获取refs</button>
+        <button onClick={this.showRefs}>点击获取 refs</button>
       </div>
     )
   }
@@ -53,7 +53,7 @@ class Comp extends React.Component {
       <div>
         {/*<input ref={c=>this.input1 = c;console.log('被调用，c:',c)} type="text" />*/}
         <input ref={this.cb} type="text" />
-        <button onClick={this.showRefs}>点击获取refs</button>
+        <button onClick={this.showRefs}>点击获取 refs</button>
       </div>
     )
   }
@@ -83,7 +83,7 @@ class Comp extends React.Component {
             console.log(this.myRef.current.value)
           }}
         >
-          点击获取当前input数据
+          点击获取当前 input 数据
         </button>
       </div>
     )

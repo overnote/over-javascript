@@ -1,4 +1,4 @@
-# 05-异步编程-1-Promise
+# 05-异步编程 -1-Promise
 
 ## 一 异步编程与回调地狱
 
@@ -71,11 +71,11 @@ ES6 对市面流行的第三方 Promise/A+规范提供了完善支持，即 Prom
 // 传入的函数用来修改 Promise 的执行结果，正确与错误的结果分别位于 resolve、reject 中
 let p = new Promise((resolve, reject) => {
   setTimeout(() => {
-    // 模拟ajax
+    // 模拟 ajax
     let err = null
     let data = { uid: 1001 }
     if (err) {
-      reject('发生了错误: ', null)
+      reject('发生了错误：', null)
     }
     resolve(data)
   })
@@ -97,7 +97,7 @@ p.then(
 
 从上看出，期约的作用其实是抽象的表示了一个异步操作。
 
-### 2.2 then()方法与 catch()方法
+### 2.2 then() 方法与 catch() 方法
 
 then() 方法返回的仍然是一个 Promise 实例，所以可以使用 then 方法进行链式调用：
 
@@ -116,12 +116,12 @@ let p = new Promise(function (resolve, reject) {
 p.then((data) => {
   console.log('处理成功，结果为：', data)
 }).catch((err) => {
-  // 实例方法 catch： 用于捕获错误
+  // 实例方法 catch：用于捕获错误
   console.log('处理失败，错误为：', err)
 })
 ```
 
-### 2.3 finally()方法
+### 2.3 finally() 方法
 
 ```js
 let p1 = Promise.resolve('foo')
@@ -142,7 +142,7 @@ setTimeout(console.log, 0, p7) // Promise <resolved>: foo
 setTimeout(console.log, 0, p8) // Promise <resolved>: foo
 ```
 
-这个新期约实例不同于 then()或 catch()方式返回的实例。因为 onFinally 被设计为一个状态无关的方法， 所以在大多数情况下它将表现为父期约的传递。对于已解决状态和被拒绝状态都是如此。
+这个新期约实例不同于 then() 或 catch() 方式返回的实例。因为 onFinally 被设计为一个状态无关的方法，所以在大多数情况下它将表现为父期约的传递。对于已解决状态和被拒绝状态都是如此。
 
 ## 三 期约 Promise 状态
 
@@ -153,14 +153,14 @@ setTimeout(console.log, 0, p8) // Promise <resolved>: foo
 - 未决（unsettled）：表示异步操作尚未结束，此时的 Promise 只有挂起态一种状态
 - **待定**（pending）：也即挂起，可以转化为 兑现、拒绝两种状态中的一种。
 - 已决（settled）：此时 Promise 已经执行结束，但是可能绵连执行成功、执行失败两种状态
-- **兑现**（fulfilled）：Promise 的异步操作成功结束，调用 resolve()将状态转换为兑现，对应完成处理函数 `fulfillment handler`
-- **拒绝**（rejected）： Promise 的异步操作未成功结束，调用 reject()将状态转换为拒绝，对应错误处理函数 `rejection handler`
+- **兑现**（fulfilled）：Promise 的异步操作成功结束，调用 resolve() 将状态转换为兑现，对应完成处理函数 `fulfillment handler`
+- **拒绝**（rejected）：Promise 的异步操作未成功结束，调用 reject() 将状态转换为拒绝，对应错误处理函数 `rejection handler`
 
 注意：期约的状态是私有的，无法被 JS 检测到，也无法被修改。
 
 ### 3.2 Promise.resolve()
 
-期约并非一开始就必须处于待定状态，然后通过执行器函数才能转换为落定状态，通过调用 Promise.resolve()静态方法，可以实例化一个解决的期约：
+期约并非一开始就必须处于待定状态，然后通过执行器函数才能转换为落定状态，通过调用 Promise.resolve() 静态方法，可以实例化一个解决的期约：
 
 ```js
 // 二者没有区别
@@ -168,7 +168,7 @@ let p1 = new Promise((resolve, reject) => resolve())
 let p2 = Promise.resolve()
 ```
 
-如果传入的参数本身是一个期约，那它的行为就类似于一个空包装。因此，Promise.resolve()可以说是一个幂等方法，如下所示：
+如果传入的参数本身是一个期约，那它的行为就类似于一个空包装。因此，Promise.resolve() 可以说是一个幂等方法，如下所示：
 
 ```js
 let p = Promise.resolve(7)
@@ -186,14 +186,14 @@ setTimeout(console.log, 0, p) // Promise <resolved>: Error: foo
 
 ### 3.3 Promise.reject()
 
-Promise.reject()会实例化一个拒绝的期约并抛出一个异步错误（这个错误不能通过 try/catch 捕获，而只能通过拒绝处理程序捕获）。下面的两个期约实例实际上是一样的：
+Promise.reject() 会实例化一个拒绝的期约并抛出一个异步错误（这个错误不能通过 try/catch 捕获，而只能通过拒绝处理程序捕获）。下面的两个期约实例实际上是一样的：
 
 ```js
 let p1 = new Promise((resolve, reject) => reject())
 let p2 = Promise.reject()
 ```
 
-这个拒绝的期约的理由就是传给 Promise.reject()的第一个参数。这个参数也会传给后续的拒绝处理程序：
+这个拒绝的期约的理由就是传给 Promise.reject() 的第一个参数。这个参数也会传给后续的拒绝处理程序：
 
 ```js
 let p = Promise.reject(3)
@@ -201,7 +201,7 @@ setTimeout(console.log, 0, p) // Promise <rejected>: 3
 p.then(null, (e) => setTimeout(console.log, 0, e)) // 3
 ```
 
-注意：Promise.reject()并没有照搬 Promise.resolve()的幂等逻辑。如果给它传一个期约对象，则这个期约会成为它返回的拒绝期约的理由：
+注意：Promise.reject() 并没有照搬 Promise.resolve() 的幂等逻辑。如果给它传一个期约对象，则这个期约会成为它返回的拒绝期约的理由：
 
 ```js
 // Promise <rejected>: Promise <resolved>
@@ -246,8 +246,8 @@ p.catch((value) => {
 
 在未来的 ES 版本中才会解决该问题，Node 和浏览器目前已经做出了支持：若没有拒绝处理事件，会执行默认的错误处理函数。
 
-- unhandledRejection ： 当一个 Promise 被拒绝，而在事件循环的一个轮次中没有任何拒绝处理函数被调用， 该事件就会被触发；
-- rejectionHandled ： 若一个 Promise 被拒绝，并在事件循环的一个轮次之后有了拒绝处理函数被调用，该事件就会被触发。
+- unhandledRejection：当一个 Promise 被拒绝，而在事件循环的一个轮次中没有任何拒绝处理函数被调用，该事件就会被触发；
+- rejectionHandled：若一个 Promise 被拒绝，并在事件循环的一个轮次之后有了拒绝处理函数被调用，该事件就会被触发。
 
 这两个事件旨在共同帮助识别已被拒绝但未曾被处理 promise。
 

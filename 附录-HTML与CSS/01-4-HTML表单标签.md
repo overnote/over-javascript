@@ -26,7 +26,7 @@
 为了提升用户体验，点击 label 标签的文字应该让焦点也到达 label 标签后续的表单控件，for 属性就是这个用途：
 
 ```html
-<!-- for中填写对应要获取焦点的id即可 -->
+<!-- for 中填写对应要获取焦点的 id 即可 -->
 <form action="" method="">
   <label for="account">账户：</label>
   <input type="text" id="account" name="username" />
@@ -79,30 +79,30 @@ autocomplete="on"         开启历史输入数据提示
 <!-- 文本框-->
 <input type="text" />
 
-<!-- 密码框： 密码输入框的属性与文本输入框一致-->
+<!-- 密码框：密码输入框的属性与文本输入框一致-->
 <input type="password" />
 
-<!-- 单选框：表单控件一般都有name属性，单选框如果没有name，就不能实现单选，checked="checked"，表示默认选中-->
+<!-- 单选框：表单控件一般都有 name 属性，单选框如果没有 name，就不能实现单选，checked="checked"，表示默认选中-->
 <input type="radio" name="a" />
 男
 <input type="radio" name="a" />
 女
 
-<!-- 多选框 checked代表默认选中-->
+<!-- 多选框 checked 代表默认选中-->
 <input type="checkbox" checked="checked" />
 喝酒
 
-<!--普通按钮，长与JavaScript配合使用-->
+<!--普通按钮，长与 JavaScript 配合使用-->
 <input type="button" vulue="登录" />
 
 <!--提交按钮，用来完成内容提交-->
 <input type="submit" />
 
-<!-- 重置按钮:该按钮将页面中的表单控件中的值恢复到默认值 -->
+<!-- 重置按钮：该按钮将页面中的表单控件中的值恢复到默认值 -->
 <input type="reset" />
 
 <!-- 上传文件：此时需要设置  form 的 enctype="multipart/form-data"-->
-<!-- 上传多个可以使用 name="image[]" 上传限制： accpet="image/png,image/jpeg -->
+<!-- 上传多个可以使用 name="image[]" 上传限制：accpet="image/png,image/jpeg -->
 <input type="file" name="image" />
 
 <!-- 数据提示 -->
@@ -113,7 +113,7 @@ autocomplete="on"         开启历史输入数据提示
   <option value="js">js</option>
 </datalist>
 
-<!-- 下拉列表： 属性 multiple="multiple"可以实现多选-->
+<!-- 下拉列表：属性 multiple="multiple"可以实现多选-->
 <select>
   <option>河北</option>
   <option selected="selected">河南</option>
@@ -142,10 +142,10 @@ autocomplete="on"         开启历史输入数据提示
 H5 的表单增加了很多类型：
 
 ```txt
-email       输入email格式
+email       输入 email 格式
 tel         手机号码，移动设备上得到焦点后会弹出键盘
-url         只能输入url格式
-number      只能输入数字，此时有属性 min  max  step等
+url         只能输入 url 格式
+number      只能输入数字，此时有属性 min  max  step 等
 search      搜索框，输入内容时候会出现清除按钮
 range       范围滑动条
 color       拾色器
@@ -175,14 +175,14 @@ datetime    时间日期
 placeholder     占位符
 autofocus       获取焦点
 multiple        文件上传多选或多个邮箱地址
-autocomplete    自动完成，用于表单元素，也可用于表单自身(on/off)
-form            指定表单项属于哪个form，处理复杂表单时会需要
+autocomplete    自动完成，用于表单元素，也可用于表单自身 (on/off)
+form            指定表单项属于哪个 form，处理复杂表单时会需要
 novalidate      关闭验证，可用于<form>标签
 required        必填项
 pattern         正则表达式 验证表单
 
-autocapitalize  iOS独有属性，设置为off关闭首字母大写
-autocorrect     iOS独有属性，设置为off关闭输入自动修正
+autocapitalize  iOS 独有属性，设置为 off 关闭首字母大写
+autocorrect     iOS 独有属性，设置为 off 关闭输入自动修正
 ```
 
 ### 4.3 新增表单事件

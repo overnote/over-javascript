@@ -10,15 +10,15 @@ JavaScript 的代码要被书写于脚本标签中，但是 HTML5 和 HTML4 的�
 脚本标签有三种书写位置：
 
 ```html
-<!-- 直接在html网页中书写代码，HelloWorld中使用了内嵌式 -->
+<!-- 直接在 html 网页中书写代码，HelloWorld 中使用了内嵌式 -->
 <script>
   console.log('Hello World!')
 </script>
 
-<!-- 推荐方式。代码位于专门的js文件，由脚本标签引入 -->
+<!-- 推荐方式。代码位于专门的 js 文件，由脚本标签引入 -->
 <script src="./hello.js"></script>
 
-<!-- 极度不推荐。代码直接书写于html标签中 -->
+<!-- 极度不推荐。代码直接书写于 html 标签中 -->
 <button onclick="fn()">登录</button>
 ```
 

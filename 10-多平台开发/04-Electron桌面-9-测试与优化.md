@@ -31,7 +31,7 @@ Electron 提供了界面测试框架 Spectron，内部封装了 ChromeDriver Web
 安装
 
 ```txt
-# 注意： spectron9  对应 Electron7，依次递增类推
+# 注意：spectron9  对应 Electron7，依次递增类推
 npm i spectron -D
 ```
 

@@ -23,17 +23,17 @@ npm run build-icon
 
 ### 3.1 打包工具
 
-Electron 支持在 package.json 中设置 build 的配置、针对操作系统重写:
+Electron 支持在 package.json 中设置 build 的配置、针对操作系统重写：
 
 ```json
 "main": "main.js",          // 设定入口文件
-"homepage": "./",           // 解决electron file协议导致生产环境加载index.html
+"homepage": "./",           // 解决 electron file 协议导致生产环境加载 index.html
 "build": {
     "appid":"demo",
     "productName": "示例软件",
     "copyright":"@copyright2021",
     "mac": {
-        "productName": "示例软件-MAC版",
+        "productName": "示例软件-MAC 版",
     }
 }
 ```
@@ -57,14 +57,14 @@ Electron 支持在 package.json 中设置 build 的配置、针对操作系统�
         "config/**/*",
         "package.json",
         "main.js",
-        "./src/.....js",              // 这里要导入所有 main.js 中使用的js文件
+        "./src/.....js",              // 这里要导入所有 main.js 中使用的 js 文件
         "./src/.....js",
     ],
 },
 "scripts": {
-    "predist": "npm run build",         // node特性：pre前缀会在 dist前自动执行
+    "predist": "npm run build",         // node 特性：pre 前缀会在 dist 前自动执行
     "dist": "electron-builder",         // 生成安装包
-    "prepack": "npm run build",         // node特性：pre前缀会在 pack前自动执行
+    "prepack": "npm run build",         // node 特性：pre 前缀会在 pack 前自动执行
     "pack": "electron-builder --dir"    // 生成绿色安装文件
 },
 ```
@@ -131,11 +131,11 @@ module.exports = {
 }
 "buildMain": 'webpack ',
 "build": {
-    "files": [            // 可以删除根目录与main相关的js文件了
+    "files": [            // 可以删除根目录与 main 相关的 js 文件了
 
     ],
     "extraMetadata":{
-        "main": "./build/main.js"   // 此时main被打包在了该文件
+        "main": "./build/main.js"   // 此时 main 被打包在了该文件
     },
 }
 ```
@@ -151,7 +151,7 @@ module.exports = {
 ```js
 scripts: {
     "prerelease": "npm run build && npm run buildMain",
-    // electron-builder会为release命令添加publish，即不但要打包，还要将其push到远端,GH_TOKEN 为githubtoken
+    // electron-builder 会为 release 命令添加 publish，即不但要打包，还要将其 push 到远端，GH_TOKEN 为 githubtoken
     "release": "cross-env GH_TOKEN=wqewjkhjad21enj2 electron-builder",
 },
 publish: [
@@ -177,7 +177,7 @@ app.on('ready', () => {
   autoUpdater.checkForUpdates()
   autoUpdater.on('error', (error) => {
     dialog.showErrorBox('更新失败')
-    console.log('更新失败:', error)
+    console.log('更新失败：', error)
   })
   autoUpdater.on('update-available', () => {
     dialog.showMessageBox(

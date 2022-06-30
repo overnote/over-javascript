@@ -24,7 +24,7 @@ ECMAScript 是 JavaScript 的语法核心，但是仅仅有语法，没有一些
 
 如图所示：
 
-![JavaScript组成](../images/javascript/02-1-01-01.svg)
+![JavaScript 组成](../images/javascript/02-1-01-01.svg)
 
 所以 JavaScript 包含三个方面：
 
@@ -45,7 +45,7 @@ JavaScript 是一种解释性编程语言，依赖于解释引擎，常见的引
 
 > 解释型：源代码无需经过编译，一行一行地直接解析执行，比如 javascript、python
 > 编译型：源码先编译为可执行文件，再运行该可执行文件，比如 C、C++
-> 贴士：这里只是初步的总结，编译型也并不是说不能按照解释的方式执行： C 语言的解释型引擎：cling
+> 贴士：这里只是初步的总结，编译型也并不是说不能按照解释的方式执行：C 语言的解释型引擎：cling
 
 在语言引擎基础上，第三方会为编程语言开发一些独立的库，对编程语言进行功能上的包装，这些最终包装出来的编程环境，我们称之为运行时！常见的 JavaScript 运行时有：
 
@@ -79,7 +79,7 @@ JavaScript 是一种解释性编程语言，依赖于解释引擎，常见的引
   </head>
   <body>
     <script>
-      // 这里开始书写js代码
+      // 这里开始书写 js 代码
       console.log('Hello World!')
     </script>
   </body>

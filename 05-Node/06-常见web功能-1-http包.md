@@ -1,4 +1,4 @@
-# 06-Web 编程-1-http 包
+# 06-Web 编程 -1-http 包
 
 ## 一 简单的 Node Web 程序
 
@@ -20,8 +20,8 @@ server.listen(8000)
 Node 与传统的 web 开发最大的不同是，Node 代码不需要 Web 容器来运行：
 
 ```txt
-Java：  Java开发的 Web 软件，需要先将源码打包为 war 包，然后将 war 包放置在其专用 web 服务器 Tomcat 中，由 Tomcat 来运行。
-Php：   Php开发的 Web 软件，需要将源码放置在其专用的 web 服务器 Apache 中，由 Apache 来运行。
+Java：Java 开发的 Web 软件，需要先将源码打包为 war 包，然后将 war 包放置在其专用 web 服务器 Tomcat 中，由 Tomcat 来运行。
+Php：Php 开发的 Web 软件，需要将源码放置在其专用的 web 服务器 Apache 中，由 Apache 来运行。
 ```
 
 ## 二 http 模块
@@ -38,7 +38,7 @@ http.Server 的主要事件有：
 - connection：TCP 建立连接时候处罚，提供一个 scoket 参数，是 net.Socket 的实例。
 - close：服务器关闭时，触发。
 
-http.createServer()方法其实就是添加了一个 Reuqest 事件监听，如下所示：
+http.createServer() 方法其实就是添加了一个 Reuqest 事件监听，如下所示：
 
 ```js
 var http = require('http')
@@ -91,9 +91,9 @@ var http = require('http')
 var url = require('url')
 
 var server = http.createServer(function (req, res) {
-  //true代表直接将结果解析为json
+  //true 代表直接将结果解析为 json
   var params = url.parse(req.url, true).query
-  console.log(params) // GET请求参数被解析为json对象，如：{name:'lisi'}
+  console.log(params) // GET 请求参数被解析为 json 对象，如：{name:'lisi'}
 
   res.end('hello')
 })
@@ -119,7 +119,7 @@ http.createServer( function(req,res){
 
     req.on('end',function{
 
-        // 将post请求体数据转换为json格式
+        // 将 post 请求体数据转换为 json 格式
         var params = querystring.parse(str);
         console.log(params);
 
@@ -209,7 +209,7 @@ function (req, res){
     });
 
     req.on('end', function(){
-        // 将接受到的Buffer列表转换为Buffer对象，再转换为没有乱码的字符串，暂时存放于rawBody属性处
+        // 将接受到的 Buffer 列表转换为 Buffer 对象，再转换为没有乱码的字符串，暂时存放于 rawBody 属性处
         req.rawBody = Buffer.concat(buffers).toString();
     })
 
@@ -243,7 +243,7 @@ Content-Type:application/json;charset=utf-8
 function(req, res){
     if(req.headers['contengt-type]' === 'application/json'){
         var str = req.headers['content-type'] || '';
-        console.log("json参数为：", str.split(';')[0]);
+        console.log("json 参数为：", str.split(';')[0]);
     }
 }
 ```
@@ -276,7 +276,7 @@ function handle(req, res) {
   if (mime(req) === 'application/xml') {
     xm2js.parseString(req.rawBody, function (err, xml) {
       if (err) {
-        console.log('解析XML异常：', err)
+        console.log('解析 XML 异常：', err)
         res.writeHead(400)
         res.end('Invalid XML')
         return

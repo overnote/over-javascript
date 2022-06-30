@@ -4,7 +4,7 @@
 
 canvas 是 html5 提供饿画布标签，该变迁内形成一个矩形区域，可以控制其每一个像素，从而实现在网页绘制图像的功能。
 
-与 Flash 相比，Canvas 更加轻量，使用 Canvas 绘制图形，在绘制成功后，canvas 就会像素化，无法修改，只能通过 API 得到画布的内容再次绘制。所以 canvas 图形如果要实现动画，需要的编程逻辑是：清屏-更新-重新渲染。
+与 Flash 相比，Canvas 更加轻量，使用 Canvas 绘制图形，在绘制成功后，canvas 就会像素化，无法修改，只能通过 API 得到画布的内容再次绘制。所以 canvas 图形如果要实现动画，需要的编程逻辑是：清屏-更新 - 重新渲染。
 
 注意：**IE8 不支持 canvas！**，此时会显示`后备文本`，即只会显示 canvas 标签内的文本。如果需要 IE8 以下浏览器支持 canvas，可以使用：
 
@@ -20,11 +20,11 @@ canvas 是 html5 提供饿画布标签，该变迁内形成一个矩形区域，
 <script>
   // 获得 canvas 上下文
   let ctx = document.querySelector('#mycanvas').getContext('2d')
-  // ctx保存绘制环境，使用ctx绘制
+  // ctx 保存绘制环境，使用 ctx 绘制
   ctx.fillStyle = 'rgb(0,0,200)'
   ctx.fillRect(0, 0, 100, 100)
   setTimeout(() => {
-    // 清除画布：0,0 代表从何处开始清除，600,600代表清除的位置和高度
+    // 清除画布：0,0 代表从何处开始清除，600,600 代表清除的位置和高度
     ctx.clearRect(0, 0, 600, 600)
   }, 5000)
 </script>
@@ -50,7 +50,7 @@ canvas 元素只提供了 2 个属性，3 个方法：
 
 canvas 元素仅仅是个容器，其内部的绘图环境真正提供了全部的绘制功能，包括：
 
-- 2d 绘图环境：getContext('2d')获取。
+- 2d 绘图环境：getContext('2d') 获取。
 - 3d 绘图环境：基于 WebGL 实现。
 
 ## 六 绘图原理

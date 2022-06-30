@@ -37,7 +37,7 @@ MVC 里的 C 是控制器，由不同的控制函数/对象，手动实现调度
 
 ### 1.3 Vue 与 React
 
-Vue 与 React 均是当前流行的框架，也都受到了 MVVM 编程思想的影响。二者的本质区别是：数据响应方式不同。React 侧重于用户手动 setState()更新，Vue 中数据改动则界面自动更新。
+Vue 与 React 均是当前流行的框架，也都受到了 MVVM 编程思想的影响。二者的本质区别是：数据响应方式不同。React 侧重于用户手动 setState() 更新，Vue 中数据改动则界面自动更新。
 
 二者没有绝对优劣，只是开发思维的不同。React 可以使用 mobx 实现类似 Vue 的响应编程，Vue 也可以把数据 freeze，不再具备响应式。
 
@@ -45,7 +45,7 @@ Vue 与 React 均是当前流行的框架，也都受到了 MVVM 编程思想的
 
 使用 MVVM 思想可以让一个单页面就能实现一个完整的应用，虽然有一定的优点，但是在一个超大项目中，需要集成很多模块，造成其首次加载速度变慢，且一个局部异常容易造成整个 APP 无法使用。而多页面应用就不会有这两个缺点，笔者推荐使用的方式是：
 
-**多页导航+单模块单页应用**。
+**多页导航 + 单模块单页应用**。
 
 ## 二 Vue 框架
 
@@ -74,9 +74,9 @@ Vue 与 原生 JS 对比：
 React 与 Vue 共同点：
 
 ```txt
-都具备MVVM思想
-内部都采用虚拟DOM方式进行视图更新
-具备组件化开发理念，且采用声明式编码，可以让编码人员无需直接操作DOM，提高开发效率。
+都具备 MVVM 思想
+内部都采用虚拟 DOM 方式进行视图更新
+具备组件化开发理念，且采用声明式编码，可以让编码人员无需直接操作 DOM，提高开发效率。
 ```
 
 声明式编码：
@@ -87,7 +87,7 @@ React 与 Vue 共同点：
 ### 2.3 Vue 的 MVVM 原理
 
 Vue 的 MVVM 的原理图：
-![MVVVM原理](../images/mvvm/vue-01.png)
+![MVVVM 原理](../images/mvvm/vue-01.png)
 
 ## 三 HelloWorld
 
@@ -101,10 +101,10 @@ Vue 的 MVVM 的原理图：
   <!-- 绑定事件 -->
 </div>
 
-<!-- 当导入vue之后，在浏览器的内存中就多了一个vue构造函数 -->
+<!-- 当导入 vue 之后，在浏览器的内存中就多了一个 vue 构造函数 -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-  // Vue实例
+  // Vue 实例
   new Vue({
     el: '#app', // 挂载元素
     // 数据源
@@ -163,11 +163,11 @@ Vue 代理 data 数据在 HTML 中使用插值 `{{ msg }}` 进行渲染，除了
 
   // 修改原始数据，代理数据会被改变
   result.a = 3
-  console.log('修改原始数据为3，代理数据为：', app.a) // 2
+  console.log('修改原始数据为 3，代理数据为：', app.a) // 2
 
   // 修改代理数据，不会更改原始数据
   app.a = 2
-  console.log('修改代理数据为2，原始数据值为：', result.a) // 1
+  console.log('修改代理数据为 2，原始数据值为：', result.a) // 1
 </script>
 ```
 
@@ -176,13 +176,13 @@ Vue 代理 data 数据在 HTML 中使用插值 `{{ msg }}` 进行渲染，除了
 贴士：在 Vue 的实例上，我们不但可以看到绑定的 a 的值，也看到了一个 `_data` 的属性，该属性内也有 a 的值，这是 vue 对数据的劫持，内部为 data 数据都包装了 getter/setter 方法，用于实现数据在界面的响应式（自动更新）。Vue2 采用 defineproperty 实现代理，Vue3 采用 Relect 实现代理。Vue2 的基本原理如下所示：
 
 ```js
-// 用户给出的原始数据：即vue中的data属性
+// 用户给出的原始数据：即 vue 中的 data 属性
 const data = {
   name: 'lisi',
   age: 30,
 }
 
-// 实现代理属性，即Vue实例上的 _data属性
+// 实现代理属性，即 Vue 实例上的 _data 属性
 const _data = new Observer(data)
 console.log(_data)
 
@@ -194,7 +194,7 @@ function Observer(obj) {
         return obj[key]
       },
       set(val) {
-        // 发生变化：解析模板、生成虚拟DOM，进行渲染
+        // 发生变化：解析模板、生成虚拟 DOM，进行渲染
         obj[key] = val
       },
     })

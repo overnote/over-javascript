@@ -17,7 +17,7 @@ console.log('属性改变了') // 先输出
 
 贴士：
 
-- 回调函数的第一个参数： MutationRecord 数组包含顺序入队的触发事件，而且连续的修改会生成多个 MutationRecord 实例。
+- 回调函数的第一个参数：MutationRecord 数组包含顺序入队的触发事件，而且连续的修改会生成多个 MutationRecord 实例。
 - 回调函数的第二个参数：是观察变化的 MutationObserver 的实例
 
 ## 二 常见使用方法
@@ -38,7 +38,7 @@ observer.disconnect()
 document.body.className = 'bar'
 ```
 
-要想让已经加入任务队列的回调执行，可以使用 setTimeout()让已经入列的回调执行完毕再调用 disconnect()：
+要想让已经加入任务队列的回调执行，可以使用 setTimeout() 让已经入列的回调执行完毕再调用 disconnect()：
 
 ```js
 let observer = new MutationObserver(() =>
@@ -56,7 +56,7 @@ setTimeout(() => {
 
 ### 2.2 复用 MutationObserver
 
-多次调用 observe()方法，可以复用一个 MutationObserver 对象观察多个不同的目标节点。此时， MutationRecord 的 target 属性可以标识发生变化事件的目标节点：
+多次调用 observe() 方法，可以复用一个 MutationObserver 对象观察多个不同的目标节点。此时，MutationRecord 的 target 属性可以标识发生变化事件的目标节点：
 
 ```js
 // 向页面主体添加两个子节点
@@ -79,7 +79,7 @@ childB.setAttribute('foo', 'bar')
 
 ### 2.3 重用 MutationObserver
 
-调用 disconnect()并不会结束 MutationObserver 的生命。还可以重新使用这个观察者，再将它关联到新的目标节点：
+调用 disconnect() 并不会结束 MutationObserver 的生命。还可以重新使用这个观察者，再将它关联到新的目标节点：
 
 ```js
 let observer = new MutationObserver(() =>
@@ -139,7 +139,7 @@ MutationObserver 接口的核心是异步回调与记录队列模型，为了在
 
 每次 MutationRecord 被添加到 MutationObserver 的记录队列时，仅当之前没有已排期的微任务回调时（队列中微任务长度为 0），才会将观察者注册的回调（在初始化 MutationObserver 时传入）作为微任务调度到任务队列上。这样可以保证记录队列的内容不会被回调处理两次。
 
-回调执行后，这些 MutationRecord 就用不着了，因此记录队列会被清空，其内容会被丢弃。不过调用 MutationObserver 实例的 takeRecords()方法可以直接清空记录队列，取出并返回其中的所有 MutationRecord 实例：
+回调执行后，这些 MutationRecord 就用不着了，因此记录队列会被清空，其内容会被丢弃。不过调用 MutationObserver 实例的 takeRecords() 方法可以直接清空记录队列，取出并返回其中的所有 MutationRecord 实例：
 
 ```js
 let observer = new MutationObserver((mutationRecords) =>

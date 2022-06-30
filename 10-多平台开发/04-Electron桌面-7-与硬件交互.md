@@ -104,7 +104,7 @@ const path = require('path')
 const fs = reuqire('fs')
 
 let webContents = remote.getCurrentWebContents()
-let data = await webContents.printToPDF({}) // 返回一个 Buffer缓存
+let data = await webContents.printToPDF({}) // 返回一个 Buffer 缓存
 let filePaht = path.join(__static, 'demo.pdf')
 fs.writeFile(filePath, data, (error) => {})
 ```
@@ -117,13 +117,13 @@ Electron 获取主显示器、外接显示器信息，主显示器
 
 ```js
 const { remote } = require('electron')
-let mainScreen = remote.screen.getPrimaryDisplay() // 主显示器包括显示器id，bounds绑定区域，据此判断是否为外接
+let mainScreen = remote.screen.getPrimaryDisplay() // 主显示器包括显示器 id，bounds 绑定区域，据此判断是否为外接
 ```
 
 让窗口显示在外接显示器上：
 
 ```js
-const { screen } = require('electron') // ready事件后才可以使用
+const { screen } = require('electron') // ready 事件后才可以使用
 
 let displays = screen.getAllDisplay()
 let externalDisplay = displays.find((display) => {
@@ -181,7 +181,7 @@ exec('osk.exe')
 // 获取系统内存信息
 let memoryUseage = process.getSystemMemoryInfo()
 
-// 获取CPU信息
+// 获取 CPU 信息
 let cpuUseage = process.getCPUUseage()
 ```
 

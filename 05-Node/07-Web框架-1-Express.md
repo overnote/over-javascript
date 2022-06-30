@@ -1,4 +1,4 @@
-# 07-Web 框架-1-Express
+# 07-Web 框架 -1-Express
 
 ## 一 Express 初识
 
@@ -152,15 +152,15 @@ app.listen(3000);
 ### 3.2 常见路由 API
 
 ```js
-app.get('网址', function (req, res) {}) //get请求
-app.post('网址', function (req, res) {}) //post请求
+app.get('网址', function (req, res) {}) //get 请求
+app.post('网址', function (req, res) {}) //post 请求
 app.all('网址', function () {}) //处理这个网址的任何类型请求
 ```
 
 注意：
 
-- 所有的 GET 参数，? 后面的都已经被忽略，锚点#也被忽略，路由到/a ， 实际/a?id=2&sex=nan 也能被处理；
-- 正则表达式中，未知部分用圆括号分组，然后可以用 req.params[0]、[1]得到，req.params 是一个类数组对象。
+- 所有的 GET 参数，? 后面的都已经被忽略，锚点#也被忽略，路由到/a，实际/a?id=2&sex=nan 也能被处理；
+- 正则表达式中，未知部分用圆括号分组，然后可以用 req.params[0]、[1] 得到，req.params 是一个类数组对象。
 
 如果 get、post 回调函数中，没有 next 参数，那么就匹配上第一个路由，就不会往下匹配了。如果想往下匹配的话，那么需要写 next()：
 
@@ -196,7 +196,7 @@ app.get("/admin/login",function(req,res){
 
 ```
 
-上面两个路由，感觉没有关系,但是实际上冲突了，因为 admin 可以当做用户名 login 可以当做 id。
+上面两个路由，感觉没有关系，但是实际上冲突了，因为 admin 可以当做用户名 login 可以当做 id。
 
 ```JavaScript
 //解决方法1 交换位置。 也就是说，express中所有的路由（中间件）的顺序至关重要，匹配上第一个，就不会往下匹配了。 具体的往上写，抽象的往下写。
@@ -230,7 +230,7 @@ app.get("/admin/login",function(req,res){
 
 ### 3.4 路由匹配
 
-app.use()他的网址不是精确匹配的，使用 user(path,fn())时候，user 内的路由，将匹配/path /path/images/ /path/images/1.png 等路由情况。
+app.use() 他的网址不是精确匹配的，使用 user(path,fn()) 时候，user 内的路由，将匹配/path /path/images/ /path/images/1.png 等路由情况。
 
 如果写一个 / 实际上就相当于"/"，就是所有网址，也可以直接不写该地址。
 
@@ -251,9 +251,9 @@ function middleware(req, res, next) {
 
 ### 4.2 Express 中的中间件
 
-中间件是在管道中执行的，在 Express 中，使用 app.use()向管道中插入中间件。中间件讲究顺序，匹配上第一个之后，就不会往后匹配了，next 函数才能够继续往后匹配。
+中间件是在管道中执行的，在 Express 中，使用 app.use() 向管道中插入中间件。中间件讲究顺序，匹配上第一个之后，就不会往后匹配了，next 函数才能够继续往后匹配。
 
-模糊意义上讲，app.get()、app.post()、app.post()等方法也属于中间件。
+模糊意义上讲，app.get()、app.post()、app.post() 等方法也属于中间件。
 
 大坑：express 的中间件函数，不需要传入 req，res，他是在中间件函数执行回调的时候自动传入。
 
@@ -262,7 +262,7 @@ function middleware(req, res, next) {
 ```js
 module.exports = function (req, res, next) {
   //中间件函数在这里调用
-  next() //记得使用next()或者 next(route)
+  next() //记得使用 next() 或者 next(route)
 }
 ```
 
@@ -351,7 +351,7 @@ function isLogin(req, res, next) {
   var cookies = {}
 
   if (!cookie) {
-    console.log('cookie不存在')
+    console.log('cookie 不存在')
     return
   }
 
@@ -378,7 +378,7 @@ app.use = function(){
 }
 ```
 
-改进后的 use()方法都将中间件存进了 stack 数组中，等待匹配后触发执行，匹配部分修改如下：
+改进后的 use() 方法都将中间件存进了 stack 数组中，等待匹配后触发执行，匹配部分修改如下：
 
 ```js
 function match(pathname, routes) {
@@ -397,15 +397,15 @@ function match(pathname, routes) {
 }
 ```
 
-一旦匹配成功，中间件具体如何调用都交给了 handle()方法处理，该方法封装后，递归性的执行数组中的中间件，每个中间件执行完成后，按照约定调用传入 next()方法触发下一个中间执行：
+一旦匹配成功，中间件具体如何调用都交给了 handle() 方法处理，该方法封装后，递归性的执行数组中的中间件，每个中间件执行完成后，按照约定调用传入 next() 方法触发下一个中间执行：
 
 ```js
 function handle(req, res, stack) {
   function next() {
-    // 从stack数组中取出中间件并执行
+    // 从 stack 数组中取出中间件并执行
     var middleware = stack.shift()
     if (middleware) {
-      // 传入next()函数自身，使中间件能够执行结束后递归
+      // 传入 next() 函数自身，使中间件能够执行结束后递归
       middleware(req, res, next)
     }
   }
@@ -422,7 +422,7 @@ function handle(req, res, stack) {
 app.use(isLogin)
 ```
 
-现在修改 use()方法，以实现更灵活的适应参数变化：
+现在修改 use() 方法，以实现更灵活的适应参数变化：
 
 ```js
 app.use = function (path) {
@@ -475,7 +475,7 @@ function (req, res) {
     var pathname = url.parse(req.url).pathname;
     var method = req.method.toLowerCase();
 
-    // 获取all()方法里的中间件
+    // 获取 all() 方法里的中间件
     var stacks = match(pathname, routes.all);
 
     if (routes.hasOwnPerperty(method)) {
@@ -486,7 +486,7 @@ function (req, res) {
     if (stacks.length) {
         handle(req, res, stacks);
     } else {
-        // 处理404请求
+        // 处理 404 请求
         handle404(req, res);
     }
 }
@@ -494,7 +494,7 @@ function (req, res) {
 
 ### 4.6 异常处理
 
-中间件自身也可能出现错误，所以必须为 next()方法添加 err 参数，捕获异常：
+中间件自身也可能出现错误，所以必须为 next() 方法添加 err 参数，捕获异常：
 
 ```js
 function handle(req, res, stack) {
@@ -503,10 +503,10 @@ function handle(req, res, stack) {
       return handle500(err, req, res, stack)
     }
 
-    // 从stack数组中取出中间件执行
+    // 从 stack 数组中取出中间件执行
     var middleware = stack.shift()
     if (middleware) {
-      // 传入next()函数自身，使中间件能够执行结束后递归
+      // 传入 next() 函数自身，使中间件能够执行结束后递归
       try {
         middleware(req, res, next)
       } catch (ex) {

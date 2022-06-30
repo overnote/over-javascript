@@ -1,4 +1,4 @@
-# 11-Node 与加密-2-加密通信
+# 11-Node 与加密 -2-加密通信
 
 ## 一 Node 中的 TCP 使用 TLS 服务
 
@@ -46,7 +46,7 @@ openssl s_client -connect 127.0.0.1:8000
 # 创建私钥
 openssl genrsa -out client.key 1024
 
-# 生成CSR
+# 生成 CSR
 openssl req -new -key client.key -out client.csr
 
 # 生成签名证书
@@ -88,7 +88,7 @@ stream.on('end', function () {
 
 ### 2.1 服务端
 
-HTTPS 服务器代码:
+HTTPS 服务器代码：
 
 ```js
 const https = require('https')

@@ -12,7 +12,7 @@ Body 混入提供了 5 个方法，用于将 ReadableStream 转存到缓冲区�
 
 ### 2.1 Body.text()
 
-Body.text()方法返回期约，解决为将缓冲区转存得到的 UTF-8 格式字符串。下面的代码展示了在 Response 对象上使用 Body.text()：
+Body.text() 方法返回期约，解决为将缓冲区转存得到的 UTF-8 格式字符串。下面的代码展示了在 Response 对象上使用 Body.text()：
 
 ```js
 fetch('https://foo.com')
@@ -37,7 +37,7 @@ request.text().then(console.log)
 
 ### 2.2 Body.json()
 
-Body.json()方法返回期约，解决为将缓冲区转存得到的 JSON。下面的代码展示了在 Response 对象上使用 Body.json()：
+Body.json() 方法返回期约，解决为将缓冲区转存得到的 JSON。下面的代码展示了在 Response 对象上使用 Body.json()：
 
 ```js
 fetch('https://foo.com/foo.json')
@@ -59,7 +59,7 @@ request.json().then(console.log)
 
 ### 2.3 Body.formData()
 
-Body.formData()方法返回期约，解决为将缓冲区转存得到的 FormData 实例。下面的代码展示了在 Response 对象上使用 Body.formData()：
+Body.formData() 方法返回期约，解决为将缓冲区转存得到的 FormData 实例。下面的代码展示了在 Response 对象上使用 Body.formData()：
 
 ```js
 fetch('https://foo.com/form-data')
@@ -82,7 +82,7 @@ request.formData()
 
 ### 2.4 Body.arrayBuffer()
 
-有时候，可能需要以原始二进制格式查看和修改主体。为此，可以使用 Body.arrayBuffer()将主体内容转换为 ArrayBuffer 实例。 Body.arrayBuffer()方法返回期约，解决为将缓冲区转存得到的 ArrayBuffer 实例。下面的代码展示了在 Response 对象上使用 Body.arrayBuffer()：
+有时候，可能需要以原始二进制格式查看和修改主体。为此，可以使用 Body.arrayBuffer() 将主体内容转换为 ArrayBuffer 实例。Body.arrayBuffer() 方法返回期约，解决为将缓冲区转存得到的 ArrayBuffer 实例。下面的代码展示了在 Response 对象上使用 Body.arrayBuffer()：
 
 ```js
 fetch('https://foo.com')
@@ -105,7 +105,7 @@ request.arrayBuffer().then((buf) => console.log(new Int8Array(buf)))
 
 ### 2.5 Body.blob()
 
-有时候，可能需要以原始二进制格式使用主体，不用查看和修改。为此，可以使用 Body.blob()将主体内容转换为 Blob 实例。 Body.blob()方法返回期约，解决为将缓冲区转存得到的 Blob 实例。下面的代码展示了在 Response 对象上使用 Body.blob()：
+有时候，可能需要以原始二进制格式使用主体，不用查看和修改。为此，可以使用 Body.blob() 将主体内容转换为 Blob 实例。Body.blob() 方法返回期约，解决为将缓冲区转存得到的 Blob 实例。下面的代码展示了在 Response 对象上使用 Body.blob()：
 
 ```js
 fetch('https://foo.com')
@@ -153,7 +153,7 @@ request.blob() // 第二次调用再次加锁会失败
 // TypeError: Failed to execute 'blob' on 'Request': body stream is locked
 ```
 
-作为 Body 混入的一部分， bodyUsed 布尔值属性表示 ReadableStream 是否已摄受（ disturbed），意思是读取器是否已经在流上加了锁。这不一定表示流已经被完全读取。下面的代码演示了这个属性：
+作为 Body 混入的一部分，bodyUsed 布尔值属性表示 ReadableStream 是否已摄受（disturbed），意思是读取器是否已经在流上加了锁。这不一定表示流已经被完全读取。下面的代码演示了这个属性：
 
 ```js
 let request = new Request('https://foo.com', { method: 'POST', body: 'foobar' })
@@ -170,9 +170,9 @@ console.log(response.bodyUsed) // true
 
 JavaScript 编程逻辑很多时候会将访问网络作为原子操作，比如请求是同时创建和发送的，响应数据也是以统一的格式一次性暴露出来的。这种约定隐藏了底层的混乱，让涉及网络的代码变得很清晰。
 
-从 TCP/IP 角度来看，传输的数据是以分块形式抵达端点的，而且速度受到网速的限制。接收端点会为此分配内存，并将收到的块写入内存。 Fetch API 通过 ReadableStream 支持在这些块到达时就实时读取和操作这些数据。
+从 TCP/IP 角度来看，传输的数据是以分块形式抵达端点的，而且速度受到网速的限制。接收端点会为此分配内存，并将收到的块写入内存。Fetch API 通过 ReadableStream 支持在这些块到达时就实时读取和操作这些数据。
 
-正如 Stream API 所定义的， ReadableStream 暴露了 getReader()方法，用于产生 ReadableStreamDefaultReader，这个读取器可以用于在数据到达时异步获取数据块。数据流的格式是 Uint8Array。下面的代码调用了读取器的 read()方法，把最早可用的块打印了出来：
+正如 Stream API 所定义的，ReadableStream 暴露了 getReader() 方法，用于产生 ReadableStreamDefaultReader，这个读取器可以用于在数据到达时异步获取数据块。数据流的格式是 Uint8Array。下面的代码调用了读取器的 read() 方法，把最早可用的块打印了出来：
 
 ```js
 fetch('https://fetch.spec.whatwg.org/')
@@ -185,7 +185,7 @@ fetch('https://fetch.spec.whatwg.org/')
 // { value: Uint8Array{}, done: false }
 ```
 
-在随着数据流的到来取得整个有效载荷，可以像下面这样递归调用 read()方法：
+在随着数据流的到来取得整个有效载荷，可以像下面这样递归调用 read() 方法：
 
 ```js
 fetch('https://fetch.spec.whatwg.org/')
@@ -207,7 +207,7 @@ fetch('https://fetch.spec.whatwg.org/')
 // ...
 ```
 
-异步函数非常适合这样的 fetch()操作。可以通过使用 async/await 将上面的递归调用打平：
+异步函数非常适合这样的 fetch() 操作。可以通过使用 async/await 将上面的递归调用打平：
 
 ```js
 fetch('https://fetch.spec.whatwg.org/')
@@ -228,7 +228,7 @@ fetch('https://fetch.spec.whatwg.org/')
 // ...
 ```
 
-另外， read()方法也可以真接封装到 Iterable 接口中。因此就可以在 for-await-of 循环中方便地实现这种转换：
+另外，read() 方法也可以真接封装到 Iterable 接口中。因此就可以在 for-await-of 循环中方便地实现这种转换：
 
 ```js
 fetch('https://fetch.spec.whatwg.org/')
@@ -325,7 +325,7 @@ fetch('https://fetch.spec.whatwg.org/')
 // ...
 ```
 
-因为可以使用 ReadableStream 创建 Response 对象，所以就可以在读取流之后，将其通过管道导入另一个流。然后在这个新流上再使用 Body 的方法，如 text()。这样就可以随着流的到达实时检查和操作流内容:
+因为可以使用 ReadableStream 创建 Response 对象，所以就可以在读取流之后，将其通过管道导入另一个流。然后在这个新流上再使用 Body 的方法，如 text()。这样就可以随着流的到达实时检查和操作流内容：
 
 ```js
 fetch('https://fetch.spec.whatwg.org/')

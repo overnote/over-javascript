@@ -14,12 +14,12 @@
 
 ```js
 // 哈希路由表现：localhost:3000/#/news/1001
-// 哈希路由实现原理：使用的是URL的哈希值
+// 哈希路由实现原理：使用的是 URL 的哈希值
 location.hash = 'about' // 地址为： /#/about
 location.hash = 'news' // 地址为： /#/news
 
 // 历史路由表现：localhost:3000/news/1001
-// 历史路由原理(栈结构)：使用的浏览器的history API，不兼容IE9
+// 历史路由原理 (栈结构)：使用的浏览器的 history API，不兼容 IE9
 location.pushState({}, '', 'about') // 地址为： /about
 location.pushState({}, '', 'news') // 地址为： /news
 ```
@@ -27,8 +27,8 @@ location.pushState({}, '', 'news') // 地址为： /news
 使用上，二者也有不同影响：
 
 ```txt
-哈希路由：刷新会不会向服务端请求资源，但会导致路由传递的state参数丢失，因为其没有history的API，无法在内存中保存state数据
-历史路由：刷新会向服务端请求资源，但不会导致路由传递的state参数丢失。所以历史路由在路径404页面上需要服务端额外支持。
+哈希路由：刷新会不会向服务端请求资源，但会导致路由传递的 state 参数丢失，因为其没有 history 的 API，无法在内存中保存 state 数据
+历史路由：刷新会向服务端请求资源，但不会导致路由传递的 state 参数丢失。所以历史路由在路径 404 页面上需要服务端额外支持。
 ```
 
 ## 二 react-router-dom 基础使用
@@ -200,7 +200,7 @@ const { id, flag } = qs.parse(search.slice(1))
 ```js
 <Link to={`/news/detail/${id}/${flag}`}><Link>
 
-{/* 声明接收params参数，不声明会产生模糊匹配 */}
+{/* 声明接收 params 参数，不声明会产生模糊匹配 */}
 <Route to={`/news/detail/:id/:flag`}><Route>
 ```
 
@@ -245,7 +245,7 @@ export default class App extends Component {
     }
 }
 
-// home内部
+// home 内部
 class Home extends React.Component {
     render() {
         return (

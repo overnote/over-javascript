@@ -43,7 +43,7 @@ new Vue({
     },
     methods: {
         getMsg(){
-            console.log('函数执行!')
+            console.log('函数执行！')
             return this.msg.toUpperCase()
         }
     }
@@ -70,7 +70,7 @@ new Vue({
           console.log('get...')
           return this.msg.toUpperCase()
         },
-        // 如果要修改计算属性，必须使用set() 修改
+        // 如果要修改计算属性，必须使用 set() 修改
         set(val) {
           console.log('set...')
           this.msg = val
@@ -86,7 +86,7 @@ new Vue({
 计算属性经常用于展示，get 函数即可应用于大多场景，所以计算属性的 set 函数没有必要，在只考虑读取时可以简写：：
 
 ```html
-<!-- 计算属性使用 getMsg 无需() -->
+<!-- 计算属性使用 getMsg 无需 () -->
 <div>{{ getMsg }}</div>
 
 <script>
@@ -97,7 +97,7 @@ new Vue({
     },
     computed: {
       getMsg() {
-        console.log('函数执行!')
+        console.log('函数执行！')
         return this.msg.toUpperCase()
       },
     },
@@ -117,9 +117,9 @@ new Vue({
   },
   watch: {
     msg: {
-      immediate: true, // 可选配置：初始化时让handler调用一下
+      immediate: true, // 可选配置：初始化时让 handler 调用一下
       handler(newVal, oldVal) {
-        console.log('msg被修改了，新值：', newVal)
+        console.log('msg 被修改了，新值：', newVal)
       },
     },
   },
@@ -152,7 +152,7 @@ new Vue({
     },
     // 深度监听：监听对象的改变
     obj: {
-      deep: true, // 默认为false
+      deep: true, // 默认为 false
       handler() {},
     },
   },
@@ -190,13 +190,13 @@ new Vue({
   data: {
     count: 0,
   },
-  // 不生效，因为 计算属性 依赖于返回值，这里返回值是null
+  // 不生效，因为 计算属性 依赖于返回值，这里返回值是 null
   computed: {
     count() {
       setTimeout(() => {
         return 10
       })
-      // 这里没写return 但是其实是返回了null
+      // 这里没写 return 但是其实是返回了 null
     },
   },
   // 生效

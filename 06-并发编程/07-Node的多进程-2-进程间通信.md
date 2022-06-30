@@ -1,4 +1,4 @@
-# 07-Node 的多进程-2-进程间通信
+# 07-Node 的多进程 -2-进程间通信
 
 ## 一 Node 进程间通信演示
 
@@ -50,7 +50,7 @@ Node 中进程间通信的实现依靠的是底层的 libuv 提供的一层类�
 
 ![进程通信原理](../images/node/process-03.png)
 
-建立连接之后的父子进程可以进行自由通信，因为 Node 使用的是 Domain Socket，与网络 Socket 非常相似，属于双向通信，而且是在内核中直接完成了进程间通信，无需网络层，非常高效。在 Node 中，IPC 通道被抽象为了 Stream 对象，调用 send()时会发送数据（类似 write()），接收到的消息会通过 message 事件触发给应用层。
+建立连接之后的父子进程可以进行自由通信，因为 Node 使用的是 Domain Socket，与网络 Socket 非常相似，属于双向通信，而且是在内核中直接完成了进程间通信，无需网络层，非常高效。在 Node 中，IPC 通道被抽象为了 Stream 对象，调用 send() 时会发送数据（类似 write()），接收到的消息会通过 message 事件触发给应用层。
 
 注意：子进程为 Node 进程时，子进程才能根据环境变量去连接 IPC 通道，进行通信，除非其他进程按照约定去连接这个已经创建好的 IPC 通道。
 
@@ -64,7 +64,7 @@ Node 中进程间通信的实现依靠的是底层的 libuv 提供的一层类�
 
 ![句柄](../images/node/process-04.png)
 
-这里会暴露一个问题：主进程每接收到一个连接，就会创建一个新的文件描述符，并将请求负载（代理）到某个工作进程，文件描述符在操作系统中是有限的（双倍浪费！）。Node 为了解决该问题，在 send()方法中额外提供了第二个可选参数：句柄。
+这里会暴露一个问题：主进程每接收到一个连接，就会创建一个新的文件描述符，并将请求负载（代理）到某个工作进程，文件描述符在操作系统中是有限的（双倍浪费！）。Node 为了解决该问题，在 send() 方法中额外提供了第二个可选参数：句柄。
 
 ```js
 child.send(message, [sendHandle])
@@ -106,7 +106,7 @@ process.on('message', function (msg, server) {
 })
 ```
 
-在该示例中，直接将一个 TCP 连接发送给了子进程，启动方式如下:
+在该示例中，直接将一个 TCP 连接发送给了子进程，启动方式如下：
 
 ```txt
 # 启动
@@ -222,7 +222,7 @@ process.on('message', function (msg, tcpSocket) {
 
 ## 四 句柄原理
 
-目前子进程对象 send()方法可以发送的句柄类型有：
+目前子进程对象 send() 方法可以发送的句柄类型有：
 
 - net.Socket:TCP 套接字
 - net.Server:TCP 服务器，可以是任意建立在 TCP 服务商应用服务
@@ -230,7 +230,7 @@ process.on('message', function (msg, tcpSocket) {
 - dgram.Socket:UDP 套接字
 - dgram.Native:C++层面的 UDP 套接字
 
-send()方法在讲消息发送到 IPC 管道前，将消息组装成 2 个对象，一个是参数 handle，另外一个 message，message 参数如下：
+send() 方法在讲消息发送到 IPC 管道前，将消息组装成 2 个对象，一个是参数 handle，另外一个 message，message 参数如下：
 
 ```json
 {

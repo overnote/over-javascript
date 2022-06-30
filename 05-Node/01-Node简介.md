@@ -21,7 +21,7 @@ JavaScript 现在的运行平台可以总结如下：
 
 下图是 Chrome 浏览器与 Node.js 的内核区别：
 
-![Chrome与Node内核区别](../images/node/node-00.svg)
+![Chrome 与 Node 内核区别](../images/node/node-00.svg)
 
 综上所述，Node 的官网对 Node 的概述非常准确：
 
@@ -36,10 +36,10 @@ JavaScript 现在的运行平台可以总结如下：
 当然，Node 的周边生态已经相当繁荣，类似 Java 平台，我们也可以将 Node 理解为一个开发平台：
 
 ```txt
-开发平台：    Node            Java
-编程语言：    JavaScript      Java
+开发平台：Node            Java
+编程语言：JavaScript      Java
 runtime：    V8              JVM
-包管理器：    NPM             Maven
+包管理器：NPM             Maven
 ```
 
 ### 1.2 Node 核心
@@ -49,11 +49,11 @@ Node 的核心部分有两部分：
 - V8 引擎：由 C++ 语言开发的编译器，提供解析 JavaScript 语言的能力。该引擎由 Google 公司推出，是 Chrome 浏览器内置的 JavaScript 引擎
 - libuv：由 C++ 语言开发的异步 I/O 库，在该库基础上，Node 提供了网络、文件等操作系统 API。该库由 Ryan Dahl 自己为了让 Node 拥有异步 I/O 能力亲自开发。
 
-![Node架构图](../images/node/node-01.png)
+![Node 架构图](../images/node/node-01.png)
 
 Node 内部维护着一个核心线程专门用于处理各种网络请求，对请求对应的事件进行异步分发。binging 一层是 JS 与底层 C++沟通的关键，前者通过 bindings 调用后者，相互交换数据，libuv 为 Node 提供了跨平台、线程池、事件池、异步 IO 能力。
 
-### 1.3 Node 特点-单线程（非严格意义）
+### 1.3 Node 特点 - 单线程（非严格意义）
 
 在传统编程语言中，大多使用多线程来应对并发请求，如 Java、Python。在多线程模型中，每有一个客户端接入服务器，服务端都会创建一个新的线程用来处理该连接，每个线程需要耗费大约 2MB 内存，理论上一台 8G 内存服务器同时只能有 4000 个客户端连接。
 
@@ -64,7 +64,7 @@ Node 本身也是多线程的，但是他与开发平台最大的不同是：在
 - 在单线程上处理业务代码，避免了传统语言反复切换线程上下文带来的损耗
 - 在事件循环机制支持下的，非阻塞 I/O 同样能够应对并发问题
 
-### 1.4 Node 特点-非阻塞 I/O
+### 1.4 Node 特点 - 非阻塞 I/O
 
 Node 天生提供了大量的异步 API，为开发者提供了友好的 非阻塞 I/O 编程环境。
 
@@ -115,7 +115,7 @@ Node 目前的主要应用领域：
 
 ### 2.0 安装简介
 
-Node 只需要在官网下载对应安装包下一步下一步安装即可，**默认会配置环境变量**。下载界面有两个版本：长期支持版(LTS)、Current(最新版)，建议使用 LTS 版本，当然 Node 的版本号中偶数位版本一般为稳定版，奇数位版本一般为非稳定版。
+Node 只需要在官网下载对应安装包下一步下一步安装即可，**默认会配置环境变量**。下载界面有两个版本：长期支持版 (LTS)、Current(最新版)，建议使用 LTS 版本，当然 Node 的版本号中偶数位版本一般为稳定版，奇数位版本一般为非稳定版。
 
 但是由于 Node 迭代速度很快，在企业开发中，经常要在多个 Node 版本中切换，使用 Node 的版本管理工具 nvm 来安装 Node，这样可以方便我们控制 Node 的版本。
 
@@ -167,8 +167,8 @@ nvm version
 
 ```txt
 # 可以先配置镜像地址
-nvm node_mirror https://npm.taobao.org/mirrors/node/    # node镜像地址
-nvm npm_mirror https://npm.taobao.org/mirrors/npm/      # node包镜像地址
+nvm node_mirror https://npm.taobao.org/mirrors/node/    # node 镜像地址
+nvm npm_mirror https://npm.taobao.org/mirrors/npm/      # node 包镜像地址
 
 # 安装最新版
 nvm install latest
@@ -190,15 +190,15 @@ node -v
 如果是使用 VSCode 开发，推荐安装插件：
 
 ```txt
-Code Runner：           用于快速右键运行 node 代码
-Search node_modules：   用于 node 包快速提示
+Code Runner：用于快速右键运行 node 代码
+Search node_modules：用于 node 包快速提示
 ```
 
 如果使用 WebStorme（或者 IDEA+Node 插件），则可能需要配置下 node 环境：
 
 打开 WebStorme，在设置中界面中选择：`File-setting-Languages&Frameworks-Node`，对比下图进行勾选：
 
-![WebStorme配置Node环境](../images/node/idea.jpg)
+![WebStorme 配置 Node 环境](../images/node/idea.jpg)
 
 ## 三 Node 的使用
 
@@ -219,7 +219,7 @@ node
 
 ### 3.2 Node 执行 JS 文件
 
-REPL 环境过于简单，Node 是可以直接运行 JS 文件的，创建一个 `app.js` 文件，内容如下:
+REPL 环境过于简单，Node 是可以直接运行 JS 文件的，创建一个 `app.js` 文件，内容如下：
 
 ```js
 console.log(1 + 1)
@@ -230,5 +230,5 @@ console.log(1 + 1)
 ```txt
 node app.js                 # 可以省略 .js 后缀
 
-# 输出2
+# 输出 2
 ```

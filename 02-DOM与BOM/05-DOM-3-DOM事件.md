@@ -1,4 +1,4 @@
-# 04-事件-1-事件简介
+# 04-事件 -1-事件简介
 
 ## 一 事件的基本概念
 
@@ -11,7 +11,7 @@
 ```js
 let btn = document.querySelector('#btn')
 
-// btn为事件源、click为事件，绑定的函数为事件处理程序
+// btn 为事件源、click 为事件，绑定的函数为事件处理程序
 btn.onclick = function () {
   console.log('btn 被点击了')
 }
@@ -69,9 +69,9 @@ obj.removeEventListener('click', function () {}, false) // 取消绑定
 现在的主流浏览器都已经支持 DOM2 级事件，但是 IE8 不支持，而是实现了类似的两个方法：`attachEvent()/detachEvent()`
 
 ```js
-// 只有两个参数：参数一为事件，带on；参数二为事件处理函数，但是该函数在全局作用域运行！！！，即其this为window
+// 只有两个参数：参数一为事件，带 on；参数二为事件处理函数，但是该函数在全局作用域运行！！！，即其 this 为 window
 // 多次绑定会按照相反的顺序执行！！！
-// 这2个事件只支持事件冒泡！！！
+// 这 2 个事件只支持事件冒泡！！！
 obj.attachEvent('onclick', function () {
   console.log(this === window) // true
 })
@@ -127,7 +127,7 @@ let EventUtil = {
 </script>
 ```
 
-只有在事件处理程序执行期间， event 对象才会存在；一旦事件处理程序执行完成， event 对象就会被销毁。
+只有在事件处理程序执行期间，event 对象才会存在；一旦事件处理程序执行完成，event 对象就会被销毁。
 
 事件对象仍然有兼容问题，IE8 中，事件对象直接位于 window 中！兼容的写法如下：
 
@@ -186,7 +186,7 @@ const EventUtil = {
   let div = document.querySelector('#div1')
   div.onclick = function (e) {
     e = e || window.event
-    // 本处示例点击div1
+    // 本处示例点击 div1
     console.log(e.target === document.querySelector('#div1')) // true
     console.log(e.currentTarget === this) // true
     console.log(e.target === this) // false
@@ -241,7 +241,7 @@ btn.dispatchEvent(event)
 type（字符串）：要触发的事件类型，如"click"。
 bubbles（布尔值）：表示事件是否冒泡。为精确模拟鼠标事件，应该设置为 true
 cancelable（布尔值）：表示事件是否可以取消。为精确模拟鼠标事件，应该设置为 true。
-view（ AbstractView）：与事件关联的视图。基本上始终是 document.defaultView。
+view（AbstractView）：与事件关联的视图。基本上始终是 document.defaultView。
 detail（整数）：关于事件的额外信息。只被事件处理程序使用，通常为 0。
 screenX（整数）：事件相对于屏幕的 x 坐标。
 screenY（整数）：事件相对于屏幕的 y 坐标。

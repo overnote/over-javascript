@@ -357,7 +357,7 @@ let pubID = null
 // 获取订阅
 const getMsg = () => {
   pubID = pubsub.subscribe('hi', function (msgName, data) {
-    // 执行 hi 消息的回调: msgName是消息名，data是数据
+    // 执行 hi 消息的回调：msgName 是消息名，data 是数据
   })
 }
 

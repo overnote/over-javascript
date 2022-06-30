@@ -2,7 +2,7 @@
 
 ## 一 fetch 概述
 
-Fetch API 能够执行 XMLHttpRequest 对象的所有任务，但更容易使用，接口也更现代化，能够在 Web 工作线程等现代 Web 工具中使用。 XMLHttpRequest 可以选择异步，而 Fetch API 则必须是异步。
+Fetch API 能够执行 XMLHttpRequest 对象的所有任务，但更容易使用，接口也更现代化，能够在 Web 工作线程等现代 Web 工具中使用。XMLHttpRequest 可以选择异步，而 Fetch API 则必须是异步。
 
 fetch 是基于 Promise 实现的，示例：
 
@@ -12,7 +12,7 @@ fetch('/getDemo')
     (res) => {
       console.log(response.status) // 200
       console.log(response.statusText) // OK
-      return res.text() // text() 返回Promise实例对象,包装的是真实的后台返回数据
+      return res.text() // text() 返回 Promise 实例对象，包装的是真实的后台返回数据
     },
     (err) => {} // 因为服务器没有响应而导致浏览器超时
   )
@@ -23,7 +23,7 @@ fetch('/getDemo')
 
 ## 二 基本使用
 
-fetch()既可以发送数据也可以接收数据。使用 init 对象参数，可以配置 fetch()在请求体中发送各种序列化的数据。
+fetch() 既可以发送数据也可以接收数据。使用 init 对象参数，可以配置 fetch() 在请求体中发送各种序列化的数据。
 
 ### 2.1 在请求体中发送数据
 
@@ -59,7 +59,7 @@ fetch('/postDemo', {
 
 ### 2.3 发送文件
 
-因为请求体支持 FormData 实现，所以 fetch()也可以序列化并发送文件字段中的文件：
+因为请求体支持 FormData 实现，所以 fetch() 也可以序列化并发送文件字段中的文件：
 
 ```js
 let imageFormData = new FormData()
@@ -72,7 +72,7 @@ fetch('/upload', {
 })
 ```
 
-这个 fetch()实现可以支持多个文件：
+这个 fetch() 实现可以支持多个文件：
 
 ```js
 let imageFormData = new FormData()
@@ -89,7 +89,7 @@ fetch('/upload', {
 
 ### 2.4 加载 Blob 文件
 
-Fetch API 也能提供 Blob 类型的响应，而 Blob 又可以兼容多种浏览器 API。一种常见的做法是明确将图片文件加载到内存，然后将其添加到 HTML 图片元素。为此，可以使用响应对象上暴露的 blob()方法。这个方法返回一个期约，解决为一个 Blob 的实例。然后，可以将这个实例传给 URL.createObjectUrl()以生成可以添加给图片元素 src 属性的值：
+Fetch API 也能提供 Blob 类型的响应，而 Blob 又可以兼容多种浏览器 API。一种常见的做法是明确将图片文件加载到内存，然后将其添加到 HTML 图片元素。为此，可以使用响应对象上暴露的 blob() 方法。这个方法返回一个期约，解决为一个 Blob 的实例。然后，可以将这个实例传给 URL.createObjectUrl() 以生成可以添加给图片元素 src 属性的值：
 
 ```js
 const imageElement = document.querySelector('img')
@@ -122,7 +122,7 @@ fetch('//cross-origin.com', { method: 'no-cors' }).then((response) =>
 
 ### 2.6 中断请求
 
-调用 AbortController.abort()会中断所有网络传输，特别适合希望停止传输大型负载的情况。中断进行中的 fetch()请求会
+调用 AbortController.abort() 会中断所有网络传输，特别适合希望停止传输大型负载的情况。中断进行中的 fetch() 请求会
 导致包含错误的拒绝：
 
 ```js
@@ -139,7 +139,7 @@ setTimeout(() => abortController.abort(), 10)
 
 ### 3.1 访问 Headers
 
-Headers 对象是所有外发请求和入站响应头部的容器。每个外发的 Request 实例都包含一个空的 Headers 实例，可以通过 Request.prototype.headers 访问，每个入站 Response 实例也可以通过 Response.prototype.headers 访问包含着响应头部的 Headers 对象。这两个属性都是可修改属性。另外，使用 new Headers()也可以创建一个新实例。
+Headers 对象是所有外发请求和入站响应头部的容器。每个外发的 Request 实例都包含一个空的 Headers 实例，可以通过 Request.prototype.headers 访问，每个入站 Response 实例也可以通过 Response.prototype.headers 访问包含着响应头部的 Headers 对象。这两个属性都是可修改属性。另外，使用 new Headers() 也可以创建一个新实例。
 
 ### 3.2 Headers 基本使用
 
@@ -150,12 +150,12 @@ let seed = { foo: 'bar' }
 let h = new Headers(seed)
 console.log(h.get('foo')) // bar
 
-// 通过append追加
+// 通过 append 追加
 h.append('name', 'Li')
 console.log(h.get('name')) // "Li"
 ```
 
-Headers 与 Map 类似，支持 get()、 set()、 has()和 delete()等实例方法，也支持使用一个可迭代对象进行初始化：
+Headers 与 Map 类似，支持 get()、set()、has() 和 delete() 等实例方法，也支持使用一个可迭代对象进行初始化：
 
 ```js
 let seed = [
@@ -172,14 +172,14 @@ console.log(...h.entries()) // ['foo', 'bar'], ['baz', 'qux']
 
 ### 3.3 头部守卫
 
-Headers 可以使用守卫设置一些属性不被客户端修改，不同的守卫设置会改变 set()、 append()和 delete()的行为。违反护卫限制会抛出 TypeError。
+Headers 可以使用守卫设置一些属性不被客户端修改，不同的守卫设置会改变 set()、append() 和 delete() 的行为。违反护卫限制会抛出 TypeError。
 
 ```txt
 none：在通过构造函数创建 Headers 实例时激活，无限制
-request：在通过构造函数初始化 Request 对象， 且 mode值为非 no-cors 时激活，不允许修改禁止修改的头部
-request-no-cors：在通过构造函数初始化 Request 对象， 且 mode值为 no-cors 时激活，不允许修改非简单头部（
+request：在通过构造函数初始化 Request 对象，且 mode 值为非 no-cors 时激活，不允许修改禁止修改的头部
+request-no-cors：在通过构造函数初始化 Request 对象，且 mode 值为 no-cors 时激活，不允许修改非简单头部（
 response：在通过构造函数初始化 Response 对象时激活，不允许修改禁止修改的响应头部
-immutable：在通过 error()或 redirect()静态方法初始化 Response 对象时激活
+immutable：在通过 error() 或 redirect() 静态方法初始化 Response 对象时激活
 ```
 
 ## 四 Request 对象
@@ -198,7 +198,7 @@ console.log(req) // Request {...}
 
 ### 4.2 Request 对象克隆
 
-Fetch API 提供了两种不太一样的方式用于创建 Request 对象的副本：使用 Request 构造函数和使用 clone()方法。
+Fetch API 提供了两种不太一样的方式用于创建 Request 对象的副本：使用 Request 构造函数和使用 clone() 方法。
 
 将 Request 实例作为 input 参数传给 Request 构造函数，会得到该请求的一个副本：
 
@@ -228,7 +228,7 @@ console.log(r2.bodyUsed) // false
 
 如果源对象与创建的新对象不同源，则 referrer 属性会被清除。此外，如果源对象的 mode 为 navigate，则会被转换为 same-origin。
 
-第二种克隆 Request 对象的方式是使用 clone()方法，这个方法会创建一模一样的副本，任何值都不会被覆盖。与第一种方式不同，这种方法不会将任何请求的请求体标记为“已使用”：
+第二种克隆 Request 对象的方式是使用 clone() 方法，这个方法会创建一模一样的副本，任何值都不会被覆盖。与第一种方式不同，这种方法不会将任何请求的请求体标记为“已使用”：
 
 ```js
 let r1 = new Request('https://foo.com', { method: 'POST', body: 'foobar' })
@@ -254,9 +254,9 @@ new Request(r);
 Request object that has already been used.
 ```
 
-### 4.3 在 fetch()中使用 Request 对象
+### 4.3 在 fetch() 中使用 Request 对象
 
-在调用 fetch()时，可以传入已经创建好的 Request 实例而不是 URL。与 Request 构造函数一样，传给 fetch()的 init 对象会覆盖传入请求对象的值：
+在调用 fetch() 时，可以传入已经创建好的 Request 实例而不是 URL。与 Request 构造函数一样，传给 fetch() 的 init 对象会覆盖传入请求对象的值：
 
 ```js
 let r = new Request('https://foo.com')
@@ -266,7 +266,7 @@ fetch(r)
 fetch(r, { method: 'POST' })
 ```
 
-fetch()会在内部克隆传入的 Request 对象。与克隆 Request 一样， fetch()也不能拿请求体已经用过的 Request 对象来发送请求：
+fetch() 会在内部克隆传入的 Request 对象。与克隆 Request 一样，fetch() 也不能拿请求体已经用过的 Request 对象来发送请求：
 
 ```js
 let r = new Request('https://foo.com', { method: 'POST', body: 'foobar' })
@@ -284,7 +284,7 @@ fetch(r)
 // TypeError: Cannot construct a Request with a Request object that has already been used.
 ```
 
-要想基于包含请求体的相同 Request 对象多次调用 fetch()，必须在第一次发送 fetch()请求前调用 clone()：
+要想基于包含请求体的相同 Request 对象多次调用 fetch()，必须在第一次发送 fetch() 请求前调用 clone()：
 
 ```js
 let r = new Request('https://foo.com', { method: 'POST', body: 'foobar' })
@@ -305,7 +305,7 @@ let res = new Response()
 console.log(res)
 ```
 
-Response 构造函数接收一个可选的 body 参数。这个 body 可以是 null，等同于 fetch()参数 init 中的 body。还可以接收一个可选的 init 对象，这个对象可以包含下表所列的键和值:
+Response 构造函数接收一个可选的 body 参数。这个 body 可以是 null，等同于 fetch() 参数 init 中的 body。还可以接收一个可选的 init 对象，这个对象可以包含下表所列的键和值：
 
 ```txt
 headers：必须是 Headers 对象实例或包含字符串键/值对的常规对象实例，默认为没有键/值对的 Headers 对象
@@ -325,14 +325,14 @@ console.log(r)
 
 注意：产生 Response 对象的主要方式是调用 fetch()，它返回一个最后会解决为 Response 对象的期约。
 
-Response 类还有两个用于生成 Response 对象的静态方法： Response.redirect()和 Response.error()。 前者接收一个 URL 和一个重定向状态码（ 301、 302、 303、 307 或 308）， 返回重定向的 Response 对象：
+Response 类还有两个用于生成 Response 对象的静态方法：Response.redirect() 和 Response.error()。前者接收一个 URL 和一个重定向状态码（301、302、303、307 或 308），返回重定向的 Response 对象：
 
 ```js
 // 提供的状态码必须对应重定向，否则会抛出错误
-console.log(Response.redirect('https://foo.com', 301)) // 200会报错
+console.log(Response.redirect('https://foo.com', 301)) // 200 会报错
 ```
 
-另一个静态方法 Response.error()用于产生表示网络错误的 Response 对象（网络错误会导致 fetch()期约被拒绝）：
+另一个静态方法 Response.error() 用于产生表示网络错误的 Response 对象（网络错误会导致 fetch() 期约被拒绝）：
 
 ```js
 console.log(Response.error())
@@ -348,7 +348,7 @@ fetch('//foo.com/redirect-me').then(console.log)
 
 ### 5.3 克隆 Response 对象
 
-克隆 Response 对象的主要方式是使用 clone()方法，这个方法会创建一个一模一样的副本，不会覆盖任何值。这样不会将任何请求的请求体标记为已使用：
+克隆 Response 对象的主要方式是使用 clone() 方法，这个方法会创建一个一模一样的副本，不会覆盖任何值。这样不会将任何请求的请求体标记为已使用：
 
 ```js
 let r1 = new Response('foobar')

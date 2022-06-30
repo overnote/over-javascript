@@ -15,14 +15,14 @@ Streams API 诞生原因：Web 应用如何消费有序的小信息块，而不�
 流主要有三种：
 
 ```txt
-可读流：可以通过某个公共接口读取数据块的流。数据在内部从底层源进入流，然后由消费者（ consumer）进行处理。
+可读流：可以通过某个公共接口读取数据块的流。数据在内部从底层源进入流，然后由消费者（consumer）进行处理。
 
-可写流：可以通过某个公共接口写入数据块的流。 生产者（ producer）将数据写入流，数据在内部传入底层数据槽（ sink）。
+可写流：可以通过某个公共接口写入数据块的流。生产者（producer）将数据写入流，数据在内部传入底层数据槽（sink）。
 
-转换流：由两种流组成，可写流用于接收数据（可写端），可读流用于输出数据（可读端）。这两个流之间是转换程序（ transformer），可以根据需要检查和修改流内容。
+转换流：由两种流组成，可写流用于接收数据（可写端），可读流用于输出数据（可读端）。这两个流之间是转换程序（transformer），可以根据需要检查和修改流内容。
 ```
 
-流的基本单位是块（ chunk）。块可是任意数据类型，但通常是定型数组。每个块都是离散的流片段，可以作为一个整体来处理。更重要的是，块不是固定大小的，也不一定按固定间隔到达。在理想的流当中，块的大小通常近似相同，到达间隔也近似相等。不过好的流实现需要考虑边界情况。
+流的基本单位是块（chunk）。块可是任意数据类型，但通常是定型数组。每个块都是离散的流片段，可以作为一个整体来处理。更重要的是，块不是固定大小的，也不一定按固定间隔到达。在理想的流当中，块的大小通常近似相同，到达间隔也近似相等。不过好的流实现需要考虑边界情况。
 
 有时候，由于数据进出速率不同，可能会出现不匹配的情况。为此流平衡可能出现如下三种情形：
 
@@ -36,7 +36,7 @@ Streams API 诞生原因：Web 应用如何消费有序的小信息块，而不�
 
 流不平衡是常见问题，但流也提供了解决这个问题的工具。所有流都会为已进入流但尚未离开流的块提供一个内部队列。对于均衡流，这个内部队列中会有零个或少量排队的块，因为流出口块出列的速度与流入口块入列的速度近似相等。这种流的内部队列所占用的内存相对比较小。
 
-如果块入列速度快于出列速度，则内部队列会不断增大。流不能允许其内部队列无限增大，因此它会使用反压（ backpressure）通知流入口停止发送数据，直到队列大小降到某个既定的阈值之下。这个阈值由排列策略决定，这个策略定义了内部队列可以占用的最大内存，即高水位线（ high water mark）。
+如果块入列速度快于出列速度，则内部队列会不断增大。流不能允许其内部队列无限增大，因此它会使用反压（backpressure）通知流入口停止发送数据，直到队列大小降到某个既定的阈值之下。这个阈值由排列策略决定，这个策略定义了内部队列可以占用的最大内存，即高水位线（high water mark）。
 
 ## 二 可读流
 
@@ -58,7 +58,7 @@ async function* ints() {
 }
 ```
 
-这个生成器的值可以通过可读流的控制器传入可读流。访问这个控制器最简单的方式就是创建 ReadableStream 的一个实例，并在这个构造函数的 underlyingSource 参数（第一个参数）中定义 start()方法，然后在这个方法中使用作为参数传入的 controller。默认情况下，这个控制器参数是 ReadableStreamDefaultController 的一个实例：
+这个生成器的值可以通过可读流的控制器传入可读流。访问这个控制器最简单的方式就是创建 ReadableStream 的一个实例，并在这个构造函数的 underlyingSource 参数（第一个参数）中定义 start() 方法，然后在这个方法中使用作为参数传入的 controller。默认情况下，这个控制器参数是 ReadableStreamDefaultController 的一个实例：
 
 ```js
 const readableStream = new ReadableStream({
@@ -68,7 +68,7 @@ const readableStream = new ReadableStream({
 })
 ```
 
-调用控制器的 enqueue()方法可以把值传入控制器。所有值都传完之后，调用 close()关闭流:
+调用控制器的 enqueue() 方法可以把值传入控制器。所有值都传完之后，调用 close() 关闭流：
 
 ```js
 async function* ints() {
@@ -89,7 +89,7 @@ const readableStream = new ReadableStream({
 
 ### 2.2 ReadableStreamDefaultReader
 
-前面的例子把 5 个值加入了流的队列，但没有把它们从队列中读出来。为此，需要一个 ReadableStreamDefaultReader 的实例，该实例可以通过流的 getReader()方法获取。调用这个方法会获得流的锁，保证只有这个读取器可以从流中读取值：
+前面的例子把 5 个值加入了流的队列，但没有把它们从队列中读出来。为此，需要一个 ReadableStreamDefaultReader 的实例，该实例可以通过流的 getReader() 方法获取。调用这个方法会获得流的锁，保证只有这个读取器可以从流中读取值：
 
 ```js
 async function* ints() {
@@ -112,7 +112,7 @@ const readableStreamDefaultReader = readableStream.getReader()
 console.log(readableStream.locked) // true
 ```
 
-消费者使用这个读取器实例的 read()方法可以读出值：
+消费者使用这个读取器实例的 read() 方法可以读出值：
 
 ```js
 async function* ints() {
@@ -172,7 +172,7 @@ async function* ints() {
 }
 ```
 
-这些值通过可写流的公共接口可以写入流。在传给 WritableStream 构造函数的 underlyingSink 参数中，通过实现 write()方法可以获得写入的数据：
+这些值通过可写流的公共接口可以写入流。在传给 WritableStream 构造函数的 underlyingSink 参数中，通过实现 write() 方法可以获得写入的数据：
 
 ```js
 const readableStream = new ReadableStream({
@@ -184,7 +184,7 @@ const readableStream = new ReadableStream({
 
 ### 3.2 WritableStreamDefaultWriter
 
-要把获得的数据写入流，可以通过流的 getWriter()方法获取 WritableStreamDefaultWriter 的实例。这样会获得流的锁，确保只有一个写入器可以向流中写入数据：
+要把获得的数据写入流，可以通过流的 getWriter() 方法获取 WritableStreamDefaultWriter 的实例。这样会获得流的锁，确保只有一个写入器可以向流中写入数据：
 
 ```js
 async function* ints() {
@@ -205,7 +205,7 @@ const writableStreamDefaultWriter = writableStream.getWriter()
 console.log(writableStream.locked) // true
 ```
 
-在向流中写入数据前，生产者必须确保写入器可以接收值。 writableStreamDefaultWriter.ready 返回一个期约，此期约会在能够向流中写入数据时解决。然后，就可以把值传给 writableStreamDefaultWriter.write()方法。写入数据之后，调用 writableStreamDefaultWriter.close()将流关闭：
+在向流中写入数据前，生产者必须确保写入器可以接收值。writableStreamDefaultWriter.ready 返回一个期约，此期约会在能够向流中写入数据时解决。然后，就可以把值传给 writableStreamDefaultWriter.write() 方法。写入数据之后，调用 writableStreamDefaultWriter.close() 将流关闭：
 
 ```js
 async function* ints() {
@@ -237,7 +237,7 @@ console.log(writableStream.locked) // true
 
 ## 四 转换流
 
-转换流用于组合可读流和可写流。数据块在两个流之间的转换是通过 transform()方法完成的。
+转换流用于组合可读流和可写流。数据块在两个流之间的转换是通过 transform() 方法完成的。
 
 下面的生成器每 1000 毫秒就会生成一个递增的整数：
 
@@ -250,7 +250,7 @@ async function* ints() {
 }
 ```
 
-下面的代码创建了一个 TransformStream 的实例，通过 transform()方法将每个值翻倍：
+下面的代码创建了一个 TransformStream 的实例，通过 transform() 方法将每个值翻倍：
 
 ```js
 async function* ints() {
@@ -309,7 +309,7 @@ const writableStreamDefaultWriter = writable.getWriter()
 
 ## 五 通过管道连接流
 
-流可以通过管道连接成一串。最常见的用例是使用 pipeThrough()方法把 ReadableStream 接入 TransformStream。从内部看， ReadableStream 先把自己的值传给 TransformStream 内部的 WritableStream，然后执行转换，接着转换后的值又在新的 ReadableStream 上出现。下面的例子将一个整数的 ReadableStream 传入 TransformStream，TransformStream 对每个值做加倍处理：
+流可以通过管道连接成一串。最常见的用例是使用 pipeThrough() 方法把 ReadableStream 接入 TransformStream。从内部看，ReadableStream 先把自己的值传给 TransformStream 内部的 WritableStream，然后执行转换，接着转换后的值又在新的 ReadableStream 上出现。下面的例子将一个整数的 ReadableStream 传入 TransformStream，TransformStream 对每个值做加倍处理：
 
 ```js
 async function* ints() {
@@ -353,7 +353,7 @@ const pipedStreamDefaultReader = pipedStream.getReader()
 // 8
 ```
 
-使用 pipeTo()方法也可以将 ReadableStream 连接到 WritableStream。整个过程与使用 pipeThrough()类似：
+使用 pipeTo() 方法也可以将 ReadableStream 连接到 WritableStream。整个过程与使用 pipeThrough() 类似：
 
 ```js
 async function* ints() {

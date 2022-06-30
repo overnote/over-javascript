@@ -1,4 +1,4 @@
-# 07-Node 的多进程-3-多进程服务部署
+# 07-Node 的多进程 -3-多进程服务部署
 
 ## 零 服务部署
 
@@ -11,14 +11,14 @@
 
 ## 一 进程事件
 
-send()方法除了 message 事件外，还有其他以下事件：
+send() 方法除了 message 事件外，还有其他以下事件：
 
 - error：子进程无法被复制，无法被杀死，无法发送消息时触发
 - exit：子进程退出时触发，如果是正常退出，该事件第一个参数为退出码，否则为 null。如果子进程是通过 kill 退出，则会得到第二个参数，表示杀死进程时的信号
 - close：在子进程的标准输入、输出流终止时触发，参数与 exit 相同
-- disconnect：在父进程或子进程中调用 disconnect()方法时触发该事件，在调用该方法时将关闭监听 IPC 通道
+- disconnect：在父进程或子进程中调用 disconnect() 方法时触发该事件，在调用该方法时将关闭监听 IPC 通道
 
-kill()方法并不能真正将通过 IPC 相连的子基础讷航杀死，只是给子进程发送了一个系统信号：
+kill() 方法并不能真正将通过 IPC 相连的子基础讷航杀死，只是给子进程发送了一个系统信号：
 
 ```js
 // 子进程
@@ -206,7 +206,7 @@ process.on('uncaughtException', function () {
     process.exit(1)
   })
 
-  // 5秒后退出进程
+  // 5 秒后退出进程
   setTimeout(function () {
     process.exit(1)
   }, 5000)
@@ -248,11 +248,11 @@ function isTooFrequently() {
   var time = Date.now()
   var length = restart.push(time)
   if (length > limit) {
-    // 取出最后10个记录
+    // 取出最后 10 个记录
     restart = restart.slice(limit * -1)
   }
 
-  // 最后一次重启到钱10次重启之间的时间间隔
+  // 最后一次重启到钱 10 次重启之间的时间间隔
   return (
     restart.length >= limit && restart[restart.length - 1] - restart[0] < during
   )
@@ -292,18 +292,18 @@ function createWorker() {
 
 负载均衡策略就是让各个工作进程能够合理分配到任务。Node 在 0.11 之后，引入的负载均衡策略是 Round-Robin，即轮叫调度：
 
-```
+```txt
 由主进程接收连接，依次分发给工作进程
-分发策略：在N个工作进程中，每次选择第 i = (i + 1)mod n 个进程来发送连接
+分发策略：在 N 个工作进程中，每次选择第 i = (i + 1)mod n 个进程来发送连接
 ```
 
 启用轮叫调度的方式：
 
-```
-# 方式一：在cluster模块中启动
+```txt
+# 方式一：在 cluster 模块中启动
 cluster.schedulingPolicy = cluster.SCHED_RR     # 关闭为：cluster.schedulingPolicy = cluster.SCHED_NONE
 
-# 方式二：环境变量中设置 NODE_CLUSTER_SCHED_POLICY的值
+# 方式二：环境变量中设置 NODE_CLUSTER_SCHED_POLICY 的值
 export NODE_CLUSTER_SCHED_POLICY=rr             # 关闭为：export NODE_CLUSTER_SCHED_POLICY=none
 ```
 
@@ -313,14 +313,14 @@ export NODE_CLUSTER_SCHED_POLICY=rr             # 关闭为：export NODE_CLUSTE
 
 安装 pm2：
 
-```
+```txt
 npm install pm2 -g
 ```
 
 使用 pm2：
 
-```
-开启：pm2 start ***.js                      # node关闭窗口仍然运行，且会自动重启
+```txt
+开启：pm2 start ***.js                      # node 关闭窗口仍然运行，且会自动重启
 参数启动：pm2 start **.js --name=”test”    # 启动应用程序并命名为 "api"
 关闭：pm2 stop **.js
 重启：pm2 restart **.js
@@ -329,7 +329,7 @@ npm install pm2 -g
 pm2 可以监控并管理多个应用程序，并对其进行日志监控。
 
 进程监控命令：`pm2 list`，监控界面：
-![](/images/node/pm2list.png)
+![pm2 监控界面](/images/node/pm2list.png)
 
 日志监控：`pm2 logs 项目名/id名`，监控界面：
-![](/images/node/pm2logs.png)
+![pm2 监控界面](/images/node/pm2logs.png)

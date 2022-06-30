@@ -11,7 +11,7 @@ location 上常用的成员：
 ```js
 location.host // "www.demo.com:80" 服务器名及端口号
 location.hostname // "www.demo.com" 服务器名
-location.href // "http:/www.demo.com" URL的触发地址
+location.href // "http:/www.demo.com" URL 的触发地址
 location.origin // "http://www.demo.com" URL 的只读源地址
 location.pathname // /user/order
 location.search // "?name=lisi"
@@ -87,7 +87,7 @@ for (let param of searchParams) {
 navigator 对象用于标识浏览器：
 
 ```js
-navigator.appCodeName // 浏览器名称，通常为Mozilla
+navigator.appCodeName // 浏览器名称，通常为 Mozilla
 navigator.userAgent // 用户代理字符串
 ```
 
@@ -107,21 +107,21 @@ screen 对象保存了客户端的能力信息，如像素宽度、像素高度�
     获取：window.sessionStorage.getItem("name");
     删除：window.sessionStorage.removeItem("name");
     清除：window.sessionStorage.clear();
-    说明：生命周期为关闭浏览器窗口,在同一个窗口下数据可以共享，可存储大约5M
+    说明：生命周期为关闭浏览器窗口，在同一个窗口下数据可以共享，可存储大约 5M
 
 本地存储：
     获取：window.localStorage
     获取：window.localStorage.getItem("name");
     删除：window.localStorage.removeItem("name");
     清除：window.localStorage.clear();
-    说明：永久生效，除非手动删除,可以多窗口共享,可存储大约20M
+    说明：永久生效，除非手动删除，可以多窗口共享，可存储大约 20M
 ```
 
 贴士：一些其他网络存储方案 WebSQL、IndexDB 已经被 w3c 放弃了。
 
 ### 4.1 history 历史状态
 
-history 记录了用户曾经浏览过的页面(URL),并可以实现浏览器前进与后退相似导航的功能。
+history 记录了用户曾经浏览过的页面 (URL),并可以实现浏览器前进与后退相似导航的功能。
 
 ```js
 // 后退一页
@@ -143,7 +143,7 @@ history.forward()
 history.pushState({ name: 'Nicholas' }, "Nicholas' page", 'nicholas.html')
 ```
 
-要更新当前状态，可以调用 replaceState()，传入的参数与 pushState()的前两个参数相同。调用这个方法不会在历史状态栈中创建新状态，只会重写当前状态。
+要更新当前状态，可以调用 replaceState()，传入的参数与 pushState() 的前两个参数相同。调用这个方法不会在历史状态栈中创建新状态，只会重写当前状态。
 
 ```js
 history.replaceState({ name: 'Greg' }, "Greg's page")
@@ -154,7 +154,7 @@ history.replaceState({ name: 'Greg' }, "Greg's page")
 HTML5 提供了 Geolocation 地理位置支持。目前大多数浏览器都可以支持（IE9+）。出于安全考虑，部分最新的浏览器只允许通过 HTTPS 协议使用 GeolocationAPI，在 http 协议下回跑出异常，当然本地开发不会有问题。
 
 ```js
-navigator.geolocation //会提示用户是否允许获取该API的权限
+navigator.geolocation //会提示用户是否允许获取该 API 的权限
 ```
 
 示例代码：
@@ -182,16 +182,16 @@ if (navigator.geolocation) {
 
 ```txt
 # 获取成功，返回 position 参数对象，包含：
-timestamp： 获取位置时的时间戳
-ciirds：    坐标信息对象，内部包含：latitude（纬度），longitude（经度），accuracy（坐标精度，单位为米）
+timestamp：获取位置时的时间戳
+ciirds：坐标信息对象，内部包含：latitude（纬度），longitude（经度），accuracy（坐标精度，单位为米）
 
 # 获取失败，返回 错误 对象，常见为：
-code:   错误标识，1为用户拒绝分享位置 2为获取用户位置失败 3为获取超时 0为其他错误
+code:   错误标识，1 为用户拒绝分享位置 2 为获取用户位置失败 3 为获取超时 0 为其他错误
 
 # 传入的位置参数对象：
 timeout:允许获取位置的超时时间，单位为毫秒
-enableHighAccuracy： 布尔值是否获取高精度信息
-maximumAge：用户位置信息缓存的最大时间，默认为0，单位是毫秒
+enableHighAccuracy：布尔值是否获取高精度信息
+maximumAge：用户位置信息缓存的最大时间，默认为 0，单位是毫秒
 ```
 
 当用户位置发生变化时，可以通过 watchPostion 方法监听用户的位置信息，该方法和 getCurrentPosition 使用方式一致：

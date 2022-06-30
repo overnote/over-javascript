@@ -12,11 +12,9 @@ JSX 优势示例：
 // 传统书写方式
 const vdom = React.createElement('h1', {id: 'title', React.createElement('span', {},'Hello World!')})
 
-// jsx书写方式
+// jsx 书写方式
 const vdom = <h1 id="title"><span>Hello World!</span></h1>
 ```
-
-**jsx 存在的意义就是为了创建虚拟 DOM**
 
 ## 二 JSX 基础语法
 
@@ -35,7 +33,7 @@ const vdom = <h1 id="title"><span>Hello World!</span></h1>
 
 ```js
 function App() {
-  let title = 'hello' // 在JSX中使用表达式
+  let title = 'hello' // 在 JSX 中使用表达式
 
   let fn = function (obj) {
     console.log(obj.name)

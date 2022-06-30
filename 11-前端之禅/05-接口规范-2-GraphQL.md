@@ -1,4 +1,4 @@
-# 05-接口规范-2-GraphQL
+# 05-接口规范 -2-GraphQL
 
 ## 一 GraphQL 概念
 
@@ -73,7 +73,7 @@ app.listen(3000)
 
 在浏览器中访问地址即可根据自定义字段访问结果：
 
-![graphql基础](../images/zen/graphql-01.png)
+![graphql 基础](../images/zen/graphql-01.png)
 
 ### 2.2 GraphQL 数据类型
 

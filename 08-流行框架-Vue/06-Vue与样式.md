@@ -108,7 +108,7 @@ import 'element-ui/lib/theme-default/index.css'
   @import '../css/style.css';
 </style>
 
-<!-- 方式三：在 style 标签的 src上引入 -->
+<!-- 方式三：在 style 标签的 src 上引入 -->
 <style scoped src="../static/css/user.css"></style>
 ```
 
@@ -123,14 +123,14 @@ CSS 引入顺序注意事项：
 
 ```html
 <style scoped>
-  /* 添加scoped后，此处的样式只是针对此组件的，不会污染全局 */
+  /* 添加 scoped 后，此处的样式只是针对此组件的，不会污染全局 */
   .h1 {
     color: red;
   }
 </style>
 ```
 
-注意： 使用 scoped 后，父组件的样式将不会渗透到子组件中，想要在子组件中重新设置父组件的样式，可以使用深度作用选择器 /deep/，如：
+注意：使用 scoped 后，父组件的样式将不会渗透到子组件中，想要在子组件中重新设置父组件的样式，可以使用深度作用选择器 /deep/，如：
 
 ```html
 <style scoped>

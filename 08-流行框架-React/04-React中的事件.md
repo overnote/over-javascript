@@ -17,11 +17,11 @@ class Title extends React.Component {
     )
   }
 
-  // 原生方式：通过获取 id 为 title 的元素绑定事件，或者直接在标签内添加： onclick="test()"
+  // 原生方式：通过获取 id 为 title 的元素绑定事件，或者直接在标签内添加：onclick="test()"
   // react 推荐方式：行内 onClick={test}。注意这里只是一个赋值语句，如果写 test() 则赋值的是该函数返回值，且会被默认首先调用一次
   test = () => {
     console.log('hello world!')
-    console.log(this) // 输出Title组件实例
+    console.log(this) // 输出 Title 组件实例
   }
 }
 ```
@@ -41,7 +41,7 @@ test(){
 }
 ```
 
-在类 Title 中，构造器、render() 内部的 this 都是实例对象本身，但是在 test()中却是 undefined 的！！这是因为前者都是通过实例调用的，而 test() 的调用者是 window！
+在类 Title 中，构造器、render() 内部的 this 都是实例对象本身，但是在 test() 中却是 undefined 的！！这是因为前者都是通过实例调用的，而 test() 的调用者是 window！
 
 如下示例：
 
@@ -57,7 +57,7 @@ class Person {
 }
 
 const p = new Person('Jack', 18)
-p.info() // 正确输出this实例
+p.info() // 正确输出 this 实例
 
 const o = p.info
 o() // undefined
@@ -69,7 +69,7 @@ o() // undefined
 
 `onClick={this.test}` 这里的 test 没有调用，只是简单赋值，造成了绑定的事件函数其实是 undefined。
 
-### 2.1 解决方案-箭头函数
+### 2.1 解决方案 - 箭头函数
 
 由于箭头函数中的 this 是其定义的地方，所以可以使用箭头函数方式解决：
 
@@ -98,7 +98,7 @@ class Comp extends React.Component {
 class Comp extends React.Component {
   constructor(props) {
     super(props)
-    this.fn = this.fn.bind(this) // 在实例上挂载一个新函数fn
+    this.fn = this.fn.bind(this) // 在实例上挂载一个新函数 fn
   }
   fn() {
     console.log(this)

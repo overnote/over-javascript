@@ -1,18 +1,18 @@
 # 14-Vue3-2-CompositionAPI
 
-## 一 ref()、reactive()实现响应式
+## 一 ref()、reactive() 实现响应式
 
 在 vue2 中，针对对象，使用 defineProperty 方法对对象的属性值进行拦截，针对数组则重写数组的更新元素方法实现劫持。Vue2 的问题是对对象新增、删除属性，对数组进行下标替换元素、更新 length 都不会触发界面的更新！
 
-Vue3 的 setup()中直接返回的数据并不是响应式的，必须通过 ref()、reactive()函数的包装，其底层利用 Proxy 方式解决了上述问题。
+Vue3 的 setup() 中直接返回的数据并不是响应式的，必须通过 ref()、reactive() 函数的包装，其底层利用 Proxy 方式解决了上述问题。
 
-### 1.1 ref()包装数据为响应式数据
+### 1.1 ref() 包装数据为响应式数据
 
 ref() 用来包装基本类型：
 
 ```html
 <template>
-  <!-- ref包装的数据在模板中有语法糖支持，无需使用 count.value -->
+  <!-- ref 包装的数据在模板中有语法糖支持，无需使用 count.value -->
   <h1>count:{{ count }}</h1>
   <button @click="updCount">count++</button>
 </template>
@@ -37,7 +37,7 @@ ref() 用来包装基本类型：
 </script>
 ```
 
-ref()用来包装引用类型：
+ref() 用来包装引用类型：
 
 ```html
 <template>
@@ -73,7 +73,7 @@ ref()用来包装引用类型：
 </script>
 ```
 
-### 1.2 reactive()包装引用类型
+### 1.2 reactive() 包装引用类型
 
 ```html
 <template>
@@ -109,19 +109,19 @@ ref()用来包装引用类型：
 </script>
 ```
 
-注意：ref() 内部的响应式依然是靠 `Object.defineProperty()`的 get 与 set 实现的。但是当传入的是引用类型，需要借助 Proxy。reactive()的响应式是深层次的，借助了 Proxy 实现，通过代理对象操作源对象内部数据，reactive 只能操作数组、对象类型的数据。
+注意：ref() 内部的响应式依然是靠 `Object.defineProperty()`的 get 与 set 实现的。但是当传入的是引用类型，需要借助 Proxy。reactive() 的响应式是深层次的，借助了 Proxy 实现，通过代理对象操作源对象内部数据，reactive 只能操作数组、对象类型的数据。
 
 ### 1.3 ref() 与 reactive() 原理
 
-ref() 的内部仍然是 reactive()函数，所以响应式的核心是 reactive() 函数，该函数将传入的数据包裹为了 ES6 的 Proxy 对象并返回，开发者修改 Proxy 代理对象，就可以让源数据同步修改，触发响应式更新。
+ref() 的内部仍然是 reactive() 函数，所以响应式的核心是 reactive() 函数，该函数将传入的数据包裹为了 ES6 的 Proxy 对象并返回，开发者修改 Proxy 代理对象，就可以让源数据同步修改，触发响应式更新。
 
 ```js
 let person = {
   name: 'lisi',
   age: 30,
 }
-// person作为源数据，对其操作是无法实现响应式的
-// 只有操作proxy才能实现响应式
+// person 作为源数据，对其操作是无法实现响应式的
+// 只有操作 proxy 才能实现响应式
 let proxy = reactive(person)
 ```
 
@@ -145,7 +145,7 @@ shallowReative() 是最简单的响应式函数，因为其无需递归响应，
 function shallowReactive(target) {
   let flag = target && typeof target === 'object'
   if (!flag) {
-    // 基本类型可以直接return
+    // 基本类型可以直接 return
     return
   }
 
@@ -216,8 +216,8 @@ function reactive(target) {
       //     obj.value.p.id,
       //   }
 
-      // 不嫩使用 ref(obj.age),在响应式关系中，如果是用户修改了界面，被响应的数据是age，而不是 obj,age
-      // toRef()是引用， ref() 是引用
+      // 不嫩使用 ref(obj.age),在响应式关系中，如果是用户修改了界面，被响应的数据是 age，而不是 obj,age
+      // toRef() 是引用，ref() 是引用
       const age = toRef(obj, 'age')
       const id = toRef(obj.p, 'id')
       return {
@@ -233,7 +233,7 @@ toRef() 用于创建一个 ref 对象，其 value 值指向另一个对象中的
 
 ### 2.2 toRefs()
 
-toRefs()用于引用多个属性：
+toRefs() 用于引用多个属性：
 
 ```js
 setup(){
@@ -256,11 +256,11 @@ let p = reactive({ age: 10, name: 'zs' })
 p = readonly(p)
 ```
 
-经过 readonly() 加工的响应式数据是只读的，shallowReadonly()只会加工对象的最外层。
+经过 readonly() 加工的响应式数据是只读的，shallowReadonly() 只会加工对象的最外层。
 
 ## 四 toRaw()、markRow() 转变响应式数据为普通对象
 
-toRow()：将 reactive()生成的响应式对象转化为普通对象。一般用于操作数据时不想造成页面更新的场景。
+toRow()：将 reactive() 生成的响应式对象转化为普通对象。一般用于操作数据时不想造成页面更新的场景。
 
 markRow()：标记一个对象，使其永远不会成为响应式对象。一般用于一些复杂的第三方库、渲染不可变数据源的大列表。
 
@@ -321,7 +321,7 @@ markRow()：标记一个对象，使其永远不会成为响应式对象。一�
 vue3 的组合 api 可以封装为复杂的可复用的功能函数，类似 vue2 中的 mixin，但是更加清晰：
 
 ```js
-// 新建一个hook文件夹，内部创建多个hookapi文件，如下示例
+// 新建一个 hook 文件夹，内部创建多个 hookapi 文件，如下示例
 import { ref, onMounted, onUnmounted } from 'vue'
 
 export default function useShowMousePosition() {

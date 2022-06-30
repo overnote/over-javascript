@@ -7,7 +7,7 @@
 控制窗口位置：
 
 ```txt
-属性：x y center movable 说明：x与y控制窗口在屏幕的位置，窗口默认位于屏幕正中
+属性：x y center movable 说明：x 与 y 控制窗口在屏幕的位置，窗口默认位于屏幕正中
 应用：经常用于创建新窗口时，新窗口与当前窗口交错显示
 ```
 
@@ -16,25 +16,25 @@
 ```txt
 属性：width height minWidth/maxWidth minHeight/maxHeight resizable minimizabel
 maximizable 说明：用来设置窗口大小，以及是否允许用户控制窗口大小
-应用：用户拖动窗口可以改变大小，如果不想让用户主动改变，可以在设置width、height后，设置resizable为false即可，max/min可以控制用户能够放大缩小的最大程度
+应用：用户拖动窗口可以改变大小，如果不想让用户主动改变，可以在设置 width、height 后，设置 resizable 为 false 即可，max/min 可以控制用户能够放大缩小的最大程度
 ```
 
 ```txt
 属性：title icon frame autoHideMenuBar titleBarStyle
 说明：用来设置窗口的边框、标题栏、菜单栏
-应用：窗口默认的title为网页title，icon默认为可执行文件的图标。frame设置为false，才能自定义系统标题栏，实现自定义窗口
+应用：窗口默认的 title 为网页 title，icon 默认为可执行文件的图标。frame 设置为 false，才能自定义系统标题栏，实现自定义窗口
 ```
 
 ```txt
 属性：nodeIntegration nodeIntegrationInWorker nodeIntegrationInSubFrames
-说明：控制窗口加载的网页是否集成Node环境
-应用：这三个配置的默认选项都是false，因为会引起安全问题
+说明：控制窗口加载的网页是否集成 Node 环境
+应用：这三个配置的默认选项都是 false，因为会引起安全问题
 ```
 
 ```txt
 属性：preload webSecurity contextIsolation
 说明：允许最大限度控制渲染进程加载的页面
-应用：preload配置项可以实现渲染进程加载的页面注入脚本，该脚本也能访问Node环境，webSecurity用来控制同源策略
+应用：preload 配置项可以实现渲染进程加载的页面注入脚本，该脚本也能访问 Node 环境，webSecurity 用来控制同源策略
 ```
 
 ## 二 示例：自定义窗口
@@ -161,7 +161,7 @@ debounce(fn){
 
 ### 2.3 记录窗口变化状态
 
-`setState()` 把窗口的大小、位置、是否最大化记录在 LocalStorage 中,推荐根据需要自定义：
+`setState()` 把窗口的大小、位置、是否最大化记录在 LocalStorage 中，推荐根据需要自定义：
 
 ```js
     setWindState(){
@@ -222,7 +222,7 @@ Electron 无法像网页那样监听 `onbeforeunload` 阻止关闭，但是可�
 
 ```js
 currentWin.onbeforeunload = function () {
-  currentWin.destroy() // 不能使用 close()，因为该函数会再次触发onbeforeunload事件，造成死循环
+  currentWin.destroy() // 不能使用 close()，因为该函数会再次触发 onbeforeunload 事件，造成死循环
 }
 ```
 
@@ -259,7 +259,7 @@ win.webContents.on('will-prevent-unload', (event) => {
 
 ### 3.2 模态框
 
-用户在操作窗口 A 时，需要的打开窗口 B,在窗口 B 完成一系列操作后需要关闭窗口 B 才能操作窗口 A，此时，窗口 B 就是窗口 A 的模态框。
+用户在操作窗口 A 时，需要的打开窗口 B，在窗口 B 完成一系列操作后需要关闭窗口 B 才能操作窗口 A，此时，窗口 B 就是窗口 A 的模态框。
 
 一旦模态框出现，就不能再操作父窗口，打开模态框的示例
 
@@ -286,12 +286,12 @@ Mac 上应用程序在关闭后，仍然会保留在 Docker 栏上，方便快�
 ```js
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    // 如果不是Mac系统，才会退出，是Mac系统则什么都不做！
+    // 如果不是 Mac 系统，才会退出，是 Mac 系统则什么都不做！
     app.quit()
   }
 })
 
-// Mac专用事件，Docker上的应用激活时触发
+// Mac 专用事件，Docker 上的应用激活时触发
 app.on('activate', () => {
   if (win == null) {
     createWindow()
@@ -299,12 +299,12 @@ app.on('activate', () => {
 })
 ```
 
-Mac 下还有 DarkMode，可以通过如下方式获取系统是否处于深色模式(这是主进程中只读的属性)：
+Mac 下还有 DarkMode，可以通过如下方式获取系统是否处于深色模式 (这是主进程中只读的属性)：
 
 ```js
-// 6.X及之前，已废弃
+// 6.X 及之前，已废弃
 const isDarkMode = electron.remote.systemPreferences.isDarkMode()
 
-// 7.X及之后
+// 7.X 及之后
 const currentMode = electron.nativeTheme.shouldUseDarkColors
 ```

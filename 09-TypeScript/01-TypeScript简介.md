@@ -8,7 +8,7 @@ JavaScript 是一种弱类型的动态语言。
 
 ```txt
 弱类型：变量的数据类型不固定，可以为其赋值任何类型的值。
-强类型：变量的类型是严格固定的，给变量赋值其他类型的数据会引发错误.
+强类型：变量的类型是严格固定的，给变量赋值其他类型的数据会引发错误。
 ```
 
 动态类型与静态类型：语言的动静特性针对的是代码类型的检查方式。
@@ -54,10 +54,10 @@ TypeScript 是 2012 年由微软发布的编程语言，是一门非常年轻的
 环境配置：
 
 ```txt
-# 安装typescript
+# 安装 typescript
 npm i -g typescript
 
-# 测试环境：tsc是在安装typescript时默认安装的TS编译器
+# 测试环境：tsc 是在安装 typescript 时默认安装的 TS 编译器
 tsc --version
 ```
 
@@ -134,7 +134,7 @@ demo
 
 ```json
 "incremental": true,      /* 增量编译 */
-"allowJs": true,           /* 支持JS编译 */
+"allowJs": true,           /* 支持 JS 编译 */
 "outDir": "./dist",       /* 输出目录 */
 "rootDir": "./src",       /* 源码目录 */
 ```
@@ -172,7 +172,7 @@ ts-node hello.ts
 步骤如下：
 
 ```txt
-# 初始化tsconfig
+# 初始化 tsconfig
 tsc --init
 "strict": false,
 
@@ -180,8 +180,8 @@ tsc --init
 "outDir": "./dist",
 "strict": false,
 
-# 设置vscode：
-# 击vscode菜单->终端->运行任务->显示所有任务->tsc 监视
+# 设置 vscode：
+# 击 vscode 菜单->终端->运行任务->显示所有任务->tsc 监视
 ```
 
 ## 五 webpack 处理 typescript

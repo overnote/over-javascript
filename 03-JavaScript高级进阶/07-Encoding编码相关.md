@@ -2,9 +2,9 @@
 
 ## 一 Encoding API
 
-字符串与定型数组（二进制）之间的转换依赖于 EncodingAPI，如：TextEncoder、 TextEncoderStream、 TextDecoder 和 TextDecoderStream。
+字符串与定型数组（二进制）之间的转换依赖于 EncodingAPI，如：TextEncoder、TextEncoderStream、TextDecoder 和 TextDecoderStream。
 
-## 二 编码-字符串转换为定型数组
+## 二 编码 - 字符串转换为定型数组
 
 ### 2.0 转换方式归纳
 
@@ -18,7 +18,7 @@ TextEncoder 对象使用示例：
 const encoder = new TextEncoder()
 
 const encoderText = encoder.encode('foo')
-// f的UTF-8编码是0x66（102），o的UTF-8编码是0x6F(111)
+// f 的 UTF-8 编码是 0x66（102），o 的 UTF-8 编码是 0x6F(111)
 console.log(encoderText) // Uint8Array(3) [102, 111, 111]
 ```
 
@@ -36,7 +36,7 @@ const barRes = encoder.encodeInto('bar', barArr)
 console.log(barRes) // { read: 2, written: 2 }
 ```
 
-注意：由于 encodeInto()不需要像 encode()那样需要分配一个新的 Unit8Array，会有性能上的提升。
+注意：由于 encodeInto() 不需要像 encode() 那样需要分配一个新的 Unit8Array，会有性能上的提升。
 
 ### 2.2 流编码
 
@@ -77,7 +77,7 @@ const readableStreamDefaultReader = encodedTextStream.getReader()
 // Uint8Array[111]
 ```
 
-## 三 解码-定型数组转换为字符串
+## 三 解码 - 定型数组转换为字符串
 
 ### 3.0 转换方式归纳
 
@@ -137,7 +137,7 @@ const readableStreamDefaultReader = decodedTextStream.getReader()
 
 ```js
 async function* chars() {
-  // ☺的 UTF-8 编码是 0xF0 0x9F 0x98 0x8A（即十进制 240、 159、 152、 138）
+  // ☺的 UTF-8 编码是 0xF0 0x9F 0x98 0x8A（即十进制 240、159、152、138）
   const encodedText = [240, 159, 152, 138].map((x) => Uint8Array.of(x))
   for (let char of encodedText) {
     yield await new Promise((resolve) => setTimeout(resolve, 1000, char))
@@ -169,7 +169,7 @@ const readableStreamDefaultReader = decodedTextStream.getReader()
 // ☺
 ```
 
-文本解码器流经常与 fetch()一起使用，因为响应体可以作为 ReadableStream 来处理：
+文本解码器流经常与 fetch() 一起使用，因为响应体可以作为 ReadableStream 来处理：
 
 ```js
 const response = await fetch(url)

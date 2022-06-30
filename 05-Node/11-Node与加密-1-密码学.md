@@ -1,4 +1,4 @@
-# 09-加密-1-密码学
+# 09-加密 -1-密码学
 
 ## 一 密码学概述
 
@@ -20,7 +20,7 @@
 md4、md5、hash1、SHA256、SHA3
 ```
 
-哈希算法加密不可逆，常见的算法有： 等。
+哈希算法加密不可逆，常见的算法有：等。
 
 例如一段字符串`hello world`，经过 md5 加密后转换成了：`5eb63bbbe01eeed093cb22bb8f5acdc3`，该密文是无法返回到原始的明文的。但是现在一些网站能够根据结构给出原始值，是因为其数据库存暴力存储了一些常用数据经过哈希后得到的结果。
 
@@ -130,8 +130,8 @@ HTTPS 即 SSL 和 HTTP 结合产物，WSS 即 SSL 和 WebSocket 结合的产物�
 **第 1 步**：客户端发送一个消息，假为 Client Hello，给服务端，该消息包括：
 
 ```txt
-一个随机数（假设它是random1）
-一个session id(用来避免后续请求的握手)
+一个随机数（假设它是 random1）
+一个 session id(用来避免后续请求的握手)
 浏览器支持的密码套件（cipher suite），即由加密算法名称组成的字符串，示例：TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 ```
 
@@ -147,7 +147,7 @@ HTTPS 即 SSL 和 HTTP 结合产物，WSS 即 SSL 和 WebSocket 结合的产物�
 
 **第 4 步**：服务器发送 Server Hello done
 
-**第 5 步**：客户端验证服务器证书的合法性后(Certificate Verify)后，利用证书中的公钥加密 premaster secret(一个在堆成加密密钥生成中的 46 字节随机数字，以及消息认证代码)作为 Client Key Exchange 的消息发送给服务器。
+**第 5 步**：客户端验证服务器证书的合法性后 (Certificate Verify) 后，利用证书中的公钥加密 premaster secret(一个在堆成加密密钥生成中的 46 字节随机数字，以及消息认证代码) 作为 Client Key Exchange 的消息发送给服务器。
 
 **第 6 步**：SSL 客户端发送 Change Cipher Spec 消息，该消息属于 SSL 密码变化协议
 

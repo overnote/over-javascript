@@ -1,4 +1,4 @@
-# 05-重要属性-1-状态 state
+# 05-重要属性 -1-状态 state
 
 ## 一 组件状态 state 概念
 
@@ -33,7 +33,7 @@ class Comp extends React.Component {
     return (
       <div>
         <button onClick={this.change}>点击改变状态</button>
-        <div>组件state数据：{this.state.age}</div>
+        <div>组件 state 数据：{this.state.age}</div>
       </div>
     )
   }
@@ -109,10 +109,10 @@ export default function Count(props) {
   return (
     <div>
       count值：{count}
-      <button onClick={changeCount}>点我修改count</button>
+      <button onClick={changeCount}>点我修改 count</button>
       <hr />
-      name值：{name}
-      <button onClick={changeName}>点我修改name</button>
+      name 值：{name}
+      <button onClick={changeName}>点我修改 name</button>
     </div>
   )
 }
@@ -129,7 +129,7 @@ state = { count: 0 }
 add = () => {
   const { count } = this.state
   this.setState({ count: count + 1 })
-  console.log('count: ', this.state.count) // 仍然输出0
+  console.log('count: ', this.state.count) // 仍然输出 0
 }
 ```
 
@@ -142,9 +142,9 @@ state = { count: 0 }
 add = () => {
   const { count } = this.state
   this.setState({ count: count + 1 }, () => {
-    console.log('count: ', this.state.count) // 仍然输出0
+    console.log('count: ', this.state.count) // 仍然输出 0
   })
 }
 ```
 
-callback 是在状态更新、render()执行之后才执行！
+callback 是在状态更新、render() 执行之后才执行！

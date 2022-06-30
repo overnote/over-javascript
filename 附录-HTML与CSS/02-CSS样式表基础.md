@@ -25,7 +25,7 @@ CSS 代码有三种书写位置：行内式（不推荐）、内嵌式（偶尔�
 ```html
 <head>
   <style type="text/css">
-    /* type="text/css" 在CSS3中可以省略 */
+    /* type="text/css" 在 CSS3 中可以省略 */
     div {
       color: pink;
       font-size: 18px;
@@ -45,7 +45,7 @@ CSS 代码有三种书写位置：行内式（不推荐）、内嵌式（偶尔�
 </head>
 ```
 
-外联式的第二种方式是利用@import：
+外联式的第二种方式是利用 @import：
 
 ```html
 <style>
@@ -57,11 +57,11 @@ CSS 代码有三种书写位置：行内式（不推荐）、内嵌式（偶尔�
 </style>
 ```
 
-link 与@import 的区别：
+link 与 @import 的区别：
 
 - 功能多样性不同：link 标签功能更多，可以加载 css、定义 rss、rel 等属性，@import 只能加载 CSS
 - 加载书序不同：link 引入的内容与当前文档同时被加载，@import 引入的 css 将会在页面加载完毕后加载
-- link 的样式权重大于@import 的权重
+- link 的样式权重大于 @import 的权重
 
 ## 三 性能问题
 

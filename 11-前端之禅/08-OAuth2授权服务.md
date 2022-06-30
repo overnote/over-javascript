@@ -38,11 +38,11 @@ OAuth 在客户端与服务提供商之间，设置一个授权层（authorizati
 示例名词：
 
 ```txt
-client：客户端，即第一节中所述的百度，百度使用QQ信息登录，百度作为了客户端
-Resource Owner：资源持有者，即第一节所述的QQ用户user
+client：客户端，即第一节中所述的百度，百度使用 QQ 信息登录，百度作为了客户端
+Resource Owner：资源持有者，即第一节所述的 QQ 用户 user
 User Agent：用户代理，即第一节所述的浏览器
-http service：服务提供商，即第一节所述的QQ服务器
-Authorization server：认证服务器，即QQ提供的专门处理认证的服务器
+http service：服务提供商，即第一节所述的 QQ 服务器
+Authorization server：认证服务器，即 QQ 提供的专门处理认证的服务器
 Resource Server：资源服务器，即服务提供商存放用户资源的服务器
 
 贴士：http service、Authorization server、Resource Server 可以是同一台服务器。
@@ -60,8 +60,8 @@ let state = Date.now()
 router.get('/login', function (req, res, next) {
   let grantUrl = 'https://graph.qq.com/oauth2.0/authorize?'
   let options = {
-    response_type: 'code', //响应类型 固定为code
-    client_id: AppId, //客户端的ID，这个ID是由QQ授权服务器分配的
+    response_type: 'code', //响应类型 固定为 code
+    client_id: AppId, //客户端的 ID，这个 ID 是由 QQ 授权服务器分配的
     redirect_uri, // 'http://www.demo.com/user/callback'
     state,
     scope: 'get_user_info,list_album',

@@ -15,9 +15,9 @@ div 与 span 是最常见的该类型标签，他们没有任何修饰意义：
 
 ```html
 <!-- 代表块区 -->
-<div>div内容</div>
+<div>div 内容</div>
 <!-- 代表文本区 -->
-<span>span内容</span>
+<span>span 内容</span>
 ```
 
 ## 三 常用标签
@@ -27,12 +27,12 @@ div 与 span 是最常见的该类型标签，他们没有任何修饰意义：
 标题用于显著展示内容，一般是文章的题目等，总计有六个，从上往下字体大小依次缩小：
 
 ```txt
-<h1>标题1<h1>
-<h2>标题2<h2>
-<h3>标题3<h3>
-<h4>标题4<h4>
-<h5>标题5<h5>
-<h6>标题6<h6>
+<h1>标题 1<h1>
+<h2>标题 2<h2>
+<h3>标题 3<h3>
+<h4>标题 4<h4>
+<h5>标题 5<h5>
+<h6>标题 6<h6>
 ```
 
 ### 3.2 段落标签
@@ -84,9 +84,9 @@ a 链接示例：
 a 标签常用属性：
 
 ```txt
-href：    值为#时不能跳转，值为一个文件时则可以实现下载功能
-title：   鼠标划过时显示的文字
-target：  网页打开方式，常见打开方式有：_self：默认值，在当前页打开，_blank：在新窗口中打开
+href：值为#时不能跳转，值为一个文件时则可以实现下载功能
+title：鼠标划过时显示的文字
+target：网页打开方式，常见打开方式有：_self：默认值，在当前页打开，_blank：在新窗口中打开
 ```
 
 锚链接位置跳转演示：
@@ -108,8 +108,8 @@ a 链接特殊写法：可以制造点击不执行，一般在 tab 栏切换中�
 
 ```html
 <ul>
-  <li>新闻1</li>
-  <li>新闻2</li>
+  <li>新闻 1</li>
+  <li>新闻 2</li>
 </ul>
 ```
 
@@ -124,16 +124,16 @@ type="circle"：列表样式为小圆圈
 
 ```html
 <ol type="a" start="3">
-  <li>新闻1</li>
-  <li>新闻2</li>
+  <li>新闻 1</li>
+  <li>新闻 2</li>
 </ol>
 ```
 
 有序列表的样式：
 
 ```txt
-A,a：       分别以 A 或者 a 字幕顺序排序
-I,i ：      分别以大小写罗马数字排列
+A,a：分别以 A 或者 a 字幕顺序排序
+I,i：分别以大小写罗马数字排列
 start="3" ：li 前面的显示从第几个开始计数
 ```
 
@@ -142,8 +142,8 @@ start="3" ：li 前面的显示从第几个开始计数
 ```html
 <dl>
   <dt>新闻汇总</dt>
-  <dd>新闻1</dd>
-  <dd>新闻2</dd>
+  <dd>新闻 1</dd>
+  <dd>新闻 2</dd>
 </dl>
 ```
 
@@ -189,7 +189,7 @@ align：设置对齐方式，包括 left、right、center
 注意：table 标签的标题标签是 caption，不能使用 title。td 内容垂直对齐使用 valign。
 
 ```html
-<!-- valign的其他值有 top middle bottom -->
+<!-- valign 的其他值有 top middle bottom -->
 <td valign="bottom">123</td>
 ```
 
@@ -220,7 +220,7 @@ align：设置对齐方式，包括 left、right、center
 
 ## 五 H5 新增的多媒体标签
 
-### 5.1 新增多媒体标签-音频标签
+### 5.1 新增多媒体标签 - 音频标签
 
 H5 支持在网页中直接嵌入多媒体标签。
 
@@ -236,10 +236,10 @@ Safari：    MP3、Wav
 音屏标签常见属性：
 
 ```txt
-autoplay：  值为 autoplay，自动播放
-controls：  值为 controls，向用户显示控件，如播放按钮
-loop：      值为 loop，当银屏结束时重新播放
-src：       值为 资源地址
+autoplay：值为 autoplay，自动播放
+controls：值为 controls，向用户显示控件，如播放按钮
+loop：值为 loop，当银屏结束时重新播放
+src：值为 资源地址
 ```
 
 为了兼容，往往这样写：
@@ -252,7 +252,7 @@ src：       值为 资源地址
 </audio>
 ```
 
-### 5.2 新增多媒体标签-视频标签
+### 5.2 新增多媒体标签 - 视频标签
 
 视频标签为 `<video>`，视频格式的版权限制如下：
 
@@ -266,14 +266,14 @@ Safari：    MP4
 视频标签的常用属性：
 
 ```txt
-autoplay：  值为 autoplay，自动播放
-controls：  值为 controls，向用户显示控件，如播放按钮
-loop：      值为 loop，当银屏结束时重新播放
-src：       值为 资源地址
+autoplay：值为 autoplay，自动播放
+controls：值为 controls，向用户显示控件，如播放按钮
+loop：值为 loop，当银屏结束时重新播放
+src：值为 资源地址
 width、height
-preload：   值为 auto 代表预先加载视频，值为none则不预加载
-poster：    值为 图片地址，加载等待时的图片
-muted：     值为 muted，静音播放
+preload：值为 auto 代表预先加载视频，值为 none 则不预加载
+poster：值为 图片地址，加载等待时的图片
+muted：值为 muted，静音播放
 ```
 
 贴士：

@@ -2,7 +2,7 @@
 
 ## 一 Symbol 类型基本使用
 
-Symbol(类型)是 ES6 新增的基本数据类型，其实例是**唯一、不可变的**，其用途是确保对象属性使用唯一标识符，不发生冲突！
+Symbol(类型) 是 ES6 新增的基本数据类型，其实例是**唯一、不可变的**，其用途是确保对象属性使用唯一标识符，不发生冲突！
 
 贴士：Symbol 并不能用来作为创建对象的私有属性，因为 Object API 提供了获取 Symbol 属性的方法，且 ES 未来方案已经规定 `#` 符号表示私有属性。
 
@@ -24,12 +24,12 @@ console.log(typeof s4) // symbol
 // 甚至可以传入字符串
 let s5 = Symbol({ name: 'lisi' })
 
-// 任意两个Symbol都不相等
+// 任意两个 Symbol 都不相等
 console.log(s1 == s2) // false
 console.log(s3 == s4) // false
 ```
 
-注意：Symbol 类型是值类型，其没有对应包装对象！而数值、布尔等都有包装类型，如： Number()、 Boolean()，这种包装类型与 Symbol 并不是一回事。所以 Symbol 不能使用 `new`进行构造，会报错：`Symbol is not a constructor`。如果要强行使用符号包装对象，可以使用 Object 函数：
+注意：Symbol 类型是值类型，其没有对应包装对象！而数值、布尔等都有包装类型，如：Number()、Boolean()，这种包装类型与 Symbol 并不是一回事。所以 Symbol 不能使用 `new`进行构造，会报错：`Symbol is not a constructor`。如果要强行使用符号包装对象，可以使用 Object 函数：
 
 ```js
 let s = Symbol()
@@ -46,11 +46,11 @@ let obj = {
   [Symbol('category')]: '食品',
 }
 
-// 再添加一个 category分类
+// 再添加一个 category 分类
 obj[Symbol('category')] = '西餐'
 console.log(obj) // {name: "zs", Symbol(category): "食品", Symbol(category): "西餐"}
 
-// Symbol属性需要使用特殊的获取方式
+// Symbol 属性需要使用特殊的获取方式
 console.log(Object.getOwnPropertySymbols(obj)) // [Symbol(category), Symbol(category)]
 console.log(Reflect.ownKeys(obj)) //["name", Symbol(category), Symbol(category)]
 ```
@@ -59,12 +59,12 @@ console.log(Reflect.ownKeys(obj)) //["name", Symbol(category), Symbol(category)]
 
 ```js
 let users = {
-  lisi: '30岁，前端工程师',
-  lisi: '24岁，设计师',
+  lisi: '30 岁，前端工程师',
+  lisi: '24 岁，设计师',
 }
 
-// 这2个人的名字一样
-console.log(users.lisi) // 24岁，设计师
+// 这 2 个人的名字一样
+console.log(users.lisi) // 24 岁，设计师
 ```
 
 如果要继续采用上述的书写格式：
@@ -81,8 +81,8 @@ let user2 = {
 }
 
 let userInfo = {
-  [user1.key]: '30岁，前端工程师',
-  [user2.key]: '24岁，设计师',
+  [user1.key]: '30 岁，前端工程师',
+  [user2.key]: '24 岁，设计师',
 }
 ```
 
@@ -117,7 +117,7 @@ let p = {
 // for (const key in p){}
 // for (const key of Object.keys(p)){}
 
-// 只能遍历到 Symbol类型属性
+// 只能遍历到 Symbol 类型属性
 // for(const key of Object.getOwnPropertySymbols(p)){}
 
 // 遍历所有属性
@@ -180,7 +180,7 @@ class Foo {}
 
 let f = new Foo()
 
-// 检查 f 实例的原型链上是否有Foo
+// 检查 f 实例的原型链上是否有 Foo
 console.log(Foo[Symbol.hasInstance](f)) // true
 ```
 

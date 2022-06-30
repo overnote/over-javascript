@@ -40,7 +40,7 @@ app.listen(3000);
 ### 1.2 ORM 框架 sequlize
 
 ```txt
-sequelize框架需要额外安装mysql2 包
+sequelize 框架需要额外安装 mysql2 包
 npm install mysql2 --save
 npm install sequelize --save
 ```

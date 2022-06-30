@@ -63,7 +63,7 @@ window 对象上绑定了一些属性，可以访问与自己有关的窗口：
 ```
 
 上述页面可以通过
-window.frames[0]或者 window.frames["topFrame"]来引用上方的框架。
+window.frames[0] 或者 window.frames["topFrame"] 来引用上方的框架。
 
 ### 2.3 window 成员的删除
 
@@ -83,7 +83,7 @@ alert(window.age) //29
 alert(window.color) //undefined
 ```
 
-使用 var 语句添加的 window 属性有一个名为[[Configurable]]的特性，这个特性的值被设置为 false，因此这样定义的属性不可以通过 delete 操作符删除，所以 IE8 中使用 delete 删除 window 属性的语句会抛出错误，IE9 及更高版本不会抛出错误。
+使用 var 语句添加的 window 属性有一个名为 [[Configurable]] 的特性，这个特性的值被设置为 false，因此这样定义的属性不可以通过 delete 操作符删除，所以 IE8 中使用 delete 删除 window 属性的语句会抛出错误，IE9 及更高版本不会抛出错误。
 
 ## 三 window 对象的常见事件
 
@@ -94,7 +94,7 @@ alert(window.color) //undefined
 但是 window 对象提供了 onload 事件，即页面加载完毕触发该事件，可以让脚本代码的位置更灵活随意，但是相应的，所有的脚本代码就需要在该事件的回调函数中书写了：
 
 ```js
-// onlaod：加载完图像、脚本、css等后调用
+// onlaod：加载完图像、脚本、css 等后调用
 window.onload = function () {
   // 当前页面的所有业务代码
 }
@@ -130,7 +130,7 @@ setTimeinterval：每多少毫秒执行一次参数函数
 setTimeinterval(() => {}, 1000)
 ```
 
-贴士：依据常理，参数函数支持函数名的方式传入，但是这里还可以传入 `函数名()` 的形式，笔者匪夷所思，更不提倡。
+贴士：依据常理，参数函数支持函数名的方式传入，但是这里还可以传入 `函数名 ()` 的形式，笔者匪夷所思，更不提倡。
 
 定时器可以以表达式方式进行取名，用于区分不同的定时器，也能更好的实现定时器的清除：
 
@@ -170,7 +170,7 @@ window.open('http://www.wrox.com/', 'topFrame')
 
 大部分浏览器都提供了 screenLeft 和 screenTop 属性，分别用于表示窗口相对于屏幕左边和上边的位置。火狐在 screenX 和 screenY 属性提供相同的窗口位置信息。
 
-使用下列兼容代码可以跨浏览器取得窗口左边和上边的位置:
+使用下列兼容代码可以跨浏览器取得窗口左边和上边的位置：
 
 ```js
 let leftPos =
@@ -180,18 +180,18 @@ let topPos =
   typeof window.screenTop == 'number' ? window.screenTop : window.screenY
 ```
 
-IE 中， screenLeft 和 screenTop 中保存的是从屏幕左边和上边到由 window 对象表示的页面可见区域的距离。换句话说，如果 window 对象是最外层对象，而且浏览器窗口紧贴屏幕最上端——即 y 轴坐标为 0，那么 screenTop 的值就是位于页面可见区域上方的浏览器工具栏的像素高度。但是，在 Chrome、 Firefox 和 Safari 中， screenY 或 screenTop 中保存的是整个浏览器窗口相对于屏幕的坐标值，即在窗口的 y 轴坐标为 0 时返回 0。
+IE 中，screenLeft 和 screenTop 中保存的是从屏幕左边和上边到由 window 对象表示的页面可见区域的距离。换句话说，如果 window 对象是最外层对象，而且浏览器窗口紧贴屏幕最上端——即 y 轴坐标为 0，那么 screenTop 的值就是位于页面可见区域上方的浏览器工具栏的像素高度。但是，在 Chrome、Firefox 和 Safari 中，screenY 或 screenTop 中保存的是整个浏览器窗口相对于屏幕的坐标值，即在窗口的 y 轴坐标为 0 时返回 0。
 
-Firefox、 Safari 和 Chrome 始终返回页面中每个框架的 top.screenX 和 top.screenY 值。即使在页面由于被设置了外边距而发生偏移的情况下，相对于 window 对象使用 screenX 和 screenY 每次也都会返回相同的值。而 IE 和 Opera 则会给出框架相对于屏幕边界的精确坐标值。
+Firefox、Safari 和 Chrome 始终返回页面中每个框架的 top.screenX 和 top.screenY 值。即使在页面由于被设置了外边距而发生偏移的情况下，相对于 window 对象使用 screenX 和 screenY 每次也都会返回相同的值。而 IE 和 Opera 则会给出框架相对于屏幕边界的精确坐标值。
 
-所以无法在跨浏览器的条件下取得窗口左边和上边的精确坐标值。moveTo()和 moveBy()方法有可能将窗口精确地移动到一个新位置：
+所以无法在跨浏览器的条件下取得窗口左边和上边的精确坐标值。moveTo() 和 moveBy() 方法有可能将窗口精确地移动到一个新位置：
 
 ```js
 //将窗口移动到屏幕左上角
 window.moveTo(0, 0)
 //将窗向下移动 100 像素
 window.moveBy(0, 100)
-//将窗口移动到(200,300)
+//将窗口移动到 (200,300)
 window.moveTo(200, 300)
 //将窗口向左移动 50 像素
 window.moveBy(-50, 0)

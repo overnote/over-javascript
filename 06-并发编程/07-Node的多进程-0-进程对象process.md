@@ -1,4 +1,4 @@
-# 07-Node 的多进程-0-进程对象 process
+# 07-Node 的多进程 -0-进程对象 process
 
 ## 一 全局对象 process
 
@@ -9,13 +9,13 @@ process 是 Node 默认提供的一个全局对象，用于保存当前进程相
 常见方法有：
 
 ```js
-process.pid // 获取程序进程id
-process.version // 获取node版本号
-process.config // 查看node配置
+process.pid // 获取程序进程 id
+process.version // 获取 node 版本号
+process.config // 查看 node 配置
 process.title // 获取进程名称
 process.argv // 获取当前进程命令行参数数组
 process.platform // 获取操作系统信息
-process.env // 获取当前shell环境变量参数
+process.env // 获取当前 shell 环境变量参数
 ```
 
 ### 1.2 process 提供的标准流
@@ -25,7 +25,7 @@ Node 的 console 其实是通过 process 模块实现的：
 标准输出流：
 
 ```js
-process.stdout.write('hello world\n') // 添加换行符后，其功能与log一致
+process.stdout.write('hello world\n') // 添加换行符后，其功能与 log 一致
 ```
 
 标准错误流：
@@ -61,10 +61,10 @@ process.on('SIGHUP', function () {
 setTimeout(function () {
   process.exit(0) //真正的杀死进程
 }, 1000)
-process.kill(process.pid, 'SIGHUP') //kill方法只是发送一个sighup信号
+process.kill(process.pid, 'SIGHUP') //kill 方法只是发送一个 sighup 信号
 ```
 
-### 1.4 process 的 nextTick()方法
+### 1.4 process 的 nextTick() 方法
 
 异步方法：`process.nextTick();` 比 setTimeout 效率高很多：
 
@@ -102,7 +102,7 @@ process.env.NODE_ENV
 
 ```json
 "scripts": {
-    "start": "export NODE_ENV='development' && node app.js" // 在Mac和Linux上使用export， 在Win上export要换成set
+    "start": "export NODE_ENV='development' && node app.js" // 在 Mac 和 Linux 上使用 export，在 Win 上 export 要换成 set
 },
 ```
 

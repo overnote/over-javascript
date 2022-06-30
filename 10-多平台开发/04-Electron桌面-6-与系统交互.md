@@ -44,24 +44,24 @@ app.showAboutPanel()
 const { Mennu } = require('electron')
 let menuTemplates = [
   {
-    label: '菜单1',
-    submenu: [{ label: '子菜单1-1' }, { label: '子菜单1-2' }],
+    label: '菜单 1',
+    submenu: [{ label: '子菜单 1-1' }, { label: '子菜单 1-2' }],
   },
   {
-    label: '菜单2',
+    label: '菜单 2',
     submenu: [
       {
-        label: '子菜单2-1',
+        label: '子菜单 2-1',
         click() {
           console.log(111)
         },
       },
-      // role表示行为，有：undo、redo、cut、copy、paste、selectAll、reload、minimize、close、quit等
+      // role 表示行为，有：undo、redo、cut、copy、paste、selectAll、reload、minimize、close、quit 等
       // 拥有 role 行为的菜单 click 无效
       // Mac 系统必须设置 role，否则窗口不具备 复制、剪切、粘贴功能
       { label: '粘贴', role: 'paste' },
-      { label: '菜单2-3', type: 'separator' }, // 设置菜单空格，值还有 checkbox、radio
-      { label: '菜单2-4' },
+      { label: '菜单 2-3', type: 'separator' }, // 设置菜单空格，值还有 checkbox、radio
+      { label: '菜单 2-4' },
     ],
   },
 ]
@@ -81,12 +81,12 @@ Menu.setApplicationMenu(menu)
 const { Menu } = window.require('electron').remote
 let menu = Menu.buildFromTemplate([
   {
-    label: '右键菜单1',
+    label: '右键菜单 1',
     click() {
       console.log(111)
     },
   },
-  { label: '右键菜单2' },
+  { label: '右键菜单 2' },
 ])
 window.oncontextmenu = function (e) {
   e.preventDefault()
@@ -100,8 +100,8 @@ window.oncontextmenu = function (e) {
 <template>
   <div id="app">
     <div id="menu-list">
-      <div class="menu-item">右键菜单1</div>
-      <div class="menu-item">右键菜单2</div>
+      <div class="menu-item">右键菜单 1</div>
+      <div class="menu-item">右键菜单 2</div>
     </div>
   </div>
 </template>
@@ -150,7 +150,7 @@ window.onclick = function (e) {
 
 ```js
 window.onkeydown = function (e) {
-  // Ctrl + S      e.metaKey是mac上的花键
+  // Ctrl + S      e.metaKey 是 mac 上的花键
   if ((e.ctrKey || e.metaKey) && e.keyCode == 83) {
     console.log(111)
   }
@@ -209,7 +209,7 @@ const path = window.require('path')
 // 图像的写入需要额外的操作
 let imagePath = path.join(__static, 'icon.png')
 let img = nativeImage.createFromPath(imagePath)
-clipboard.writeImage(img) // 还有： writeText  writeHTML
+clipboard.writeImage(img) // 还有：writeText  writeHTML
 
 clipboard.clear() // 清除数据
 ```
@@ -218,7 +218,7 @@ clipboard.clear() // 清除数据
 
 ```js
 // readText  readHTML
-// 读取图片 imgSrc 就可以作为 image 标签的的src属性
+// 读取图片 imgSrc 就可以作为 image 标签的的 src 属性
 let imgSrc = clipboard.readImg().toDataURL()
 ```
 
@@ -258,7 +258,7 @@ Electron 的 shell 模块可以在 Electron 应用中打开 Word 文档等应用
 ```js
 const { shell } = require('electron')
 shell.openExternal('https://www.baidu.com') // 使用默认浏览器打开网页，该方法是异步的
-shell.openItem('D:\\files\\demo.docx') // 打开word文档，该方法是同步的
+shell.openItem('D:\\files\\demo.docx') // 打开 word 文档，该方法是同步的
 shell.moveToTrash('D:\\files\\demo.docx') // 删除到回收站，该方法是同步的
 ```
 

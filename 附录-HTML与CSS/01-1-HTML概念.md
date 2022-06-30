@@ -63,9 +63,9 @@ HTML 文档整体两部分组成：
 
 header 标签是网页头部，用于描绘网页的基础信息，其内部包含的标签有：
 
-- link： 网页中引入的样式表、标题小图标
-- meta： 网页的元信息
-- title： 网页标题
+- link：网页中引入的样式表、标题小图标
+- meta：网页的元信息
+- title：网页标题
 
 link 用来引入外部资源，如浏览器标题小图标、css：
 
@@ -83,7 +83,7 @@ meta 标签用来设置字符集、关键字、描述、重定向等，这些元
 <meta name="keywords" content="流行资讯" />
 <!-- 网页描述 -->
 <meta name="description" content="最新服装设计流行信息" />
-<!-- 2秒后跳转到1.html -->
+<!-- 2 秒后跳转到 1.html -->
 <meta http-equiv="refresh" content="2; url=1.html" />
 ```
 
@@ -144,7 +144,7 @@ a 标签不能嵌套 a 标签。
 
 ## 四 HTML 中的实体与实体编号
 
-![HTML中的实体](../images/html/01.png)
+![HTML 中的实体](../images/html/01.png)
 
 ## 五 编辑器的 emmet 语法
 
@@ -153,10 +153,10 @@ emmet 语法用于提升编辑器的操作速度，笔者这里是 vscode：
 - 输入 div，tab 键可以直接输入完整的 div 标签
 - 输入 html，tab 键可以直接输入完整的 html 文档
 - 输入 `div*3`，tab 键可以直接输入 3 个 div
-- 输入 `ul>li*3`， tab 键可以输入 ul/li，并有 3 个 li
-- 输入 div+p， tab 键可以输入 div 与 p 两个兄弟节点
-- 输入 .demo， tab 键可以直接输入 `<div class="demo"></div>`，类似的也支持 #
-- 输入 `.demo\$*3`， tab 键可以为 class 类名做自增， class=demo1
+- 输入 `ul>li*3`，tab 键可以输入 ul/li，并有 3 个 li
+- 输入 div+p，tab 键可以输入 div 与 p 两个兄弟节点
+- 输入 .demo，tab 键可以直接输入 `<div class="demo"></div>`，类似的也支持 #
+- 输入 `.demo\$*3`，tab 键可以为 class 类名做自增，class=demo1
 
 ## 六 其他语法
 

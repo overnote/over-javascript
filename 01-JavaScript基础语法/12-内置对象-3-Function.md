@@ -1,4 +1,4 @@
-# 12-内置对象-3-Function
+# 12-内置对象 -3-Function
 
 ## 一 函数对象的内部对象
 
@@ -14,7 +14,7 @@ arguments 对象是个伪数组，其长度由实参个数决定。
 function fn(a, b) {
   console.log(fn.length) //输出：函数的形参的个数 2
   console.log(arguments) //输出：{ '0': 1, '1': 2 }
-  console.log(arguments.length) // 输出实参个数1
+  console.log(arguments.length) // 输出实参个数 1
 }
 fn(1)
 ```
@@ -50,7 +50,7 @@ this 对象是函数的执行环境对象，也可以称为具体某个实例。
 caller 对象中保存着调用当前函数的函数的引用，如果是在全局作用域中调用当前函数，其值为 null：
 
 ```js
-// 下列代码会导致警告框中显示 outer()函数的源代码，因为 outer()调用了 inter()，所以inner.caller 就指向 outer()。
+// 下列代码会导致警告框中显示 outer() 函数的源代码，因为 outer() 调用了 inter()，所以 inner.caller 就指向 outer()。
 function outer() {
   inner()
 }
@@ -98,9 +98,9 @@ function fn() {
   console.log(this.a)
 }
 
-fn() // 输出20，因为这里的this是全局的window
+fn() // 输出 20，因为这里的 this 是全局的 window
 
-// 修改this指向
+// 修改 this 指向
 fn.call(obj) // 40
 fn.apply(obj) // 40
 ```
@@ -114,8 +114,8 @@ apply 与 call 的区别是：第二个参数及其后续参数传递形式不�
 
 但是其参数是不同的：
 
-- apply 用于函数的形参个数不确定的情况：函数名.apply(绑定对象,函数参数列表数组);
-- call 用于确定了函数的形参有多少个的时候使用：函数名.call(绑定对象,函数参数 1,参数 2,参数 3....);
+- apply 用于函数的形参个数不确定的情况：函数名.apply(绑定对象，函数参数列表数组);
+- call 用于确定了函数的形参有多少个的时候使用：函数名.call(绑定对象，函数参数 1，参数 2，参数 3....);
 - apply 和 call 的第一个参数都为 null 时，表示为函数调用模式，即 this 指向 window
 
 使用案例一：求数组最大值
@@ -124,23 +124,23 @@ apply 与 call 的区别是：第二个参数及其后续参数传递形式不�
 let arr = [9, 1, 4, 10, 7]
 let max1 = Math.max(9, 1, 4, 10, 7)
 let max2 = Math.max.apply(null, arr)
-console.log(max1) //输出10
-console.log(max2) //输出10
+console.log(max1) //输出 10
+console.log(max2) //输出 10
 ```
 
 使用案例二：伪数组
 
 ```javascript
-//obj是个伪数组，无法使用obj.0获取属性，也无法像数组那样用obj[0]获取
+//obj 是个伪数组，无法使用 obj.0 获取属性，也无法像数组那样用 obj[0] 获取
 let obj = {
   0: 'a',
   1: 'b',
   2: 'c',
   length: 3,
 }
-// [].concat(1,2,3)会产生数组[1,2,3]
+// [].concat(1,2,3) 会产生数组 [1,2,3]
 let arr = [].concat.apply([], obj)
-console.log(arr) //输出['a','b','c']
+console.log(arr) //输出 ['a','b','c']
 ```
 
 ## 四 bind

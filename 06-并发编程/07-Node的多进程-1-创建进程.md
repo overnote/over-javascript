@@ -1,4 +1,4 @@
-# 07-Node 的多进程-1-创建进程
+# 07-Node 的多进程 -1-创建进程
 
 ## 一 Node 的进程管理
 
@@ -26,14 +26,14 @@ let child_process = require('child_process')
 let os = require('os')
 
 let cpuNum = os.cpus().length
-console.log('当前CPU数量为：', cpuNum)
+console.log('当前 CPU 数量为：', cpuNum)
 
 for (let i = 0; i < cpuNum; i++) {
   child_process.fork('./worker.js')
 }
 ```
 
-启动并查看 node 进程数量(和 cpu 数量相等)：
+启动并查看 node 进程数量 (和 cpu 数量相等)：
 
 ```txt
 node master.js
@@ -49,9 +49,9 @@ ps aux|grep worker.js
 
 ![工作进程](../images/node/process-01.svg)
 
-通过 fork()复制的进程都是一个独立的进程，每个进程中都包含着一个独立、全新的 V8 实例，需要至少 30 毫秒启动时间，至少 10MB 的内存。
+通过 fork() 复制的进程都是一个独立的进程，每个进程中都包含着一个独立、全新的 V8 实例，需要至少 30 毫秒启动时间，至少 10MB 的内存。
 
-fork()是非常消耗资源的，但是 Node 本身的单线程非阻塞 I/O 已经解决了大并发问题，fork()的作用仅仅是为了充分利用 CPU，而不是像以前的高并发架构中描述的使用多进程应对并发。
+fork() 是非常消耗资源的，但是 Node 本身的单线程非阻塞 I/O 已经解决了大并发问题，fork() 的作用仅仅是为了充分利用 CPU，而不是像以前的高并发架构中描述的使用多进程应对并发。
 
 ## 二 child_process 模块
 
@@ -60,8 +60,8 @@ fork()是非常消耗资源的，但是 Node 本身的单线程非阻塞 I/O 已
 child_process 模块提供了四种创建子进程的方法：
 
 - spawn()：启动一个子进程来执行命令
-- exec()：与 spawn()类似，但是该函数额外有一个回调函数可以获知子进程状况
-- fork()：与 spawn()类似，但是创建的紫禁城只需要执行指定的 JS 文件模块即可
+- exec()：与 spawn() 类似，但是该函数额外有一个回调函数可以获知子进程状况
+- fork()：与 spawn() 类似，但是创建的紫禁城只需要执行指定的 JS 文件模块即可
 - execFile()：启动一个子进程来执行可执行文件
 
 四者在执行第一节中 worker 的代码分别如下：
@@ -78,8 +78,8 @@ cp.fork('./worker.js')
 注意：
 
 - exec，execFile、fork 基本都是借助于 spawn 方式实现的。
-- exec()，execFile()创建子进程时，可以指定子进程的运行时间（timeout）。
-- execFile()执行 JS 文件时，其首行内容必须添加：`#!/usr/bin/env node`
+- exec()，execFile() 创建子进程时，可以指定子进程的运行时间（timeout）。
+- execFile() 执行 JS 文件时，其首行内容必须添加：`#!/usr/bin/env node`
 
 ### 2.1 spawn 创建进程
 
@@ -90,7 +90,7 @@ spawn 会使用指定的 command 生成一个新的进程，执行完对应的 c
 ```js
 let spawn = require('child_process').spawn
 
-let ls = spawn('ls', ['-lh', '/usr']) // win需要修改为： ("powershell",["dir"])
+let ls = spawn('ls', ['-lh', '/usr']) // win 需要修改为： ("powershell",["dir"])
 
 ls.stdout.on('data', function (data) {
   console.log('stdout:', data.toString())
@@ -140,7 +140,7 @@ worker.js:
 
 ```js
 let begin = process.argv[2]
-console.log('子进程启动:', begin)
+console.log('子进程启动：', begin)
 
 // 子进程向父进程发送信息
 process.send({

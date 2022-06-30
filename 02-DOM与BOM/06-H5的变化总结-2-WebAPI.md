@@ -1,4 +1,4 @@
-# 06-H5 的变化总结-2-WebAPI
+# 06-H5 的变化总结 -2-WebAPI
 
 ## 一 离线应用
 
@@ -11,7 +11,7 @@ CACHE MANIFEST      # 说明这是离线应用描述文件
 CACHE:              # 会被缓存的资源列表
 index.html
 index.js
-NETWORK:            # 总是从web获取的资源列表
+NETWORK:            # 总是从 web 获取的资源列表
 test.js
 ```
 
@@ -25,12 +25,12 @@ html 文件需要添加如下配置：
 
 在过去，跨文档通信（跨源、跨窗口，cross-document messaging）往往是与服务端进行数据交互来实现的，并且需要借助轮询或者 Connect 技术来监听消息。
 
-H5 提供了 PostMessages()方法 实现安全的跨源通信：
+H5 提供了 PostMessages() 方法 实现安全的跨源通信：
 
 ```js
 // 参数一：消息体
 // 参数二：消息来自哪个域
-// 参数三：可选。是一串和message同时传递的Transferable对象，这些对象的所有权将被转译给消息的接收方，而发送乙方将不再保有所有权
+// 参数三：可选。是一串和 message 同时传递的 Transferable 对象，这些对象的所有权将被转译给消息的接收方，而发送乙方将不再保有所有权
 
 let iframeWindow = document.getElementById('myframe').contentWindow
 iframeWindow.postMessage('A secret', 'http://www.demo.com')
@@ -39,13 +39,13 @@ iframeWindow.postMessage('A secret', 'http://www.demo.com')
 iframe 应用实例：
 
 ```html
-<button id="btn">点击发送消息给iframe</button>
+<button id="btn">点击发送消息给 iframe</button>
 <iframe src="http:127.0.0.1/iframe.html"></iframe>
 <script>
   let btn = document.querySelector('#btn')
   let data = ['周一', '周二', '周五']
   btn.onclick = function () {
-    alert('执行发送数据给iframe？')
+    alert('执行发送数据给 iframe？')
     window.parent.postMessage(data, 'http:127.0.0.1/iframe.html')
   }
 </script>
@@ -131,7 +131,7 @@ HTML5 新增了两个与媒体相关的元素：`<audio>`和`<video>`，可以�
 
 ## 五 通知
 
-Notifications API 用于向用户显示通知，比传统的 alert()更灵活，常用于 Service Worker，使得网页看起来像一个应用。
+Notifications API 用于向用户显示通知，比传统的 alert() 更灵活，常用于 Service Worker，使得网页看起来像一个应用。
 
 Notifications API 有被滥用的可能，因此默认会开启两项安全措施：
 
@@ -162,7 +162,7 @@ Notifications API 提供了 4 个用于添加回调的生命周期方法：
 ```txt
 onshow 在通知显示时触发；
 onclick 在通知被点击时触发；
-onclose 在通知消失或通过 close()关闭时触发；
+onclose 在通知消失或通过 close() 关闭时触发；
 onerror 在发生错误阻止通知显示时触发。
 ```
 

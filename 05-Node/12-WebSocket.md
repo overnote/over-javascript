@@ -74,7 +74,7 @@ ws.on('disconnect') // 断开连接事件
       let sendBtn = document.querySelector('#sendBtn')
 
       sendBtn.onclick = function () {
-        //发送一个名称为msg的消息
+        //发送一个名称为 msg 的消息
         ws.emit('msg', sendText.value)
         let myLi = document.createElement('li')
         myLi.innerHTML = sendText.value
@@ -186,17 +186,17 @@ Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
 ### 3.2 服务端代码
 
 ```js
-//http,socket.io都是基于net模块制作的
+//http,socket.io 都是基于 net 模块制作的
 const net = require('net');
 const crypto = require('crypto');
-//前台不使用socket.io时，使用源生webscoket连接服务，会被http服务拒绝，所以这里使用net创建服务
-net.createServer(socket=>{    //使用http接收会拒绝
+//前台不使用 socket.io 时，使用源生 webscoket 连接服务，会被 http 服务拒绝，所以这里使用 net 创建服务
+net.createServer(socket=>{    //使用 http 接收会拒绝
 
     console.log('已经连接');
 
     //发现数据传输
     socket.once('data',data=>{        //握手的过程只有一次
-        //该过程即 握手 此时接收到了http头数据，但是我们没有http模块来解析
+        //该过程即 握手 此时接收到了 http 头数据，但是我们没有 http 模块来解析
         console.log('开始握手...');
         // console.log(data.toString());//打印该数据
         let str = data.toString();
@@ -214,7 +214,7 @@ net.createServer(socket=>{    //使用http接收会拒绝
             console.log('其他协议',headers['Upgrade']);
             socket.end();
         } else if(headers['Sec-WebSocket-Version'] != 13){
-            console.log('只支持13版本的webscoket');
+            console.log('只支持 13 版本的 webscoket');
             socket.end();
         } else {
 
@@ -225,7 +225,7 @@ net.createServer(socket=>{    //使用http接收会拒绝
             hash.update(key+mask);
             let key2=hash.digest('base64');
 
-            //发送key2 给客户端
+            //发送 key2 给客户端
             socket.write(`HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ${key2}\r\n\r\n`);
 
             console.log('握手结束');
@@ -259,7 +259,7 @@ net.createServer(socket=>{    //使用http接收会拒绝
 <script>
   let ws = new WebSocket('ws://localhost:8000')
 
-  //模仿socket.io手工封装一个emit方法
+  //模仿 socket.io 手工封装一个 emit 方法
   ws.emit = function (name, ...args) {
     console.log('发送了：' + JSON.stringify({ name, data: [...args] }))
     ws.send(JSON.stringify({ name, data: [...args] }))
@@ -287,7 +287,7 @@ net.createServer(socket=>{    //使用http接收会拒绝
 计算机的数据都是由位构成的，1 个位占据 8。
 
 ```txt
- 0位        1位        2位        3位
+ 0 位        1 位        2 位        3 位
  0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7
 +-+-+-+-+-------+-+-------------+-------------------------------+
 |F|R|R|R| opcode|M| Payload len |    Extended payload length    |
@@ -310,7 +310,7 @@ net.createServer(socket=>{    //使用http接收会拒绝
 FIN               1bit 是否最后一帧
 RSV               3bit 预留
 Opcode            4bit 帧类型
-Mask              1bit 掩码，是否加密数据，默认必须置为1
+Mask              1bit 掩码，是否加密数据，默认必须置为 1
 Payload           7bit 长度
 Masking-key       1 or 4 bit 掩码
 Payload data      (x + y) bytes 数据

@@ -15,16 +15,16 @@ jQuery 的选择器具备隐式迭代的特性，如下案例所示：
 
 <script>
   let div = $('div')
-  console.log($('div')) // 3个全拿到了
-  div.css('background', 'red') // 3个div全部被修改为了red
+  console.log($('div')) // 3 个全拿到了
+  div.css('background', 'red') // 3 个 div 全部被修改为了 red
 </script>
 ```
 
-**获取索引号方式：`jQuery对象.index()`**
+**获取索引号方式：`jQuery 对象.index()`**
 
 由于隐式迭代在方法的内部会为匹配到的所有元素进行循环遍历，执行相应的方法；而不用我们再进行循环，简化我们的操作，方便我们调用。
 如果获取的是多元素的值，大部分情况下返回的是第一个元素的值。
-但是有时候我们需要对获取的元素集合中每个元素做不同的处理，可以使用 each()方法：
+但是有时候我们需要对获取的元素集合中每个元素做不同的处理，可以使用 each() 方法：
 
 ```js
 $('li').each(function (i, elem) {
@@ -45,7 +45,7 @@ $('li').each(function (i, elem) {
 <script>
   // 当前元素变化背景，其余去掉颜色
   $('div').click(function () {
-    //  this 必须转换为 jQuery对象
+    //  this 必须转换为 jQuery 对象
     $(this).css('background', 'green')
     $(this).siblings('div').css('background', '')
   })
@@ -71,7 +71,7 @@ jQuery 的大量对象名都被限制在了自己的命名空间里，所以 jQu
 
 jQuery.noConflict()
 
-// 此时只能使用 jQuery变量
+// 此时只能使用 jQuery 变量
 jQuery(function () {
   // 函数内部仍然可以继续使用 $
   $('p').click(function () {
@@ -133,22 +133,22 @@ jQuery 只提供了 DOM 等操作，复杂的操作依赖于大量的第三方�
 
 ## 四 `$` 方法
 
-`$`下的方法大多数为工具类方法，不仅可以给 jQuery 使用，也可以给原生 JS 使用，调用方式统一为：`$.方法()`
+`$`下的方法大多数为工具类方法，不仅可以给 jQuery 使用，也可以给原生 JS 使用，调用方式统一为：`$.方法 ()`
 
 ```js
 // 拷贝
 $.extend(target, result) // 浅拷贝：源对象的中的复杂数据类型只拷贝地址。同一层的数据如果有冲突会被合并
-$.extend(true, target, result) // 深拷贝：完全把数据重新赋值一份给target
+$.extend(true, target, result) // 深拷贝：完全把数据重新赋值一份给 target
 
-type() //判断类型，比如时间对象返回Date，而typeof返回的都是Object。
+type() //判断类型，比如时间对象返回 Date，而 typeof 返回的都是 Object。
 
 trim() // 去除空白
 
-inArray() //类似indexOf();
+inArray() //类似 indexOf();
 
-proxy() //改变this指向
+proxy() //改变 this 指向
 
-parseJSON() //将字符串数据转换成json对象
+parseJSON() //将字符串数据转换成 json 对象
 
 makeArray() //将类数组转换成真正的数组
 

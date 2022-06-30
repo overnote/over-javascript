@@ -63,10 +63,10 @@ export default function Count(props) {
   return (
     <div>
       count值：{count}
-      <button onClick={changeCount}>点我修改count</button>
+      <button onClick={changeCount}>点我修改 count</button>
       <hr />
-      name值：{name}
-      <button onClick={changeName}>点我修改name</button>
+      name 值：{name}
+      <button onClick={changeName}>点我修改 name</button>
     </div>
   )
 }
@@ -83,7 +83,7 @@ state = { count: 0 }
 add = () => {
   const { count } = this.state
   this.setState({ count: count + 1 })
-  console.log('count: ', this.state.count) // 仍然输出0
+  console.log('count: ', this.state.count) // 仍然输出 0
 }
 ```
 
@@ -96,16 +96,16 @@ state = { count: 0 }
 add = () => {
   const { count } = this.state
   this.setState({ count: count + 1 }, () => {
-    console.log('count: ', this.state.count) // 仍然输出0
+    console.log('count: ', this.state.count) // 仍然输出 0
   })
 }
 ```
 
-callback 是在状态更新、render()执行之后才执行！
+callback 是在状态更新、render() 执行之后才执行！
 
 ## 三 生命周期 Hooks：useEffect()
 
-### 3.1 useEffect()监控状态
+### 3.1 useEffect() 监控状态
 
 函数组件没有生命周期函数，添加 useEffect Hook，示例将会在初次加载、任意状态改变时执行：
 
@@ -180,7 +180,7 @@ const useMyPosition = () => {
     }
   })
 
-  return pos // 不再return JSX
+  return pos // 不再 return JSX
 }
 export default useMyPosition
 ```
@@ -206,7 +206,7 @@ function App() {
 // 制作一个高阶组件
 const withLoader = (WrapperComponent, url) => {
   return class LoaderComponent extends React.Component {
-    //  内部执行ajax
+    //  内部执行 ajax
   }
 }
 
@@ -220,7 +220,7 @@ function App() {
 这里如果使用 hooksAPI 将会更加优雅，能够直接使用其返回值：
 
 ```js
-// 制作自定义hooks
+// 制作自定义 hooks
 const useLoader = (url) => {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -269,7 +269,7 @@ export default function Count(props) {
 
 ## 五 改造 context 通信 Hooks：useContext()
 
-createContext() 可以实现跨组件通信，useContext()可以在此基础上将原有的写法改造，不需要再依赖 consumer，解决 consumer 嵌套问题：
+createContext() 可以实现跨组件通信，useContext() 可以在此基础上将原有的写法改造，不需要再依赖 consumer，解决 consumer 嵌套问题：
 
 ```js
 const ctx = React.createContext()
@@ -412,7 +412,7 @@ class Demo {
 }
 ```
 
-在 React 中，父组件如果重新 render()，则其内部子组件的 render()也都会被相应调用。一旦 Demo 的 props、state 发生改变，触发 Demo 的 render()函数后，其子组件 Comp 的 style、handler 属性的值是一个新生成的引用，这时候会导致 Comp 重新渲染。如果该组件是一个大型组件树，则会造成性能损失，解决办法是将参数抽离为变量：
+在 React 中，父组件如果重新 render()，则其内部子组件的 render() 也都会被相应调用。一旦 Demo 的 props、state 发生改变，触发 Demo 的 render() 函数后，其子组件 Comp 的 style、handler 属性的值是一个新生成的引用，这时候会导致 Comp 重新渲染。如果该组件是一个大型组件树，则会造成性能损失，解决办法是将参数抽离为变量：
 
 ```js
 const fontSizeStyle = { fontSize: 14 }
@@ -473,9 +473,9 @@ function Demo() {
 }
 ```
 
-useCallback()第二个参数数组中每一项发生改变，或者引用发生改变，useCallback()返回一个新的记忆函数提供给后面进行渲染。
+useCallback() 第二个参数数组中每一项发生改变，或者引用发生改变，useCallback() 返回一个新的记忆函数提供给后面进行渲染。
 
-memo()的第二个参数是一个回调函数，如果返回 true，则表示组件内的函数被永远缓存了下来：
+memo() 的第二个参数是一个回调函数，如果返回 true，则表示组件内的函数被永远缓存了下来：
 
 ```js
 const MemComp = memo(Comp, () => {
@@ -485,15 +485,15 @@ const MemComp = memo(Comp, () => {
 
 ### 7.2 记忆函数 useMemo()
 
-useMemo()可以完全取代 useCallback：
+useMemo() 可以完全取代 useCallback：
 
 ```js
 useMemo(() => {}, [])
 ```
 
-二者的区别是：useCallback() 不会执行第一个参数函数，而是直接返回给你，useMemo()则会执行该函数，并将函数结果返回给你。
+二者的区别是：useCallback() 不会执行第一个参数函数，而是直接返回给你，useMemo() 则会执行该函数，并将函数结果返回给你。
 
-一般情况下：useCallback()用于事件的响应函数，useMemo()用于组件的缓存。
+一般情况下：useCallback() 用于事件的响应函数，useMemo() 用于组件的缓存。
 
 ### 7.3 memoize-one
 

@@ -1,4 +1,4 @@
-# 04-Electron 桌面-2-Electron 进程
+# 04-Electron 桌面 -2-Electron 进程
 
 ## 一 Electron 中的主进程与渲染进程
 
@@ -7,7 +7,7 @@
 - 主进程：由 Electron 创建，并从口文件开始执行代码的进程。主进程用来监听程序的生命周期事件、管理窗口（渲染进程）、加载页面、程序关闭后回收资源等。
 - 渲染进程：一个 BrowserWindow 实例代表一个渲染进程，若该实例被销毁，则渲染进程也会终结。渲染界面负责完成界面渲染、接收用户输入、响应用户交互。
 
-![electron应用架构](./../images/node/electron-00.svg)
+![electron 应用架构](./../images/node/electron-00.svg)
 
 在 HelloWorld 示例中，`electron .` 的入口文件是 `main.js` 文件中的代码，即启动了一个进程，并且执行该代码，创建了窗口、加载了`index.html`，而`index.html`中的代码则会运行在 Electron 的渲染进程中。
 
@@ -19,12 +19,12 @@
 Electron 中模块的归属：
 
 ```txt
-主进程模块：  app、BrowserView、autoUpdater、contentTracing、dialog、gloablShortcut、ipcMainMenu、
+主进程模块：app、BrowserView、autoUpdater、contentTracing、dialog、gloablShortcut、ipcMainMenu、
             MenuItem、net、netLog、Notification、powerMonitor、powerSaveBlocker、protocol、screen、session、systemPreferences、TouchBar、Tray、webContents
 
-渲染进程模块： desktopCapturer。ipcRenderer、remote、webFrame
+渲染进程模块：desktopCapturer。ipcRenderer、remote、webFrame
 
-公用模块：    clipboard、crashReporter、nativeImage、shell
+公用模块：clipboard、crashReporter、nativeImage、shell
 ```
 
 ## 二 进程调试
@@ -61,10 +61,10 @@ Electron 中模块的归属：
 配置解释：
 
 ```txt
-name：              用于识别启动项目 type：调试环境，这里是Node
-runtimeExecutable： 指向批处理文件，用于启动Electron
-${workspaceRoot}：  正在进行调试的程序的工作目录的绝对路径
-args：              启动参数，这里简写为 . ，其实是 index.js
+name：用于识别启动项目 type：调试环境，这里是 Node
+runtimeExecutable：指向批处理文件，用于启动 Electron
+${workspaceRoot}：正在进行调试的程序的工作目录的绝对路径
+args：启动参数，这里简写为 . ，其实是 index.js
 ```
 
 配置完毕后，设置一个端点，在 debug 界面，即可点击绿色三角开始调试，如图所示：  
@@ -81,7 +81,7 @@ args：              启动参数，这里简写为 . ，其实是 index.js
 也可以在`main.js`的代码中手动添加打开代码：
 
 ```js
-// 打开开发者工具，书写在loadFile函数之后
+// 打开开发者工具，书写在 loadFile 函数之后
 mainWindow.webContents.openDevTools()
 ```
 
@@ -125,7 +125,7 @@ Electron 使用 IPC（interprocess communication）在进程之间进行通信�
 // 主进程添加的消息处理代码
 let { ipcMain } = require('electron')
 ipcMain.on('msg_renderUsers', (event, param1, param2) => {
-  // event.sender是渲染进程的webContents实例
+  // event.sender 是渲染进程的 webContents 实例
   console.log('param1：', param1)
   console.log('param2：', param2)
 })
@@ -193,7 +193,7 @@ ipcMain.on('msg_renderUsers', (event, param1, param2) => {
 如果已经得知要接收消息的窗口的`webContents`的 id，也可以直接传递：
 
 ```js
-ipcRenderer.sendTo(win.webContents.id, 'msg', { name: 'lisi' }) // win即目标窗口
+ipcRenderer.sendTo(win.webContents.id, 'msg', { name: 'lisi' }) // win 即目标窗口
 ```
 
 ## 四 remote 模块
@@ -221,8 +221,8 @@ remote 模块可以帮助开发者在渲染进程中访问主进程对象。
 ```js
 mainWindow = new BrowserWindow({
   webPreferences: {
-    nodeIntegration: true, // 允许界面使用node
-    enableRemoteModule: true, // 开启remote模块，Electron10这里默认是false
+    nodeIntegration: true, // 允许界面使用 node
+    enableRemoteModule: true, // 开启 remote 模块，Electron10 这里默认是 false
   },
 })
 ```

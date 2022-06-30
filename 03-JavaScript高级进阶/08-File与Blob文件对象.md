@@ -31,15 +31,15 @@ FileReader 类型表示一种异步文件读取机制。可以把 FileReader 想
 readAsText(file, encoding)：从文件中读取纯文本内容并保存在 result 属性中。第二个参数表示编码，是可选的。
 readAsDataURL(file)：读取文件并将内容的数据 URI 保存在 result 属性中。
 readAsBinaryString(file)：读取文件并将每个字符的二进制数据保存在 result 属性中。
-readAsArrayBuffer(file)： 读取文件并将文件内容以 ArrayBuffer 形式保存在 result 属性。
+readAsArrayBuffer(file)：读取文件并将文件内容以 ArrayBuffer 形式保存在 result 属性。
 ```
 
 常用对应事件有：
 
 ```txt
-rogress 事件：每 50 毫秒就会触发一次，其与 XHR 的 progress 事件具有相同的信息：lengthComputable、 loaded 和 total。此外，在 progress 事件中可以读取 FileReader 的 result属性，即使其中尚未包含全部数据。
+rogress 事件：每 50 毫秒就会触发一次，其与 XHR 的 progress 事件具有相同的信息：lengthComputable、loaded 和 total。此外，在 progress 事件中可以读取 FileReader 的 result 属性，即使其中尚未包含全部数据。
 
-error 事件：会在由于某种原因无法读取文件时触发。触发 error 事件时， FileReader 的 error属性会包含错误信息。这个属性是一个对象，只包含一个属性： code。这个错误码的值可能是 1（未找到文件）、 2（安全错误）、 3（读取被中断）、 4（文件不可读）或 5（编码错误）。
+error 事件：会在由于某种原因无法读取文件时触发。触发 error 事件时，FileReader 的 error 属性会包含错误信息。这个属性是一个对象，只包含一个属性：code。这个错误码的值可能是 1（未找到文件）、2（安全错误）、3（读取被中断）、4（文件不可读）或 5（编码错误）。
 
 load 事件：会在文件成功加载后触发。如果 error 事件被触发，则不会再触发 load 事件。
 ```
@@ -86,7 +86,7 @@ filesList.addEventListener('change', (event) => {
 })
 ```
 
-如果想提前结束文件读取，则可以在过程中调用 abort()方法，从而触发 abort 事件。在 load、error 和 abort 事件触发后，还会触发 loadend 事件。 loadend 事件表示在上述 3 种情况下，所有读取操作都已经结束。
+如果想提前结束文件读取，则可以在过程中调用 abort() 方法，从而触发 abort 事件。在 load、error 和 abort 事件触发后，还会触发 loadend 事件。loadend 事件表示在上述 3 种情况下，所有读取操作都已经结束。
 
 ### 1.3 FileReaderSync 类型
 
@@ -96,9 +96,9 @@ FileReaderSync 类型就是 FileReader 的同步版本。这个类型拥有与 F
 
 ### 2.1 二进制对象 Blob
 
-某些情况下，可能需要读取部分文件而不是整个文件。为此， File 对象提供了一个名为 slice()的方法。 slice()方法接收两个参数：起始字节和要读取的字节数。这个方法返回一个 Blob 的实例，而 Blob 实际上是 File 的超类。
+某些情况下，可能需要读取部分文件而不是整个文件。为此，File 对象提供了一个名为 slice() 的方法。slice() 方法接收两个参数：起始字节和要读取的字节数。这个方法返回一个 Blob 的实例，而 Blob 实际上是 File 的超类。
 
-blob 表示二进制大对象（ binary larget object），是 JavaScript 对不可修改二进制数据的封装类型。包含字符串的数组、 ArrayBuffers、 ArrayBufferViews，甚至其他 Blob 都可以用来创建 blob。 Blob 构造函数可以接收一个 options 参数，并在其中指定 MIME 类型：
+blob 表示二进制大对象（binary larget object），是 JavaScript 对不可修改二进制数据的封装类型。包含字符串的数组、ArrayBuffers、ArrayBufferViews，甚至其他 Blob 都可以用来创建 blob。Blob 构造函数可以接收一个 options 参数，并在其中指定 MIME 类型：
 
 ```js
 console.log(new Blob(['foo']))
@@ -109,7 +109,7 @@ console.log(new Blob(['<p>Foo</p>', '<p>Bar</p>'], { type: 'text/html' }))
 // {size: 20, type: "text/html"}
 ```
 
-Blob 对象有一个 size 属性和一个 type 属性，还有一个 slice()方法用于进一步切分数据。另外也可以使用 FileReader 从 Blob 中读取数据。下面的例子只会读取文件的前 32 字节：
+Blob 对象有一个 size 属性和一个 type 属性，还有一个 slice() 方法用于进一步切分数据。另外也可以使用 FileReader 从 Blob 中读取数据。下面的例子只会读取文件的前 32 字节：
 
 ```js
 let filesList = document.getElementById('files-list')
@@ -139,7 +139,7 @@ filesList.addEventListener('change', (event) => {
 
 ### 2.2 对象 URL 与 Blob
 
-对象 URL 有时候也称作 Blob URL，是指引用存储在 File 或 Blob 中数据的 URL。对象 URL 的优点是不用把文件内容读取到 JavaScript 也可以使用文件。只要在适当位置提供对象 URL 即可。要创建对象 URL，可以使用 window.URL.createObjectURL()方法并传入 File 或 Blob 对象。这个函数返回的值是一个指向内存中地址的字符串。因为这个字符串是 URL，所以可以在 DOM 中直接使用。例如，以下代码使用对象 URL 在页面中显示了一张图片：
+对象 URL 有时候也称作 Blob URL，是指引用存储在 File 或 Blob 中数据的 URL。对象 URL 的优点是不用把文件内容读取到 JavaScript 也可以使用文件。只要在适当位置提供对象 URL 即可。要创建对象 URL，可以使用 window.URL.createObjectURL() 方法并传入 File 或 Blob 对象。这个函数返回的值是一个指向内存中地址的字符串。因为这个字符串是 URL，所以可以在 DOM 中直接使用。例如，以下代码使用对象 URL 在页面中显示了一张图片：
 
 ```js
 let filesList = document.getElementById('files-list')
@@ -197,4 +197,4 @@ droptarget.addEventListener('dragover', handleEvent)
 droptarget.addEventListener('drop', handleEvent)
 ```
 
-贴士：必须取消 dragenter、 dragover 和 drop 的默认行为。在 drop 事件处理程序中，可以通过 event.dataTransfer.files 读到文件，此时可以获取文件的相关信息。
+贴士：必须取消 dragenter、dragover 和 drop 的默认行为。在 drop 事件处理程序中，可以通过 event.dataTransfer.files 读到文件，此时可以获取文件的相关信息。

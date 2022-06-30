@@ -10,7 +10,7 @@ JavaScript 在浏览器、Node 这两个运行时中都采用了单线程异步 
 
 不过要注意的是：浏览器和 Node 这两个运行时都不是单纯的单线程环境。
 
-浏览器内部存在很多线程，最重要的线程是： JS 解析线程、UI 绘制线程，二者不能同时运行，因为二者如果操作同一个 DOM 则会出现渲染的异常。
+浏览器内部存在很多线程，最重要的线程是：JS 解析线程、UI 绘制线程，二者不能同时运行，因为二者如果操作同一个 DOM 则会出现渲染的异常。
 
 同样，Node 在使用单线程运行 JS 时，其内部完成 I/O 任务则是依赖一个线程池（在 Linux 中，Node 的异步是靠着 libuv 库实现的，在 Windows 中，则依赖于 IOCP 实现）。
 
@@ -33,9 +33,9 @@ JavaScript 在浏览器、Node 这两个运行时中都采用了单线程异步 
 假设现在有三个任务：
 
 ```txt
-任务1：计算 1 + 1 的结果，假设耗时1秒
-任务2：控制台打印 hello world，假设耗时2秒
-任务3：向文件 demo.txt 内写入 hello world，假设耗时5秒
+任务 1：计算 1 + 1 的结果，假设耗时 1 秒
+任务 2：控制台打印 hello world，假设耗时 2 秒
+任务 3：向文件 demo.txt 内写入 hello world，假设耗时 5 秒
 ```
 
 传统的思维中，单线程处理方式如下：
@@ -213,14 +213,14 @@ ccc
 
 ```txt
 第一次循环：
-    从 macro-task 中的script开始，全局上下文进入函数调用栈，此时如果遇到任务分发器，就会将任务放入对应队列
+    从 macro-task 中的 script 开始，全局上下文进入函数调用栈，此时如果遇到任务分发器，就会将任务放入对应队列
     调用栈清空只剩下全局上下文后，执行所有的 micro-task
-    micro-task全部执行结束后，第一次循环结束
+    micro-task 全部执行结束后，第一次循环结束
 
 第二次循环：
     再次从 macro-task 开始执行，
-    此时 macro-task中的script队列没有任务，但是可能会有其他的队列任务，而micro-task中暂时没有任务，
-    此时会选择其中一个宏任务队列，如setTimeout，将改对垒中所有任务全部执行完毕，再执行此过程中可能产生的微任务
+    此时 macro-task 中的 script 队列没有任务，但是可能会有其他的队列任务，而 micro-task 中暂时没有任务，
+    此时会选择其中一个宏任务队列，如 setTimeout，将改对垒中所有任务全部执行完毕，再执行此过程中可能产生的微任务
     微任务执行完毕后，再回头执行其他宏任务队列中的任务
     依次类推，直到所有宏任务队列中的任务都被执行一遍，并清空了微任务，第二次循环结束
 
@@ -236,7 +236,7 @@ Node 旧版与浏览器的循环有少许不同，为了与社区同步，Node11
 在 Node11 之前，Node 的一轮 evetnloop 包含六个循环阶段
 
 - timers（定时器）：执行由 `setTimeout()`、`setInterval()`调度的回调函数
-- I/O callbacks(I/O 回调)：执行几乎所有回调函数，除了 close callbacks、timers、setImmediate()调度的回调。
+- I/O callbacks(I/O 回调)：执行几乎所有回调函数，除了 close callbacks、timers、setImmediate() 调度的回调。
 - idle(空转),prepare()：Node 内部使用
 - **poll（轮询）**：检索新的 I/O 事件，在恰当的时候 Node 会在该阶段阻塞
 - check（检查）：调用 `setImmediate()` 回调
@@ -300,7 +300,7 @@ recurse(0)
 
 ```js
 /*
-二者类似，但是调用时机不同，setTimeout位于timer队列，setImmediate位于check队列
+二者类似，但是调用时机不同，setTimeout 位于 timer 队列，setImmediate 位于 check 队列
 */
 
 // 在主模块调用，会根据性能影响，执行的顺序有所不同
@@ -312,9 +312,9 @@ setImmediate(() => {
   console.log('2-setImmediate')
 })
 
-// 但是在IO中，是固定的.
-// poll队列并不一定是在无限循环，如果有 setImmediate，会进入check，执行setImmediate,然后回到第一步从timer阶段开始重新循环
-// 如果没有setImmediate，则会等待然后回到timer阶段
+// 但是在 IO 中，是固定的。
+// poll 队列并不一定是在无限循环，如果有 setImmediate，会进入 check，执行 setImmediate，然后回到第一步从 timer 阶段开始重新循环
+// 如果没有 setImmediate，则会等待然后回到 timer 阶段
 fs.readFile('./demo.txt', (data) => {
   setTimeout(() => {
     console.log('1-setTimeout')
@@ -414,14 +414,14 @@ let startTime = Date.now()
 //setTimeout 的异步
 setTimeout(function () {
   let delay = Date.now() - startTime
-  console.log(delay + ' 毫秒后才开始执行setTimeout回调')
+  console.log(delay + ' 毫秒后才开始执行 setTimeout 回调')
 }, 100)
 
-//文件读取的异步：假设耗时95ms
+//文件读取的异步：假设耗时 95ms
 fs.readFile('./foo.js', function (err, data) {
   let beginCallbackTime = Date.now()
   while (Date.now() - beginCallbackTime < 10) {
-    // 使用while阻塞10ms
+    // 使用 while 阻塞 10ms
     console.log('阻塞中')
   }
 })
@@ -481,7 +481,7 @@ Promise.resolve().then(() => {
   console.log('2-Promise')
 })
 
-// 微任务：但是该微任务在当前执行站执行完毕后会立即调用，优于Promise.then()
+// 微任务：但是该微任务在当前执行站执行完毕后会立即调用，优于 Promise.then()
 process.nextTick(() => {
   console.log('3-nextTick')
 })

@@ -8,7 +8,7 @@
 
 在健全的类型系统中，永远不会在编译时 或运行时 出现表达式与预期类型不匹配的情况。
 
-当然，健全性（soundness） 也是有级别的，TypeScript 具有一定程度的健全性，并会捕获以下类型的错误：
+当然，健全性（soundness）也是有级别的，TypeScript 具有一定程度的健全性，并会捕获以下类型的错误：
 
 ```ts
 // 类型 'string' 不能赋值给 类型 'number'
@@ -16,13 +16,13 @@ const increment = (i: number): number => {
   return i + '1'
 }
 
-// 类型 '"98765432"' 的参数不能赋值给类型 'number' 的参数.
+// 类型 '"98765432"' 的参数不能赋值给类型 'number' 的参数。
 const countdown: number = increment('98765432')
 ```
 
 ### 1.2 TypeScript 中的类型不健全现象
 
-TypeScript 并不保证 100%的及安全性，而是在正确性与生产力之间取得了一个平衡，这也就造成变量在运行时可能不是定义时的类型：
+TypeScript 并不保证 100% 的及安全性，而是在正确性与生产力之间取得了一个平衡，这也就造成变量在运行时可能不是定义时的类型：
 
 ```ts
 interface A {

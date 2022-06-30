@@ -20,7 +20,7 @@ const actWebContent = electron.webContents.getFocusedWebContents()
 // 通过渲染进程获取 webContents
 webContent = remote.getCurrentWebContents()
 
-// 每次创建窗口时，窗口都有一个制度的整型id值，也可以获取页面内容
+// 每次创建窗口时，窗口都有一个制度的整型 id 值，也可以获取页面内容
 webContent = electron.webContents.fromId(yourID)
 
 // 下策：还可以通过遍历所有内容，一一对比方式
@@ -32,13 +32,13 @@ const webContentArr = electron.webContents.getAllWebContents()
 Electron 中页面加载的事件顺序：
 
 ```txt
-id-start-loading：      页面加载中的第一个事件，浏览器的 tab 页图标开始旋转
-page-title-update：     页面标题更新。处理函数的第二个参数为当前页面标题
-dom-ready：             页面中的 dom 加载完毕。其本质是网页的事件 DOMContentLoaded。
+id-start-loading：页面加载中的第一个事件，浏览器的 tab 页图标开始旋转
+page-title-update：页面标题更新。处理函数的第二个参数为当前页面标题
+dom-ready：页面中的 dom 加载完毕。其本质是网页的事件 DOMContentLoaded。
                         该事件与页面中的 iframe 无关，但是如果有 script 标签则需要等待脚本加载完毕后触发，
                         若 script 标签之前还有 css 资源，则还需要等待 CSS 资源的加载。
                         若没有 script 标签，则无需等待 CSS 资源加载会直接触发事件。
-did-frame-finish-load： 框架加载完成。页面中可能有多个 iframe，所以该事件会触发多次，当前页面为 mainFramedid
+did-frame-finish-load：框架加载完成。页面中可能有多个 iframe，所以该事件会触发多次，当前页面为 mainFramedid
 ```
 
 ### 1.3 页面跳转事件
@@ -51,15 +51,15 @@ did-frame-finish-load： 框架加载完成。页面中可能有多个 iframe，
 webContents 的跳转事件有：
 
 ```txt
-will-redirect：         服务端返回301、302后，浏览器准备跳转时触发。
+will-redirect：服务端返回 301、302 后，浏览器准备跳转时触发。
                         Electron 可以通过 event.preventDefault() 取消该事件，阻止跳转
 did-redirect-navigation：will-redirect 事件之后，跳转发生时触发
-will-navigation：       用户点击了跳转连接或者 使用了 window.location.href 属性，跳转发生前触发
+will-navigation：用户点击了跳转连接或者 使用了 window.location.href 属性，跳转发生前触发
                         不会触发该事件的场景：webContents.loadURL、webContents.back、更新 window.location.hash、用户点击锚点
-did-start-navigation：  一般发生在 will-navigation 之后，跳转发生时触发
-did-navigate-in-page：  更新 window.location.hash 时，或者 用户点击锚点 时触发
-did-frame-navigate：    主页面和子页面跳转完成时触发，更新 window.location.hash、用户点击锚点 不会触发
-did-navigate：          主页面跳转完成时触发（子页面不会），更新 window.location.hash、用户点击锚点 不会触发
+did-start-navigation：一般发生在 will-navigation 之后，跳转发生时触发
+did-navigate-in-page：更新 window.location.hash 时，或者 用户点击锚点 时触发
+did-frame-navigate：主页面和子页面跳转完成时触发，更新 window.location.hash、用户点击锚点 不会触发
+did-navigate：主页面跳转完成时触发（子页面不会），更新 window.location.hash、用户点击锚点 不会触发
 ```
 
 注意：目前前端项目大多使用 MVVM 框架开发，其路由模式无论是 hash 还是 history，一般情况都是业内跳转，会触发：`did-start-navigation`、`did-navigate-in-page`。
@@ -83,7 +83,7 @@ did-navigate：          主页面跳转完成时触发（子页面不会），�
 webFrame 的实例只能在渲染进程中使用：
 
 ```js
-const { webFrame } = require('electron') // 这里的webFrame其实就是mainFrame
+const { webFrame } = require('electron') // 这里的 webFrame 其实就是 mainFrame
 ```
 
 在获得 mainFrame 后，可以通过下列方式查找自己所需要的 webFrame：
@@ -109,7 +109,7 @@ let win = new BrowserWindow({
 let myIframe = document.querySelectro("#iframeID");
 myIframe.onload = function(){
     let iframeWin = myIframe.contentWindow;
-    let iframe.require = myIframe.require;          // 也可以采用该方式：在子页面中获取父窗口的require
+    let iframe.require = myIframe.require;          // 也可以采用该方式：在子页面中获取父窗口的 require
 }
 ```
 
@@ -147,7 +147,7 @@ let view = new BrowserView({
   webPreferences: { preload },
 })
 
-win.setBrowserView(view) // win是BrowserWindow对象，这里为自己设置一个 BrowserView容器
+win.setBrowserView(view) // win 是 BrowserWindow 对象，这里为自己设置一个 BrowserView 容器
 
 let size = win.getSize()
 // 设定绑定区域
@@ -217,6 +217,6 @@ window.onload = function () {
 
 ```js
 await win.webContents.executeJavaScript("document.alert('hello world!')")
-// 贴士：也可以使用类似方式注入css
+// 贴士：也可以使用类似方式注入 css
 await win.webContents.insertCSS('html, body{ background-color: red }')
 ```

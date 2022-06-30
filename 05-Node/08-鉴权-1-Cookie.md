@@ -1,4 +1,4 @@
-# 08-鉴权-1-Cookie
+# 08-鉴权 -1-Cookie
 
 ## 一 Cookie 简介
 
@@ -202,10 +202,10 @@ app.listen(3000);
 cookie 的其他配置：
 
 ```txt
-domain：将cookie分配给特定的子域名，但是不能分配给和服务器所用域名不同的域名
-path：控制应用该cookie的路径，默认是 /  应用到所有页面上，如果参数是 /foo，则会应用到 /foo /foo/bar等路径上
-maxAge：cookie有效期，单位是毫秒
-secure：cookie只通过https发送
-httpOnly：设置为true，表明cookie只能由服务器修改，可以防范XSS攻击。
-singend：设为true会对cookie签名，此时只能通过res.signedCookies获取，而不是res.cookies。此时被串改的签名cookie会被服务器拒绝，并且cookie会被重置为原始值。
+domain：将 cookie 分配给特定的子域名，但是不能分配给和服务器所用域名不同的域名
+path：控制应用该 cookie 的路径，默认是 /  应用到所有页面上，如果参数是 /foo，则会应用到 /foo /foo/bar等路径上
+maxAge：cookie 有效期，单位是毫秒
+secure：cookie 只通过 https 发送
+httpOnly：设置为 true，表明 cookie 只能由服务器修改，可以防范 XSS 攻击。
+singend：设为 true 会对 cookie 签名，此时只能通过 res.signedCookies 获取，而不是 res.cookies。此时被串改的签名 cookie 会被服务器拒绝，并且 cookie 会被重置为原始值。
 ```

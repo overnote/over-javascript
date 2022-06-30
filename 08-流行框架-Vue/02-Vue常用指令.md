@@ -56,7 +56,7 @@
   new Vue({
     el: '#app',
     data: {
-      mytitle: '自定义title',
+      mytitle: '自定义 title',
     },
   })
 </script>
@@ -87,7 +87,7 @@ v-if 每次都会重新创建或移除元素，切换性能消耗高。v-show �
 <!-- 每次都会重新创建或移除元素，切换性能消耗高 -->
 <h2 v-if="flag">test1</h2>
 
-<!-- 只是切换display:none的样式，初始渲染消耗高  -->
+<!-- 只是切换 display:none 的样式，初始渲染消耗高  -->
 <h2 v-show="flag">test1</h2>
 
 <button @click="flag=!flag">点击</button>
@@ -108,7 +108,7 @@ v-if 每次都会重新创建或移除元素，切换性能消耗高。v-show �
   new Vue({
     el: '#app',
     data: {
-      mytitle: '自定义title',
+      mytitle: '自定义 title',
     },
     methods: {
       show: function () {
@@ -122,8 +122,8 @@ v-if 每次都会重新创建或移除元素，切换性能消耗高。v-show �
 v-on 可以缩写为 `@`，绑定的事件函数可以写函数名，也可以书写函数调用：
 
 ```js
-@click='do'                         // 该方式默认会携带事件对象，do函数的第一个参数就是事件对象
-@click='do("hello", $event)'        // $event只有显式传递才能获取到，顺序可在前在后，vue会对参数进行扫描
+@click='do'                         // 该方式默认会携带事件对象，do 函数的第一个参数就是事件对象
+@click='do("hello", $event)'        // $event 只有显式传递才能获取到，顺序可在前在后，vue 会对参数进行扫描
 ```
 
 ### 3.2 事件修饰符
@@ -172,8 +172,8 @@ Vue 为一些常用键盘事件提供了别名：
 </div>
 
 <script>
-  // 全局中使用 Vue类本身
-  Vue.config.keyCodes.move = 65 // 65代表 a 键 按该键触发函数
+  // 全局中使用 Vue 类本身
+  Vue.config.keyCodes.move = 65 // 65 代表 a 键 按该键触发函数
 </script>
 ```
 
@@ -228,7 +228,7 @@ Vue 为一些常用键盘事件提供了别名：
 
 ### 4.3 表单修饰符
 
-表单中的数据往往需要做一些特殊处理，如年龄强制转换为数值类型，电话号码需要去掉开始结尾空格，input 事件需要切换为 change 事件(失去焦点才触发)等等。
+表单中的数据往往需要做一些特殊处理，如年龄强制转换为数值类型，电话号码需要去掉开始结尾空格，input 事件需要切换为 change 事件 (失去焦点才触发) 等等。
 
 vue 提供了简便的方式，即表单修饰符：
 

@@ -1,4 +1,4 @@
-# 07-Web 框架-2-Koa
+# 07-Web 框架 -2-Koa
 
 ## 一 Koa 简介
 
@@ -23,13 +23,13 @@ app.listen(3000)
 koa 将 node 的 Request 和 Response 对象封装进了 Context 对象中，所以也可以把 Context 对象称为一次对话的上下文。Context 对象内部封装的常见属性：
 
 ```js
-ctx // Context对象，包含 req、res
+ctx // Context 对象，包含 req、res
 ctx.request
 ctx.response
 ctx.status
-ctx.throw(500) // 页面会抛出状态码为500的错误页面
+ctx.throw(500) // 页面会抛出状态码为 500 的错误页面
 
-this // Context对象也可以直接写为this
+this // Context 对象也可以直接写为 this
 this.request
 this.response
 ```
@@ -83,7 +83,7 @@ app.listen(3000)
 
 ### 2.2 生产实践
 
-推荐所有的中间件的 next()均使用 `async/await` 形式包裹，这是因为中间件中一般需要处理一些事情，包裹之后更方便编码，更关键的是：所有中间件如果都被包裹，则不会引发顺序错乱：
+推荐所有的中间件的 next() 均使用 `async/await` 形式包裹，这是因为中间件中一般需要处理一些事情，包裹之后更方便编码，更关键的是：所有中间件如果都被包裹，则不会引发顺序错乱：
 
 ```js
 app.use(async (ctx, next) => {
@@ -191,19 +191,19 @@ app.use(static(path.join(__dirname, 'static')))
 //favicon
 app.use(favicon(__dirname + '/static/favicon.ico'))
 
-// 加载ejs模板引擎:ejs后缀方式
+// 加载 ejs 模板引擎:ejs 后缀方式
 // app.use(views(path.join(__dirname, './views'), {
 //     extension: 'ejs'
 // }));
 
-// 加载ejs模板引擎:html后缀方式
+// 加载 ejs 模板引擎:html 后缀方式
 app.use(
   views(path.join(__dirname, 'views'), {
     map: { html: 'ejs' },
   })
 )
 
-//post解析中间件
+//post 解析中间件
 app.use(bodyParser())
 
 //路由->渲染模板
@@ -219,7 +219,7 @@ router.post('/', (ctx, next) => {
 })
 
 app.use(router.routes()) //启动路由中间件
-app.use(router.allowedMethods()) //根据ctx.status设置响应头
+app.use(router.allowedMethods()) //根据 ctx.status 设置响应头
 
 //支持链式写法
 // app.use(router.routes()).use(router.allowedMethods());
@@ -248,7 +248,7 @@ router.get('/todo', function (ctx, next) {
 })
 
 app.use(router.routes()) //启动路由中间件
-app.use(router.allowedMethods()) //根据ctx.status设置响应头
+app.use(router.allowedMethods()) //根据 ctx.status 设置响应头
 
 app.listen(3000)
 ```
@@ -288,10 +288,10 @@ router.use('/page', page.routes())
 比如对 url 的增删改查：
 
 ```txt
-/users                  # post方式：新增用户
-/users/:id              # delete方式：删除用户
-/users/:id              # put方式：修改用户
-/users/:id              # get方式：获取用户
+/users                  # post 方式：新增用户
+/users/:id              # delete 方式：删除用户
+/users/:id              # put 方式：修改用户
+/users/:id              # get 方式：获取用户
 ```
 
 上述以 `/:id` 参数接收方式的路由也可以称呼为**动态路由**。
@@ -304,7 +304,7 @@ router.all() 可以用来模糊匹配
 router.get('/', async (ctx, next) => {
   console.log('111')
   ctx.response.body = '111'
-  await next() // 如果 注释该段，则不执行all
+  await next() // 如果 注释该段，则不执行 all
   console.log('222')
 })
 
@@ -376,12 +376,12 @@ const router = new Router()
 
 app.use(userRouter.routes())
 app.use(orderRouter.routes())
-app.use(router.allowedMethods()) //根据ctx.status设置响应头
+app.use(router.allowedMethods()) //根据 ctx.status 设置响应头
 
 app.listen(3000)
 ```
 
-为了减少重复书写 `app.use(userRouter.routes())` 这样的路由加载，可以使用 `require-directory` 库进行整合:
+为了减少重复书写 `app.use(userRouter.routes())` 这样的路由加载，可以使用 `require-directory` 库进行整合：
 
 ```js
 requireDirectory(module, './routers', { visit: whenLoadModule })
@@ -410,10 +410,10 @@ app.use(async function (ctx) {
   // 参数方式二：/login/:name   实际路由：/login/lisi
   console.log(ctx.params) // 获取动态路由参数
 
-  // 参数方式三：body传参
+  // 参数方式三：body 传参
   console.log(ctx.body) // 获取动态路由参数
 
-  // 参数方式四：headers传参
+  // 参数方式四：headers 传参
   console.log(ctx.header)
 })
 ```

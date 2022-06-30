@@ -1,4 +1,4 @@
-# 05-网络编程-1-TCP
+# 05-网络编程 -1-TCP
 
 ## 一 TCP 编程简介
 
@@ -21,7 +21,7 @@ const net = require('net')
 
 const server = net.createServer()
 
-// 创建一个套接字socket，作为参数传递给回调函数
+// 创建一个套接字 socket，作为参数传递给回调函数
 server.on('connection', (socket) => {
   console.log('new connection comming')
 })
@@ -38,7 +38,7 @@ server.listen(() => {
 ```js
 const net = require('net')
 
-// 创建一个套接字socket，作为参数传递给回调函数
+// 创建一个套接字 socket，作为参数传递给回调函数
 const server = net.createServer((socket) => {
   // socket.end("world\n");
   socket.write('world\n')
@@ -72,7 +72,7 @@ Node 创建 TCP 客户端只需要创建一个连接 TCP 客户端的 socket 对
 ```js
 const net = require('net')
 
-//新建的client对象（就是socket）用来支持数据交互
+//新建的 client 对象（就是 socket）用来支持数据交互
 const client = new net.Socket()
 
 client.connect(3000, 'localhost', () => {
@@ -90,11 +90,11 @@ client.on('data', (data) => {
 创建 client 时候可以传入一个 json 对象，这个 json 对象有以下属性：
 
 ```txt
-fd：            置顶一个存在的文件描述，默认为null
-readable：      是否允许在这个socket上读，默认为false
-writeable：     是否允许在这个socket上写，默认为false
-allowHalfOpen： 该属性为false时，TCP服务器接收到客户端发送的一个FIN包后将会回发一个FIN包，
-                该属性为true时，TCP服务器接收客户端发送的一个FIN包后不会回发FIN包。
+fd：置顶一个存在的文件描述，默认为 null
+readable：是否允许在这个 socket 上读，默认为 false
+writeable：是否允许在这个 socket 上写，默认为 false
+allowHalfOpen：该属性为 false 时，TCP 服务器接收到客户端发送的一个 FIN 包后将会回发一个 FIN 包，
+                该属性为 true 时，TCP 服务器接收客户端发送的一个 FIN 包后不会回发 FIN 包。
 ```
 
 ## 三 了解 TCP 与 Socket

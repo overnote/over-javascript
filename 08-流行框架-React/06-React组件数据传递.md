@@ -37,14 +37,14 @@ export default Box extends Component {
 此时 A 组件如果要向 B 组件传递数据，需要如下方式：
 
 ```js
-// box组件内传递数据
+// box 组件内传递数据
   render(){
     return (
       <A render={(name)=> <B name={name}/>}></A>
     )
   }
 
-// A组件内部修改
+// A 组件内部修改
   render(){
     const { name } = this.state
     return (
@@ -55,7 +55,7 @@ export default Box extends Component {
   }
 
 
-//  B组件正常使用数据
+//  B 组件正常使用数据
   render(){
     return (
       <h3>{this.props.name}</h3>
@@ -174,7 +174,7 @@ export default class Father extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      num: 0, // 默认值为0
+      num: 0, // 默认值为 0
     }
   }
   fn = (data) => {
@@ -239,7 +239,7 @@ export default class Son2 extends React.Component {
     })
   }
   render() {
-    return <div>来自兄弟的数据: {this.state.num}</div>
+    return <div>来自兄弟的数据：{this.state.num}</div>
   }
 }
 ```
@@ -305,7 +305,7 @@ const Son = (props) => {
   return (
     <div>
       params: {params.id}
-      <button onClick={changeSonData}>点击改变Son接收到的数据</button>
+      <button onClick={changeSonData}>点击改变 Son 接收到的数据</button>
     </div>
   )
 }
@@ -315,7 +315,7 @@ const Son = (props) => {
 
 ### 6.0 示例
 
-一个用户列表，可以新增和编辑用户:
+一个用户列表，可以新增和编辑用户：
 
 ```js
 class Father extends React.Component {

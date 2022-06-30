@@ -34,7 +34,7 @@ slot 插槽可以解决上述问题，父组件中插入标签：
 
 ## 二 具名插槽
 
-多个插槽共同使用时，如果需要对单独的插槽进行个性设计，就需要给插槽命名(不带 name 的插槽其 name 值是 default)。
+多个插槽共同使用时，如果需要对单独的插槽进行个性设计，就需要给插槽命名 (不带 name 的插槽其 name 值是 default)。
 
 父组件中定义具名插槽：
 
@@ -54,15 +54,15 @@ slot 插槽可以解决上述问题，父组件中插入标签：
 ```html
 <template>
   <div>
-    <slot name="left">默认值left</slot>
-    <slot name="right">默认值right</slot>
+    <slot name="left">默认值 left</slot>
+    <slot name="right">默认值 right</slot>
   </div>
 </template>
 ```
 
 ## 三 作用域插槽
 
-组件在编译时，其数据的来源有作用域限制，如果现在父组件需要对子组件内容进行加工处理(父使用子数据)，就需要设定作用域。
+组件在编译时，其数据的来源有作用域限制，如果现在父组件需要对子组件内容进行加工处理 (父使用子数据)，就需要设定作用域。
 
 父组件传递数据：
 
@@ -90,7 +90,7 @@ slot 插槽可以解决上述问题，父组件中插入标签：
 <template>
   <div>
     <!--传递数据给插槽使用者-->
-    <slot :users="users">默认值left</slot>
+    <slot :users="users">默认值 left</slot>
   </div>
 </template>
 

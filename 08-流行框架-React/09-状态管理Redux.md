@@ -24,7 +24,7 @@ redux 工作如图：
 
 Redux 的设计原则：
 
-- 单一数据源：与 MVC 不同（Model 之间互相监听、触发），Redux 认为一个应用只需要一个唯一数据源，这会导致产生一个极大的 JS 对象，Redux 通过 combineReducers()解决
+- 单一数据源：与 MVC 不同（Model 之间互相监听、触发），Redux 认为一个应用只需要一个唯一数据源，这会导致产生一个极大的 JS 对象，Redux 通过 combineReducers() 解决
 - 状态只读：redux 没有真正意义上的 store，即无法用代码定义，reducer 也只是返回一个全新的状态
 - 状态修改由纯函数完成：每个 reducer 都是纯函数，没有副作用，使得 redux 变得容易测试。
 
@@ -65,14 +65,14 @@ function counterReducer(state = initCount, action) {
   }
 }
 
-// 创建Store
+// 创建 Store
 const store = createStore(
   counterReducer,
-  // 支持redux-devtools谷歌插件
+  // 支持 redux-devtools 谷歌插件
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-// 创建第一个Action：对count+1
+// 创建第一个 Action：对 count+1
 function countAddAction() {
   return {
     type: 'INCREMENT',
@@ -82,7 +82,7 @@ function countAddAction() {
   }
 }
 
-// 创建第二个Action：对count-2
+// 创建第二个 Action：对 count-2
 function countMinusAction() {
   return {
     type: 'DECREMENT',
@@ -92,7 +92,7 @@ function countMinusAction() {
   }
 }
 
-// 执行action，改变数据
+// 执行 action，改变数据
 store.dispatch(countAddAction())
 store.dispatch(countMinusAction())
 
@@ -112,7 +112,7 @@ const rootReducers = combineReducers({
   other: otherRerucer,
 })
 
-// 创建Store
+// 创建 Store
 const store = createStore(
   rootReducers,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -141,14 +141,14 @@ const logger = createLogger({
   collapsed: true,
 })
 
-// 集成中间件:apply函数用于加载中间件
+// 集成中间件:apply 函数用于加载中间件
 let appliedMiddlewares = applyMiddleware(...[thunk, logger])
 if (isDev) {
   const { composeWithDevTools } = require('redux-devtools-extension')
   appliedMiddlewares = composeWithDevTools(appliedMiddlewares)
 }
 
-// 创建Store
+// 创建 Store
 const store = createStore(rootReducers, appliedMiddlewares)
 ```
 
@@ -185,7 +185,7 @@ export default function applyMiddleware(...middlewares) {
 }
 ```
 
-用户开发的 logger 中间件示例:
+用户开发的 logger 中间件示例：
 
 ```js
 export default (store) => (next) => (action) => {
@@ -197,7 +197,7 @@ export default (store) => (next) => (action) => {
 
 ### 3.3 redux 异步流
 
-请求发送的最好的地方是：action creator 。redux 中可以使用 redux-thunk 中间件实现异步流。
+请求发送的最好的地方是：action creator。redux 中可以使用 redux-thunk 中间件实现异步流。
 
 thunk 函数是针对多参数函数的柯里化，以实现函数的惰性求值。任何函数，只要参数有回调函数，都可以写成 thunk 函数形式：
 
@@ -209,7 +209,7 @@ const Thunk = function (filename) {
   }
 }
 
-// 使用该thunk
+// 使用该 thunk
 const readFileChunk = Thunk(filename)
 readFieChunk(callback)
 ```
@@ -231,7 +231,7 @@ function createThunkMiddleware(extraArgument) {
 
 当 action 为函数的时候，我们并没有调用 next 或 dispatch 方法，而是返回 action 的调用。这里的 action 即为一个 Thunk 函数，以达到将 dispatch 和 getState 参数传递到函数内的作用。
 
-异步请求示例(把同步 action 变成了异步 action)：
+异步请求示例 (把同步 action 变成了异步 action)：
 
 ```js
 function getProducts(url, params) {
@@ -253,7 +253,7 @@ function getProducts(url, params) {
 }
 ```
 
-使用 async/await 语法简化:
+使用 async/await 语法简化：
 
 ```js
 const fetchData = (url, params) => fetch(url, params)
@@ -329,10 +329,10 @@ react-redux 是 redux 针对 react 推出的库，提供了 connect、Provider �
 
 所有文件目录：
 
-![redux项目](../images/mvvm/redux-03.png)
+![redux 项目](../images/mvvm/redux-03.png)
 
 demmo 示例：
-![redux项目](../images/mvvm/redux-04.png)
+![redux 项目](../images/mvvm/redux-04.png)
 
 ### 4.2 入口传递 store
 
@@ -626,8 +626,8 @@ class CompA extends React.Component {
       <div>
         <button onClick={this.handleAdd}> count + </button>
         <button onClick={this.handleSub}> count - </button>
-        <button onClick={this.handleAddAsync}> 异步count + </button>
-        <button onClick={this.handleSubAsync}> 异步count - </button>
+        <button onClick={this.handleAddAsync}> 异步 count + </button>
+        <button onClick={this.handleSubAsync}> 异步 count - </button>
       </div>
     )
   }
@@ -662,7 +662,7 @@ class CompB extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    counter: state.counter, // state内部counter的产生是因为 combineReducers 包裹reducer操作
+    counter: state.counter, // state 内部 counter 的产生是因为 combineReducers 包裹 reducer 操作
   }
 }
 
@@ -718,12 +718,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(User)
 
 ### 5.1 reduce 复用
 
-在 Redux 架构中， reducer 是一个纯函数，它的职责是根据 previousState 和 action 计算出新的 state。在复杂应用中， Redux 提供的 combineReducers 让我们可以把顶层的 reducer 拆分成多个小的 reducer，分别独立地操作 state 树的不同部分。而在一个应用中，很多小粒度的 reducer 往
+在 Redux 架构中，reducer 是一个纯函数，它的职责是根据 previousState 和 action 计算出新的 state。在复杂应用中，Redux 提供的 combineReducers 让我们可以把顶层的 reducer 拆分成多个小的 reducer，分别独立地操作 state 树的不同部分。而在一个应用中，很多小粒度的 reducer 往
 往有很多重复的逻辑，使用高阶 reducer 可以抽取公用逻辑，减少代码冗余。
 
 高阶 reducer 就是指将 reducer 作为参数或者返回值的函数。combineReducers 其实就是一个高阶 reducer，combineReducers 将一个 reducer 对象作为参数，最后返回顶层的 reducer。
 
-我们将顶层的 reducer 拆分成多个小的 reducer，肯定会碰到 reducer 的复用问题。例如有 A 和 B 两个模块，它们的 UI 部分相似，此时可以通过配置不同的 props 来区别它们。那么这种情况下， A 和 B 模块能不能共用一个 reducer 呢？答案是否定的。我们先来看一个简单的 reducer：
+我们将顶层的 reducer 拆分成多个小的 reducer，肯定会碰到 reducer 的复用问题。例如有 A 和 B 两个模块，它们的 UI 部分相似，此时可以通过配置不同的 props 来区别它们。那么这种情况下，A 和 B 模块能不能共用一个 reducer 呢？答案是否定的。我们先来看一个简单的 reducer：
 
 ```js
 const LOAD_DATA = 'LOAD_DATA'
@@ -748,7 +748,7 @@ function reducer(state = initialState, action) {
 }
 ```
 
-loadData 来分发相应的 action 时， A 和 B 的 reducer 都会处理这个 action，然后 A 和 B 的内容就完全一致了。这里我们需要意识到，在一个应用中，不同模块间的 actionType 必须是全局唯一的。因此，要解决 actionType 唯一的问题，有一个方法就是通过添加前缀的方式来做到：
+loadData 来分发相应的 action 时，A 和 B 的 reducer 都会处理这个 action，然后 A 和 B 的内容就完全一致了。这里我们需要意识到，在一个应用中，不同模块间的 actionType 必须是全局唯一的。因此，要解决 actionType 唯一的问题，有一个方法就是通过添加前缀的方式来做到：
 
 ```js
 function generateReducer(prefix, state) {
@@ -769,7 +769,7 @@ function generateReducer(prefix, state) {
 }
 ```
 
-这样只要 A 模块和 B 模块分别调用 generateReducer 来生成相应的 reducer ，就能解决 reducer 复用的问题了。而对于 prefix，我们可以根据自己的项目结构来决定，例如 `${页面名称}_${模块名称}`。只要能够保证全局唯一性，就可以写成一种前缀。
+这样只要 A 模块和 B 模块分别调用 generateReducer 来生成相应的 reducer，就能解决 reducer 复用的问题了。而对于 prefix，我们可以根据自己的项目结构来决定，例如 `${页面名称}_${模块名称}`。只要能够保证全局唯一性，就可以写成一种前缀。
 
 ### 5.2 reducer 增强
 

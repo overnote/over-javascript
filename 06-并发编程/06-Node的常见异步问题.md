@@ -70,7 +70,7 @@ try {
 
 这里只能捕获到 asyncFN 的异常，却无法捕获 callback 的异常，因为 callback 会被存放起来，直到下一个事件循环到达才会取出来执行。
 
-Node 的解决方案是将异常作为回调函数的第一个参数传回:
+Node 的解决方案是将异常作为回调函数的第一个参数传回：
 
 ```js
 asyncFN(function (err, results) {})
@@ -103,7 +103,7 @@ callback()
 
 ### 1.3 代码阻塞
 
-Node 没有 sleep()线程睡眠函数，也导致了阻塞代码执行变得困难，如果使用下面方式，将会引起灾难：
+Node 没有 sleep() 线程睡眠函数，也导致了阻塞代码执行变得困难，如果使用下面方式，将会引起灾难：
 
 ```js
 // 模拟 sleep(1000)
@@ -336,9 +336,9 @@ async.parallelLimit(
 )
 ```
 
-parallelLimit()方法与 parallel()类似，但多了一个用于限制并发数量的参数，使得任务只能同时并发一定数量，而不是无限制并发。
+parallelLimit() 方法与 parallel() 类似，但多了一个用于限制并发数量的参数，使得任务只能同时并发一定数量，而不是无限制并发。
 
-parallelLimit()方法的却显示是无法动态增加并行任务，async 的 queue()方法可以，比如用来遍历文件目录等操作十分有效：
+parallelLimit() 方法的却显示是无法动态增加并行任务，async 的 queue() 方法可以，比如用来遍历文件目录等操作十分有效：
 
 ```js
 var q = async.queue(function (file, callback) {
@@ -356,4 +356,4 @@ fs.readdirSync('.').forEach(function (file) {
 })
 ```
 
-queue()的却显示接收参数固定，丢失了 parallelLimit()方法的灵活性。
+queue() 的却显示接收参数固定，丢失了 parallelLimit() 方法的灵活性。

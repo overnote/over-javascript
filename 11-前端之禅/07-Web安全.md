@@ -13,7 +13,7 @@ XSS 安全包括：反射型 XSS、存储型 XSS。
 反射型 XSS 过程：
 
 ```txt
-黑客将带有url地址发送给用户，但是该地址中携带着特殊参数：恶意脚本
+黑客将带有 url 地址发送给用户，但是该地址中携带着特殊参数：恶意脚本
 用户点击此链接，请求信息被发送到服务端
 服务端使用恶意参数后，黑客需要的数据被响应到前台
 ```
@@ -21,7 +21,7 @@ XSS 安全包括：反射型 XSS、存储型 XSS。
 示例：
 
 ```js
-// 反射型XSS：/goods?category=<script>alert(1)</script>
+// 反射型 XSS：/goods?category=<script>alert(1)</script>
 app.get('/goods', (req, res) => {
   let { category } = req.query
 
@@ -61,7 +61,7 @@ app.get('/goods', (req, res) => {
 示例：
 
 ```js
-// 持久型XSS：常见于用户评论
+// 持久型 XSS：常见于用户评论
 app.get('/comments', (req, res) => {
   // 假设用户提交了一个评论如下：
   let commont = '你好啊<script>alert(1)</script>'
@@ -81,14 +81,14 @@ app.get('/comments', (req, res) => {
 
 ```txt
 用户打开带有恶意的链接
-浏览器在解析DOM时，使用恶意数据
+浏览器在解析 DOM 时，使用恶意数据
 ```
 
 DOM-Based 型 XSS 常见触发场景是：修改 `innerHTML`、`outerHTML`、`document.write()` 。
 
 ### 2.4 XSS 解决方案
 
-方案一： 设置 cookie 为 http-only
+方案一：设置 cookie 为 http-only
 
 可以让本地无法获取 cookie：
 
@@ -122,8 +122,8 @@ function encode(str) {
 跨站请求伪造 CSRF（Cross Site Request Forgery），一般是用户点开了一个比较吸引人的网站，其内部内嵌了一个没有宽高不会被发现的内容，过程如下：
 
 ```txt
-用户A登录网站，登录成功后设置cookie
-用户A点击了黑客站点，返回一个页面，该页面伪造一个请求到目的网站（如银行）
+用户 A 登录网站，登录成功后设置 cookie
+用户 A 点击了黑客站点，返回一个页面，该页面伪造一个请求到目的网站（如银行）
 ```
 
 示例：

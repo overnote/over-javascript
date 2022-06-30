@@ -37,7 +37,7 @@ MVC 里的 C 是控制器，由不同的控制函数/对象，手动实现调度
 
 ### 1.3 Vue 与 React
 
-Vue 与 React 均是当前流行的框架，也都受到了 MVVM 编程思想的影响。二者的本质区别是：数据响应方式不同。React 侧重于用户手动 setState()更新，Vue 中数据改动则界面自动更新。
+Vue 与 React 均是当前流行的框架，也都受到了 MVVM 编程思想的影响。二者的本质区别是：数据响应方式不同。React 侧重于用户手动 setState() 更新，Vue 中数据改动则界面自动更新。
 
 二者没有绝对优劣，只是开发思维的不同。React 可以使用 mobx 实现类似 Vue 的响应编程，Vue 也可以把数据 freeze，不再具备响应式。
 
@@ -45,7 +45,7 @@ Vue 与 React 均是当前流行的框架，也都受到了 MVVM 编程思想的
 
 使用 MVVM 思想可以让一个单页面就能实现一个完整的应用，虽然有一定的优点，但是在一个超大项目中，需要集成很多模块，造成其首次加载速度变慢，且一个局部异常容易造成整个 APP 无法使用。而多页面应用就不会有这两个缺点，笔者推荐使用的方式是：
 
-**多页导航+单模块单页应用**。
+**多页导航 + 单模块单页应用**。
 
 ## 二 React 框架
 
@@ -65,8 +65,8 @@ React 与原生 JS 的对比：
 React 与 Vue 共同点：
 
 ```txt
-都具备MVVM思想
-内部都采用虚拟DOM方式进行视图更新
+都具备 MVVM 思想
+内部都采用虚拟 DOM 方式进行视图更新
 具备组件化开发理念
 ```
 
@@ -85,22 +85,22 @@ React 与 Vue 共同点：
   src="https://unpkg.com/react@16/umd/react.development.js"
   crossorigin
 ></script>
-<!--React 支持DOM库-->
+<!--React 支持 DOM 库-->
 <script
   src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
   crossorigin
 ></script>
-<!--支持JSX语法-->
+<!--支持 JSX 语法-->
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
 <script type="text/babel">
   const app = document.querySelector('#app')
-  const vdom = <h1>Hello World</h1> // 这里是JSX语法，不需要引号
+  const vdom = <h1>Hello World</h1> // 这里是 JSX 语法，不需要引号
   ReactDOM.render(vdom, app)
 </script>
 ```
 
-`ReactDOM.render` 用于将模板转为 HTML 语言，并插入指定的 DOM 节点。这个方法， 必须而且只能返回一个有效的 React 元素对象。这意味着，如果你的组件是由多个元素构成的，那么你必须在外边包一个顶层 元素，然后返回这个顶层元素。
+`ReactDOM.render` 用于将模板转为 HTML 语言，并插入指定的 DOM 节点。这个方法，必须而且只能返回一个有效的 React 元素对象。这意味着，如果你的组件是由多个元素构成的，那么你必须在外边包一个顶层 元素，然后返回这个顶层元素。
 
 ### 2.2 react 脚手架
 
@@ -111,7 +111,7 @@ React 与 Vue 共同点：
 facebook 官方的 react 脚手架为 create-react-app，安装方式：
 
 ```txt
-# 确保已经安装Node环境
+# 确保已经安装 Node 环境
 npm i -g create-react-app
 
 # 查看脚手架版本
@@ -149,7 +149,7 @@ module.exports = function (app) {
   app.use(
     proxy('/api/v1', {
       target: 'http://192.168.1.1:5001', // 请求转发给谁
-      changeOrigin: true, // 默认为false，为true时服务器的host的端口值为5001，而不是客户端React服务的端口
+      changeOrigin: true, // 默认为 false，为 true 时服务器的 host 的端口值为 5001，而不是客户端 React 服务的端口
       pathRewrite: { '^/api/v1': '/api' }, // 将地址重写
     }),
     proxy('/api/v2', {

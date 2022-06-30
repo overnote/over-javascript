@@ -136,7 +136,7 @@ v-leave-active：
 </transition>
 ```
 
-上面四个是入场的动画生命周期函数； 后面四个是出场的动画生命周期函数；
+上面四个是入场的动画生命周期函数；后面四个是出场的动画生命周期函数；
 
 当只用 JavaScript 过渡的时候，在 enter 和 leave 中必须使用 done 进行回调。否则，它们将被同步调用，过渡会立即完成。
 
@@ -149,8 +149,8 @@ methods: {
   },
   // 当与 CSS 结合使用时
   // 回调函数 done 是可选的
-  enter: function (el, done) {//此时的done其实就是afterEnter函数的引用
-    // ...    // 当需要的操作完成之后，就会自动去调用done()，也就是立即调用 afterEnter函数；
+  enter: function (el, done) {//此时的 done 其实就是 afterEnter 函数的引用
+    // ...    // 当需要的操作完成之后，就会自动去调用 done()，也就是立即调用 afterEnter 函数；
     done()
   },
   afterEnter: function (el) {

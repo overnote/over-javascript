@@ -1,4 +1,4 @@
-# 05-异步编程-4-async 与 await
+# 05-异步编程 -4-async 与 await
 
 ## 一 ES7 的 async/await
 
@@ -11,10 +11,10 @@ async/await 语法：
 ```js
 async function(){
 
-    // await是等待的意思，等待异步操作返回的结果，会阻塞代码
+    // await 是等待的意思，等待异步操作返回的结果，会阻塞代码
     let res1 = await 异步操作1(Promise/generator/async);
 
-    // 这时候异步操作2需要等待 res1 的结果获取后才能执行
+    // 这时候异步操作 2 需要等待 res1 的结果获取后才能执行
     let res2 = await 异步操作2(Promise/generator/async);
 }
 ```
@@ -71,9 +71,9 @@ async function foo() {
   return 3 // 与 return Promise.resolve(3) 效果一致
 }
 
-// 返回值由then函数解包
+// 返回值由 then 函数解包
 foo().then((data) => {
-  console.log('后打印:', data) // 3
+  console.log('后打印：', data) // 3
 })
 
 console.log('先打印') // 1
@@ -94,10 +94,10 @@ baz().then(console.log) // baz
 
 ### 1.2 await
 
-使用 await 关键字可以暂停异步函数代码的执行，等待期约解决:
+使用 await 关键字可以暂停异步函数代码的执行，等待期约解决：
 
 ```js
-// 纯Promise解决方案：
+// 纯 Promise 解决方案：
 let p = new Promise((resolve, reject) => setTimeout(resolve, 1000, 3))
 p.then((x) => console.log(x)) // 3
 
@@ -109,7 +109,7 @@ async function foo() {
 foo() // 3
 ```
 
-await 关键字会暂停执行异步函数后面的代码，让出 JavaScript 运行时的执行线程。这个行为与生成器函数中的 yield 关键字是一样的。 await 关键字同样是尝试“解包”对象的值，然后将这个值传给表达式，再异步恢复异步函数的执行。
+await 关键字会暂停执行异步函数后面的代码，让出 JavaScript 运行时的执行线程。这个行为与生成器函数中的 yield 关键字是一样的。await 关键字同样是尝试“解包”对象的值，然后将这个值传给表达式，再异步恢复异步函数的执行。
 
 await 的用法与医院操作一样，可以单独使用，也可以在表达式中使用：
 
@@ -131,7 +131,7 @@ async function baz() {
   await new Promise((resolve, reject) => setTimeout(resolve, 1000))
   console.log('baz')
 }
-baz() // baz（ 1000 毫秒后）
+baz() // baz（1000 毫秒后）
 ```
 
 await 关键字期待（但实际上并不要求）一个实现 thenable 接口的对象，但常规的值也可以。如果是实现 thenable 接口的对象，则这个对象可以由 await 来“解包”。如果不是，则这个值就被当作已经解决的期约。
@@ -155,7 +155,7 @@ foo() // 3
 await 错误示例：
 
 ```js
-// 不允许： await 出现在了箭头函数中
+// 不允许：await 出现在了箭头函数中
 function foo() {
   const syncFn = () => {
     return await Promise.resolve('foo')
@@ -163,7 +163,7 @@ function foo() {
   console.log(syncFn())
 }
 
-// 不允许： await 出现在了同步函数声明中
+// 不允许：await 出现在了同步函数声明中
 function bar() {
   function syncFn() {
     return await Promise.resolve('bar')
@@ -171,7 +171,7 @@ function bar() {
   console.log(syncFn())
 }
 
-// 不允许： await 出现在了同步函数表达式中
+// 不允许：await 出现在了同步函数表达式中
 function baz() {
   const syncFn = function () {
     return await Promise.resolve('baz')
@@ -179,7 +179,7 @@ function baz() {
   console.log(syncFn())
 }
 
-// 不允许： IIFE 使用同步函数表达式或箭头函数
+// 不允许：IIFE 使用同步函数表达式或箭头函数
 function qux() {
   ;(function () {
     console.log(await Promise.resolve('qux'))
@@ -220,7 +220,7 @@ foo().catch(console.log)
 console.log(2)
 ```
 
-对拒绝的期约使用 await 则会释放（ unwrap）错误值（将拒绝期约返回）：
+对拒绝的期约使用 await 则会释放（unwrap）错误值（将拒绝期约返回）：
 
 ```js
 async function foo() {
@@ -255,7 +255,7 @@ baz()
 // foo
 ```
 
-JavaScript 运行时在碰到 await 关键字时，会记录在哪里暂停执行。等到 await 右边的值可用了， JavaScript 运行时会向消息队列中推送一个任务，这个任务会恢复异步函数的执行。
+JavaScript 运行时在碰到 await 关键字时，会记录在哪里暂停执行。等到 await 右边的值可用了，JavaScript 运行时会向消息队列中推送一个任务，这个任务会恢复异步函数的执行。
 
 即使 await 后面跟着一个立即可用的值，函数的其余部分也会被异步求值：
 
@@ -280,15 +280,15 @@ console.log(3)
 ```txt
 (1) 打印 1；
 (2) 调用异步函数 foo()；
-(3)（在 foo()中）打印 2；
-(4)（在 foo()中） await 关键字暂停执行，为立即可用的值 null 向消息队列中添加一个任务；
-(5) foo()退出；
+(3)（在 foo() 中）打印 2；
+(4)（在 foo() 中）await 关键字暂停执行，为立即可用的值 null 向消息队列中添加一个任务；
+(5) foo() 退出；
 (6) 打印 3；
 (7) 同步线程的代码执行完毕；
 (8) JavaScript 运行时从消息队列中取出任务，恢复异步函数执行；
-(9)（在 foo()中）恢复执行， await 取得 null 值（这里并没有使用）；
-(10)（在 foo()中）打印 4；
-(11) foo()返回。
+(9)（在 foo() 中）恢复执行，await 取得 null 值（这里并没有使用）；
+(10)（在 foo() 中）打印 4；
+(11) foo() 返回。
 ```
 
 如果 await 后面是一个期约，为了执行异步函数，实际上会有两个任务被添加到消息队列并被异步求值：
@@ -325,28 +325,28 @@ console.log(5)
 ```txt
 (1) 打印 1；
 (2) 调用异步函数 foo()；
-(3)（在 foo()中）打印 2；
-(4)（在 foo()中） await 关键字暂停执行，向消息队列中添加一个期约在落定之后执行的任务；
+(3)（在 foo() 中）打印 2；
+(4)（在 foo() 中）await 关键字暂停执行，向消息队列中添加一个期约在落定之后执行的任务；
 (5) 期约立即落定，把给 await 提供值的任务添加到消息队列；
-(6) foo()退出；
+(6) foo() 退出；
 (7) 打印 3；
 (8) 调用异步函数 bar()；
-(9)（在 bar()中）打印 4；
-(10)（在 bar()中） await 关键字暂停执行，为立即可用的值 6 向消息队列中添加一个任务；
-(11) bar()退出；
+(9)（在 bar() 中）打印 4；
+(10)（在 bar() 中）await 关键字暂停执行，为立即可用的值 6 向消息队列中添加一个任务；
+(11) bar() 退出；
 (12) 打印 5；
 (13) 顶级线程执行完毕；
 (14) JavaScript 运行时从消息队列中取出解决 await 期约的处理程序，并将解决的值 8 提供给它；
-(15) JavaScript 运行时向消息队列中添加一个恢复执行 foo()函数的任务；
-(16) JavaScript 运行时从消息队列中取出恢复执行 bar()的任务及值 6；
-(17)（在 bar()中）恢复执行， await 取得值 6；
-(18)（在 bar()中）打印 6；
-(19)（在 bar()中）打印 7；
-(20) bar()返回；
-(21) 异步任务完成， JavaScript 从消息队列中取出恢复执行 foo()的任务及值 8；
-(22)（在 foo()中）打印 8；
-(23)（在 foo()中）打印 9；
-(24) foo()返回
+(15) JavaScript 运行时向消息队列中添加一个恢复执行 foo() 函数的任务；
+(16) JavaScript 运行时从消息队列中取出恢复执行 bar() 的任务及值 6；
+(17)（在 bar() 中）恢复执行，await 取得值 6；
+(18)（在 bar() 中）打印 6；
+(19)（在 bar() 中）打印 7；
+(20) bar() 返回；
+(21) 异步任务完成，JavaScript 从消息队列中取出恢复执行 foo() 的任务及值 8；
+(22)（在 foo() 中）打印 8；
+(23)（在 foo() 中）打印 9；
+(24) foo() 返回
 ```
 
 ## 四 异步实践
@@ -587,4 +587,4 @@ foo()
 // foo
 ```
 
-这时栈追踪信息就准确地反映了当前的调用栈。 fooPromiseExecutor()已经返回，所以它不在错误信息中。但 foo()此时被挂起了，并没有退出。 JavaScript 运行时可以简单地在嵌套函数中存储指向包含函数的指针，就跟对待同步函数调用栈一样。这个指针实际上存储在内存中，可用于在出错时生成栈追踪信息。这样就不会像之前的例子那样带来额外的消耗，因此在重视性能的应用中是可以优先考虑的。
+这时栈追踪信息就准确地反映了当前的调用栈。fooPromiseExecutor() 已经返回，所以它不在错误信息中。但 foo() 此时被挂起了，并没有退出。JavaScript 运行时可以简单地在嵌套函数中存储指向包含函数的指针，就跟对待同步函数调用栈一样。这个指针实际上存储在内存中，可用于在出错时生成栈追踪信息。这样就不会像之前的例子那样带来额外的消耗，因此在重视性能的应用中是可以优先考虑的。

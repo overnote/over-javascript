@@ -7,21 +7,21 @@
 以下示例都需要启动配置好的 NodeJS 服务器，并且需要在同源情况下进行访问，即在 Node 项目的 public 文件夹的 index.html 中书如下 ajax（仍然使用接口：`/hi`）：
 
 ```html
-<button id="btn">点击执行Ajax</button>
+<button id="btn">点击执行 Ajax</button>
 <script>
   let btn = document.querySelector('#btn')
 
   btn.onclick = function () {
     // 1 创建 Ajax 对象。IE6 中对象为：ActiveXObject("Microsoft.XMLHTTP");
     let xhr = new XMLHttpRequest()
-    // 2 设置请求方式、请求地址，参数三可选表示是否异步，默认为true异步
+    // 2 设置请求方式、请求地址，参数三可选表示是否异步，默认为 true 异步
     xhr.open('get', 'http://localhost:3000/hi')
     // 3 发送请求
     xhr.send(null)
     // 4.获取服务器端响应的数据：由于 xhr.send() 是异步的，所以后面只能用事件方式监听
     // 如果是同步请求则这里无需使用事件
     xhr.onload = function () {
-      // onload事件在成功接收完响应时触发
+      // onload 事件在成功接收完响应时触发
       if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
         console.log(xhr.responseText)
       } else {
@@ -44,8 +44,8 @@
 常见状态：
 
 ```txt
-0   请求未初始化（未调用open()）
-1   请求已建立，但未发送（未调用send()）
+0   请求未初始化（未调用 open()）
+1   请求已建立，但未发送（未调用 send()）
 2   请求已发送
 3   请求正在处理中，此时一般已经接收到了一部分数据
 4   响应完成
@@ -71,7 +71,7 @@ xhr.send(params)
 
 ### 1.2 HTTP 请求头
 
-每个 HTTP 请求和响应都会携带一些头部字段，默认情况下， XHR 请求会发送以下头部字段：
+每个 HTTP 请求和响应都会携带一些头部字段，默认情况下，XHR 请求会发送以下头部字段：
 
 ```txt
 Accept：浏览器可以处理的内容类型。
@@ -95,7 +95,7 @@ xhr.send(null)
 
 ### 1.3 HTTP 响应头
 
-使用 getResponseHeader()方法 可以获得响应头：
+使用 getResponseHeader() 方法 可以获得响应头：
 
 ```js
 let myHeader = xhr.getResponseHeader('token')
@@ -139,7 +139,7 @@ xhr.setRequestHeader(
   'Content-Type',
   'application/x-www-form-urlencoded'
 )
-// 3 发送请求：在sen的中发送参数，POST的参数封装在请求体中
+// 3 发送请求：在 sen 的中发送参数，POST 的参数封装在请求体中
 xhr.send(params)
 ```
 
@@ -159,7 +159,7 @@ xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 JSON 格式传递方式：
 
 ```js
-// JSON 格式传递: {username:"zs","password":"123"}，发送时必须转换为字符串
+// JSON 格式传递：{username:"zs","password":"123"}，发送时必须转换为字符串
 xhr.setRequestHeader('Content-Type', 'application/json')
 xhr.send(JSON.stringify({ username: 'zs', password: '123' }))
 ```
@@ -187,7 +187,7 @@ xhr.open('get', url, false)
 
 ### 3.0 Ajax2.0 概念
 
-XMLHttpRequest Level 1 只是把已经存在的 XHR 对象的实现细节明确了一下。 XMLHttpRequest Level 2 又进一步发展了 XHR 对象。
+XMLHttpRequest Level 1 只是把已经存在的 XHR 对象的实现细节明确了一下。XMLHttpRequest Level 2 又进一步发展了 XHR 对象。
 
 ### 3.1 FormData 类型
 
@@ -217,7 +217,7 @@ let params = new FormData(document.getElementById('loginForm'))
 xhr.send(new FormData(form))
 ```
 
-使用 FormData 的另一个方便之处是不再需要给 XHR 对象显式设置任何请求头部了。 XHR 对象能够识别作为 FormData 实例传入的数据类型并自动配置相应的头部。
+使用 FormData 的另一个方便之处是不再需要给 XHR 对象显式设置任何请求头部了。XHR 对象能够识别作为 FormData 实例传入的数据类型并自动配置相应的头部。
 
 ### 3.2 超时
 
@@ -239,21 +239,21 @@ xhr.onreadystatechange = function () {
   }
 }
 xhr.open('get', 'localhost:3000', true)
-xhr.timeout = 1000 // 1000毫秒超时
+xhr.timeout = 1000 // 1000 毫秒超时
 xhr.ontimeout = function () {
   alert('Request did not return in a second.')
 }
 xhr.send(null)
 ```
 
-### 3.3 overrideMimeType()方法
+### 3.3 overrideMimeType() 方法
 
-假设服务器实际发送了 XML 数据，但响应头设置的 MIME 类型是 text/plain。结果就会导致虽然数据是 XML，但 responseXML 属性值是 null。此时调用 overrideMimeType()可以保证将响应当成 XML 而不是纯文本来处理：
+假设服务器实际发送了 XML 数据，但响应头设置的 MIME 类型是 text/plain。结果就会导致虽然数据是 XML，但 responseXML 属性值是 null。此时调用 overrideMimeType() 可以保证将响应当成 XML 而不是纯文本来处理：
 
 ```js
 let xhr = new XMLHttpRequest()
 xhr.open('get', 'localhost:3000', true)
-xhr.overrideMimeType('text/xml') // 强行让XHR把响应当做XML处理
+xhr.overrideMimeType('text/xml') // 强行让 XHR 把响应当做 XML 处理
 xhr.send(null)
 ```
 
@@ -267,9 +267,9 @@ xhr.send(null)
 loadstart：在接收到响应的第一个字节时触发。
 progress：在接收响应期间反复触发。
 error：在请求出错时触发。
-abort：在调用 abort()终止连接时触发。
+abort：在调用 abort() 终止连接时触发。
 load：在成功接收完响应时触发
-loadend：在通信完成时，且在 error、 abort 或 load 之后触发。
+loadend：在通信完成时，且在 error、abort 或 load 之后触发。
 ```
 
 每次请求都会首先触发 loadstart 事件，之后是一个或多个 progress 事件，接着是 error、abort 或 load 中的一个，最后以 loadend 事件结束。
@@ -293,7 +293,7 @@ xhr.send(null)
 
 ### 4.2 progress 事件
 
-在浏览器接收数据期间，progress 事件会被反复触发，每次触发时， onprogress 事件处理程序都会收到 event 对象，其 target 属性是 XHR 对象，且包含 3 个额外属性： lengthComputable、 position 和 totalSize。其中， lengthComputable 是一个布尔值，表示进度信息是否可用； position 是接收到的字节数； totalSize 是响应的 ContentLength 头部定义的总字节数。有了这些信息，就可以给用户提供进度条了。以下代码演示了如何向用
+在浏览器接收数据期间，progress 事件会被反复触发，每次触发时，onprogress 事件处理程序都会收到 event 对象，其 target 属性是 XHR 对象，且包含 3 个额外属性：lengthComputable、position 和 totalSize。其中，lengthComputable 是一个布尔值，表示进度信息是否可用；position 是接收到的字节数；totalSize 是响应的 ContentLength 头部定义的总字节数。有了这些信息，就可以给用户提供进度条了。以下代码演示了如何向用
 户展示进度：
 
 ```js
@@ -315,7 +315,7 @@ xhr.onprogress = function (event) {
   }
 }
 
-// 必须在调用 open()之前添加 onprogress 事件处理程序
+// 必须在调用 open() 之前添加 onprogress 事件处理程序
 xhr.open('get', 'localhost:3000', true)
 xhr.send(null)
 ```
@@ -337,9 +337,9 @@ xhr.open('get', 'http://www.demo.com?t=' + Math.random())
 
 为了把尽量多的页面信息传到服务器，很多分析工具需要在页面生命周期中尽量晚的时候向服务器发送遥测或分析数据。因此，理想的情况下是通过浏览器的 unload 事件发送网络请求。这个事件表示用户要离开当前页面，不会再生成别的有用信息了。
 
-在 unload 事件触发时，分析工具要停止收集信息并把收集到的数据发给服务器。这时候有一个问题，因为 unload 事件对浏览器意味着没有理由再发送任何结果未知的网络请求（因为页面都要被销毁了）。例如，在 unload 事件处理程序中创建的任何异步请求都会被浏览器取消。 为此， 异步 XMLHttpRequest 或 fetch()不适合这个任务。分析工具可以使用同步 XMLHttpRequest 强制发送请求，但这样做会导致用户体验问题。浏览器会因为要等待 unload 事件处理程序完成而延迟导航到下一个页面。
+在 unload 事件触发时，分析工具要停止收集信息并把收集到的数据发给服务器。这时候有一个问题，因为 unload 事件对浏览器意味着没有理由再发送任何结果未知的网络请求（因为页面都要被销毁了）。例如，在 unload 事件处理程序中创建的任何异步请求都会被浏览器取消。为此，异步 XMLHttpRequest 或 fetch() 不适合这个任务。分析工具可以使用同步 XMLHttpRequest 强制发送请求，但这样做会导致用户体验问题。浏览器会因为要等待 unload 事件处理程序完成而延迟导航到下一个页面。
 
-为解决这个问题， W3C 引入了补充性的 Beacon API。这个 API 给 navigator 对象增加了一个 sendBeacon()方法。这个简单的方法接收一个 URL 和一个数据有效载荷参数，并会发送一个 POST 请求。可选的数据有效载荷参数有 ArrayBufferView、 Blob、 DOMString、 FormData 实例。如果请求成功进入了最终要发送的任务队列，则这个方法返回 true，否则返回 false。
+为解决这个问题，W3C 引入了补充性的 Beacon API。这个 API 给 navigator 对象增加了一个 sendBeacon() 方法。这个简单的方法接收一个 URL 和一个数据有效载荷参数，并会发送一个 POST 请求。可选的数据有效载荷参数有 ArrayBufferView、Blob、DOMString、FormData 实例。如果请求成功进入了最终要发送的任务队列，则这个方法返回 true，否则返回 false。
 
 ```js
 // 发送 POST 请求
@@ -354,9 +354,9 @@ navigator.sendBeacon(
 这个方法虽然看起来只不过是 POST 请求的一个语法糖，但它有几个重要的特性：
 
 ```txt
-sendBeacon()并不是只能在页面生命周期末尾使用，而是任何时候都可以使用。
-调用 sendBeacon()后，浏览器会把请求添加到一个内部的请求队列。浏览器会主动地发送队列中的请求。
+sendBeacon() 并不是只能在页面生命周期末尾使用，而是任何时候都可以使用。
+调用 sendBeacon() 后，浏览器会把请求添加到一个内部的请求队列。浏览器会主动地发送队列中的请求。
 浏览器保证在原始页面已经关闭的情况下也会发送请求。
 状态码、超时和其他网络原因造成的失败完全是不透明的，不能通过编程方式处理。
-信标（ beacon）请求会携带调用 sendBeacon()时所有相关的 cookie。
+信标（beacon）请求会携带调用 sendBeacon() 时所有相关的 cookie。
 ```

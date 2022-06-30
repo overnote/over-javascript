@@ -18,7 +18,7 @@
 
 ![钩子函数](../images/mvvm/react-03.png)
 
-### 2.1 旧版生命周期-组件创建阶段
+### 2.1 旧版生命周期 - 组件创建阶段
 
 创建阶段是组件的第一次渲染，由 `ReactDOM.render()` 触发，包含四步：
 
@@ -32,12 +32,12 @@ class Comp extends React.Component {
         static defaultProps = {}
     }
 
-    // 组件即将被挂载,虚拟DOM元素尚未创建完毕，该生命周期未来会废弃
+    // 组件即将被挂载，虚拟 DOM 元素尚未创建完毕，该生命周期未来会废弃
     componentWillMount() {
         console.log('1-将要挂载')
     }
 
-    // render()方法运行完毕后，虚拟DOM也创建完毕，但是并未真正挂载到真实的页面上
+    // render() 方法运行完毕后，虚拟 DOM 也创建完毕，但是并未真正挂载到真实的页面上
     render() {
         console.log('2-渲染函数')
         return <div>comp</div>
@@ -52,7 +52,7 @@ class Comp extends React.Component {
 
 componentWillMount() 较为常用，由于此阶段组件已经真实渲染，可以在钩子内开启定时器、发送网络请求、订阅消息等。
 
-### 2.2 旧版生命周期-组件运行阶段
+### 2.2 旧版生命周期 - 组件运行阶段
 
 运行阶段，属性 props 的改变，状态 state 的改变都可以触发组件的更新。
 
@@ -60,7 +60,7 @@ componentWillMount() 较为常用，由于此阶段组件已经真实渲染，�
 
 ```js
 class Comp extends React.Component {
-  // 组件接收到新的props时执行，该生命周期未来会废弃
+  // 组件接收到新的 props 时执行，该生命周期未来会废弃
   componentWillReceiveProps(nextProps) {
     console.log('0-接收新参数')
   }
@@ -71,7 +71,7 @@ class Comp extends React.Component {
     return true
   }
 
-  // 组件将要更新此时内存中的虚拟DOM树还是旧的，该生命周期未来会废弃
+  // 组件将要更新此时内存中的虚拟 DOM 树还是旧的，该生命周期未来会废弃
   componentWillUpdate() {
     console.log('2-即将更新')
   }
@@ -82,7 +82,7 @@ class Comp extends React.Component {
     return <div>comp</div>
   }
 
-  // 重新渲染：新的state、虚拟DOM与页面都保持了同步
+  // 重新渲染：新的 state、虚拟 DOM 与页面都保持了同步
   componentDidUpdate() {
     console.log('3-已经更新')
   }
@@ -95,7 +95,7 @@ class Comp extends React.Component {
 
 贴士：`React.Component` 是最基础的 React 组件类，而 `React.PueComponent` 则内部默认为开发者定义好了 `shouldComponentUpdate` 生命周期，开发者无需考虑该函数。
 
-### 2.3 旧版生命周期-组件销毁阶段
+### 2.3 旧版生命周期 - 组件销毁阶段
 
 组件销毁即组件卸载。
 
@@ -141,7 +141,7 @@ class Comp extends React.Component {
 ### 3.1 新版本生命周期使用变化汇总
 
 - 16.3+：可以使用带 `UNSAFE_`开头的钩子，也可以使用旧版钩子
-- 16.4： getDeriveStateFromProps() 可以在 setState()、forceUpdate() 时触发。
+- 16.4：getDeriveStateFromProps() 可以在 setState()、forceUpdate() 时触发。
 - 17：只能使用 `UNSAFE_`开头的钩子，或者新版钩子
 
 ### 3.2 新生命周期个阶段对应钩子总结
@@ -149,26 +149,26 @@ class Comp extends React.Component {
 创建阶段：
 
 ```txt
-第一步：  constructor()
-第二步：  getDerivedStateFromProps
-第三步：  render()
-第四步：  componentDidMount()
+第一步：constructor()
+第二步：getDerivedStateFromProps
+第三步：render()
+第四步：componentDidMount()
 ```
 
 更新阶段：
 
 ```txt
-第一步：  getDerivedStateFromProps()
-第二步：  shouldComponentUpdate()
-第三步：  render()
-第四步：  getSnapshotBeforeUpdate()
-第五步：  componentDidMount()
+第一步：getDerivedStateFromProps()
+第二步：shouldComponentUpdate()
+第三步：render()
+第四步：getSnapshotBeforeUpdate()
+第五步：componentDidMount()
 ```
 
 销毁阶段：
 
 ```txt
-第一步：  componentWillUnmount()
+第一步：componentWillUnmount()
 ```
 
 ## 四 错误处理

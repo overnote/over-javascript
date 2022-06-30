@@ -27,8 +27,8 @@ console.log(obj1 == obj) // false
 由于 Object 对象是所有对象的祖先对象（基类），所以其属性和方法，其他对象都会拥有：
 
 - `constructor`属性：保存当前对象的构造函数
-- `hasOwnProperty(propStr)方法`：检测实例对象是否包含该属性用于检查给定的属性（不会检测原型中的属性）
-- `isPrototypeOf(protoObj)方法`：检测当前对象是否是传入的原型对象
+- `hasOwnProperty(propStr) 方法`：检测实例对象是否包含该属性用于检查给定的属性（不会检测原型中的属性）
+- `isPrototypeOf(protoObj) 方法`：检测当前对象是否是传入的原型对象
 - `propertyIsEnumerable(propStr)`：检测传入的参数属性是否能够被 for-in 枚举到。
 - `toString()`：返回对象的字符串表示。
 - `valueOf()`：返回对象的字符串、数值或布尔值表示
@@ -38,7 +38,7 @@ console.log(obj1 == obj) // false
 
 ## 二 Object 类常见使用场景
 
-### 2.1 Object.keys()获取对象成员
+### 2.1 Object.keys() 获取对象成员
 
 Object.keys() 用来获取对象成员数组：
 
@@ -81,7 +81,7 @@ for (let item in obj) {
 
 ### 2.2 对象的成员检测
 
-使用属性直接查询、in、hasOwnProperty()、propertyIsEnumerable()等方式可以检测对象中是否存在该成员。但是如果对象的属性是通过继承得到的，那么上述操作就会出现一些特殊情况：
+使用属性直接查询、in、hasOwnProperty()、propertyIsEnumerable() 等方式可以检测对象中是否存在该成员。但是如果对象的属性是通过继承得到的，那么上述操作就会出现一些特殊情况：
 
 ```js
 class Father {
@@ -108,13 +108,13 @@ console.log('age' in s) // true
 console.log('name' in s) // true
 console.log('toString' in s) // true
 
-// Object.hasOwnProperty()方式：不会检查原型链
+// Object.hasOwnProperty() 方式：不会检查原型链
 console.log(s.hasOwnProperty('age')) // true
 console.log(s.hasOwnProperty('name')) // true
 console.log(s.hasOwnProperty('toString')) // false 继承方法无法识别
 
-// Object.propertyIsEnumerable()()方式：是hasOwnProperty()的增强版
-// 只有检测到是自有属性，且可枚举型为true时，返回值才为true
+// Object.propertyIsEnumerable()() 方式：是 hasOwnProperty() 的增强版
+// 只有检测到是自有属性，且可枚举型为 true 时，返回值才为 true
 console.log(s.hasOwnProperty('age')) // true
 console.log(s.hasOwnProperty('name')) // true
 console.log(s.hasOwnProperty('toString')) // false 继承方法无法识别
@@ -123,7 +123,7 @@ console.log(s.hasOwnProperty('toString')) // false 继承方法无法识别
 延伸：使用 `s.age !== undefined` 的方式也可以用来判断对象是否存在属性，作用与 in 类似，但是在一些场合，这种做法欠妥周全：
 
 ```js
-let obj = { x: undefined } // 对象属性被显式赋值了undefined
+let obj = { x: undefined } // 对象属性被显式赋值了 undefined
 console.log(obj.x !== undefined) // false
 console.log('x' in obj) // true
 ```
@@ -143,8 +143,8 @@ console.log('x' in obj) // true
 
 ```js
 let p = {
-  // 直接在对对象上定义了属性，则 Configurable、Enumerable、Writable都被默认设置为了true
-  name: 'lisi', // name属性的  Value 特征被设置为了 lisi
+  // 直接在对对象上定义了属性，则 Configurable、Enumerable、Writable 都被默认设置为了 true
+  name: 'lisi', // name 属性的  Value 特征被设置为了 lisi
 }
 ```
 
@@ -210,7 +210,7 @@ console.log(book.edition) //2
 
 不一定非要同时指定 getter 和 setter。只指定 getter 意味着属性是不能写，尝试写入属性会被忽略。在严格模式下，尝试写入只指定了 getter 函数的属性会抛出错误。类似地，只指定 setter 函数的属性也不能读，否则在非严格模式下会返回 undefined，而在严格模式下会抛出错误。
 
-在 IE 中，只有 9 及以上版本才支持，如果是旧版，一 般 都 使 用 两 个 非 标 准 的 方 法 ：`__defineGetter__()`和`__defineSetter__()`:
+在 IE 中，只有 9 及以上版本才支持，如果是旧版，一 般 都 使 用 两 个 非 标 准 的 方 法：`__defineGetter__()`和`__defineSetter__()`:
 
 ```js
 let book = {
@@ -260,7 +260,7 @@ Object.defineProperties(book, {
 
 ### 3.4 读取属性特性
 
-用 ECMAScript 5 的 `Object.getOwnPropertyDescriptor()`方法，可以取得给定属性的描述符。这个方法接收两个参数：属性所在的对象和要读取其描述符的属性名称。返回值是一个对象，如果是访问器属性，这个对象的属性有 configurable、 enumerable、 get 和 set；如果是数据属性，这个对象的属性有 configurable、 enumerable、 writable 和 value。例如：
+用 ECMAScript 5 的 `Object.getOwnPropertyDescriptor()`方法，可以取得给定属性的描述符。这个方法接收两个参数：属性所在的对象和要读取其描述符的属性名称。返回值是一个对象，如果是访问器属性，这个对象的属性有 configurable、enumerable、get 和 set；如果是数据属性，这个对象的属性有 configurable、enumerable、writable 和 value。例如：
 
 ```js
 let book = {}
@@ -309,7 +309,7 @@ let host = {
   port: 443,
 }
 
-Object.freeze(host) // host已经无法变更
+Object.freeze(host) // host 已经无法变更
 host.port = 446
 console.log(host.port) // 443
 

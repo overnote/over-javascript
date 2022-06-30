@@ -1,4 +1,4 @@
-# 05-重要属性-2-数据 props
+# 05-重要属性 -2-数据 props
 
 ## 一 props 概念
 
@@ -31,7 +31,7 @@ class ClaComp extends React.Component {
     super(props)
   }
   render() {
-    return <div>组件props数据：{this.props.name}</div>
+    return <div>组件 props 数据：{this.props.name}</div>
   }
 }
 ```
@@ -52,7 +52,7 @@ class ClaComp extends React.Component {
         super(props)
     }
     render() {
-        return <div>组件props数据：{this.props.name}</div>
+        return <div>组件 props 数据：{this.props.name}</div>
     }
 }
 
@@ -66,7 +66,7 @@ ClaComp。defaultProps = {
 
 ```js
 function FuncComp(props) {
-  // 若参数props无name属性，则显示默认属性值
+  // 若参数 props 无 name 属性，则显示默认属性值
   return <div>默认数据：{props.name}</div>
 }
 
@@ -83,7 +83,7 @@ props.name = props.name || '默认值'
 
 ### 3.2 批量传递标签属性 props
 
-传递多个参数时可以使用 ES6 的扩展运算符:
+传递多个参数时可以使用 ES6 的扩展运算符：
 
 ```js
 // 传递 name、age

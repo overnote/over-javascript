@@ -1,4 +1,4 @@
-# 08-鉴权-2-Session
+# 08-鉴权 -2-Session
 
 ## 一 Session 简介
 
@@ -56,7 +56,7 @@ function (req, res) {
                 req.session = generate();
             }
         } else {
-            // 如果session过期或口令不对，重新生成session
+            // 如果 session 过期或口令不对，重新生成 session
             req.session = generate();
         }
     }
@@ -64,7 +64,7 @@ function (req, res) {
 }
 ```
 
-此时还需要在响应给客户端时设置新的值，以便下次请求时能够对应服务端的数据，这里重新实现 writeHead()方法，在内部注入设置 Cookie 的逻辑：
+此时还需要在响应给客户端时设置新的值，以便下次请求时能够对应服务端的数据，这里重新实现 writeHead() 方法，在内部注入设置 Cookie 的逻辑：
 
 ```js
 var writeHead = res.writeHead
@@ -139,7 +139,7 @@ function (req, res) {
                 redirect(getURL(req.url, key, session.id));
             }
         } else {
-            // 如果session过期或口令不对，重新生成session
+            // 如果 session 过期或口令不对，重新生成 session
             var session = generate();
             redirect(getURL(req.url, key, session.id));
         }

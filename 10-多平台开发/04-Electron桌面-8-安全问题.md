@@ -91,7 +91,7 @@ let session = win.webContents.session
 session.setCertificateVerifyProc((request, callback) => {
   if (request.certificate.issuer.commonName == 'DO_NOT_TRUST_FiddlerRoot') {
     // 假设现在安装的是 Fiddler 的证书
-    callback(-2) // 如果不符合预期，传入-2 驳回
+    callback(-2) // 如果不符合预期，传入 -2 驳回
   } else {
     callback(-3) // -3 表示使用 Chromium 的验证结果，0 表示成功并禁止使用证书透明度验证
   }

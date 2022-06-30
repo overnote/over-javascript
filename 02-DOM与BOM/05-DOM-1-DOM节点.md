@@ -18,7 +18,7 @@
   let div = document.getElementById('div')
   console.log(div.nodeType) // 1
   console.log(div.nodeName) // DIV，元素标签名
-  console.log(div.nodeValue) // null，始终为null
+  console.log(div.nodeValue) // null，始终为 null
 </script>
 ```
 
@@ -63,7 +63,7 @@ if (someNode.nodeType == 1) {
 每个节点都有一个 **childNodes** 的属性，其中包含一个 NodeList 的实例：
 
 ```js
-// 中括号或使用 item()方法可以访问 NodeList 中的元素：
+// 中括号或使用 item() 方法可以访问 NodeList 中的元素：
 let firstChild = someNode.childNodes[0]
 let secondChild = someNode.childNodes.item(1)
 let count = someNode.childNodes.length
@@ -73,11 +73,11 @@ let count = someNode.childNodes.length
 
 ```js
 let arrayOfNodes = Array.prototype.slice.call(someNode.childNodes, 0)
-// 推荐使用ES6方式
+// 推荐使用 ES6 方式
 let arrayOfNodes = Array.from(someNode.childNodes)
 ```
 
-每个节点都有一个 parentNode 属性，指向其 DOM 树中的父元素。 childNodes 中的所有节点都有同一个父元素，因此它们的 parentNode 属性都指向同一个节点。childNodes 列表中的每个节点都是同一列表中其他节点的同胞节点。而 previousSibling 和 nextSibling 可以在这个列表的节点间导航。这个列表中第一个节点的 previousSibling 属性是 null，最后一个节点的
+每个节点都有一个 parentNode 属性，指向其 DOM 树中的父元素。childNodes 中的所有节点都有同一个父元素，因此它们的 parentNode 属性都指向同一个节点。childNodes 列表中的每个节点都是同一列表中其他节点的同胞节点。而 previousSibling 和 nextSibling 可以在这个列表的节点间导航。这个列表中第一个节点的 previousSibling 属性是 null，最后一个节点的
 nextSibling 属性也是 null，如下所示：
 
 ```js
@@ -90,7 +90,7 @@ if (someNode.nextSibling === null) {
 
 注意：如果 childNodes 中只有一个节点，则它的 previousSibling 和 nextSibling 属性都是 null。
 
-父节点和它的第一个及最后一个子节点也有专门属性： firstChild 和 lastChild 分别指向 childNodes 中的第一个和最后一个子节点。
+父节点和它的第一个及最后一个子节点也有专门属性：firstChild 和 lastChild 分别指向 childNodes 中的第一个和最后一个子节点。
 
 ## 二 常见节点类型
 
@@ -123,7 +123,7 @@ let textNode = document.createTextNode('<strong>Hello</strong> world!')
 
 Attr 节点的类型数值为 2，nodeName 为其特性名称，nodeValue 为其特性值。
 
-注意：特性不被认为是 DOM 文档树的一部分。开发人员最常使用的是 getAttribute()、 setAttribute()和 remveAttribute()方法，很少直接引用特性节点。
+注意：特性不被认为是 DOM 文档树的一部分。开发人员最常使用的是 getAttribute()、setAttribute() 和 remveAttribute() 方法，很少直接引用特性节点。
 
 ## 2.5 DocumentFragment 类型
 
@@ -139,14 +139,14 @@ Attr 节点的类型数值为 2，nodeName 为其特性名称，nodeValue 为其
 // 通用的 元素节点选择 API
 document.getElementById('demo') //通过 id 找到 HTML 元素
 document.getElementsByTagName('div')[0] //通过标签名找到 HTML 元素获得的是标签伪数组
-document.getElementsByClassName('a') //通过类名找到 HTML 元素，在部分IE中无效
+document.getElementsByClassName('a') //通过类名找到 HTML 元素，在部分 IE 中无效
 
 // HTML5 中新增的节点选择 API
-document.querySelector() // 可以传入 CSS选择符,返回与该模式匹配的第一个元素
-document.querySelectorAll() // 可以传入 CSS选择符,返回的是一个 NodeList 的实例
+document.querySelector() // 可以传入 CSS 选择符，返回与该模式匹配的第一个元素
+document.querySelectorAll() // 可以传入 CSS 选择符，返回的是一个 NodeList 的实例
 
 // 该方法浏览器支持率较低
-document.matchesSelector() // 可以传入 CSS选择符,返回是否匹配的布尔
+document.matchesSelector() // 可以传入 CSS 选择符，返回是否匹配的布尔
 ```
 
 ### 3.2 节点层次关系
@@ -158,17 +158,17 @@ document.matchesSelector() // 可以传入 CSS选择符,返回是否匹配的布
 element.parentNode
 
 // 获取子元素节点
-// 下列 API 不支持IE8，IE8 使用 firstChid，firstChild 在标准中获取的是第一个子节点，同理lastChid
+// 下列 API 不支持 IE8，IE8 使用 firstChid，firstChild 在标准中获取的是第一个子节点，同理 lastChid
 fatherElement.firstElementChild //获取第一个子元素节点
 fatherElement.lastElementChild //获取最后一个子元素节点
 
 // 获取前后同级元素节点
-// 下列 API 不支持IE8，IE8 使用 previousSibling，previousSibling 在标准中获取的是前一个节点，同理 nextSibling
+// 下列 API 不支持 IE8，IE8 使用 previousSibling，previousSibling 在标准中获取的是前一个节点，同理 nextSibling
 element.previousElementSibling //获取前一个节点
 element.nextElementSibling //获取下一个节点
 
 // 获取所有子元素节点
-fatherElement.children // 非标准属性，但是得到了所有支持（在IE8中包含注释节点）
+fatherElement.children // 非标准属性，但是得到了所有支持（在 IE8 中包含注释节点）
 
 // 获取所有子节点
 fatherElement.childNodes //标准属性，用来获取所有子节点数组，包括：文本、换行
@@ -189,7 +189,7 @@ fatherElement.insertBefore(新节点,参考节点); // 在参考节点前插入
 fatherElement.removeChild（子节点);      // 必须指定要删除的子节点
 
 // 修改节点内容
-element.innerHTML = "HTML内容";  // 内容修改为新的 HTML 文档
+element.innerHTML = "HTML 内容";  // 内容修改为新的 HTML 文档
 element.innerText = "文本内容";    // 内容修改为纯文本
 
 // 复制节点
@@ -255,7 +255,7 @@ element.style.removeProperty('border')
 
 ### 3.6 节点比较
 
-isSameNode()和 isEqualNode():
+isSameNode() 和 isEqualNode():
 
 ```js
 let div1 = document.createElement('div')
@@ -295,7 +295,7 @@ DOM2 Traversal and Range 模块定义了两个类型用于辅助顺序遍历 DOM
 
 如果以 document 为根节点进行遍历：
 
-![DOM遍历](../images/dom/dom-tree-01.png)
+![DOM 遍历](../images/dom/dom-tree-01.png)
 
 ### 4.1 NodeIterator
 
@@ -322,8 +322,8 @@ DOM2 Traversal and Range 模块定义了两个类型用于辅助顺序遍历 DOM
       let iterator = document.createNodeIterator(
         div, // 从哪个节点开始遍历
         NodeFilter.SHOW_ELEMENT, // whatToShow 参数：应该访问哪些节点
-        null, // filter参数：是否接收或跳过特定节点
-        false // 是否扩展实体引用，在HTML中无效！
+        null, // filter 参数：是否接收或跳过特定节点
+        false // 是否扩展实体引用，在 HTML 中无效！
       )
 
       let node = iterator.nextNode()
@@ -336,7 +336,7 @@ DOM2 Traversal and Range 模块定义了两个类型用于辅助顺序遍历 DOM
 </html>
 ```
 
-注意：nextNode()和 previousNode()方法共同维护 NodeIterator 对 DOM 结构的内部指针，因此修改 DOM 结构也会体现在遍历中。
+注意：nextNode() 和 previousNode() 方法共同维护 NodeIterator 对 DOM 结构的内部指针，因此修改 DOM 结构也会体现在遍历中。
 
 第二个参数 whatToShow 是一个位掩码，通过应用一个或多个过滤器来指定访问哪些节点，常见定义有：
 
@@ -428,7 +428,7 @@ nextSibling()，遍历到当前节点的下一个同胞节点。
 previousSibling()，遍历到当前节点的上一个同胞节点。
 ```
 
-节点过滤器（ filter）除了可以返回 NodeFilter.FILTER_ACCEPT 和 NodeFilter.FILTER_SKIP，还可以返回 NodeFilter.FILTER_REJECT。在使用 NodeIterator 时， NodeFilter.FILTER_SKIP 和 NodeFilter.FILTER_REJECT 是一样的。但在使用 TreeWalker 时， NodeFilter.FILTER_SKIP 表示跳过节点，访问子树中的下一个节点，而 NodeFilter.FILTER_REJECT 则表示跳过该节点以及该节点的整个子树。例如，如果把前面示例中的过滤器函数改为返回 NodeFilter.FILTER_REJECT（而不是 NodeFilter.FILTER_SKIP），则会导致遍历立即返回，不会访问任何节点。这是因为第一个返回的元素是`<div>`，其中标签名不是"li"，因此过滤函数返回 NodeFilter.FILTER_REJECT，表示要跳过整个子树。因为`<div>`本身就是遍历的根节点，所以遍历会就此结束。
+节点过滤器（filter）除了可以返回 NodeFilter.FILTER_ACCEPT 和 NodeFilter.FILTER_SKIP，还可以返回 NodeFilter.FILTER_REJECT。在使用 NodeIterator 时，NodeFilter.FILTER_SKIP 和 NodeFilter.FILTER_REJECT 是一样的。但在使用 TreeWalker 时，NodeFilter.FILTER_SKIP 表示跳过节点，访问子树中的下一个节点，而 NodeFilter.FILTER_REJECT 则表示跳过该节点以及该节点的整个子树。例如，如果把前面示例中的过滤器函数改为返回 NodeFilter.FILTER_REJECT（而不是 NodeFilter.FILTER_SKIP），则会导致遍历立即返回，不会访问任何节点。这是因为第一个返回的元素是`<div>`，其中标签名不是"li"，因此过滤函数返回 NodeFilter.FILTER_REJECT，表示要跳过整个子树。因为`<div>`本身就是遍历的根节点，所以遍历会就此结束。
 
 ### 4.3 TreeWalker 节点跳跃
 
@@ -451,7 +451,7 @@ while (node !== null) {
 }
 ```
 
-TreeWalker 类型也有一个名为 currentNode 的属性，表示遍历过程中上一次返回的节点（无论使用的是哪个遍历方法）。可以通过修改这个属性来影响接下来遍历的起点:
+TreeWalker 类型也有一个名为 currentNode 的属性，表示遍历过程中上一次返回的节点（无论使用的是哪个遍历方法）。可以通过修改这个属性来影响接下来遍历的起点：
 
 ```js
 let node = walker.nextNode()

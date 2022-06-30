@@ -33,7 +33,7 @@ vue 中使用组件的步骤：
 
 ```html
 <div id="div">
-  <!--驼峰命名的组件名，在html中引用使用 - 连接符，并修改为小写-->
+  <!--驼峰命名的组件名，在 html 中引用使用 - 连接符，并修改为小写-->
   <my-comp></my-comp>
 </div>
 
@@ -137,8 +137,8 @@ template 属性也可以直接引用其他已经定义好的 template。
 
 ```html
 <div id="app">
-  <span @click="who='com1'">显示组件1</span>
-  <span @click="who='com2'">显示组件2</span>
+  <span @click="who='com1'">显示组件 1</span>
+  <span @click="who='com2'">显示组件 2</span>
   <component :is="who"></component>
 </div>
 

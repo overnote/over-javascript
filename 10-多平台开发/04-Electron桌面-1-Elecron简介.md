@@ -4,7 +4,7 @@
 
 桌面客户端开发常用的库是：QT、GTK、MFC，他们都是基于 C++开发的，开发效率较低，虽然现在也有基于 Go、Py 的 QT，但是仍然存在一定的缺陷。
 
-2011 年，中国英特尔的王文睿开发了 node-webkit 库，用来操作 Webkit，后开该项目失败，却衍生出了跨平台开发框架 NW.js，node-webkit 团队成员赵成到了 Github 团队后开发出了类 node-webkit 项目： Atom Shell，即 Electron 的前身。
+2011 年，中国英特尔的王文睿开发了 node-webkit 库，用来操作 Webkit，后开该项目失败，却衍生出了跨平台开发框架 NW.js，node-webkit 团队成员赵成到了 Github 团队后开发出了类 node-webkit 项目：Atom Shell，即 Electron 的前身。
 
 NW.js 与 Electron 都是基于 Node、Webkit 这 2 种技术的跨平台（Win、Mac、Linux）桌面应用开发框架，通过该框架可以利用 HTML、CSS、JavaScript 等 web 前端技术来开发跨平台桌面应用，其理念是将 Chromium、Node 进行结合：
 
@@ -44,10 +44,10 @@ Electron 也有一些竞争者，不乏理念上不同的开发方式，如 PWA�
 安装 Electron 需要确保电脑上已经安装 Node.js，最好是 8 版本以上
 
 ```txt
-# 由于国内环境，偶尔需要设置electron的代理
+# 由于国内环境，偶尔需要设置 electron 的代理
 npm config set ELECTRON_MIRROR https://cdn.npm.taobao.org/dist/electron/
 
-# 全局安装：全局安装后electron 提供了 electron 命令。当然也可以本地项目中安装，需要借助npm脚本或者npx启用electron
+# 全局安装：全局安装后 electron 提供了 electron 命令。当然也可以本地项目中安装，需要借助 npm 脚本或者 npx 启用 electron
 npm i electron -g
 ```
 
@@ -55,7 +55,7 @@ npm i electron -g
 
 ## 三 Electron 初体验
 
-### 3.1 手动书写一个 HelloWorld 【重要】
+### 3.1 手动书写一个 HelloWorld【重要】
 
 第一步：初始化一个项目：
 
@@ -67,10 +67,10 @@ npm init
 npm config set ELECTRON_MIRROR https://cdn.npm.taobao.org/dist/electron/
 npm i electron -D
 
-# 如果一直安装失败，则可以在 node_modules/electron 目录，创建一个path.txt文本文件
-    Win上，该文本文件输入内容：electron.exe
-    Mac上，该文本文件输入内容：Electron.app/Contents/MacOS/Electron
-  然后手动从阿里镜像网站下载对应版本的Electron压缩包，解压到node_modules/electron/dist
+# 如果一直安装失败，则可以在 node_modules/electron 目录，创建一个 path.txt 文本文件
+    Win 上，该文本文件输入内容：electron.exe
+    Mac 上，该文本文件输入内容：Electron.app/Contents/MacOS/Electron
+  然后手动从阿里镜像网站下载对应版本的 Electron 压缩包，解压到 node_modules/electron/dist
 ```
 
 第二步：初始化项目中的文件
@@ -95,8 +95,8 @@ function createWindow() {
     },
   })
 
-  // 根据开发环境设置加载地址，build模式下直接加载build文件中的index.html即可
-  // 生产打包文件地址： file://${path.join(__dirname, './build/index.html')}
+  // 根据开发环境设置加载地址，build 模式下直接加载 build 文件中的 index.html 即可
+  // 生产打包文件地址：file://${path.join(__dirname, './build/index.html')}
   const urlLocation = 'http://localhost:3000'
   mainWindow.loadURL(urlLocation)
   mainWindow.webContents.openDevTools()
@@ -109,7 +109,7 @@ function createWindow() {
 app.on('ready', createWindow)
 
 app.on('activate', function () {
-  // macOS中点击Dock图标时没有已打开的其余应用窗口时,则通常在应用中重建一个窗口
+  // macOS 中点击 Dock 图标时没有已打开的其余应用窗口时，则通常在应用中重建一个窗口
   if (mainWindow === null) {
     createWindow()
   }
@@ -122,8 +122,8 @@ app.on('window-all-closed', () => {
 第四步：运行
 
 ```txt
-# 直接运行 npx electron . # 为了简便，也可以使用npm脚本运行 #
-在package.json中的script内添加一行脚本： "start": "electron ." npm start
+# 直接运行 npx electron . # 为了简便，也可以使用 npm 脚本运行 #
+在 package.json 中的 script 内添加一行脚本： "start": "electron ." npm start
 ```
 
 ### 3.2 js 脚本的引入
@@ -131,10 +131,10 @@ app.on('window-all-closed', () => {
 在 index.html 中可以像普通的前端开发一样，直接使用 script 脚本引入其他的 js 文件即可：
 
 ```html
-<!-- 在根本目创建一个lib.js，内容如下：  -->
+<!-- 在根本目创建一个 lib.js，内容如下：  -->
 window.data = { key: 'value' }
 
-<!-- 在index.html中使用：  -->
+<!-- 在 index.html 中使用：  -->
 <script src="./lib.js"></script>
 <script>
   alert(data.key)
@@ -148,7 +148,7 @@ npm start
 
 ```js
 mainWindow = new BrowserWindow({
-  webPreferences: { nodeIntegration: true }, // 该配置会让页面继承Node环境，网页中的js可以使用Node,Web网页不推荐，会引起安全问题
+  webPreferences: { nodeIntegration: true }, // 该配置会让页面继承 Node 环境，网页中的 js 可以使用 Node,Web 网页不推荐，会引起安全问题
 })
 ```
 
@@ -194,14 +194,14 @@ Electron API 项目集成了大量官方的 API 演示案例，[网址](https://
 Vue 集成 Electron，不需要使用示例项目，其 cli 工具直接支持：
 
 ```txt
-# 安装vue cli 工具
+# 安装 vue cli 工具
 npm i @vue/cli -g
 
 # 创建项目
 vue create project
 
-# 进入项目后，集成electron
-vue add electron-builder  # 添加background.js为主进程入口，main.js是渲染进程入口
+# 进入项目后，集成 electron
+vue add electron-builder  # 添加 background.js 为主进程入口，main.js 是渲染进程入口
 
 # 贴士：该步骤容易因为网络原因卡住，可以切换源，或者使用 yarn -add -D electron-chromedriver
 
@@ -212,7 +212,7 @@ electron:serve
 bug 解决：此时国内环境是无法直接启动的，是因为要安装 dev-tools，这个需要翻墙，可以暂时注释
 
 ```js
-// 注释掉src / background.js中的以下代码就行了;
+// 注释掉 src / background.js 中的以下代码就行了;
 // if (isDevelopment && !process.env.IS_TEST) {
 //   // Install Vue Devtools
 //   try {
@@ -235,18 +235,18 @@ bug 解决：此时国内环境是无法直接启动的，是因为要安装 dev
 原生继承示例：使用 create-react-app 工具创建 react 项目，进入该项目手动后集成 electron：
 
 ```txt
-# 第一步：安装electron，以及一些需要的软件
+# 第一步：安装 electron，以及一些需要的软件
 npm i electron -D
 
-# 第二步：项目根目录（src同级目录）创建 main.js，内容与3.1相同
+# 第二步：项目根目录（src 同级目录）创建 main.js，内容与 3.1 相同
 
-# 第三步：增加package.json键值对： 此时当 yarn start 后，再运行 electron . 项目初级结构已经完成
+# 第三步：增加 package.json 键值对：此时当 yarn start 后，再运行 electron . 项目初级结构已经完成
 "main": "main.js",          // 设定入口文件
-"homepage": "./",           // 解决electron file协议导致生产环境加载index.html资源404问题
+"homepage": "./",           // 解决 electron file 协议导致生产环境加载 index.html 资源 404 问题
 
-# 第四步：配置electron的启动项脚本。如果想要启动时开启浏览器，则可以移除 cross-env BROWSER=none
-npm i concurrently -D    用来运行跨平台脚本，并支持一个npm脚本中运行多个命令
-npm i wait-on -D         用来等待web服务启动后才启动electron
+# 第四步：配置 electron 的启动项脚本。如果想要启动时开启浏览器，则可以移除 cross-env BROWSER=none
+npm i concurrently -D    用来运行跨平台脚本，并支持一个 npm 脚本中运行多个命令
+npm i wait-on -D         用来等待 web 服务启动后才启动 electron
 npm i cross-env -D       用来执行一些跨平台命令
 "dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\"",
 ```

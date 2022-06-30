@@ -49,10 +49,10 @@ cluster 为健壮性提供了很多事件：
 - listening：工作进程中调用 listen()，发送一条 listening 消息给主进程，主进程收到消息后，触发该事件
 - disconnect：主进程和工作进程之间 IPC 通道断开后回触发该事件
 - exit：有工作进程退出时触发该事件
-- setup：cluster.setupMaster()执行后触发该事件
+- setup：cluster.setupMaster() 执行后触发该事件
 
 ## 三 cluster 工作原理
 
-cluster 模块本质上就是 child_process 和 net 模块的组合，cluster 在启动时，会在内部启动 TCP 服务器，cluster.fork()时，将这个 TCP 服务器端的 socket 文件描述符发送给工作进程。如果进程是通过 cluster.fork()出来的，那么其环境变量存在 NODE_UNIQUE_ID，如工作进程中存在 listen()真挺网络端口的地爱用，它将拿到该文件描述符，并通过 SO_REQUSEADDR 端口重用，从而实现多个子进程共享端口。
+cluster 模块本质上就是 child_process 和 net 模块的组合，cluster 在启动时，会在内部启动 TCP 服务器，cluster.fork() 时，将这个 TCP 服务器端的 socket 文件描述符发送给工作进程。如果进程是通过 cluster.fork() 出来的，那么其环境变量存在 NODE_UNIQUE_ID，如工作进程中存在 listen() 真挺网络端口的地爱用，它将拿到该文件描述符，并通过 SO_REQUSEADDR 端口重用，从而实现多个子进程共享端口。
 
-使用 cluster 方式没有 child_process 灵活，因为自己通过 child_process 操作子进程时，可以隐式创建多个 TCP 服务器,使得子进程可以共享多个服务端的 socket。
+使用 cluster 方式没有 child_process 灵活，因为自己通过 child_process 操作子进程时，可以隐式创建多个 TCP 服务器，使得子进程可以共享多个服务端的 socket。

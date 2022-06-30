@@ -11,9 +11,9 @@
 
 ### 2.1 JSON 简介
 
-JSON（JavaScript Object Notation）是 JS 的严格子集，可以用来替代以前的标准数据方案 XML，因为 **JSON 可以直接传给 eval()而不需要创建 DOM**。
+JSON（JavaScript Object Notation）是 JS 的严格子集，可以用来替代以前的标准数据方案 XML，因为 **JSON 可以直接传给 eval() 而不需要创建 DOM**。
 
-贴士： JSON 不属于 JavaScript，它们只是拥有相同的语法而已。 JSON 也不是只能在 JavaScript 中使用，它是一种通用数据格式。很多语言都有解析和序列化 JSON 的内置能力。
+贴士：JSON 不属于 JavaScript，它们只是拥有相同的语法而已。JSON 也不是只能在 JavaScript 中使用，它是一种通用数据格式。很多语言都有解析和序列化 JSON 的内置能力。
 
 ### 2.2 JSON 语法
 
@@ -38,7 +38,7 @@ let obj = {
   name: 'Li',
   brothers: ['WW', 'ZS'],
 }
-// 参数二可选，表示只序列化哪些： JSON.stringify(book, ["name", "brothers"])
+// 参数二可选，表示只序列化哪些：JSON.stringify(book, ["name", "brothers"])
 let objStr = JSON.stringify(obj)
 console.log(objStr)
 ```
@@ -71,18 +71,18 @@ let obj = {
 }
 ```
 
-toJSON()方法可以与过滤函数一起使用，因此理解不同序列化流程的顺序非常重要。在把对象传给 JSON.stringify()时会执行如下步骤。
+toJSON() 方法可以与过滤函数一起使用，因此理解不同序列化流程的顺序非常重要。在把对象传给 JSON.stringify() 时会执行如下步骤。
 
 ```txt
-(1) 如果可以获取实际的值，则调用 toJSON()方法获取实际的值，否则使用默认的序列化。
-(2) 如果提供了第二个参数，则应用过滤。传入过滤函数的值就是第(1)步返回的值。
-(3) 第(2)步返回的每个值都会相应地进行序列化。
+(1) 如果可以获取实际的值，则调用 toJSON() 方法获取实际的值，否则使用默认的序列化。
+(2) 如果提供了第二个参数，则应用过滤。传入过滤函数的值就是第 (1) 步返回的值。
+(3) 第 (2) 步返回的每个值都会相应地进行序列化。
 (4) 如果提供了第三个参数，则相应地进行缩进
 ```
 
 ### 2.4 解析方法 parse()
 
-JSON.parse()方法也可以接收一个额外的参数，这个函数会针对每个键/值对都调用一次。为区别于传给 JSON.stringify()的起过滤作用的替代函数（ replacer），这个函数被称为还原函数（ reviver）。实际上它们的格式完全一样，即还原函数也接收两个参数，属性名（ key）和属性值（ value），另外也
+JSON.parse() 方法也可以接收一个额外的参数，这个函数会针对每个键/值对都调用一次。为区别于传给 JSON.stringify() 的起过滤作用的替代函数（replacer），这个函数被称为还原函数（reviver）。实际上它们的格式完全一样，即还原函数也接收两个参数，属性名（key）和属性值（value），另外也
 需要返回值。
 
 如果还原函数返回 undefined，则结果中就会删除相应的键。如果返回了其他任何值，则该值就会成为相应键的值插入到结果中。还原函数经常被用于把日期字符串转换为 Date 对象。例如：
@@ -134,12 +134,12 @@ let children = xmldom.getElementsByTagName('child')
 console.log(children.length) // 2
 ```
 
-在发生解析错误时， parseFromString()方法仍会返回一个 Document 对象，只不过其 document 元素是`<parsererror>`，该元素的内容为解
+在发生解析错误时，parseFromString() 方法仍会返回一个 Document 对象，只不过其 document 元素是`<parsererror>`，该元素的内容为解
 析错误的描述。
 
 ### 3.3 DOM 解析为 XML
 
-要序列化 DOM 文档，必须创建 XMLSerializer 的新实例，然后把文档传给 serializeToString()方法：
+要序列化 DOM 文档，必须创建 XMLSerializer 的新实例，然后把文档传给 serializeToString() 方法：
 
 ```js
 let serializer = new XMLSerializer()

@@ -5,7 +5,7 @@
 ```css
 /* CSS2 */
 *                   /* 通配符选择器 */
-#div                /* id选择器 */
+#div                /* id 选择器 */
 .box                /* 类名选择器 */
 div                 /* 标签选择器 */
 div p               /* 后代选择器：所有后代 */
@@ -14,8 +14,8 @@ div,p,span          /* 并集选择器 */
 
 /* CSS3 */
 div>p               /* 子代选择器：直接后代 */
-div+p               /* 选中div后同级第一个p */
-div~p               /* 选中div后同级所有p */
+div+p               /* 选中 div 后同级第一个 p */
+div~p               /* 选中 div 后同级所有 p */
 ```
 
 ## 二 属性选择器
@@ -24,15 +24,15 @@ div~p               /* 选中div后同级所有p */
 
 ```css
 /* CSS2 */
-E[attr]               /* 属性名=attr的div */
-E[attr="value"]       /* 属性attr值=value的div */
+E[attr]               /* 属性名=attr 的 div */
+E[attr="value"]       /* 属性 attr 值=value 的 div */
 
 /* CSS3 */
-E[attr~="value"]      /* 属性值包含value字符 */
-E[attr*="value"]      /* 属性值包含value字符并且在 任意 位置 */
-E[attr^="value"]      /* 属性值包含value字符并且在 开始 位置 */
-E[attr$="value"]      /* 属性值包含value字符并且在 结束 位置 */
-E[attr|="value"]      /* 属性值是value或以 value- 开头的值（比如说zh-cn） */
+E[attr~="value"]      /* 属性值包含 value 字符 */
+E[attr*="value"]      /* 属性值包含 value 字符并且在 任意 位置 */
+E[attr^="value"]      /* 属性值包含 value 字符并且在 开始 位置 */
+E[attr$="value"]      /* 属性值包含 value 字符并且在 结束 位置 */
+E[attr|="value"]      /* 属性值是 value 或以 value- 开头的值（比如说 zh-cn） */
 ```
 
 示例：选择以 icon 开头的
@@ -51,7 +51,7 @@ E[attr|="value"]      /* 属性值是value或以 value- 开头的值（比如说
 
 ```css
 E:link {
-} /* 超链接默认状态，与a{}一样 */
+} /* 超链接默认状态，与 a{}一样 */
 E:visited {
 } /* 超链接访问过后的样式 */
 E:hover {
@@ -90,7 +90,7 @@ input:required {
 `:target` 伪类匹配的元素需要有 id 属性，用来匹配浏览器中的哈希值
 
 ```css
-/* 网址为： demo.com/#blue 此时选中 .div 的标签中 id="blue" 的元素 */
+/* 网址为：demo.com/#blue 此时选中 .div 的标签中 id="blue" 的元素 */
 .div:target {
 }
 ```
@@ -113,19 +113,19 @@ E:first-child           /* 第一个子元素 */
 E:last-child            /* 最后一个子元素 */
 
 /* CSS3 */
-E:nth-child(n)          /* E元素的所有子元素，n为第几个 */
-E:nth-last-child(n)     /* 同E:nth-child(n) 相似，只是倒着计算 */
+E:nth-child(n)          /* E 元素的所有子元素，n 为第几个 */
+E:nth-last-child(n)     /* 同 E:nth-child(n) 相似，只是倒着计算 */
 
-E:nth-of-type(n)        /* E元素的所有子元素中，所在类型的第n个元素 */
+E:nth-of-type(n)        /* E 元素的所有子元素中，所在类型的第 n 个元素 */
 E:nth-last-of-type(n)   /* 同上，从后向前计算 */
 
-E:empty                 /* 没有任何子节点（包括空格）的E元素,(子节点包含文本节点) */
+E:empty                 /* 没有任何子节点（包括空格）的 E 元素，(子节点包含文本节点) */
 ```
 
 注意：
 
 - n 遵循线性变化，其取值是：0、1、2、3、4....。n<=0 时选取无效。
-- n 可以是多种形式：`nth-child(2n)`、`nth-child(2n+1)`、`nth-child(-1n+5)`、`nth-last-child(-1n+5)`(后五个)等；
+- n 可以是多种形式：`nth-child(2n)`、`nth-child(2n+1)`、`nth-child(-1n+5)`、`nth-last-child(-1n+5)`(后五个) 等；
 - n 可以是特殊字符：`even`(偶数)、`odd`(奇数)
 
 示例：
