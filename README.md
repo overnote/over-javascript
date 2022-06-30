@@ -56,6 +56,10 @@ CSS 提升类书籍：
 - [《ECMAScript6 入门》第 3 版](https://book.douban.com/subject/27127030/)：ES6 书籍，偏全面
 - [《你不知道 JavaScript》上卷 + 中卷](https://book.douban.com/subject/26351021/)：笔者认为目前最好的 JS 深入书籍之一
 - [《JavaScript 忍者秘籍》第 2 版](https://book.douban.com/subject/30143702/)：对函数的讲解：闭包、重载、柯里化化讲解极好
+- [《JavaScript 函数式编程思想》](https://book.douban.com/subject/30449514/)
+- [《JavaScript ES8 函数式编程实践入门 (第 2 版)》](https://book.douban.com/subject/35791367/)
+- [《JavaScript 函数式编程指南》](https://book.douban.com/subject/30283769/)
+- [《JavaScript 函数式编程指北-Franklin Risby》](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)
 
 其他优秀书籍：
 
@@ -79,6 +83,7 @@ DOM 编程学习：
 
 - [《TypeScript 编程》](https://book.douban.com/subject/35134660/)：TS 语法基础
 - [《Effective TypeScript》](https://book.douban.com/subject/35689352/)：TS 使用中的一些实践技巧
+- [《编程与类型系统》](https://book.douban.com/subject/35325133/)
 
 ### 2.4 Node
 
