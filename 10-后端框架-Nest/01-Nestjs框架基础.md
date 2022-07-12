@@ -2,11 +2,9 @@
 
 ## 一 Nest 简介
 
-Nest 是使用 TypeScript 开飞的 Node 服务端框架，其内核是可插拔的，默认内核是 Express。
+Nest 是使用 TypeScript 开发的 Node 服务端框架，其中文文档地址为：<https://docs.nestjs.cn/>。
 
-Nest 的中文文档：<https://docs.nestjs.cn/>
-
-与 Express、Koa 不同，Nest 具备了大量企业级开发特性，这些特性往往与 Java 中的 Spring 框架开发思想相似：
+Nest 的设计灵感来源于 Angular，其默认内核是 Express，且可插拔。与 Express、Koa 不同，Nest 具备了大量企业级开发特性，这些特性往往与 Java 中的 Spring 框架开发思想相似：
 
 - 基于 TypeScript 语言开发，具备类型校验功能，也有更便利的语法联想，适合大型工程项目
 - 具备依赖注入（DI）、控制反转（IOC）功能，解耦了业务代码
@@ -15,9 +13,9 @@ Nest 的中文文档：<https://docs.nestjs.cn/>
 
 Express 与 Koa 适合小型项目，如个人博客等，但是其约定很差，项目格式会因为不同开发者的个人风格而千奇百怪，阿里的 egg 虽然也做了约束，但是仍然只适合对项目做了普通约束，他们都是只适合作为上层框架的底层框架而存在。
 
-Nest 是 NodeJS 真正意义上的第一个 Web 框架，借鉴了 Spring、Anular 的设计思想，具备了：高效、可扩展、可靠的能力。
+Nest 借鉴了 Spring、Anular 的设计思想， 是 NodeJS 真正意义上的第一个 Web 框架，本质上 Nest 解决的是：Express、Koa 这些底层框架在开发时遇到的项目架构问题，即：高效性、可扩展、可靠性。
 
-## 二 Nest7.0 初步使用
+## 二 Nest 初步使用
 
 ### 2.1 环境搭建
 
