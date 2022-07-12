@@ -133,8 +133,9 @@ DOM 编程学习：
 - [《HTML5+JavaScript 动画基础》](https://book.douban.com/subject/24744218/)：目前最好的动画书籍
 - [《HTML5 Canvas 核心技术》](https://book.douban.com/subject/24533314/)：目前最好的 canvas 书籍
 - [《TypeScript 图形渲染实战：2D 架构设计与实现》](https://book.douban.com/subject/31365348/)：编排较乱，但仍有值得看的地方
-- [《WebGL 编程指南》](https://book.douban.com/subject/25909351/)
-- [《Three.js 开发指南》](https://book.douban.com/subject/26349497/)
+- [《交互式计算机图形学》](https://book.douban.com/subject/26916420/)：计算机图形学基础原理
+- [《WebGL 编程指南》](https://book.douban.com/subject/25909351/)：webgl 使用手册，目前可以额外关注 webgpu
+- [《Three.js 开发指南》](https://book.douban.com/subject/34451906/)：threejs 的编程手册
 
 ## 附
 
