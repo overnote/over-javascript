@@ -1,10 +1,10 @@
-# 13.1-Nestjs-框架基础
+# 01-Nestjs 框架基础
 
 ## 一 Nest 简介
 
 Nest 是使用 TypeScript 开发的 Node 服务端框架，其中文文档地址为：<https://docs.nestjs.cn/>。
 
-Nest 的设计灵感来源于 Angular，其默认内核是 Express，且可插拔。与 Express、Koa 不同，Nest 具备了大量企业级开发特性，这些特性往往与 Java 中的 Spring 框架开发思想相似：
+Nest 的设计灵感来源于 Angular，其默认内核是 Express（可切换为 fastify）。与 Express、Koa 不同，Nest 具备了大量企业级开发特性，这些特性往往与 Java 中的 Spring 框架开发思想相似：
 
 - 基于 TypeScript 语言开发，具备类型校验功能，也有更便利的语法联想，适合大型工程项目
 - 具备依赖注入（DI）、控制反转（IOC）功能，解耦了业务代码
@@ -49,7 +49,7 @@ src
 ├── app.service.ts          # 服务层示例
 ```
 
-nest 推荐将项目按照 业务模块进行划分（module），比如`user.module.ts`，`order.module.ts`，在每个模块下进行控制层、服务层的开发。
+nest 项目是由 ts-node 运行的，可以在开发时节省编译 .ts 的过程，其目录是按照业务模块进行划分（module），比如`user.module.ts`，`order.module.ts`，在每个模块下进行控制层、服务层的开发。
 
 注意：
 **nest 的工厂管理了大量的模块（module），当使用到该模块时，直接取用即可，由 nest 框架自己负责注入，而无需开发者自己手动去 new。**，这就是 Java 的 Web 框架 Spring 的核心思想。
@@ -71,9 +71,7 @@ nest g s user           # s 是 service 的缩写
 
 贴士：`nest --help` 可以查看缩写规范。
 
-## 三 控制器与服务层
-
-### 3.1 在 module 中注册控制器与服务
+### 2.3 在 module 中注册控制器与服务
 
 在 Nestjs 中，所有的 controller 和 service 都要在对应的 module 中注册：
 
@@ -90,9 +88,15 @@ import { AppService } from './app.service'
 export class AppModule {}
 ```
 
-### 3.2 路由
+## 三 控制层
 
-Nestjs 路由不是集中式管理，而是分散在 controller 中，通过 @controller() 中声明的（可选）前缀和请求装饰器中指定的任何路由来确定的。
+### 3.1 路由
+
+Nestjs 路由不是集中式管理，而是分散在 controller 中。如图所示：
+
+![控制器](../images/nest/01.png)
+
+控制器使用了大量请求相关的装饰器来实现业务：
 
 ```ts
 import { Controller, Get } from '@nestjs/common'
@@ -103,10 +107,39 @@ import { CatsService } from './cats.service'
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
-  // 路由地址： /cats/1003
-  @Get(':id')
-  findOne(@Param('id') id: string): string {
-    return this.catsService.getCat()
+  // query 参数：自动解析参数
+  @Get('demo1')
+  demoA(@Query() query: Record<string, any>) {
+    console.log('query:', query)
+    return {}
+  }
+
+  // 多个参数
+  @Get('demo2')
+  demoB(@Query() { uid, name }): string {
+    console.log(uid, name)
+    return {}
+  }
+
+  // param 参数
+  @Get('demo3/:uid')
+  demoC(@Param() param: { uid: number }) {
+    console.log('uid:', param.uid)
+    return {}
+  }
+
+  // body 参数：这里如果前端传递了非 dto 属性，也是被接收到了。因为 TS 不严格，只在开发时检查！
+  // dto 层主要是在开发阶段进行前端数据校验，其类型如下：
+  //   export class CreateDemoDto implements Demo {
+  //     uid: number
+  //     name: string
+  //     username: string
+  //     password: string
+  // }
+  @Post('demo4')
+  demoE(@Body() demo: CreateDemoDto) {
+    console.log('demo:', demo)
+    return {}
   }
 }
 ```
@@ -125,7 +158,78 @@ async function bootstrap() {
 bootstrap()
 ```
 
-### 3.3 服务层
+除了使用 @Get 装饰器，我们还可以使用其它 HTTP 方法装饰器。比如：@Put(), @Delete(), @Patch(), @Options(), @Head(), and @All()，注意 All 并不是 HTTP 的方法，而是 Nest 提供的一个快捷方式，表示接收任何类型的 HTTP 请求。
+
+Nest 支持基于模式的路由规则匹配，比如 `*` 表示匹配任意的字母组合：
+
+```ts
+// 将匹配 abcd, ab_cd, abecd 等规则
+@Get('ab*cd')
+```
+
+匹配规则如下：
+
+- `*` 匹配任意数量的任意字符
+- `?` 匹配任意单个字符
+- `[abc]` 匹配方括号中的任意一个字符
+- `[a-z]` 匹配字母、数字区间
+
+贴士：路由的注册顺序与控制器类中的方法顺序相关，如果你先装饰了一个 cats/:id 的路由，后面又装饰了一个 cats 路由。
+
+### 3.2 请求
+
+请求对象包括：
+
+```ts
+@Request() req
+@Response() res
+@Next() next
+@Session() req.session
+@Param(key?: string) req.params / req.params[key]
+@Body(key?: string) req.body / req.body[key]
+@Query(key?: string) req.query / req.query[key]
+@Headers(name?: string) req.headers / req.headers[name]
+```
+
+示例：
+
+```ts
+// http://localhost:3000/?username=zs
+@Get()
+getHello(@Query() q: String): string {
+    console.log(q)  // { username: 'zs' }
+    return this.appService.getHello();
+}
+```
+
+### 3.3 响应对象
+
+响应的默认状态码是 200，POST 则是 201，可以采用下面的方式指定响应：
+
+- 内置方法：推荐该方式。如果返回一个 js 对象或者数据会自动序列化 `json`，如果是字符串则不会序列化。可以使用@HttpCode()装饰器改变
+- 指定框架：可以使用`@Res()`装饰器装饰响应对象，这样可以使用 `Express` 的方式处理响应： `res.status(200).send()`
+
+使用装饰器 @HttpCode(204) 来指定处理器级别的 默认 HttpCode 为 204 示例：
+
+```ts
+@Post()
+@HttpCode(204)
+create() {
+  return 'This action adds a new cat';
+}
+```
+
+可以使用 `@Header()` 来设置自定义的请求头，也可以使用 `response.header()` 设置:
+
+```ts
+@Post()
+@Header('Cache-Control', 'none')
+create() {
+return 'This action adds a new cat';
+}
+```
+
+## 四 服务层
 
 在 MVC 模式中，controller 通过 model 获取数据。对应的，在 Nestjs 中，controller 负责处理传入的请求，并调用对应的 service 完成业务处理，返回对客户端的响应。service 可以看做夹在 controller 和 model 之间的一层，在 service 调用 DAO（在 Nestjs 中是各种 ORM 工具或者自己封装的 DAO 层）实现数据库的访问，进行数据的处理整合。
 
