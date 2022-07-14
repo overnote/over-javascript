@@ -1,4 +1,8 @@
-# 09-客户端存储 -1-cookie
+# 09-客户端存储-1-cookie
+
+## 关于客户端存储
+
+客户端存储在本文档指浏览器端用于在本地存储数据、读取数据的机制。目前常见的客户端存储技术有：Cookie、SessionStorage、LocalStorage、indexDB 等。
 
 ## 一 cookie
 
