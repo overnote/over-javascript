@@ -88,6 +88,10 @@ import { AppService } from './app.service'
 export class AppModule {}
 ```
 
+### 2.3 项目模板
+
+本文档参考模板地址：<https://github.com/ry-cli/nest-prisma>
+
 ## 三 控制层
 
 ### 3.1 路由
