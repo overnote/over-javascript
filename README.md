@@ -24,11 +24,12 @@ OverNote 系列笔记是我在平时一些学习时间阅读书籍博客、观�
 笔者推荐直接阅读新时期的一些必读著作：
 
 - [《CSS 设计指南》](https://book.douban.com/subject/23123255/)：CSS 入门
-- [《深入解析 CSS》](https://book.douban.com/subject/35021471/)：重点书籍，新近较好的 CSS 基础与进阶书籍，有大量工作细节补充
-- [《CSS 揭秘》](https://book.douban.com/subject/26745943/)：重点书籍，CSS 书籍瑰宝！！！
+- [**《深入解析 CSS》**](https://book.douban.com/subject/35021471/)：重点书籍，新近较好的 CSS 基础与进阶书籍，有大量工作细节补充
+- [**《CSS 揭秘》**](https://book.douban.com/subject/26745943/)：重点书籍，CSS 书籍瑰宝！！！
 - [《CSS 权威指南（第四版）》](https://book.douban.com/subject/33398314/)：经典书籍，可以作为 CSS 字典查阅
 - [《精通 CSS》第 3 版](https://book.douban.com/subject/30450258/)：内容与《深入解析 CSS》重合
 - [《CSS 实战手册》第四版](https://book.douban.com/subject/26898555/)：内容与《深入解析 CSS》重合
+- [《CSS3 艺术》](https://book.douban.com/subject/34932891/)：提供大量 CSS3 的示例与优化技巧
 
 其他优秀书籍：
 
