@@ -135,9 +135,9 @@ autocomplete="on"         开启历史输入数据提示
 <textarea></textarea>
 ```
 
-## 四 H5 中表单的改变
+## 三 H5 中表单的改变
 
-### 4.1 新增表单类型
+### 3.1 新增表单类型
 
 H5 的表单增加了很多类型：
 
@@ -169,7 +169,7 @@ datetime    时间日期
 
 上述表单类型设置为 email 后，可以验证邮箱书写的合法性。
 
-### 4.2 新增表单属性
+### 3.2 新增表单属性
 
 ```txt
 placeholder     占位符
@@ -185,14 +185,14 @@ autocapitalize  iOS 独有属性，设置为 off 关闭首字母大写
 autocorrect     iOS 独有属性，设置为 off 关闭输入自动修正
 ```
 
-### 4.3 新增表单事件
+### 3.3 新增表单事件
 
 ```txt
 oninput         用户输入内容时触发，可用于移动端输入字数统计
 oninvalid       验证不通过时触发
 ```
 
-### 4.4 表单自动联想
+### 3.4 表单自动联想
 
 ```html
 <input type="text" list="data" />
