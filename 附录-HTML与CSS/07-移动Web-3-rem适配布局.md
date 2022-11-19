@@ -1,47 +1,8 @@
 # 07-移动 Web-3-rem 适配布局
 
-## 一 媒体查询
+## 一 rem 适配布局概念
 
-媒体查询（Media Query）是 CSS3 引入的新技术，可以针对不同的屏幕尺寸设置不同的样式，在重置浏览器大小的过程中，页面也会根据浏览器的宽度和高度重新渲染页面！
-
-示例：
-
-```css
-/*
-声明媒体查询：@media
-参数一：mediatype，媒体类型，值有：
-        all：用于所有设备
-        print：用于打印机和打印预览
-        screen：用于电脑、平板、手机等
-
-参数二：用于连接参数 1 与参数二，为 and not only 等值
-        and：可以将多个媒体特性连接到一起，即：且
-        not：排除某个媒体类型，即：非，可以省略
-        only：指定某个特性的特性，可以省略
-参数三：media feature 特性，必须有小括号包含
-        width: 可视区宽度
-        min-width：可视区最小宽度
-        max-width：可视区最大宽度
-*/
-@media screen and (max-width: 800px) {
-  /* 在屏幕中，且设置最大宽度为 800px */
-  body {
-    background-color: pink;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  body {
-    background-color: green;
-  }
-}
-```
-
-## 二 rem 适配方案
-
-### 2.0 rem 适配布局概念
-
-px 是一个实际的像素大小，rem（root em）、em 都是相对大小：
+在不同的设备上，如果一个图形大小一样，页面就会出现拉伸效果，比例也会出现问题，解决办法其实是在大设备上等比放大、在小设备上等比缩小，PX 由于是绝对单位，即是一个实际的像素大小，要实现这种等比变化，就需要使用 JS 控制，比较麻烦。而 rem（root em）、em 都是相对大小，就可以实现这个要求：
 
 - em：相对于当前元素的字体大小，没有则相对于父级。比如父元素的字体为 5px，子元素为 2em，则子元素的字体为 10px。
 - rem：相对于 html 根元素字体大小（默认为 16px）。比如 html 设置了 `font-size=10px`，若某个非根元素设置 `width:2rem;` 换算为 px 就是 20px。
@@ -70,6 +31,8 @@ rem 可以用来解决布局中一些大小问题，如：
 由上得出：**`rem 值` = `页面元素 px` / `html 的 font-size`**。
 
 贴士：如果不设置字体大小，1rem=16px
+
+## 二 rem 布局的方案
 
 ### 2.1 rem 实现方式一：js 控制
 
@@ -122,7 +85,7 @@ rem 可以用来解决布局中一些大小问题，如：
 </body>
 ```
 
-### 2.2 rem 适配方式二：配合媒体查询
+### 2.2 rem 适配方式二：媒体查询动态计算 font-size
 
 不同屏幕设备上，手动动态设置 html 标签 font-size 大小步骤：
 
@@ -181,32 +144,49 @@ html {
 <link rel="stylesheet" href="./big.css" media="screen and (min-width:640px)" />
 ```
 
-### 2.3 rem 实现方式三：vw 布局
+### 2.3 rem 实现方式三：vw 动态计算 font-size
 
-vw 布局可以看做的是 rem 的进化版，比上述 js 控制的方式更加简单，无需对字体大小进行控制，但是只兼容 iOS8、Android4.4 以上系统。
+vw 方式 js 控制的方式更加简单，性能更高，无需对字体大小进行控制，但是只兼容 iOS8、Android4.4 以上系统。
 
-vw 布局是将屏幕划分为 100 份，即屏幕是 100vw（也即 vw 是 1% 的屏幕宽度），换算到在 750px 设计稿中就是 `750px=100vw`，1px 就是 `0.1333333333vw`。为了方便计算，实际开发中根元素不可能是 1px，放大 100 倍：
+vw 布局是将屏幕划分为 100 份，即屏幕是： `100vw * 100vh`（也即 vw 是 1% 的屏幕宽度）：
+
+```css
+.box {
+  width: 50vw;
+  height: 50vh;
+  background-color: yellowgreen;
+}
+```
+
+换算到 750px 宽度的设计稿中就是 `750px=100vw`，即 1px 就是 `0.2666666667vw`。为了方便计算，font-size 取 100px：
 
 ```html
 <style>
   html {
-    font-size: 13.33333333vw;
+    font-size: 26.66666667vw; /* iPhone6是375px宽，此时在iPhone6下换算得到100px */
   }
-  @media (min-width: 750px) {
-    html {
-      font-size: 100px;
-    }
+
+  /* 1rem就是一个font-size大小，此时在IP6下就是100px的宽高 */
+  .box {
+    width: 1rem;
+    height: 1rem;
+    background-color: yellowgreen;
   }
 </style>
 ```
 
-由于 vw 布局是自己将屏幕等份划分，所以也就不再依赖与 JS 脚本、媒体查询来控制字体大小，开发更方便。
+由于 vw 布局是自己将屏幕等份划分，所以也就不再依赖与 JS 脚本、媒体查询来控制字体大小，开发更方便。但是由于 html 设置了文本大小，实际开发我们需要重设：
 
-## 三 企业级 rem 适配总结
-
-目前有两种常见的实践方案：
-
-- less+媒体查询+rem：一般采用标准尺寸 750px，页面元素的 rem 值=750 像素下的 px 值/html 文字大小
-- flexible.js+rem：更简便，该库由淘宝推出，有了其支持，不再需要对不同屏幕进行媒体查询。其原理是将当前设备划分为了 10 等份，在不同设备下比例一致。如当前设计稿是 750px，那么只需要把 html 的字体设置为 750px/10 即可，当前元素的 rem 值就是：页面元素的 px 值/75，其他的交给了库自己运算
-
-贴士：vscode 插件 cssrem 可以快速帮助运算。
+```css
+html {
+  font-size: 26.66666667vw; /* iPhone6是375px宽，此时在iPhone6下换算得到100px */
+}
+body {
+  font-size: 1rem; /*也即在iPhone6下是 16px*/
+}
+.box {
+  width: 1rem;
+  height: 1rem;
+  background-color: yellowgreen;
+}
+```
