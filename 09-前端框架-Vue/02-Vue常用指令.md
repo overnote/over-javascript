@@ -73,11 +73,20 @@
 
 ```html
 <div id="app">
+  <!--推荐写法-->
   <h2 v-for="item in arr" :key="item.id">{{item}}</h2>
   <h5 v-for="(item, index) of arr" :key="item.id">{{item}}</h5>
+
+  <!--不推荐该写法-->
   <h5 v-for="(item, index) in arr" :key="index">{{item}}</h5>
 </div>
 ```
+
+如果没有写 key，vue 默认会使用示例中第三个案例 index 作为默认 key，但是不推荐使用循环索引 index 作为 key。 原因是：在一些特殊场景下会产生 BUG，且存在性能问题，如图所示：
+
+![vue key原理](../images/vue/key-01.jpg)
+
+如图所示，左侧的数据在虚拟 DOM 中准备好后渲染在了真实 DOM 上，且用户在真实 DOM 上输入了对应数据。当我们为添加一行数据，且该数据添加在第一行后，新的虚拟 DOM 与旧的虚拟 DOM 对比时就会发现第一行的数据发生了变化，但是 input 输入框没有变化，在渲染时，第一行的用户名被正确渲染，但是输入框部分仍然使用了旧虚拟 DOM 中的输入框。且这种插入顺序也会导致所有的数据被重新渲染了一遍，性能较低。
 
 ### 2.5 v-if 与 v-show 条件渲染
 

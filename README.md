@@ -45,24 +45,17 @@ CSS 提升类书籍：
 《CSS 选择器世界》：可阅读，内容较好，但是作者行文风格较为特殊
 ```
 
-### 2.2 JavaScript
+### 2.2 JavaScript 基础
 
-**JavaScript 语法基础**：
+JavaScript 语法基础：
 
-- [《Effective JavaScript》](https://book.douban.com/subject/25786138/)：语法基础，版本有点老了
-- [《JavaScript 高级程序设计》第 4 版](https://book.douban.com/subject/35175321/)：红宝书，最好的 JS 入门、提升书籍之一
-- [《JavaScript 语言精髓与编程实践》第 3 版](https://book.douban.com/subject/35085910/)：国内非常深入优秀的 JS 书籍
+- [**《JavaScript 高级程序设计》第 4 版**](https://book.douban.com/subject/35175321/)：红宝书，最好的 JS 入门、提升书籍之一
+- [**《JavaScript 语言精髓与编程实践》第 3 版**](https://book.douban.com/subject/35085910/)：国内非常深入优秀的 JS 书籍
 - [《JavaScript 权威指南》第 7 版](https://book.douban.com/subject/35396470/)：犀牛书，JS 的百科全书，与红宝书冲突过多
 - [《深入理解 ECMAScript6》](https://book.douban.com/subject/27072230/)：ES6 书籍，偏基础
-- [《ECMAScript6 入门》第 3 版](https://book.douban.com/subject/27127030/)：ES6 书籍，偏全面
-- [《你不知道 JavaScript》上卷 + 中卷](https://book.douban.com/subject/26351021/)：笔者认为目前最好的 JS 深入书籍之一
-- [《JavaScript 忍者秘籍》第 2 版](https://book.douban.com/subject/30143702/)：对函数的讲解：闭包、重载、柯里化化讲解极好
-- [《JavaScript 函数式编程思想》](https://book.douban.com/subject/30449514/)
-- [《JavaScript ES8 函数式编程实践入门 (第 2 版)》](https://book.douban.com/subject/35791367/)
-- [《JavaScript 函数式编程指南》](https://book.douban.com/subject/30283769/)
-- [《JavaScript 函数式编程指北-Franklin Risby》](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)
+- [《JavaScript 面向对象编程指南》（第 3 版）](https://book.douban.com/subject/35692269/)：部分内容被红宝书覆盖，后半部分的设计模式等内容可以看其他书籍
 
-其他优秀书籍：
+其他优秀基础书籍：
 
 ```txt
 JavaScript 语言学习：
@@ -71,8 +64,13 @@ JavaScript 语言学习：
 《JavaScript 语言精粹》修订版：即蝴蝶书，短小精悍，附录中对 JS 语言糟粕的汇总值得一看！但大多问题已被 ES6 相关书籍总结
 《JavaScript 编程全解》-井上诚一郎：内容全面详细，但是被《红宝书》完全替代
 《JavaScript 面向对象编程指南》（第 3 版）：部分内容被红宝书覆盖，后半部分的设计模式等内容可以看其他书籍
+```
 
-DOM 编程学习：
+### 2.3 DOM 编程
+
+大多 DOM 相关书籍内容都被 JS 基础书涵盖了，有编程基础可以忽略本节书籍。
+
+```txt
 《JavaScript DOM 编程艺术》第 2 版：内容极简，适合零基础入门
 《HTML5 秘籍（第 2 版）》：内容较好，推荐学习
 《HTML5 权威指南》：与《HTML5 秘籍》冲突
@@ -80,41 +78,66 @@ DOM 编程学习：
 《JavaScript&jQuery 交互式 Web 前端开发》：适合学习使用 jQuery 制作优秀的交互式网站
 ```
 
-### 2.3 TypeScript
+### 2.4 JavaScript 进阶
+
+- [**《你不知道 JavaScript》上卷 + 中卷**](https://book.douban.com/subject/26351021/)：笔者认为目前最好的 JS 深入书籍之一
+- [**《JavaScript 忍者秘籍》第 2 版**](https://book.douban.com/subject/30143702/)：对函数的讲解：闭包、重载、柯里化化讲解极好
+- [**《Effective JavaScript》**](https://book.douban.com/subject/25786138/)：
+- [**《ECMAScript6 入门》第 3 版**](https://book.douban.com/subject/27127030/)：ES6 书籍，偏全面
+- [《JavaScript 函数式编程思想》](https://book.douban.com/subject/30449514/)
+- [《JavaScript ES8 函数式编程实践入门 (第 2 版)》](https://book.douban.com/subject/35791367/)
+- [《JavaScript 函数式编程指南》](https://book.douban.com/subject/30283769/)
+- [《JavaScript 函数式编程指北-Franklin Risby》](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)
+
+其他：
+
+```txt
+深入理解 JAVASCRIPT 特性
+```
+
+### 2.5 TypeScript
 
 - [《TypeScript 编程》](https://book.douban.com/subject/35134660/)：TS 语法基础
-- [《Effective TypeScript》](https://book.douban.com/subject/35689352/)：TS 使用中的一些实践技巧
+- [**《Effective TypeScript》**](https://book.douban.com/subject/35689352/)：TS 使用中的一些实践技巧
 - [《编程与类型系统》](https://book.douban.com/subject/35325133/)
 
-### 2.4 Node
+### 2.6 Node.js
 
 - [overnote 笔记](https://github.com/overnote/over-javascript/tree/master/04-NodeJS)：市面上的入门书籍太过时，还是直接看本笔记吧 o(╯□╰)o
-- [《Node.js 设计模式》第 3 版](https://book.douban.com/subject/35608760/)：质内容上乘，推荐看英文原版
+- [**《Node.js 设计模式》第 3 版**](https://book.douban.com/subject/35608760/)：质内容上乘，推荐看英文原版
 - [《深入浅出 Node.js》](https://book.douban.com/subject/25768396/)：Node 书籍的集大成者，部分内容已过时，但仍然值得精读
 - [《Node.js:来一打 C++扩展》](https://book.douban.com/subject/30247892/)：适合学习开发扩展使用
-- [《Node.js 实战 分布式系统中的后端服务开发》](https://book.douban.com/subject/35672065/)：当前后端流行技术的汇总罗列
 
-### 2.5 前端综合类书籍
+### 2.8 前端框架
 
-**前端框架 书籍**：
+Vue：
 
-- [《Vue.js 设计与实现》](https://book.douban.com/subject/35768338/)：目前非常好的 vue 原理书籍
-- [《Webpack 实战：入门、进阶与调优》](https://book.douban.com/subject/34430881/)：能看的 webpack 书籍
+- [**《Vue.js 设计与实现》**](https://book.douban.com/subject/35768338/)：目前非常好的 vue 原理书籍
 - [《深入浅出 Vue.js》](https://book.douban.com/subject/32581281/)：vue 一些原理分析
+
+React：
+
+- [**《React 设计原理》**](https://book.douban.com/subject/36171032/)
+- [**《React Hooks 实战》**](https://book.douban.com/subject/36077233/)
 - [《深入 React 技术栈》](https://book.douban.com/subject/26918038/)：知识内容版本较老
 - [《深入浅出 React 和 Redux》](https://book.douban.com/subject/27033213/)：知识内容版本较老
 - [《React 状态管理与同构实战》](https://book.douban.com/subject/30290509/)：知识内容版本较老
 
-**前端综合提升**：
+其他：
+
+- [《jQuery 技术内幕》](https://book.douban.com/subject/25823709/)
+- [《Webpack+Babel 入门与实例详解》](https://book.douban.com/subject/35721564/)
+- [《Webpack 实战：入门、进阶与调优》第 2 版](https://book.douban.com/subject/35818947/)：能看的 webpack 书籍
+
+### 2.9 前端综合
 
 - [《现代前端技术解析》](https://book.douban.com/subject/27021790/)：前端目前技术趋势的汇总，适合茶余饭后简单阅读。
 - [《高效前端：Web 高效编程与优化实践》](https://book.douban.com/subject/30170670/)
+- [《了不起的 JavaScript 工程师：从前端到全端高级进阶》](https://book.douban.com/subject/34788884/)
 - [《高性能 JavaScript》](https://book.douban.com/subject/5362856/)
 - [《Web 性能权威指南》](https://book.douban.com/subject/25856314/)
-- [《了不起的 JavaScript 工程师：从前端到全端高级进阶》](https://book.douban.com/subject/34788884/)
 - [《JavaScript 设计模式与开发实践》](https://book.douban.com/subject/26382780/)
 - [《JavaScript 模式》](https://book.douban.com/subject/11506062/)
-- [《jQuery 技术内幕》](https://book.douban.com/subject/25823709/):虽然 jQeury 现在应用面越来越窄，但其内部的实现思想仍可一看
 
 其他优秀书籍：
 
@@ -122,21 +145,40 @@ DOM 编程学习：
 《编写可维护的 JavaScript》：不推荐，现在 ESLint 等工具已经成熟。
 ```
 
-### 2.6 桌面开发
+### 2.10 桌面开发
 
 - [《Electron 实战：入门、进阶与性能优化》](https://book.douban.com/subject/35069275/)
 - [《深入浅出 Electron》](https://book.douban.com/subject/35693818/)
 
 其他书籍如：《Electron 跨平台开发实战》等过老。
 
-### 2.7 图形学、canvas 等
+### 2.11 图形学、canvas 等
 
 - [《HTML5+JavaScript 动画基础》](https://book.douban.com/subject/24744218/)：目前最好的动画书籍
 - [《HTML5 Canvas 核心技术》](https://book.douban.com/subject/24533314/)：目前最好的 canvas 书籍
 - [《TypeScript 图形渲染实战：2D 架构设计与实现》](https://book.douban.com/subject/31365348/)：编排较乱，但仍有值得看的地方
-- [《交互式计算机图形学》](https://book.douban.com/subject/26916420/)：计算机图形学基础原理
 - [《WebGL 编程指南》](https://book.douban.com/subject/25909351/)：webgl 使用手册，目前可以额外关注 webgpu
 - [《Three.js 开发指南》](https://book.douban.com/subject/34451906/)：threejs 的编程手册
+
+### 2.12 待读
+
+```txt
+Webpack+Babel入门与实例详解
+Web 性能实战
+前端自动化测试框架 ——Cypress 从入门到精通
+Vue.js 技术内幕
+Web 前端开发 Debug 技巧
+轻松学会 JavaScript
+图解算法：使用JavaScript
+图解数据结构 使用JavaScript
+前端性能揭秘
+前端开发必知必会：从工程核心到前沿实战
+微前端设计与实现
+微前端实战
+前端跨界开发指南
+前端架构师：基础建设与架构设计思想
+前端开发核心知识进阶：从夯实基础到突破瓶颈
+```
 
 ## 附
 
