@@ -147,8 +147,8 @@ React：
 
 ### 2.10 桌面开发
 
-- [《Electron 实战：入门、进阶与性能优化》](https://book.douban.com/subject/35069275/)
-- [《深入浅出 Electron》](https://book.douban.com/subject/35693818/)
+- [《Electron 实战：入门、进阶与性能优化》刘晓伦](https://book.douban.com/subject/35069275/)
+- [《深入浅出 Electron：原理、工程与实践》刘晓伦](https://book.douban.com/subject/35693818/)
 
 其他书籍如：《Electron 跨平台开发实战》等过老。
 
