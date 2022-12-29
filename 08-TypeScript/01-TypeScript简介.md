@@ -21,13 +21,14 @@ JavaScript 是一种弱类型的动态语言。
 动态类型很容易造成一个现象，即代码错误不易被捕捉到：
 
 ```js
-// 该函数参数数据类型并未限制，可以任意传递 对象、字符串、undefined，产生的结果也会千奇百怪
+// 该函数参数数据类型并未限制，可以任意传递 对象、字符串、undefined，
+// 产生的结果也会千奇百怪
 function add(num) {
   return num + 1
 }
 ```
 
-在实际企业开发中，我们往往需要对参数的类型进行判断、限制，这在 JS 语言中非常痛苦！
+在实际企业开发中，我们往往需要对参数的类型进行判断、限制，否则当数据类型不正确时，就会在运行阶段突然触发：类型错误等提示，这在 JS 语言中非常痛苦！
 
 静态类型的语言在函数定义时会要求 num 必须是整数或者小数等，在书写代码阶段（其实就是编译：开发工具帮助提前编译），一旦出现非法参数，直接报错，无法通过编译，可以大大降低低级错误，而且动态类型语言在开发工具中也不能获得很好的代码提示。
 
@@ -87,7 +88,7 @@ tsc hello.ts
 node hello.js
 ```
 
-## 三 体验 TypeScript 的语法联想演示
+### 2.3 体验 TypeScript 的语法联想演示
 
 ts 代码如下：
 
@@ -119,6 +120,89 @@ function fn(p) {
 fn({ x: 1, y: 2 })
 ```
 
+## 三 理解 TypeScript 的类型检查
+
+### 3.1 编译器
+
+编译器可以将代码文本转换成抽象语法树（abstract syntax tree，即 AST），AST 的本质是去除了空白、注释、缩进等制表符后的数据结构，AST 最终会被编译器转换为字节码（bytecode）底层程序，交给计算机执行。那么大多数编程语言整体执行过程，以 JS 为例为：
+
+- 1、将 JavaScript 程序解析为 JavaScript AST
+- 2、把 JavaScript AST 编译为字节码
+- 3、运行时计算字节码
+
+TypeScript 其他编程语言不同的是，其不直接生成字节码，而是编译成了 JavaScript 代码，接着再在浏览器或者 Node 等运行时中运行 JS 代码！TS 对代码安全性的保证就在 TS 编译器生成 AST 后，真正运行代码之前，会对代码做类型检查。所以，TS 编译器的解析步骤为：
+
+- 1、将 TypeScript 程序解析为 TypeScript AST
+- 2、类型检查器检查 TypeScript AST
+- 3、把 TypeScript AST 编译为 JavaScript 源码
+- 4、把 JavaScript AST 编译为字节码
+- 5、运行时计算字节码
+
+上述步骤中，1-3 步为 TSC 编译器执行，4-5 步为浏览器/Node 执行。这意味着程序中的类型类型只在类型检查这一步起到作用，对程序输出没有任何影响，这是 TS 与传统编译型语言最大的不同，也是其巧妙之处。（ Node 之父创建的 Deno 能直接运行 TS 是另外一个故事了）
+
+### 3.2 类型系统设计
+
+在 TS 编译代码运行步骤中的第 2 步，使用的类型检查器其实是一套程序分配类型的规则。一般有两种类型系统：
+
+- 显式设置类型（type annotation，类型注解）：如 Java 需要显式设置几乎所有类型！
+- 自动推导类型（type interface， 类型推断）：如 JS、Python 等在运行时推导类型，Haskell 在编译时推导检查类型
+
+这两种方式都各有利弊，TS 都支持了，这样在开发者这里就可以依据需求设计类型。而且 TS 是渐进式类型语言，在编译前不需要知道全部类型，即便是没有类型的程序，TS 也能推导出一部分类型，捕获部分错误。
+
+示例：
+
+```ts
+// 类型注解
+const count: number
+// 声明时也可以直接赋值
+let age: number = 30
+
+// 类型推断：声明变量之后，再使用时，鼠标移入 num 查看，会显示为 number 类型
+let num = 123
+```
+
+贴士：在实际开发中，如果一个变量拥有了固定的值，推荐让 TS 自动推导，无需手动设置其变量类型。
+
+变量的类型乍一看有点鸡肋，其作用其实很大程度上体现在函数中，比如如下函数，如果参数没有类型，函数内部的运算就会有隐藏问题，如 undefined 等，且其在一连串的函数调用时会引起连锁错误。一般情况下，我们需要对函数的参数进行类型注解，返回值则可以直接推断出来：
+
+```ts
+function total(num1: number, num2: number) {
+  return num1 + num2
+}
+
+// res 的值类型可以推断出来
+let res = total(1, 2)
+```
+
+不过要注意 typescript 对类型的严格限定：
+
+```ts
+let num1: number
+console.log(num1) //声明没有赋值报错
+
+let num2: undefined
+console.log(num2) //undefined 类型直接输出不会报错
+
+let num3: number | undefined
+console.log(num3) //不会报错
+
+let num: null
+num = null //正确
+num = 123 //报错，定义一个变量为 null 时，变量的值只能是 null
+```
+
+在隐式转换方面，TS 能发现无效操作，并在**运行代码前就会及时报错**，如：
+
+```txt
+// 报错
+const a = 3 + [1]
+
+// 正确输出31，因为意图清晰，可以推导
+(3).toStiring +[1].toString()
+```
+
+而 JS 在运行上述代码则会导致难以追踪的错误！
+
 ## 四 TS 的配置
 
 ### 4.1 配置文件 tsconfig.json
@@ -129,14 +213,22 @@ fn({ x: 1, y: 2 })
 tsc --init
 ```
 
-生成的配置文件一般需要将编译文件输出目录打开，并修正为：
-demo
+常见配置有：
 
 ```json
-"incremental": true,      /* 增量编译 */
-"allowJs": true,           /* 支持 JS 编译 */
-"outDir": "./dist",       /* 输出目录 */
-"rootDir": "./src",       /* 源码目录 */
+{
+  "compilerOptions": {
+    "lib": ["es2018", "dom"],  /* tsc假定运行环境中包含哪些API */
+    "incremental": true /* 增量编译 */,
+    "allowJs": true /* 支持 JS 编译 */,
+    "outDir": "./dist" /* 输出目录 */,
+    "rootDir": "./src", /* 源码目录 */
+     "target": "es2015",  /* tsc编译为哪个版本 */
+  },
+  "include": {  /* tsc 在哪个文件夹寻找TS文件 */
+    "src"
+  }
+}
 ```
 
 在上述配置文件支持下，项目中的 TS 文件都会被统一编译到 `./dist`目录下。
@@ -167,26 +259,9 @@ npm i -g ts-node
 ts-node hello.ts
 ```
 
-### 4.3 配置 vscode 自动编译 TS
+### 4.3 使用 webpack 处理 typescript
 
-步骤如下：
-
-```txt
-# 初始化 tsconfig
-tsc --init
-"strict": false,
-
-# 设置 tsconfig.json
-"outDir": "./dist",
-"strict": false,
-
-# 设置 vscode：
-# 击 vscode 菜单->终端->运行任务->显示所有任务->tsc 监视
-```
-
-## 五 webpack 处理 typescript
-
-推荐使用官方的 loader：
+如果项目中用到 webpack，则推荐使用官方的 loader：
 
 ```txt
 npm i -D ts-loader
@@ -214,10 +289,10 @@ tsconfig.json 配置：
 webpack 配置：
 
 ```js
-                {
-                    test: /\.tsx?$/,
-                    use: {
-                        loader: 'ts-loader'
-                    }
-                }
+{
+  test: /\.tsx?$/,
+  use: {
+    loader: 'ts-loader'
+  }
+}
 ```

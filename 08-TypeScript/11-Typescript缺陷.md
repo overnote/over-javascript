@@ -1,4 +1,4 @@
-# 14-Typescript 缺陷
+# 11-Typescript 缺陷
 
 ## 一 非健全的类型系统
 
