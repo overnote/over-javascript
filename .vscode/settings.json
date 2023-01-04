@@ -5,13 +5,6 @@
     "editor.codeActionsOnSave": {
         "source.fixAll": true
     },
-    "markdownlint.config": {
-        "default": true,
-        "MD010": {
-            "code_blocks": false
-        },
-        "MD030": false
-    },
     "[markdown]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.wordWrap": "on",
@@ -49,5 +42,20 @@
         "circlelist.h": "c",
         "static.h": "c",
         "stdlib.h": "c"
-    }
+    },
+    "auto-close-tag.activationOnLanguage": [
+        "xml",
+        "php",
+        "blade",
+        "ejs",
+        "jinja",
+        "plaintext",
+        "liquid",
+        "erb",
+        "lang-cfml",
+        "cfml",
+        "HTML (EEx)",
+        "HTML (Eex)",
+        "plist"
+    ]
 }
