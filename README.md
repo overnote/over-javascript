@@ -63,7 +63,6 @@ JavaScript 语言学习：
 《JavaScript 编程精解 第 3 版》：佳作《Eloquent JavaScript》，深入浅出，整体偏基础，翻译不佳。
 《JavaScript 语言精粹》修订版：即蝴蝶书，短小精悍，附录中对 JS 语言糟粕的汇总值得一看！但大多问题已被 ES6 相关书籍总结
 《JavaScript 编程全解》-井上诚一郎：内容全面详细，但是被《红宝书》完全替代
-《JavaScript 面向对象编程指南》（第 3 版）：部分内容被红宝书覆盖，后半部分的设计模式等内容可以看其他书籍
 ```
 
 ### 2.3 DOM 编程
@@ -99,7 +98,10 @@ JavaScript 语言学习：
 
 - [《TypeScript 编程》](https://book.douban.com/subject/35134660/)：TS 语法基础
 - [**《Effective TypeScript》**](https://book.douban.com/subject/35689352/)：TS 使用中的一些实践技巧
-- [《编程与类型系统》](https://book.douban.com/subject/35325133/)
+
+```txt
+《编程与类型系统》：笔者认为有上述2本书的情况下TS的学习、实践已经足够了
+```
 
 ### 2.6 Node.js
 
@@ -178,6 +180,7 @@ Web 前端开发 Debug 技巧
 前端跨界开发指南
 前端架构师：基础建设与架构设计思想
 前端开发核心知识进阶：从夯实基础到突破瓶颈
+现代JavaScript库开发 原理、技术与实战
 ```
 
 ## 附
