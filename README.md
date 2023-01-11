@@ -12,15 +12,15 @@ OverNote 系列笔记是我在平时一些学习时间阅读书籍博客、观�
 
 ## 二 笔记内容来源书籍整理
 
-友情提醒：**书不在于多，而在于精**，以下只是读者本人的推荐，全部书籍都有进行粗读，加红部分阅读了多遍，是笔者认为很好的作品。
+Github 不能让 md 文件显示颜色，如果想查阅带重点标红记号的，请前往[网页版 Readme](./README.html)
 
 ### 2.1 HTNL CSS
 
 笔者推荐直接阅读新时期的一些必读著作：
 
-- [**<font color='red'>《深入解析 CSS》</font>**](https://book.douban.com/subject/35021471/)：重点书籍，新近较好的 CSS 基础与进阶书籍
-- [**<font color='red'>《CSS 揭秘》</font>**](https://book.douban.com/subject/26745943/)：重点书籍，CSS 书籍瑰宝！！！
-- [<font color='red'>《CSS3 艺术 网页设计案例实战》</font>](https://book.douban.com/subject/34932891/)：CSS 进阶书籍，提供了大量 CSS3 的示例与优化技巧
+- [**《深入解析 CSS》**](https://book.douban.com/subject/35021471/)：重点书籍，新近较好的 CSS 基础与进阶书籍
+- [**《CSS 揭秘》**](https://book.douban.com/subject/26745943/)：重点书籍，CSS 书籍瑰宝！！！
+- [**《CSS3 艺术 网页设计案例实战》**](https://book.douban.com/subject/34932891/)：CSS 进阶书籍，提供了大量 CSS3 的示例与优化技巧
 - [《CSS 设计指南》](https://book.douban.com/subject/23123255/)：很基础的 CSS 入门书籍，讲解了 CSS 语法与常用案例如导航、下拉菜单等等
 - [《CSS 权威指南（第四版）》](https://book.douban.com/subject/33398314/)：经典书籍，可以作为 CSS 字典查阅
 - [《精通 CSS》第 3 版](https://book.douban.com/subject/30450258/)：内容与《深入解析 CSS》重合
@@ -46,16 +46,16 @@ CSS 提升类书籍：
 
 JavaScript 语法汇总类：
 
-- [**<font color='red'>《JavaScript 高级程序设计》</font>第 4 版**](https://book.douban.com/subject/35175321/)：红宝书，最好的 JS 入门、提升书籍之一
-- [**<font color='red'>《JavaScript 语言精髓与编程实践》</font>第 3 版**](https://book.douban.com/subject/35085910/)：国内出品非常优秀的 JS 书籍
-- [**<font color='red'>《JavaScript 权威指南》</font>第 7 版**](https://book.douban.com/subject/35396470/)：犀牛书，JS 的百科全书，与红宝书冲突过多
+- [**《JavaScript 高级程序设计》** 第 4 版](https://book.douban.com/subject/35175321/)：红宝书，最好的 JS 入门、提升书籍之一
+- [**《JavaScript 语言精髓与编程实践》** 第 3 版](https://book.douban.com/subject/35085910/)：国内出品非常优秀的 JS 书籍
+- [**《JavaScript 权威指南》** 第 7 版](https://book.douban.com/subject/35396470/)：犀牛书，JS 的百科全书，与红宝书冲突过多
 - [《JavaScript 编程全解》](https://book.douban.com/subject/25767719/)：内容全面，讲解的很细致优秀，但是内容与红宝书、犀牛书重复较多
 - [《JavaScript 面向对象编程指南》（第 3 版）](https://book.douban.com/subject/35692269/)：名为讲解面向对象，实则补充了 JS 语法、设计模式、DOM 编程等部分，内容与红宝书、犀牛书重复较多
 
 ES6 相关书籍：
 
-- [**<font color='red'>《ECMAScript6 入门》</font>第 3 版**](https://book.douban.com/subject/27127030/)：阮一峰的 ES6 作品，全面深入，也可以看 [网页版](https://es6.ruanyifeng.com/#docs/generator)
-- [**<font color='red'>《深入理解 ECMAScript6》</font>**](https://book.douban.com/subject/27072230/)：ES6 书籍，偏基础
+- [**《ECMAScript6 入门》** 第 3 版](https://book.douban.com/subject/27127030/)：阮一峰的 ES6 作品，全面深入，也可以看 [网页版](https://es6.ruanyifeng.com/#docs/generator)
+- [**《深入理解 ECMAScript6》**](https://book.douban.com/subject/27072230/)：ES6 书籍，偏基础
 
 其他优秀基础书籍：
 
@@ -81,10 +81,10 @@ ES6 相关书籍：
 
 ### 2.4 JavaScript 进阶篇
 
-- [**<font color='red'>《你不知道 JavaScript》</font>上卷 + 中卷**](https://book.douban.com/subject/26351021/)：笔者认为目前最好的 JS 深入书籍之一
-- [**<font color='red'>《JavaScript 忍者秘籍》</font>第 2 版**](https://book.douban.com/subject/30143702/)：对函数的讲解：闭包、重载、柯里化化讲解极好
-- [<font color='red'>《Effective JavaScript》</font>](https://book.douban.com/subject/25786138/)：非常好的进阶书籍，不分内容过时
-- [<font color='red'>《JavaScript 函数式编程指北-Franklin Risby》</font>](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)：很好的函数式书籍，目前只有英文版
+- [**《你不知道 JavaScript》** 上卷 + 中卷](https://book.douban.com/subject/26351021/)：笔者认为目前最好的 JS 深入书籍之一
+- [**《JavaScript 忍者秘籍》** 第 2 版](https://book.douban.com/subject/30143702/)：对函数的讲解：闭包、重载、柯里化化讲解极好
+- [**《Effective JavaScript》**](https://book.douban.com/subject/25786138/)：非常好的进阶书籍，不分内容过时
+- [**《JavaScript 函数式编程指北-Franklin Risby》**](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)：很好的函数式书籍，目前只有英文版
 - [《深入理解 JAVASCRIPT 特性》](https://book.douban.com/subject/33441887/)：比较有深度
 - [《JavaScript 函数式编程思想》](https://book.douban.com/subject/30449514/)
 - [《JavaScript 函数式编程指南》](https://book.douban.com/subject/30283769/)
@@ -109,32 +109,32 @@ ES6 相关书籍：
 ### 2.6 Node.js
 
 - [overnote 笔记](https://github.com/overnote/over-javascript/tree/master/04-NodeJS)：Node 发展太快，市面上的入门书籍大多过时，还是直接看本笔记吧 o(╯□╰)o
-- [**<font color='red'>《Node.js 设计模式》</font>第 3 版**](https://book.douban.com/subject/35608760/)：质内容上乘，推荐看英文原版
-- [<font color='red'>《深入浅出 Node.js》</font>](https://book.douban.com/subject/25768396/)：Node 书籍的集大成者，部分内容已过时，但仍然值得精读
+- [**《Node.js 设计模式》** 第 3 版](https://book.douban.com/subject/35608760/)：质内容上乘，推荐看英文原版
+- [**《深入浅出 Node.js》**](https://book.douban.com/subject/25768396/)：Node 书籍的集大成者，部分内容已过时，但仍然值得精读
 - [《Node.js:来一打 C++扩展》](https://book.douban.com/subject/30247892/)：适合学习开发扩展使用
 
 ### 2.8 前端框架
 
 Vue：
 
-- [**<font color='red'>《Vue.js 设计与实现》</font>**](https://book.douban.com/subject/35768338/)：目前非常好的 vue 原理书籍
-- [<font color='red'>《深入浅出 Vue.js》</font>](https://book.douban.com/subject/32581281/)：vue 一些原理分析
-- [<font color='red'>《Vue.js 技术内幕》</font>](https://book.douban.com/subject/36092368/)
+- [**《Vue.js 设计与实现》**](https://book.douban.com/subject/35768338/)：目前非常好的 vue 原理书籍
+- [**《深入浅出 Vue.js》**](https://book.douban.com/subject/32581281/)：vue 一些原理分析
+- [**《Vue.js 技术内幕》**](https://book.douban.com/subject/36092368/)
 
 React：
 
-- [<font color='red'>React 官方文档</font>](https://zh-hans.reactjs.org/docs/getting-started.html)：React 官方文档是目前比较新的、全面的文档，基础学习看这里即可
-- [<font color='red'>《React 设计原理》</font>](https://book.douban.com/subject/36171032/)
+- [**React 官方文档**](https://zh-hans.reactjs.org/docs/getting-started.html)：React 官方文档是目前比较新的、全面的文档，基础学习看这里即可
+- [**《React 设计原理》**](https://book.douban.com/subject/36171032/)
 - [《React Hooks 实战》](https://book.douban.com/subject/36077233/)
-- [<font color='red'>《React 状态管理与同构实战》</font>](https://book.douban.com/subject/30290509/)
+- [**《React 状态管理与同构实战》**](https://book.douban.com/subject/30290509/)
 
 jQuery：
 
-- [<font color='red'>《jQuery 技术内幕》</font>](https://book.douban.com/subject/25823709/)
+- [**《jQuery 技术内幕》**](https://book.douban.com/subject/25823709/)
 
 Webpack：
 
-- [<font color='red'>《Webpack+Babel 入门与实例详解》</font>](https://book.douban.com/subject/35721564/)
+- [**《Webpack+Babel 入门与实例详解》**](https://book.douban.com/subject/35721564/)
 
 其他：
 
@@ -146,13 +146,13 @@ Webpack：
 
 ### 2.9 前端综合
 
-- [<font color='red'>《现代前端技术解析》</font>](https://book.douban.com/subject/27021790/)：前端目前技术趋势的汇总，适合茶余饭后简单阅读。
-- [<font color='red'>《高效前端：Web 高效编程与优化实践》</font>](https://book.douban.com/subject/30170670/)
-- [<font color='red'>《了不起的 JavaScript 工程师：从前端到全端高级进阶》</font>](https://book.douban.com/subject/34788884/)
-- [<font color='red'>《高性能 JavaScript》</font>](https://book.douban.com/subject/5362856/)
-- [<font color='red'>《Web 性能权威指南》</font>](https://book.douban.com/subject/25856314/)
-- [<font color='red'>《JavaScript 设计模式与开发实践》</font>](https://book.douban.com/subject/26382780/)
-- [<font color='red'>《JavaScript 模式》</font>](https://book.douban.com/subject/11506062/)
+- [**《现代前端技术解析》**](https://book.douban.com/subject/27021790/)：前端目前技术趋势的汇总，适合茶余饭后简单阅读。
+- [**《高效前端：Web 高效编程与优化实践》**](https://book.douban.com/subject/30170670/)
+- [**《了不起的 JavaScript 工程师：从前端到全端高级进阶》**](https://book.douban.com/subject/34788884/)
+- [**《高性能 JavaScript》**](https://book.douban.com/subject/5362856/)
+- [**《Web 性能权威指南》**](https://book.douban.com/subject/25856314/)
+- [**《JavaScript 设计模式与开发实践》**](https://book.douban.com/subject/26382780/)
+- [**《JavaScript 模式》**](https://book.douban.com/subject/11506062/)
 
 其他优秀书籍：
 
@@ -162,8 +162,8 @@ Webpack：
 
 ### 2.10 桌面开发
 
-- [<font color='red'>《Electron 实战：入门、进阶与性能优化》</font>刘晓伦](https://book.douban.com/subject/35069275/)
-- [<font color='red'>《深入浅出 Electron：原理、工程与实践》</font>刘晓伦](https://book.douban.com/subject/35693818/)
+- [**《Electron 实战：入门、进阶与性能优化》** 刘晓伦](https://book.douban.com/subject/35069275/)
+- [**《深入浅出 Electron：原理、工程与实践》** 刘晓伦](https://book.douban.com/subject/35693818/)
 
 其他书籍如：
 
@@ -173,8 +173,8 @@ Webpack：
 
 ### 2.11 Canvas
 
-- [<font color='red'>《HTML5+JavaScript 动画基础》</font>](https://book.douban.com/subject/24744218/)：目前最好的动画书籍
-- [<font color='red'>《HTML5 Canvas 核心技术》</font>](https://book.douban.com/subject/24533314/)：目前最好的 canvas 书籍
+- [**《HTML5+JavaScript 动画基础》**](https://book.douban.com/subject/24744218/)：目前最好的动画书籍
+- [**《HTML5 Canvas 核心技术》**](https://book.douban.com/subject/24533314/)：目前最好的 canvas 书籍
 - [**《TypeScript 图形渲染实战：2D 架构设计与实现》**](https://book.douban.com/subject/31365348/)：编排较乱，但仍有值得看的地方
 
 ### 2.12 待读

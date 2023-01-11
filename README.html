@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="readme">README</h1>
+<h2 id="%E4%B8%80-%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AC%94%E8%AE%B0">一 关于本笔记</h2>
+<p>OverNote 系列笔记是我在平时一些学习时间阅读书籍博客、观看视频后整理出来的一套体系化笔记，着重将一个整套知识体系由浅入深的记录下来，并做<strong>可持续的</strong>扩展。许多内容仍然没有细化，笔误依然很多，敬请期待不断校正后的正式版。正式版会以类似 gitbook 的形式开放，便于阅读。</p>
+<p>笔记的内容大多都来源于市面上常见的经典书籍，以及笔者自己平时的开发经验整理。</p>
+<p>贴士 1：ES6 现在基本被各运行时接受，故 ES6 的内容已经完全被整合入对应章节，不再单独列出。如 let 声明已经并入了变量相关章节，class 并入了面向对象相关章节。</p>
+<p>贴士 2：一些内容涉及了数学公式等，笔者使用了 KaTex/MathJax 代码，为了在浏览器上能正常显示，可以安装插件 <a href="https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima">MathJax Plugin for Github</a></p>
+<h2 id="%E4%BA%8C-%E7%AC%94%E8%AE%B0%E5%86%85%E5%AE%B9%E6%9D%A5%E6%BA%90%E4%B9%A6%E7%B1%8D%E6%95%B4%E7%90%86">二 笔记内容来源书籍整理</h2>
+<h3 id="21-htnl-css">2.1 HTNL CSS</h3>
+<p>笔者推荐直接阅读新时期的一些必读著作：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/35021471/"><strong><font color='red'>《深入解析 CSS》</font></strong></a>：重点书籍，新近较好的 CSS 基础与进阶书籍</li>
+<li><a href="https://book.douban.com/subject/26745943/"><strong><font color='red'>《CSS 揭秘》</font></strong></a>：重点书籍，CSS 书籍瑰宝！！！</li>
+<li><a href="https://book.douban.com/subject/34932891/"><font color='red'>《CSS3 艺术 网页设计案例实战》</font></a>：CSS 进阶书籍，提供了大量 CSS3 的示例与优化技巧</li>
+<li><a href="https://book.douban.com/subject/23123255/">《CSS 设计指南》</a>：很基础的 CSS 入门书籍，讲解了 CSS 语法与常用案例如导航、下拉菜单等等</li>
+<li><a href="https://book.douban.com/subject/33398314/">《CSS 权威指南（第四版）》</a>：经典书籍，可以作为 CSS 字典查阅</li>
+<li><a href="https://book.douban.com/subject/30450258/">《精通 CSS》第 3 版</a>：内容与《深入解析 CSS》重合</li>
+<li><a href="https://book.douban.com/subject/26898555/">《CSS 实战手册》第四版</a>：内容与《深入解析 CSS》重合</li>
+</ul>
+<p>其他优秀书籍：</p>
+<pre class="hljs"><code><div>零基础入门类书籍：
+《Head First HTML 与 CSS》第 2 版
+《HTML &amp; CSS 设计与构建网站》
+《HTML5 与 CSS3 基础教程》第 8 版
+
+CSS 提升类书籍：
+《CSS 禅意花园》：不推荐，内容偏设计，非程序员读物，且时代较为久远
+《CSS 世界》：可阅读，深入 CSS 的一本书，但是作者行文风格较为奇特
+《CSS 选择器世界》：可阅读，内容较好，但是作者行文风格较为特殊
+</div></code></pre>
+<h3 id="22-javascript-%E5%9F%BA%E7%A1%80%E7%AF%87">2.2 JavaScript 基础篇</h3>
+<p>这一部分有太多好书了，笔者爱不释手，可以根据需要选择 3-4 本左右即可。</p>
+<p>JavaScript 语法汇总类：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/35175321/"><strong><font color='red'>《JavaScript 高级程序设计》</font>第 4 版</strong></a>：红宝书，最好的 JS 入门、提升书籍之一</li>
+<li><a href="https://book.douban.com/subject/35085910/"><strong><font color='red'>《JavaScript 语言精髓与编程实践》</font>第 3 版</strong></a>：国内出品非常优秀的 JS 书籍</li>
+<li><a href="https://book.douban.com/subject/35396470/"><strong><font color='red'>《JavaScript 权威指南》</font>第 7 版</strong></a>：犀牛书，JS 的百科全书，与红宝书冲突过多</li>
+<li><a href="https://book.douban.com/subject/25767719/">《JavaScript 编程全解》</a>：内容全面，讲解的很细致优秀，但是内容与红宝书、犀牛书重复较多</li>
+<li><a href="https://book.douban.com/subject/35692269/">《JavaScript 面向对象编程指南》（第 3 版）</a>：名为讲解面向对象，实则补充了 JS 语法、设计模式、DOM 编程等部分，内容与红宝书、犀牛书重复较多</li>
+</ul>
+<p>ES6 相关书籍：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/27127030/"><strong><font color='red'>《ECMAScript6 入门》</font>第 3 版</strong></a>：阮一峰的 ES6 作品，全面深入，也可以看 <a href="https://es6.ruanyifeng.com/#docs/generator">网页版</a></li>
+<li><a href="https://book.douban.com/subject/27072230/"><strong><font color='red'>《深入理解 ECMAScript6》</font></strong></a>：ES6 书籍，偏基础</li>
+</ul>
+<p>其他优秀基础书籍：</p>
+<pre class="hljs"><code><div>《Head First JavaScript 程序设计》：零基础入门书籍
+《JavaScript 编程精解 第 3 版》：佳作《Eloquent JavaScript》中文版，深入浅出，建议看英文版。
+</div></code></pre>
+<h3 id="23-web-%E7%BC%96%E7%A8%8B%E7%AF%87">2.3 Web 编程篇</h3>
+<p>大多 Web 相关书籍内容在 JavaScript 语法书中都有涉及，有网页开发经验的，笔者认为可以忽略本节书籍：</p>
+<ul>
+<li><a href="">《HTML5 秘籍》第 2 版</a>：内容比较系统的一本 Web 编程书籍</li>
+<li><a href="https://book.douban.com/subject/3794471/">《锋利的 jQuery》</a>第 2 版：罗列了 jQuery 的 API 使用示例，适合初学 jQuery 时看一看</li>
+<li><a href="https://book.douban.com/subject/26433805/">《JavaScript&amp;jQuery 交互式 Web 前端开发》</a>：适合学习使用 jQuery 制作优秀的交互式网站</li>
+</ul>
+<p>其他书籍：</p>
+<pre class="hljs"><code><div>《JavaScript DOM 编程艺术》：非常基础的一本DOM编程书籍，内容与《JavaScript&amp;jQuery 交互式 Web 前端开发》类似
+《HTML5 权威指南》：知识点全面，内容比较宽泛，可以作为手册
+</div></code></pre>
+<h3 id="24-javascript-%E8%BF%9B%E9%98%B6%E7%AF%87">2.4 JavaScript 进阶篇</h3>
+<ul>
+<li><a href="https://book.douban.com/subject/26351021/"><strong><font color='red'>《你不知道 JavaScript》</font>上卷 + 中卷</strong></a>：笔者认为目前最好的 JS 深入书籍之一</li>
+<li><a href="https://book.douban.com/subject/30143702/"><strong><font color='red'>《JavaScript 忍者秘籍》</font>第 2 版</strong></a>：对函数的讲解：闭包、重载、柯里化化讲解极好</li>
+<li><a href="https://book.douban.com/subject/25786138/"><font color='red'>《Effective JavaScript》</font></a>：非常好的进阶书籍，不分内容过时</li>
+<li><a href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/"><font color='red'>《JavaScript 函数式编程指北-Franklin Risby》</font></a>：很好的函数式书籍，目前只有英文版</li>
+<li><a href="https://book.douban.com/subject/33441887/">《深入理解 JAVASCRIPT 特性》</a>：比较有深度</li>
+<li><a href="https://book.douban.com/subject/30449514/">《JavaScript 函数式编程思想》</a></li>
+<li><a href="https://book.douban.com/subject/30283769/">《JavaScript 函数式编程指南》</a></li>
+</ul>
+<p>其他优秀书籍：</p>
+<pre class="hljs"><code><div>
+《JavaScript ES8 函数式编程实践入门 (第 2 版)》：内容较为基础
+《JavaScript 语言精粹》修订版：即经典蝴蝶书，短小精悍，附录中对 JS 语言糟粕的汇总值得一看！但大多问题已被 ES6 相关书籍总结
+</div></code></pre>
+<h3 id="25-typescript">2.5 TypeScript</h3>
+<ul>
+<li><a href="https://book.douban.com/subject/35134660/"><strong>《TypeScript 编程》</strong></a>：TS 语法基础，也拥有一些实用基础，类型进阶、错误处理、JS 互操作等章节的一些实践不错</li>
+<li><a href="https://book.douban.com/subject/35689352/"><strong>《Effective TypeScript》</strong></a>：TS 使用中的一些实践技巧，建议英文版</li>
+</ul>
+<pre class="hljs"><code><div>《编程与类型系统》：笔者认为有上述2本书的情况下TS的学习、实践已经足够了
+</div></code></pre>
+<h3 id="26-nodejs">2.6 Node.js</h3>
+<ul>
+<li><a href="https://github.com/overnote/over-javascript/tree/master/04-NodeJS">overnote 笔记</a>：Node 发展太快，市面上的入门书籍大多过时，还是直接看本笔记吧 o(╯□╰)o</li>
+<li><a href="https://book.douban.com/subject/35608760/"><strong><font color='red'>《Node.js 设计模式》</font>第 3 版</strong></a>：质内容上乘，推荐看英文原版</li>
+<li><a href="https://book.douban.com/subject/25768396/"><font color='red'>《深入浅出 Node.js》</font></a>：Node 书籍的集大成者，部分内容已过时，但仍然值得精读</li>
+<li><a href="https://book.douban.com/subject/30247892/">《Node.js:来一打 C++扩展》</a>：适合学习开发扩展使用</li>
+</ul>
+<h3 id="28-%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6">2.8 前端框架</h3>
+<p>Vue：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/35768338/"><strong><font color='red'>《Vue.js 设计与实现》</font></strong></a>：目前非常好的 vue 原理书籍</li>
+<li><a href="https://book.douban.com/subject/32581281/"><font color='red'>《深入浅出 Vue.js》</font></a>：vue 一些原理分析</li>
+<li><a href="https://book.douban.com/subject/36092368/"><font color='red'>《Vue.js 技术内幕》</font></a></li>
+</ul>
+<p>React：</p>
+<ul>
+<li><a href="https://zh-hans.reactjs.org/docs/getting-started.html"><font color='red'>React 官方文档</font></a>：React 官方文档是目前比较新的、全面的文档，基础学习看这里即可</li>
+<li><a href="https://book.douban.com/subject/36171032/"><font color='red'>《React 设计原理》</font></a></li>
+<li><a href="https://book.douban.com/subject/36077233/">《React Hooks 实战》</a></li>
+<li><a href="https://book.douban.com/subject/30290509/"><font color='red'>《React 状态管理与同构实战》</font></a></li>
+</ul>
+<p>jQuery：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/25823709/"><font color='red'>《jQuery 技术内幕》</font></a></li>
+</ul>
+<p>Webpack：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/35721564/"><font color='red'>《Webpack+Babel 入门与实例详解》</font></a></li>
+</ul>
+<p>其他：</p>
+<pre class="hljs"><code><div>《深入 React 技术栈》：原理介绍较好，但是版本较老了
+《深入浅出React和Redux》：适合学习react和redux，但是版本较老了
+《Webpack 实战：入门、进阶与调优》第 2 版
+</div></code></pre>
+<h3 id="29-%E5%89%8D%E7%AB%AF%E7%BB%BC%E5%90%88">2.9 前端综合</h3>
+<ul>
+<li><a href="https://book.douban.com/subject/27021790/"><font color='red'>《现代前端技术解析》</font></a>：前端目前技术趋势的汇总，适合茶余饭后简单阅读。</li>
+<li><a href="https://book.douban.com/subject/30170670/"><font color='red'>《高效前端：Web 高效编程与优化实践》</font></a></li>
+<li><a href="https://book.douban.com/subject/34788884/"><font color='red'>《了不起的 JavaScript 工程师：从前端到全端高级进阶》</font></a></li>
+<li><a href="https://book.douban.com/subject/5362856/"><font color='red'>《高性能 JavaScript》</font></a></li>
+<li><a href="https://book.douban.com/subject/25856314/"><font color='red'>《Web 性能权威指南》</font></a></li>
+<li><a href="https://book.douban.com/subject/26382780/"><font color='red'>《JavaScript 设计模式与开发实践》</font></a></li>
+<li><a href="https://book.douban.com/subject/11506062/"><font color='red'>《JavaScript 模式》</font></a></li>
+</ul>
+<p>其他优秀书籍：</p>
+<pre class="hljs"><code><div>《编写可维护的 JavaScript》：不推荐，现在 ESLint 等工具已经成熟。
+</div></code></pre>
+<h3 id="210-%E6%A1%8C%E9%9D%A2%E5%BC%80%E5%8F%91">2.10 桌面开发</h3>
+<ul>
+<li><a href="https://book.douban.com/subject/35069275/"><font color='red'>《Electron 实战：入门、进阶与性能优化》</font>刘晓伦</a></li>
+<li><a href="https://book.douban.com/subject/35693818/"><font color='red'>《深入浅出 Electron：原理、工程与实践》</font>刘晓伦</a></li>
+</ul>
+<p>其他书籍如：</p>
+<pre class="hljs"><code><div>《Electron 跨平台开发实战》：版本较老
+</div></code></pre>
+<h3 id="211-canvas">2.11 Canvas</h3>
+<ul>
+<li><a href="https://book.douban.com/subject/24744218/"><font color='red'>《HTML5+JavaScript 动画基础》</font></a>：目前最好的动画书籍</li>
+<li><a href="https://book.douban.com/subject/24533314/"><font color='red'>《HTML5 Canvas 核心技术》</font></a>：目前最好的 canvas 书籍</li>
+<li><a href="https://book.douban.com/subject/31365348/"><strong>《TypeScript 图形渲染实战：2D 架构设计与实现》</strong></a>：编排较乱，但仍有值得看的地方</li>
+</ul>
+<h3 id="212-%E5%BE%85%E8%AF%BB">2.12 待读</h3>
+<pre class="hljs"><code><div>Web 性能实战
+Web 前端开发 Debug 技巧
+前端性能揭秘
+前端开发必知必会：从工程核心到前沿实战
+微前端设计与实现
+微前端实战
+前端跨界开发指南
+前端架构师：基础建设与架构设计思想
+前端开发核心知识进阶：从夯实基础到突破瓶颈
+现代JavaScript库开发 原理、技术与实战
+前端自动化测试框架 ——Cypress 从入门到精通
+</div></code></pre>
+<h2 id="%E9%99%84">附</h2>
+<p><strong>OverNote</strong>地址：<a href="https://github.com/overnote">https://github.com/overnote</a><br>
+<strong>笔者的地址</strong>：<a href="https://github.com/ruyuejun">https://github.com/ruyuejun</a></p>
+<p><strong>OverNote 分类</strong>：</p>
+<ul>
+<li><a href="https://github.com/overnote/over-golang">Golang</a>：详尽的 Go 领域笔记：Go 语法、Go 并发编程、GoWeb 编程、Go 微服务等</li>
+<li><a href="https://github.com/overnote/over-javascript">大前端</a>：包含 JavaScript、Node.js、vue/react、微信开发、Flutter 等大前端技术</li>
+<li><a href="https://github.com/overnote/over-algorithm">数据结构与算法</a>：以 C/Go 实现为主记录数据结构与算法的笔记</li>
+<li><a href="https://github.com/overnote/over-server">服务端架构</a>：分布式与微服务笔记，附 Nginx、Mysql、Redis 等常用服务端技术</li>
+<li><a href="https://github.com/overnote/over-python">Python 与机器学习</a>：Python 相关笔记，完善中</li>
+<li><a href="https://github.com/overnote/over-cs">cs</a>：计算机组成原理、操作系统、计算机网络、编译原理基础学科笔记</li>
+<li><a href="https://github.com/overnote/over-bigdata">大数据</a>：大数据笔记，完善中</li>
+<li><a href="https://github.com/overnote/over-flutter">Flutter</a>：完善中</li>
+</ul>
+
+</body>
+</html>
