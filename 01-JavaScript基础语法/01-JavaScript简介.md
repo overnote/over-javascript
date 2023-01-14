@@ -8,14 +8,24 @@ JavaScript 诞生于 1995 年，由网景公司的 Brendan Eich 在十天内开�
 
 虽然该语言名字中带有 Java，但是其与另一个流行语言 Java 并没有多大关系，JavaScript 原名为 LiveScript，为了迎合 Java 的热潮而改名。
 
-由于浏览器的兴起，JavaScript 成为了 Web 前端领域不可替代的核心语言，没有之一！由于市面上浏览器众多，各家浏览器对 JavaScript 的实现都不尽一致，如早期微软 IE 的 JScript 等，这种现象造成了 JavaScript 实现的不统一局面。为了统一各个标准，欧洲计算机制造商协会制定了该脚本语言的语法规范：ECMAScript，即各家的 JS 脚本语言都要以 ECMAScript 语法规范来开发。
+由于浏览器的兴起，JavaScript 成为了 Web 前端领域不可替代的核心语言，没有之一！然而浏览器厂商众多，不同浏览器之间始终存在规范差异，如早期微软 IE 的 JScript 等。为了应对该问题，推出了 ECAMS-262，也即 ECMAScript，这是欧洲计算机制造商协会制定的该脚本语言的语法规范，也被采纳入了 ISO 规范中。此后，各浏览器厂商都要以此标准在自家浏览器中实现 JavaScript。
+
+如果不涉及浏览器的话， ECMA-262 仅仅描述了这门语言的如下部分：
+
+- 语法
+- 类型
+- 语句
+- 关键字
+- 保留字
+- 操作符
+- 全局对象
 
 ECMAScript 现在的流行版本是：ES5、ES6，其主要版本有：
 
 - ECMAScript3：1999 年标准规范，火狐的 js1.5 和 1.8 都是基于 3 规范
 - ECMAScript4：为了适应互联网发展出来的激进版本，由于存在大量分歧，该版本被放弃！
-- ECMAScript5：2009 年发布，包含了 4 中的一些常见功能，其本质是 ES3.1，是当前的主流版本
-- ECMAScript6：诞生于 2015 年，也称为 ES2015，是 js 划时代意义的版本。引入了开发大型项目所需要的功能，JS 终于不再是一门`玩具语言`。
+- ECMAScript5：2009 年发布，包含了 ES4 中的一些常见功能，其本质是 ES3.1，是当前的主流版本
+- ECMAScript6：诞生于 2015 年，也称为 ES2015，是 js 划时代意义的版本。添加了开发大型项目所需要的功能，JS 终于不再是一门`玩具语言`。
 - ES2016：诞生于 2016 年，即 ES7，后续版本均以年为名称，如 ES2017、ES2018。ES2016 最出色的地方是引入了`async await`异步解决方案。
 
 ### 1.2 JavaScript 的 API 组成
@@ -32,7 +42,7 @@ ECMAScript 是 JavaScript 的语法核心，但是仅仅有语法，没有一些
 - DOM：`Document Object Model`，JavaScript 操作网页元素的 API
 - BOM：`Browser Object Model`，JavaScript 操作浏览器部分功能的 API
 
-> API：Application Programming Interface，即用用程序编程接口，是包装好后提供给开发人员使用的工具
+> API：Application Programming Interface，即应用程序编程接口，是包装好后提供给开发人员使用的工具
 
 ### 1.3 JavaScript 的引擎
 

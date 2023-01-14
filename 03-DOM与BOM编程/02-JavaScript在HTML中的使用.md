@@ -1,13 +1,10 @@
-# 04-script 标签
+# 02-JavaScript 在 HTML 中的使用
 
-## 一 script 标签引入方式
+## 一 script 标签标签
 
-JavaScript 的代码要被书写于脚本标签中，但是 HTML5 和 HTML4 的脚本标签规范不尽一致：
+### 1.1 在 HTML 中使用 JavaScript
 
-- HTML4 规范：`<script type="application/javascript"> </script>`
-- HTML5 规范：`<script> </script>`
-
-脚本标签有三种书写位置：
+要在 HTML 文档中使用 JavaScript，需要插入 `<script>` 标签，有三种书写位置：
 
 ```html
 <!-- 直接在 html 网页中书写代码，HelloWorld 中使用了内嵌式 -->
@@ -26,16 +23,25 @@ JavaScript 的代码要被书写于脚本标签中，但是 HTML5 和 HTML4 的�
 
 注意：script 标签中的代码不能出现 `</script>`，需要转义为：`<\/script>`
 
-## 二 script 元素的一些属性
+### 1.2 script 标签属性
 
 script 标签常用的属性有：
 
-- src：表示要包含的外部文件。
-- type：表示脚本语言类型，默认都是`type="application/javascript"`，该属性已经替代了 `language` 属性。
-- defer：立即下载脚本，延迟到文档解析后执行。该属性值对外部文件有效。写法：`defer="defer"`，H5 中简写为：`defer`。
-- async：立即下载脚本，且不阻止其他页面动作。该属性只对外部文件有效。写法：`sync="sync"`，H5 中简写为：`sync`。
+- src：表示要包含的外部文件
+- type：表示脚本语言类型（MIME），默认都是 `type="application/javascript"`，该属性已经替代了 `language` 属性，如果值为 `application/module` 则代表代码是 ES6 模块，代码中可以出现 import 和 export 关键字
+- crossorigin：可选。默认值为 `anonymous`，即不使用 CORS，值为 `use-credentials` 表示需要设置凭据，即出站请求会包含凭据
+- integrity：可选。允许比对接收到的资源和指定的加密签名，以验证子资源完整性，若不匹配，则页面报错。该属性常用于确保 CDN 不会提供恶意内容
 
-注意：`type="application/module"`表示可以出现 import 和 export 关键字，代码被作为 ES6 模块使用。
+script 上设置文件加载行为的属性（只对外部文件有效）：
+
+- defer：可选，表示立即下载脚本，但脚本延迟到文档解析、显示后再执行。写法：`defer="defer"`，H5 中简写为：`defer`。
+- async：可选，表示立即下载脚本，且不阻止其他页面动作如：下载资源、等待其他脚本加载。这是 H5 新增属性，写法：`sync=sync`
+
+其他废弃或无用属性有：`charset`、`language`，浏览器几乎不会在意这些值。
+
+贴士：src 属性指定的路径文件内容会以 GET 请求结果形式返回，且该请求不受浏览器的同源策略影响，这是 script 标签还有一个极其强大的能力，可以用来加载外部代码，但是我们必须确保域是自己的，或者域是可信来源，`integrity` 属性就是用来防范这个问题的。
+
+页面中也可以插入多个 script 标签，当没有 `defer`、`async` 属性限制时，这些脚本代码会被从上到下解析，下一个脚本必须等待上一个脚本执行完毕后才会执行，依次类推。
 
 ## 三 script 元素的位置
 
