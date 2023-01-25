@@ -2,17 +2,18 @@
 
 ## 一 Object 类型
 
-### 1.1 Object 类型基本使用
+### 1.1 Object 类实例的创建
 
 Object 是 ECMAScript 所有引用类型的祖先，即基类（基本类）。
 
 创建方式：
 
 ```js
-// new 方式
+// 构造函数方式：有效不推荐该方式
 let obj1 = new Object()
-let obj2 = new Object() // 有效，但是不推荐该方式
 console.log(typeof obj1) // object
+
+let obj2 = new Object()
 console.log(obj1 == obj2) // false
 
 // 字面量方式
@@ -22,7 +23,7 @@ console.log(obj1 == obj) // false
 
 基于 Object 类型还有一些衍生的引用类型，如：Array、Function、Date、Math 等。所以 Object 与 Java 中的 java.lang.Object 类非常相似，也是派生其他对象的`基类`，即是所有类的祖先！
 
-### 1.2 Object 对象实例
+### 1.2 Object 对象的成员
 
 由于 Object 对象是所有对象的祖先对象（基类），所以其属性和方法，其他对象都会拥有：
 
@@ -34,7 +35,17 @@ console.log(obj1 == obj) // false
 - `valueOf()`：返回对象的字符串、数值或布尔值表示
 - `getPrototypeOf(obj)`：返回 obj 实例对应构造函数的原型
 
-从上看出，Object 主要用来处理对象相关的操作。
+从上看出，**Object 主要用来处理对象相关的操作**。一般通过**点语法**来使用成员，但也可以使用中括号：
+
+```js
+let obj = { name: 'zs' }
+console.log(obj['name']) // "zs"
+console.log(obj.name) // "zs"
+
+// 中括号的优势是可以使用变量访问属性，也可以在属性名存在保留字关键字、存在语法错误时使用：
+let propertyName = 'name'
+console.log(obj[propertyName]) // "zs"
+```
 
 ## 二 Object 类常见使用场景
 
