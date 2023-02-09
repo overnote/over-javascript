@@ -214,7 +214,7 @@ npm i -D file-loader
 ```
 
 项目的整体结构图如下所示：
-![整体结构图](/images/JavaScript/webpack-04.png)
+![整体结构图](/images/javascript/webpack-04.png)
 
 file-loader 配置：
 
