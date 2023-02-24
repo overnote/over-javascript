@@ -12,8 +12,6 @@ OverNote 系列笔记是我在平时一些学习时间阅读书籍博客、观�
 
 ## 二 笔记内容来源书籍整理
 
-Github 不能让 md 文件显示颜色，如果想查阅带重点标红记号的，请前往[网页版 Readme](./README.html)
-
 ### 2.1 HTNL CSS
 
 笔者推荐直接阅读新时期的一些必读著作：
@@ -148,7 +146,6 @@ Webpack：
 
 - [**《现代前端技术解析》**](https://book.douban.com/subject/27021790/)：前端目前技术趋势的汇总，适合茶余饭后简单阅读。
 - [**《高效前端：Web 高效编程与优化实践》**](https://book.douban.com/subject/30170670/)
-- [**《了不起的 JavaScript 工程师：从前端到全端高级进阶》**](https://book.douban.com/subject/34788884/)
 - [**《高性能 JavaScript》**](https://book.douban.com/subject/5362856/)
 - [**《Web 性能权威指南》**](https://book.douban.com/subject/25856314/)
 - [**《JavaScript 设计模式与开发实践》**](https://book.douban.com/subject/26382780/)
