@@ -79,19 +79,23 @@ ES6 相关书籍：
 
 ### 2.4 JavaScript 进阶篇
 
+JS 语法规范进阶：
+
 - [**《你不知道 JavaScript》** 上卷 + 中卷](https://book.douban.com/subject/26351021/)：笔者认为目前最好的 JS 深入书籍之一
 - [**《JavaScript 忍者秘籍》** 第 2 版](https://book.douban.com/subject/30143702/)：对函数的讲解：闭包、重载、柯里化化讲解极好
 - [**《Effective JavaScript》**](https://book.douban.com/subject/25786138/)：非常好的进阶书籍，不分内容过时
-- [**《JavaScript 函数式编程指北-Franklin Risby》**](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)：很好的函数式书籍，目前只有英文版
 - [《深入理解 JAVASCRIPT 特性》](https://book.douban.com/subject/33441887/)：比较有深度
-- [《JavaScript 函数式编程思想》](https://book.douban.com/subject/30449514/)
-- [《JavaScript 函数式编程指南》](https://book.douban.com/subject/30283769/)
+
+JS 函数式编程：
+
+- [《JavaScript ES8 函数式编程实践入门 (第 2 版)》](https://book.douban.com/subject/35791367/)：入门函数式较好
+- [**《JavaScript 函数式编程指北-Franklin Risby》**](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)：很好的函数式书籍，目前只有英文版，[点击进入原书地址](https://github.com/MostlyAdequate/mostly-adequate-guide)
 
 其他优秀书籍：
 
 ```txt
-
-《JavaScript ES8 函数式编程实践入门 (第 2 版)》：内容较为基础
+《JavaScript 函数式编程思想》：内容较好，深度足够，语言要素较多
+《JavaScript 函数式编程指南》：源码给出的较为粗糙，需要一定功底翻看
 《JavaScript 语言精粹》修订版：即经典蝴蝶书，短小精悍，附录中对 JS 语言糟粕的汇总值得一看！但大多问题已被 ES6 相关书籍总结
 ```
 
