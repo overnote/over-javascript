@@ -150,12 +150,12 @@ Webpack：
 - [**《高性能 JavaScript》**](https://book.douban.com/subject/5362856/)
 - [**《Web 性能权威指南》**](https://book.douban.com/subject/25856314/)
 - [**《JavaScript 设计模式与开发实践》**](https://book.douban.com/subject/26382780/)
-- [**《JavaScript 模式》**](https://book.douban.com/subject/11506062/)
 
 其他优秀书籍：
 
 ```txt
 《编写可维护的 JavaScript》：不推荐，现在 ESLint 等工具已经成熟。
+《JavaScript 模式》：不推荐，版本太老
 ```
 
 ### 2.10 桌面开发
