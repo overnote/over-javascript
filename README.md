@@ -145,16 +145,25 @@ Webpack：
 
 ### 2.9 前端综合
 
+前端技术概览：
+
 - [**《现代前端技术解析》**](https://book.douban.com/subject/27021790/)：前端目前技术趋势的汇总，适合茶余饭后简单阅读。
 - [**《高效前端：Web 高效编程与优化实践》**](https://book.douban.com/subject/30170670/)
-- [**《高性能 JavaScript》**](https://book.douban.com/subject/5362856/)
-- [**《Web 性能权威指南》**](https://book.douban.com/subject/25856314/)
 - [**《JavaScript 设计模式与开发实践》**](https://book.douban.com/subject/26382780/)
-- [《微前端设计与实现》](https://book.douban.com/subject/36014313/)：偏理论
-- [《微前端实战》](https://book.douban.com/subject/35916201/)：偏实践
 - [《前端跨界开发指南：JavaScript 工具库原理解析与实战》](https://book.douban.com/subject/36039010/)
 - [《前端开发核心知识进阶：从夯实基础到突破瓶颈》](https://book.douban.com/subject/35218831/)：适合面试
 - [《现代 JavaScript 库开发 原理、技术与实战》](https://book.douban.com/subject/36162488/)
+
+前端性能优化：
+
+- [**《前端性能揭秘》**](https://book.douban.com/subject/36096567/)：新时期前端性能优化度量、优化办法的汇总
+- [**《高性能 JavaScript》**](https://book.douban.com/subject/5362856/)
+- [**《Web 性能权威指南》**](https://book.douban.com/subject/25856314/)
+
+微前端架构：
+
+- [《微前端设计与实现》](https://book.douban.com/subject/36014313/)：偏理论
+- [《微前端实战》](https://book.douban.com/subject/35916201/)：偏实践
 
 其他优秀书籍：
 
@@ -183,11 +192,10 @@ Webpack：
 ### 2.12 待读
 
 ```txt
-Web 性能实战
-前端性能揭秘
-Web 前端开发 Debug 技巧
-前端开发必知必会：从工程核心到前沿实战
 前端架构师：基础建设与架构设计思想
+前端开发必知必会：从工程核心到前沿实战
+前端工程质量保障体系实践
+Web 前端开发 Debug 技巧
 ```
 
 ## 附
