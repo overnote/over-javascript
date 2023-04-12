@@ -124,7 +124,6 @@ React：
 
 - [**React 官方文档**](https://zh-hans.reactjs.org/docs/getting-started.html)：React 官方文档是目前比较新的、全面的文档，基础学习看这里即可
 - [**《React 设计原理》**](https://book.douban.com/subject/36171032/)
-- [《React Hooks 实战》](https://book.douban.com/subject/36077233/)
 - [**《React 状态管理与同构实战》**](https://book.douban.com/subject/30290509/)
 
 jQuery：
@@ -140,6 +139,7 @@ Webpack：
 ```txt
 《深入 React 技术栈》：原理介绍较好，但是版本较老了
 《深入浅出React和Redux》：适合学习react和redux，但是版本较老了
+《React Hooks 实战》：与官方文档类似，推荐直接看官方文档
 《Webpack 实战：入门、进阶与调优》第 2 版
 ```
 
