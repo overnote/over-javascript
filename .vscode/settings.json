@@ -16,16 +16,6 @@
         "editor.tabSize": 4,
         "editor.useTabStops": true
     },
-    /*  vue 的配置 */
-    "vetur.format.defaultFormatter.html": "prettyhtml",
-    "vetur.format.defaultFormatter.css": "prettier",
-    "vetur.format.defaultFormatter.postcss": "prettier",
-    "vetur.format.defaultFormatter.scss": "prettier",
-    "vetur.format.defaultFormatter.sass": "sass-formatter",
-    "vetur.format.defaultFormatter.less": "prettier",
-    "vetur.format.defaultFormatter.stylus": "stylus-supremacy",
-    "vetur.format.defaultFormatter.js": "prettier",
-    "vetur.format.defaultFormatter.ts": "prettier",
     "gopls": {
         "experimentalWorkspaceModule": true
     },
