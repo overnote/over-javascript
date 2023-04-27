@@ -66,9 +66,9 @@ ES6 相关书籍：
 
 大多 Web 相关书籍内容在 JavaScript 语法书中都有涉及，有网页开发经验的，笔者认为可以忽略本节书籍：
 
-- [《HTML5 秘籍》第 2 版]()：内容比较系统的一本 Web 编程书籍
-- [《锋利的 jQuery》](https://book.douban.com/subject/3794471/)第 2 版：罗列了 jQuery 的 API 使用示例，适合初学 jQuery 时看一看
 - [《JavaScript&jQuery 交互式 Web 前端开发》](https://book.douban.com/subject/26433805/)：适合学习使用 jQuery 制作优秀的交互式网站
+- [《HTML5 秘籍》第 2 版](https://book.douban.com/subject/26342322/)：内容比较系统的一本 Web 编程书籍
+- [《锋利的 jQuery》](https://book.douban.com/subject/3794471/)第 2 版：罗列了 jQuery 的 API 使用示例，适合初学 jQuery 时看一看
 
 其他书籍：
 
