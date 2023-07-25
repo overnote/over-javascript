@@ -16,11 +16,7 @@
         "editor.tabSize": 4,
         "editor.useTabStops": true
     },
-    "gopls": {
-        "experimentalWorkspaceModule": true
-    },
     "workbench.editor.enablePreview": false,
-    "go.testFlags": ["-v"],
     "files.associations": {
         "array": "c",
         "string": "c",
