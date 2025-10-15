@@ -90,6 +90,7 @@ JS 语法规范进阶：
 - [**《Effective JavaScript》**](https://book.douban.com/subject/25786138/)：非常好的进阶书籍，不分内容过时
 - [《深入理解 JAVASCRIPT 特性》](https://book.douban.com/subject/33441887/)：比较有深度
 - [**《JavaScript 函数式编程指北-Franklin Risby》**](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)：很好的函数式书籍，目前只有英文版，[点击进入原书地址](https://github.com/MostlyAdequate/mostly-adequate-guide)
+- [JavaScript 多线程编程实践](https://book.douban.com/subject/36716556/)
 
 其他优秀书籍：
 
@@ -119,12 +120,15 @@ Vue：
 - [**《Vue.js 设计与实现》**](https://book.douban.com/subject/35768338/)：目前非常好的 vue 原理书籍
 - [**《深入浅出 Vue.js》**](https://book.douban.com/subject/32581281/)：vue 一些原理分析
 - [**《Vue.js 技术内幕》**](https://book.douban.com/subject/36092368/)
+- [流畅的 React](https://book.douban.com/subject/37528151/)
+- [低代码平台开发实践：基于 React](https://item.jd.com/14012127.html)
 
 React：
 
 - [**React 官方文档**](https://zh-hans.reactjs.org/docs/getting-started.html)：React 官方文档是目前比较新的、全面的文档，基础学习看这里即可
 - [**《React 设计原理》**](https://book.douban.com/subject/36171032/)
 - [**《React 状态管理与同构实战》**](https://book.douban.com/subject/30290509/)
+- [流畅的 React](https://book.douban.com/subject/37528151/)
 
 jQuery：
 
