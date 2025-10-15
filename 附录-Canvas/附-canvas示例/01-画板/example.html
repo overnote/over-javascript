@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html>
+   <head>
+     <title>Paint</title>
+      <style> 
+         body {
+            background: #dddddd;
+         }
+
+         option {
+            padding-right: 5px;
+         }
+         
+         .floatingControls {
+            position: absolute;
+            left: 105px;
+            top: 70px;
+            width: 300px;
+            padding: 20px;
+            border: thin solid rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 200, 0.1);
+            color: blue;
+            font: 14px Arial;
+            -webkit-box-shadow: rgba(0, 0, 0, 0.2) 6px 6px 8px;
+            -moz-box-shadow: rgba(0, 0, 0, 0.2) 6px 6px 8px;
+            box-shadow: rgba(0, 0, 0, 0.2) 6px 6px 8px;
+            display: none;
+         }
+
+         .floatingControls p {
+            margin-top: 0px;
+            margin-bottom: 20px;
+         }
+         
+         #iconCanvas {
+            background: #eeeeef;
+            border: thin solid #aaaaaa;
+            cursor: pointer;
+            -webkit-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+            -moz-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+            box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 8px;
+         }
+
+         #drawingCanvas {
+            background: #ffffff;
+            border: thin solid #aaaaaa;
+            cursor: crosshair;
+            margin-left: 10px;
+            -webkit-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+            -moz-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+            box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            border-radius: 12px;
+         }
+
+         #controls {
+               padding-top: 5px;
+               padding-bottom: 10px;
+               padding-left: 100px;
+         }
+
+         select { margin-right: 15px; }
+
+         @media all and (min-device-width: 481px) and (max-device-width: 1024px)
+                    and (orientation:portrait) {
+            #controls {
+               padding-top: 10px;
+               padding-bottom: 10px;
+            }
+
+            #drawingCanvas {
+               background: #ffffff;
+               border: thin solid #aaaaaa;
+               cursor: crosshair;
+               margin-left: 10px;
+               -webkit-box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 4px;
+               -moz-box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 4px;
+               box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 4px;
+               -webkit-border-radius: 8px;
+               -moz-border-radius: 8px;
+               border-radius: 8px;
+            }
+         }
+         
+         @media all and (min-device-width: 481px) and (max-device-width: 1024px) 
+                    and (orientation:landscape) {
+            #controls {
+               padding-top: 20px;
+               padding-bottom: 10px;
+               padding-left: 85px;
+            }
+
+            #drawingCanvas {
+               background: #ffffff;
+               cursor: crosshair;
+               margin-left: 5px;
+               -webkit-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+               -moz-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+               box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+               -webkit-border-radius: 10px;
+               -moz-border-radius: 10px;
+               border-radius: 10px;
+            }
+
+            #snapshotImageElement {
+               position: absolute;
+               left: 85px;
+               top: 30px;
+               margin: 20px;
+               display: none;
+            }
+         }
+
+         #snapshotButton {
+            margin-left: 150px;
+         }
+
+         #snapshotInstructions {
+            position: absolute;
+            left: 300px;
+            top: 0px;
+            margin-top: 17px;
+            display: none;
+         }
+
+         #keyboard {
+            position: absolute;
+            left: 25px;
+            top: 0px;
+            width: 1000px;
+            height: 0px;
+
+            background: rgba(129, 129, 138, 0.4);
+
+            -webkit-box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 4px;
+            -moz-box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 4px;
+            box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 4px;
+         }
+      </style>
+   </head>
+
+   <body>
+    <div id='controls'>
+       Stroke: <select id='strokeStyleSelect'>
+                  <option value='red'>red</option>
+                  <option value='green'>green</option>
+                  <option value='blue'>blue</option>
+                  <option value='orange'>orange</option>
+                  <option value='cornflowerblue' selected>cornflowerblue</option>
+                  <option value='goldenrod'>goldenrod</option>
+                  <option value='white'>white</option>
+                  <option value='purple'>purple</option>
+               </select>
+
+       Fill: <select id='fillStyleSelect'>
+                <option value='red'>red</option>
+                <option value='rgba(255,0,0,0.5)'>semi-transparent red</option>
+                <option value='green'>green</option>
+                <option value='rgba(0,255,0,0.5)'>semi-transparent green</option>
+                <option value='blue'>blue</option>
+                <option value='rgba(0,0,255,0.5)'>semi-transparent blue</option>
+                <option value='orange'>orange</option>
+                <option value='rgba(255,165,0,0.5)'>semi-transparent orange</option>
+                <option value='cornflowerblue'>cornflowerblue</option>
+                <option value='rgba(100,140,230,0.5)'>semi-transparent cornflowerblue</option>
+                <option value='goldenrod'>goldenrod</option>
+                <option value='rgba(218,165,32,0.5)' selected>semi-transparent goldenrod</option>
+                <option value='white'>white</option>
+                <option value='rgba(255,255,255,0.5)'>semi-transparent white</option>
+                <option value='purple'>purple</option>
+                <option value='rgba(255,0,255,0.5)'>semi-transparent purple</option>
+             </select>
+
+       Line width: <select id='lineWidthSelect'>
+                      <option value='1.0'>1.0</option>
+                      <option value='2.0'>2.0</option>
+                      <option value='3.0'>3.0</option>
+                      <option value='4.0'>4.0</option>
+                      <option value='5.0'>5.0</option>
+                      <option value='6.0'>6.0</option>
+                   </select>
+
+      <input id='eraseAllButton' type='button' value='Erase all'/>
+      <input id='snapshotButton' type='button' value='Take snapshot'/>
+      <span id='snapshotInstructions'>Drag the image to your desktop (or Right-click to save to disk)</span>
+    </div>
+
+    <img id='snapshotImageElement' alt=''/> <!-- What's up with the need for alt='', Opera?!? -->
+    
+    <canvas id='iconCanvas' width='75' height='670'>
+      Canvas not supported
+    </canvas>
+
+    <canvas id='drawingCanvas' width='915' height='670'>
+      Canvas not supported
+    </canvas>
+
+    <div id='keyboard'></div>
+    
+    <div id='curveInstructions' class='floatingControls'>
+      <p>
+      The yellow circle is a control point for the curve. Drag that
+      circle around to change the shape of the curve.
+      </p>
+
+      <input id='curveInstructionsOkayButton' type='button' value='Okay'/>
+      <input id='curveInstructionsNoMoreButton' type='button' value='Do not show this again'/>
+    </div>
+    
+    <script src='keyboard.js'></script>
+    <script src='example.js'></script>
+  </body>
+</html>

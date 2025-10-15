@@ -1,0 +1,47 @@
+{
+    "code-runner.runInTerminal": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": {
+            "comments": "off",
+            "strings": "off",
+            "other": "off"
+        },
+        "editor.tabSize": 4,
+        "editor.useTabStops": true
+    },
+    "workbench.editor.enablePreview": false,
+    "files.associations": {
+        "array": "c",
+        "string": "c",
+        "string_view": "c",
+        "vector": "c",
+        "__locale": "c",
+        "__string": "c",
+        "__node_handle": "c",
+        "circlelist.h": "c",
+        "static.h": "c",
+        "stdlib.h": "c"
+    },
+    "auto-close-tag.activationOnLanguage": [
+        "xml",
+        "php",
+        "blade",
+        "ejs",
+        "jinja",
+        "plaintext",
+        "liquid",
+        "erb",
+        "lang-cfml",
+        "cfml",
+        "HTML (EEx)",
+        "HTML (Eex)",
+        "plist"
+    ]
+}
