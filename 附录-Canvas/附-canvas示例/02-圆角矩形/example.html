@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+   <head>
+     <title>Rounded Rectangles</title>
+
+      <style> 
+         body {
+            background: bisque;
+         }
+
+         #roundedRectangleDiv {
+            position: absolute;
+            left: 50px;
+            top: 70px;
+            width: 450px;
+            height: 80px;
+         }
+
+         .range {
+            vertical-align: -5px;
+         }
+
+         #controls {
+            color: blue;
+            margin-top: 20px;
+            margin-left: 65px;
+         }
+
+         #widthRangeDiv {
+            margin-right: 30px;
+            display: inline;
+         }
+      </style>
+   </head>
+
+   <body>
+      <div id='controls'> 
+         <div id='widthRangeDiv'>
+           Width:  <input id='widthRange' class='range' type='range'
+                     minimum='5' maximum='100'/>
+         </div>
+         
+         Height: <input id='heightRange' class='range' type='range' 
+                   minimum='5' maximum='100'/>
+      </div>
+
+      <div id='roundedRectangleDiv'></div>
+
+      <script src='../../shared/js/roundedRectangle.js'></script>
+      <script src='example.js'></script>
+   </body>
+</html>

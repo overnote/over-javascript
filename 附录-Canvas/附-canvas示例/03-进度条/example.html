@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+   <head>
+     <title>Progress bars</title>
+
+      <style> 
+         body {
+            background: linen;
+         }
+
+         #loadingSpan {
+            font: 20px Arial;
+            position: absolute;
+            left: 250px;
+            color: teal;
+            text-shadow: 1px 1px rgba(0,0,0,0.1);
+         }
+
+         #progressbarDiv {
+            position: absolute;
+            left: 35px;
+            top: 50px;
+            width: 500px;
+            height: 70px;
+         }
+      </style>
+   </head>
+
+  <body>
+    <input type='button' id='startButton' value='Start'/>
+    <span id='loadingSpan' style='display: none'>Loading...</span>
+
+    <div id='progressbarDiv'></div>
+
+    <script src='../../shared/js/roundedRectangle.js'></script>
+    <script src='../../shared/js/progressbar.js'></script>
+    <script src='../../shared/js/requestNextAnimationFrame.js'></script>
+    <script src='example.js'></script>
+  </body>
+</html>

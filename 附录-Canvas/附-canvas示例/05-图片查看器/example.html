@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Panning Images</title>
+
+        <style>
+            body {
+                background: rgba(100, 145, 250, 0.3);
+            }
+
+            #canvas {
+                position: absolute;
+                left: 0px;
+                top: 50px;
+                margin-left: 20px;
+                margin-right: 0;
+                margin-bottom: 20px;
+                padding: 0;
+                -webkit-box-shadow: rgba(60, 60, 70, 0.7) 5px 5px 7px;
+                -moz-box-shadow: rgba(60, 60, 70, 0.7) 5px 5px 7px;
+                box-shadow: rgba(60, 60, 70, 0.7) 5px 5px 7px;
+                border: 1px solid rgba(100, 140, 130, 0.5);
+                cursor: crosshair;
+            }
+
+            .pan {
+                position: absolute;
+                left: 50px;
+                top: 70px;
+                -webkit-box-shadow: rgba(60, 60, 70, 0.7) 5px 5px 7px;
+                -moz-box-shadow: rgba(60, 60, 70, 0.7) 5px 5px 7px;
+                box-shadow: rgba(60, 60, 70, 0.7) 5px 5px 7px;
+                cursor: pointer;
+            }
+
+            #sizeSliderDiv {
+                position: absolute;
+                left: 20px;
+                top: -5px;
+                margin-left: 10px;
+                display: inline;
+                width: 175px;
+                height: 45px;
+            }
+
+            #alphaSliderDiv {
+                position: absolute;
+                left: 270px;
+                top: -5px;
+                margin-left: 10px;
+                display: inline;
+                width: 175px;
+                height: 45px;
+            }
+
+            #controls {
+                position: absolute;
+                left: 10px;
+                margin-left: 35px;
+                margin-bottom: 25px;
+            }
+
+            #alphaSpan {
+                position: absolute;
+                left: 240px;
+                vertical-align: center;
+                color: rgb(80, 100, 190);
+                font: 18px Arial;
+                text-shadow: 2px 2px 4px rgba(100, 140, 250, 0.8);
+            }
+
+            #sizeSpan {
+                position: absolute;
+                left: -20px;
+                vertical-align: center;
+                color: rgb(80, 100, 190);
+                font: 18px Arial;
+                text-shadow: 2px 2px 4px rgba(100, 140, 250, 0.8);
+            }
+        </style>
+    </head>
+
+    <body id="body">
+        <div id="controls">
+            <span id="sizeSpan">0</span>
+            <div id="alphaSliderDiv"></div>
+
+            <span id="alphaSpan">0</span>
+            <div id="sizeSliderDiv"></div>
+        </div>
+
+        <canvas id="canvas" width="1000" height="600"> Canvas not supported </canvas>
+
+        <script src="../../shared/js/roundedRectangle.js"></script>
+        <script src="../../shared/js/slider.js"></script>
+        <script src="../../shared/js/pan.js"></script>
+        <script src="example.js"></script>
+    </body>
+</html>

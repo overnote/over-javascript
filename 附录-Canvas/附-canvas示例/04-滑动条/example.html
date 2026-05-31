@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+
+   <head>
+     <title>Sliders</title>
+
+      <style> 
+         body {
+            background: #dddddd;
+         }
+
+         #colorPatchCanvas {
+            position: absolute;
+            top: 75px;
+            left: 410px;
+            -webkit-box-shadow: rgba(0,0,0,0.5) 2px 2px 4px;
+            -moz-box-shadow: rgba(0,0,0,0.5) 2px 2px 4px;
+            box-shadow: rgba(0,0,0,0.5) 2px 2px 4px;
+            border: thin solid rgba(0,0,0,0.2);
+         }
+
+         .slider {
+            width: 324px;
+            height: 50px;
+         }
+
+         #redSliderDiv {
+            position: absolute;
+            left: 40px;
+            top: 50px;
+         }
+
+         #greenSliderDiv {
+            position: absolute;
+            left: 40px;
+            top: 115px;
+         }
+
+         #blueSliderDiv {
+            position: absolute;
+            left: 40px;
+            top: 180px;
+         }
+
+         #alphaSliderDiv {
+            position: absolute;
+            left: 40px;
+            top: 300px;
+         }
+      </style>
+   </head>
+
+  <body>
+    <div id='redSliderDiv'   class='slider'></div>
+    <div id='greenSliderDiv' class='slider'></div>
+    <div id='blueSliderDiv'  class='slider'></div>
+    <div id='alphaSliderDiv' class='slider'></div>
+    
+    <canvas id='colorPatchCanvas' width='220' height='120'>
+       Canvas not supported
+    </canvas>
+
+    <script src='../../shared/js/roundedRectangle.js'></script>
+    <script src='../../shared/js/slider.js'></script>
+    <script src='example.js'></script>
+  </body>
+</html>

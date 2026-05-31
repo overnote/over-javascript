@@ -1,0 +1,19 @@
+{
+    "printWidth": 120,
+    "tabWidth": 4,
+    "useTabs": false,
+    "semi": false,
+    "singleQuote": true,
+    "overrides": [
+        {
+            "files": ["*.md"],
+            "options": {
+                "printWidth": 80,
+                "tabWidth": 2,
+                "useTabs": false,
+                "semi": false,
+                "singleQuote": true
+            }
+        }
+    ]
+}
