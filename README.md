@@ -14,19 +14,26 @@ OverNote 系列笔记是我在平时一些学习时间阅读书籍博客、观�
 
 ### 2.1 HTML/CSS
 
-- [《HTML & CSS 设计与构建网站》](https://book.douban.com/subject/21338365/)：零基础使用的经典的页面制作基础教程
+推荐书籍：
+
 - [**《深入解析 CSS》**](https://book.douban.com/subject/35021471/)：重点书籍，新近较好的 CSS 基础与进阶书籍
-- [**《CSS 揭秘》**](https://book.douban.com/subject/26745943/)：经典 CSS 书籍，CSS 书籍瑰宝！！！
-- [**《CSS3 艺术 网页设计案例实战》**](https://book.douban.com/subject/34932891/)：CSS3 书籍，提供了大量 CSS3 的示例与优化技巧
+- [《CSS 新世界》](https://book.douban.com/subject/35539710/)：可阅读，新的 CSS 规范的一些解读
 - [**《CSS 权威指南（第五版）》**](https://book.douban.com/subject/33398314/)：经典书籍，可以作为 CSS 字典查阅（![第五版已出](https://item.jd.com/10221683732978.html)）
-- [《CSS 新世界》](https://book.douban.com/subject/35539710/)：CSS 各种精巧用法
 
 其他可参考 HTML/CSS 书籍：
 
+- 《CSS 世界》：可阅读，深入 CSS 的一本书，作者行文风格较为随意
+- 《CSS 选择器世界》：可阅读，深入 CSS 的一本书，作者行文风格较为随意
+- 《CSS 揭秘》
+- 《CSS3 艺术 网页设计案例实战》
+- 《CSS3 艺术 网页设计案例实战》
+
+较老的书籍，不再推荐：
+
 ```txt
-《Head First HTML 与 CSS》第 2 版：经典系列基础书籍，功能与 《HTML & CSS 设计与构建网站》 重复
+《HTML & CSS 设计与构建网站》：零基础书籍
+《Head First HTML 与 CSS》第 2 版：零基础书籍
 《CSS 设计指南》：比较简洁的一本CSS 书籍，不过与 《深入解析 CSS》 重复
-《CSS 世界》：可阅读，深入 CSS 的一本书，但是作者行文风格较为奇特
 《CSS 禅意花园》：不推荐，内容偏设计，非程序员读物，且时代较为久远
 《精通 CSS》第 3 版：本书第3版跟上了时代，但是内容上与《深入解析 CSS》重合
 《CSS 实战手册》第四版：内容上与《深入解析 CSS》重合
@@ -39,33 +46,23 @@ OverNote 系列笔记是我在平时一些学习时间阅读书籍博客、观�
 - [**《JavaScript 高级程序设计》** 第 4 版](https://book.douban.com/subject/35175321/)：红宝书，最好的 JS 入门、提升书籍之一
 - [**《JavaScript 语言精髓与编程实践》** 第 3 版](https://book.douban.com/subject/35085910/)：国内出品非常优秀的 JS 书籍
 - [**《JavaScript 权威指南》** 第 7 版](https://book.douban.com/subject/35396470/)：犀牛书，JS 的百科全书，与红宝书冲突过多
-
-**Web篇**：大多 Web 相关书籍内容在 JavaScript 语法书中都有涉及，有网页开发经验的，笔者认为可以忽略本节书籍：
-
-- [《JavaScript&jQuery 交互式 Web 前端开发》](https://book.douban.com/subject/26433805/)：适合学习使用 jQuery 制作优秀的交互式网站
-- [《HTML5 秘籍》第 2 版](https://book.douban.com/subject/26342322/)：内容比较系统的一本 Web 编程书籍
-
-**深入篇**：
-
-- [**《你不知道 JavaScript》** 上卷 + 中卷](https://book.douban.com/subject/26351021/)：笔者认为目前最好的 JS 深入书籍之一
 - [**《JavaScript 忍者秘籍》** 第 2 版](https://book.douban.com/subject/30143702/)：对函数的讲解：闭包、重载、柯里化化讲解极好
 - [**《Effective JavaScript》**](https://book.douban.com/subject/25786138/)：非常好的进阶书籍，不分内容过时
-- [**《JavaScript 函数式编程指北-Franklin Risby》**](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)：很好的函数式书籍，目前只有英文版，[点击进入原书地址](https://github.com/MostlyAdequate/mostly-adequate-guide)
-- [JavaScript 多线程编程实践](https://book.douban.com/subject/36716556/)
+- [**《JavaScript 函数式编程指北-Franklin Risby》**](https://github.com/MostlyAdequate/mostly-adequate-guide)：很好的函数式书籍
+- [《JavaScript 多线程编程实践》](https://book.douban.com/subject/36716556/)：worker、atomics 的介绍与使用
 
 其他优秀书籍：
 
 ```txt
 《Head First JavaScript 程序设计》：零基础入门书籍
-《JavaScript 编程精解 第 3 版》：佳作《Eloquent JavaScript》中文版，深入浅出，建议看英文版。
+《JavaScript&jQuery 交互式 Web 前端开发》：DOM 编程基础入门
+《HTML5 秘籍》第 2 版：：DOM 编程
+《JavaScript 编程精解 第 3 版》：《Eloquent JavaScript》的中文版，可以一看，但是内容与红宝书、犀牛书重复较多
 《JavaScript 编程全解》：内容全面，讲解的很细致优秀，但是内容与红宝书、犀牛书重复较多
 《JavaScript 面向对象编程指南》（第 3 版）：名为讲解面向对象，实则补充了 JS 语法、设计模式、DOM 编程等部分，内容与红宝书、犀牛书重复较多
 《ECMAScript6 入门》第 3 版：阮一峰的 ES6 作品，写的很好
 《深入理解 ECMAScript6》：ES6 书籍，偏基础
 《JavaScript 语言精粹》修订版：即经典蝴蝶书，短小精悍，附录中对 JS 语言糟粕的汇总值得一看！但大多问题已被 ES6 相关书籍总结
-《JavaScript ES8 函数式编程实践入门 (第 2 版)》：内容过于简单
-《JavaScript 函数式编程思想》：内容较好，深度足够，但是语言要素较多
-《JavaScript 函数式编程指南》：概念讲解优秀，但是源码给出的较为粗糙，需要一定功底翻看
 《深入理解 JAVASCRIPT 特性》：可以一读
 ```
 
@@ -84,7 +81,6 @@ OverNote 系列笔记是我在平时一些学习时间阅读书籍博客、观�
 
 **React**：
 
-- [**React 官方文档**](https://zh-hans.reactjs.org/docs/getting-started.html)：React 官方文档是目前比较新的、全面的文档，基础学习看这里即可
 - [《流畅的 React》](https://book.douban.com/subject/37528151/)
 
 **Vue**：
