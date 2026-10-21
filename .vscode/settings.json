@@ -1,12 +1,64 @@
 {
     "code-runner.runInTerminal": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.enable": false,
+    // 为所有支持的文件类型启用 Biome
+    "editor.defaultFormatter": "oxc.oxc-vscode",
     "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "oxc.enable.oxfmt": true,
+    // "oxc.fmt.configPath": "${workspaceFolder}/.oxfmtrc.json",
     "editor.codeActionsOnSave": {
-        "source.fixAll": "explicit"
+        "source.organizeImports.oxc": "explicit", // 导入排序
+        "source.fixAll.oxc": "explicit"
+    },
+
+    "workbench.editor.enablePreview": false,
+    "scss.lint.unknownAtRules": "ignore",
+    "css.lint.unknownAtRules": "ignore",
+    "[html]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "[postcss]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[svelte]": {
+        "editor.defaultFormatter": "svelte.svelte-vscode"
+    },
+    "[jsx-tags]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[yml]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[mjs]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
     },
     "[markdown]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
         "editor.wordWrap": "on",
         "editor.quickSuggestions": {
             "comments": "off",
@@ -16,7 +68,10 @@
         "editor.tabSize": 4,
         "editor.useTabStops": true
     },
-    "workbench.editor.enablePreview": false,
+    "gopls": {
+        "experimentalWorkspaceModule": true
+    },
+    "go.testFlags": ["-v"],
     "files.associations": {
         "array": "c",
         "string": "c",
@@ -43,5 +98,8 @@
         "HTML (EEx)",
         "HTML (Eex)",
         "plist"
-    ]
+    ],
+    "search.useReplacePreview": false,
+    "editor.cursorStyle": "line",
+    "svn.ignoreMissingSvnWarning": true
 }
